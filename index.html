@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie Clicker Game-By Vuduy 7/7  </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            background: linear-gradient(to right, #ffd700, #ff8c00);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+
+        .coins-display {
+            font-size: 2.5em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .stats {
+            font-size: 0.9em;
+            color: #ddd;
+            margin-top: 10px;
+        }
+
+        .main-content {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .game-section {
+            flex: 1;
+            min-width: 300px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .click-button {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            border: 8px solid #ffed4e;
+            font-size: 6em;
+            cursor: pointer;
+            transition: transform 0.1s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .click-button:hover:not(.disabled) {
+            transform: scale(1.05);
+        }
+
+        .click-button:active:not(.disabled) {
+            transform: scale(0.95);
+        }
+
+        .click-button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .shop-section {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .shop-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .shop-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .shop-item {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .shop-item:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .shop-item.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .item-description {
+            font-size: 0.9em;
+            color: #ddd;
+        }
+
+        .item-owned {
+            font-size: 0.8em;
+            color: #ffd700;
+            margin-top: 5px;
+        }
+
+        .buy-button {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .buy-button:hover {
+            transform: scale(1.05);
+        }
+
+        .buy-button:active {
+            transform: scale(0.95);
+        }
+
+        .buy-button.disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        .icon {
+            font-size: 2em;
+            margin-right: 10px;
+        }
+
+        .admin-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #ffd700;
+            z-index: 100;
+        }
+
+        .playtime-panel {
+            position: fixed;
+            top: 20px;
+            right: 350px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00ff00;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #00ff00;
+        }
+
+        .admin-input {
+            padding: 8px;
+            border-radius: 5px;
+            border: none;
+            margin-right: 5px;
+            width: 150px;
+        }
+
+        .admin-button {
+            padding: 8px 15px;
+            background: #ffd700;
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .admin-button:hover {
+            background: #ffed4e;
+        }
+
+        .admin-controls {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #ffd700;
+        }
+
+        .admin-money-button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .admin-money-button:hover {
+            transform: scale(1.05);
+        }
+
+        .weather-controls {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #ffd700;
+        }
+
+        .weather-control-title {
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            color: #ffd700;
+        }
+
+        .weather-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5px;
+        }
+
+        .weather-summon-btn {
+            padding: 6px 10px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 0.8em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .weather-summon-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .weather-clear-btn {
+            padding: 8px 15px;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
+            width: 100%;
+        }
+
+        .weather-clear-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .weather-panel {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #00bfff;
+            z-index: 100;
+            min-width: 250px;
+            max-width: 350px;
+        }
+
+        .weather-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #00bfff;
+            text-align: center;
+        }
+
+        .weather-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .weather-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: weatherFadeIn 0.3s ease-in;
+        }
+
+        .weather-item.wind {
+            border-color: #87ceeb;
+            background: rgba(135, 206, 235, 0.2);
+        }
+
+        .weather-item.cloud {
+            border-color: #b0c4de;
+            background: rgba(176, 196, 222, 0.2);
+        }
+
+        .weather-item.rain {
+            border-color: #4682b4;
+            background: rgba(70, 130, 180, 0.2);
+        }
+
+        .weather-item.night {
+            border-color: #191970;
+            background: rgba(25, 25, 112, 0.2);
+        }
+
+        .weather-item.moonlight {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .weather-item.meteor {
+            border-color: #ff6347;
+            background: rgba(255, 99, 71, 0.2);
+        }
+        .weather-item.acid {
+            border-color: #9acd32;
+            background: rgba(154, 205, 50, 0.2);
+        }
+
+        .weather-item.diamond {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.2);
+        }
+
+        .weather-item.emerald {
+            border-color: #50c878;
+            background: rgba(80, 200, 120, 0.2);
+        }
+
+        .weather-item.adminabuse {
+            border-color: #ff00ff;
+            background: rgba(255, 0, 255, 0.2);
+        }
+
+        .weather-info {
+            flex: 1;
+        }
+
+        .weather-name {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 3px;
+        }
+
+        .weather-effect {
+            font-size: 0.85em;
+            color: #ddd;
+        }
+
+        .weather-timer {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ffd700;
+            min-width: 45px;
+            text-align: right;
+        }
+
+        .weather-empty {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            padding: 20px;
+        }
+
+        @keyframes weatherFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .admin-status {
+            color: #00ff00;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .save-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .save-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .save-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .save-button, .load-button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-size: 1em;
+        }
+
+        .save-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .load-button {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .save-button:hover, .load-button:hover {
+            transform: scale(1.05);
+        }
+
+        .save-button:active, .load-button:active {
+            transform: scale(0.95);
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        .save-info {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #ddd;
+        }
+
+        .gamepass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .gamepass-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+            color: #ffd700;
+        }
+
+        .gamepass-input-section {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .gamepass-input {
+            padding: 10px;
+            border-radius: 5px;
+            border: 2px solid #ffd700;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            width: 200px;
+            font-size: 1em;
+        }
+
+        .redeem-button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .redeem-button:hover {
+            transform: scale(1.05);
+        }
+
+        .gamepass-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .gamepass-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .gamepass-card.vip {
+            border-color: #4169e1;
+        }
+
+        .gamepass-card.premium {
+            border-color: #9370db;
+        }
+
+        .gamepass-card.legend {
+            border-color: #ffd700;
+        }
+
+        .gamepass-card.owned {
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .gamepass-name {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .gamepass-benefits {
+            font-size: 0.9em;
+            color: #ddd;
+            text-align: left;
+            margin-top: 10px;
+        }
+
+        .gamepass-benefits li {
+            margin: 5px 0;
+        }
+
+        .gamepass-status {
+            margin-top: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .gamepass-status.owned {
+            background: rgba(0, 255, 0, 0.3);
+            color: #00ff00;
+        }
+
+        .gamepass-status.not-owned {
+            background: rgba(255, 0, 0, 0.3);
+            color: #ff6b6b;
+        }
+
+        .potion-shop, .inventory-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .section-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .potion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .potion-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .potion-card.x2 {
+            border-color: #4169e1;
+        }
+
+        .potion-card.x3 {
+            border-color: #9370db;
+        }
+
+        .potion-card.x4 {
+            border-color: #ff6347;
+        }
+
+        .potion-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .potion-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .potion-effect {
+            font-size: 0.9em;
+            color: #ddd;
+            margin-bottom: 10px;
+        }
+
+        .buy-potion-button {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .buy-potion-button:hover {
+            transform: scale(1.05);
+        }
+
+        .buy-potion-button.disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        .inventory-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .inventory-item {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #ffd700;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .inventory-count {
+            font-size: 1.5em;
+            color: #ffd700;
+            margin: 10px 0;
+        }
+
+        .use-button {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+
+        .use-button:hover {
+            transform: scale(1.05);
+        }
+
+        .use-button.disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        .potion-timer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            border: 3px solid #ffd700;
+            border-radius: 15px;
+            padding: 20px 40px;
+            font-size: 2em;
+            font-weight: bold;
+            z-index: 1000;
+            display: none;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .potion-timer.active {
+            display: block;
+        }
+
+        .afk-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .afk-overlay.active {
+            display: flex;
+        }
+
+        .afk-modal {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 3px solid #ff6b6b;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .afk-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+
+        .afk-message {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .afk-button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .afk-button:hover {
+            transform: scale(1.05);
+        }
+
+        .afk-warning {
+            position: fixed;
+            top: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 107, 107, 0.95);
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            z-index: 1001;
+            display: none;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+
+        .afk-warning.active {
+            display: block;
+            animation: pulse 1s infinite;
+        }
+
+        .rebirth-panel {
+            background: rgba(255, 215, 0, 0.2);
+            border: 3px solid #ffd700;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .rebirth-title {
+            font-size: 1.8em;
+            text-align: center;
+            margin-bottom: 15px;
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .rebirth-info {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+
+        .rebirth-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .rebirth-stat {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .rebirth-stat-label {
+            font-size: 0.9em;
+            color: #ddd;
+            margin-bottom: 5px;
+        }
+
+        .rebirth-stat-value {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .rebirth-button {
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            border: none;
+            border-radius: 10px;
+            color: #000;
+            font-size: 1.3em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .rebirth-button:hover {
+            transform: scale(1.02);
+        }
+
+        .rebirth-button.disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .ban-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 0, 0, 0.95);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ban-overlay.active {
+            display: flex;
+        }
+
+        .ban-modal {
+            background: #000;
+            border: 5px solid #ff0000;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 600px;
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.8);
+        }
+
+        .ban-title {
+            font-size: 3em;
+            margin-bottom: 20px;
+            color: #ff0000;
+            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+        }
+
+        .ban-message {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            line-height: 1.8;
+            color: #fff;
+        }
+
+        .discount-ticket-timer {
+            position: fixed;
+            top: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 200, 0, 0.95);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            font-weight: bold;
+            z-index: 1001;
+            display: none;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+
+        .discount-ticket-timer.active {
+            display: block;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .admin-panel, .playtime-panel {
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .potion-timer {
+                font-size: 1.5em;
+                padding: 15px 30px;
+            }
+
+            .afk-modal {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+
+            .afk-title {
+                font-size: 2em;
+            }
+
+            .afk-message {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Ban Overlay -->
+    <div class="ban-overlay" id="banOverlay">
+        <div class="ban-modal">
+            <div class="ban-title">🚫 BẠN ĐÃ BỊ BAN!</div>
+            <div class="ban-message">
+                ⚠️ HỆ THỐNG ANTI-CHEAT ĐÃ PHÁT HIỆN BẠN SỬ DỤNG AUTO CLICKER ⚠️<br>
+                <br>
+                Bạn đã click với tốc độ KHÔNG THỂ thực hiện bằng tay người.<br>
+                <br>
+                <strong style="color: #ff6b6b;">TÀI KHOẢN ĐÃ BỊ KHÓA VĨNH VIỄN!</strong><br>
+                <br>
+                Vui lòng làm mới trang để bắt đầu lại.<br>
+                Chơi công bằng!
+            </div>
+        </div>
+    </div>
+
+    <!-- Discount Ticket Timer -->
+    <div class="discount-ticket-timer" id="discountTicketTimer">
+        💳 Vé giảm giá <span id="ticketDiscountPercent">0</span>% - <span id="ticketTimeLeft">60</span>s
+    </div>
+
+    <!-- Playtime Panel -->
+    <div class="playtime-panel">
+        ⏱️ Thời gian: <span id="playTime">00:00:00</span>
+    </div>
+
+    <!-- AFK Warning -->
+    <div class="afk-warning" id="afkWarning">
+        ⚠️ AFK Warning: <span id="afkCountdown">60</span>s
+    </div>
+
+    <!-- AFK Overlay -->
+    <div class="afk-overlay" id="afkOverlay">
+        <div class="afk-modal">
+            <div class="afk-title">⚠️ ANTI-AFK</div>
+            <div class="afk-message">
+                Bạn đã không hoạt động trong 30 phút!<br>
+                Game đã bị khóa để tránh AFK farm.<br>
+                <br>
+                Nhấn nút bên dưới để tiếp tục chơi.
+            </div>
+            <button class="afk-button" onclick="resumeFromAFK()">
+                ✅ Tôi đã quay lại!
+            </button>
+        </div>
+    </div>
+
+    <!-- Potion Timer Display -->
+    <div class="potion-timer" id="potionTimer">
+        <div id="potionTimerText">x2 - 60s</div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel">
+        <div style="font-size: 1.2em; margin-bottom: 10px;">🔐 Admin Panel</div>
+        <input type="password" id="adminCode" class="admin-input" placeholder="Nhập admin code">
+        <button class="admin-button" onclick="checkAdminCode()">Đăng nhập</button>
+        <div id="adminStatus"></div>
+        <div id="adminControls" style="display: none;" class="admin-controls">
+            <button class="admin-money-button" onclick="addAdminMoney()">💰 +1QA Coins</button>
+            
+            <div class="weather-controls">
+                <div class="weather-control-title">🌦️ Triệu hồi Thời tiết</div>
+               <div class="weather-buttons">
+                    <button class="weather-summon-btn" onclick="summonWeather('wind')">💨 Gió</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('cloud')">☁️ Mây</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('rain')">🌧️ Mưa</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('night')">🌙 Đêm</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('moonlight')">✨ Trăng</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('meteor')">☄️ Sao</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('acid')">☣️ Acid</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('diamond')">💎 Kim Cương</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('emerald')">💚 Lục Kim</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('adminabuse')">🛸 Admin</button>
+                </div>
+                <button class="weather-clear-btn" onclick="clearAllWeather()">🚫 Xóa tất cả thời tiết</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weather Panel -->
+    <div class="weather-panel">
+        <div class="weather-title">🌦️ Thời Tiết Hiện Tại</div>
+        <div class="weather-list" id="weatherList">
+            <div class="weather-empty">Không có thời tiết nào</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>🍪 Cookie Clicker</h1>
+            <div class="coins-display">
+                <span>💰</span>
+                <span id="coins">1</span>
+            </div>
+            <div class="stats">
+                Click Power: <span id="clickPower">1</span> | 
+                Auto: <span id="autoClickers">0</span>/s | 
+                Multiplier: x<span id="multiplier">1</span> |
+                Click Cooldown: <span id="clickCooldown">0.5</span>s |
+                Rebirth: x<span id="rebirthMultiplierDisplay">1</span> |
+                Giảm giá: <span id="discountDisplay">0</span>% |
+                Vé giảm: <span id="ticketDiscountDisplay">0</span>% |
+                Giới hạn mua: <span id="purchaseLimitDisplay">5</span>
+            </div>
+        </div>
+
+        <!-- Cookie Button - Centered -->
+        <div style="display: flex; justify-content: center; align-items: center; min-height: 350px; margin-bottom: 50px;">
+            <button class="click-button" id="clickButton">🍪</button>
+        </div>
+
+        <div class="main-content">
+            <div class="shop-section" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+                <h2 class="shop-title">🛒 Shop</h2>
+                <div class="shop-items" id="shopItems">
+                    <!-- Items will be generated here -->
+                </div>
+            </div>
+
+            <!-- Save/Load Panel -->
+            <div class="save-panel">
+                <div class="save-title">💾 Save & Load Game</div>
+                <div class="save-buttons">
+                    <button class="save-button" onclick="saveGame()">📥 Export Save File</button>
+                    <label for="loadFile" class="load-button" style="cursor: pointer; display: inline-block;">
+                        📤 Import Save File
+                    </label>
+                    <input type="file" id="loadFile" class="file-input" accept=".json" onchange="loadGame(event)">
+                </div>
+                <div class="save-info">
+                    💡 Export để lưu game, Import để tải lại tiến trình
+                </div>
+            </div>
+
+            <!-- Game Pass Panel -->
+            <div class="gamepass-panel">
+                <div class="gamepass-title">🎫 Game Pass Store</div>
+                <div class="gamepass-input-section">
+                    <input type="text" id="gamepassCode" class="gamepass-input" placeholder="Nhập code Game Pass">
+                    <button class="redeem-button" onclick="redeemGamePass()">🎁 Redeem Code</button>
+                </div>
+                <div class="gamepass-list">
+                    <div class="gamepass-card vip" id="vipCard">
+                        <div class="gamepass-name">💎 VIP Pass</div>
+                        <div>Code: <strong>VIP2025</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>✨ +30 Click Power</li>
+                            <li>⚡ Click Cooldown -0.15s</li>
+                            <li>💰 +50 Auto Clickers/s</li>
+                        </ul>
+                        <div class="gamepass-status not-owned" id="vipStatus">❌ Chưa sở hữu</div>
+                    </div>
+                    <div class="gamepass-card premium" id="premiumCard">
+                        <div class="gamepass-name">👑 Premium Pass</div>
+                        <div>Code: <strong>PREMIUM999</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>🌟 +100 Click Power</li>
+                            <li>⏱️ Click Cooldown -0.2s</li>
+                            <li>🤖 +200 Auto Clickers/s</li>
+                            <li>🎯 x2 Multiplier</li>
+                        </ul>
+                        <div class="gamepass-status not-owned" id="premiumStatus">❌ Chưa sở hữu</div>
+                    </div>
+                    <div class="gamepass-card legend" id="legendCard">
+                        <div class="gamepass-name">🏆 Legend Pass</div>
+                        <div>Code: <strong>LEGEND777</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>⚡ +500 Click Power</li>
+                            <li>🚀 Click Cooldown = 0.01s</li>
+                            <li>💫 +1000 Auto Clickers/s</li>
+                            <li>👑 x5 Multiplier</li>
+                            <li>💰 +500K coins khởi đầu</li>
+                        </ul>
+                        <div class="gamepass-status not-owned" id="legendStatus">❌ Chưa sở hữu</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Potion Shop -->
+            <div class="potion-shop">
+                <div class="section-title">🧪 Cửa Hàng Thuốc</div>
+                <div class="potion-grid">
+                    <div class="potion-card x2">
+                        <div class="potion-icon">🧪</div>
+                        <div class="potion-name">Potion x2</div>
+                        <div class="potion-effect">Nhân đôi thu nhập 1 phút</div>
+                        <button class="buy-potion-button" onclick="buyPotion('2x', 100)">
+                            Mua - 100 💰
+                        </button>
+                    </div>
+                    <div class="potion-card x3">
+                        <div class="potion-icon">🧪</div>
+                        <div class="potion-name">Potion x3</div>
+                        <div class="potion-effect">Nhân ba thu nhập 1 phút</div>
+                        <button class="buy-potion-button" onclick="buyPotion('3x', 3000)">
+                            Mua - 3,000 💰
+                        </button>
+                    </div>
+                    <div class="potion-card x4">
+                        <div class="potion-icon">🧪</div>
+                        <div class="potion-name">Potion x4</div>
+                        <div class="potion-effect">Nhân bốn thu nhập 1 phút</div>
+                        <button class="buy-potion-button" onclick="buyPotion('4x', 5000)">
+                            Mua - 5,000 💰
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Discount Ticket Shop -->
+            <div class="potion-shop">
+                <div class="section-title">💳 Cửa Hàng Vé Giảm Giá</div>
+                <div class="potion-grid">
+                    <div class="potion-card x2">
+                        <div class="potion-icon">🎫</div>
+                        <div class="potion-name">Vé giảm 10%</div>
+                        <div class="potion-effect">Giảm giá 10% trong 1 phút</div>
+                        <button class="buy-potion-button" onclick="buyDiscountTicket(10, 100)">
+                            Mua - 100 💰
+                        </button>
+                    </div>
+                    <div class="potion-card x3">
+                        <div class="potion-icon">🎫</div>
+                        <div class="potion-name">Vé giảm 20%</div>
+                        <div class="potion-effect">Giảm giá 20% trong 1 phút</div>
+                        <button class="buy-potion-button" onclick="buyDiscountTicket(20, 500)">
+                            Mua - 500 💰
+                        </button>
+                    </div>
+                    <div class="potion-card x4">
+                        <div class="potion-icon">🎫</div>
+                        <div class="potion-name">Vé giảm 50%</div>
+                        <div class="potion-effect">Giảm giá 50% trong 1 phút</div>
+                        <button class="buy-potion-button" onclick="buyDiscountTicket(50, 100000)">
+                            Mua - 100,000 💰
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inventory -->
+            <div class="inventory-panel">
+                <div class="section-title">🎒 Túi Đồ</div>
+                <div class="inventory-grid">
+                    <div class="inventory-item">
+                        <div class="potion-icon">🧪</div>
+                        <div class="potion-name">Potion x2</div>
+                        <div class="inventory-count" id="inv2x">0</div>
+                        <button class="use-button" onclick="usePotion('2x', 2)">
+                            Sử dụng
+                        </button>
+                    </div>
+                    <div class="inventory-item">
+                        <div class="potion-icon">🧪</div>
+                        <div class="potion-name">Potion x3</div>
+                        <div class="inventory-count" id="inv3x">0</div>
+                        <button class="use-button" onclick="usePotion('3x', 3)">
+                            Sử dụng
+                        </button>
+                    </div>
+                    <div class="inventory-item">
+                        <div class="potion-icon">🧪</div>
+                        <div class="potion-name">Potion x4</div>
+                        <div class="inventory-count" id="inv4x">0</div>
+                        <button class="use-button" onclick="usePotion('4x', 4)">
+                            Sử dụng
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rebirth Panel -->
+            <div class="rebirth-panel">
+                <div class="rebirth-title">🔄 Tái Sinh (Rebirth)</div>
+                <div class="rebirth-info">
+                    Tái sinh sẽ reset toàn bộ tiến độ nhưng tăng vĩnh viễn thu nhập!<br>
+                    Mỗi lần tái sinh: <strong>+0.75x thu nhập</strong>
+                </div>
+                <div class="rebirth-stats">
+                    <div class="rebirth-stat">
+                        <div class="rebirth-stat-label">Số lần tái sinh</div>
+                        <div class="rebirth-stat-value" id="rebirthCountDisplay">0</div>
+                    </div>
+                    <div class="rebirth-stat">
+                        <div class="rebirth-stat-label">Multiplier hiện tại</div>
+                        <div class="rebirth-stat-value" id="rebirthMultiplierStat">x1.00</div>
+                    </div>
+                    <div class="rebirth-stat">
+                        <div class="rebirth-stat-label">Lần tái sinh tiếp theo</div>
+                        <div class="rebirth-stat-value" id="nextRebirthReq">2,500 coins</div>
+                    </div>
+                    <div class="rebirth-stat">
+                        <div class="rebirth-stat-label">Multiplier sau tái sinh</div>
+                        <div class="rebirth-stat-value" id="nextRebirthMult">x1.75</div>
+                    </div>
+                </div>
+                <button class="rebirth-button" id="rebirthButton" onclick="performRebirth()">
+                    🔄 Tái Sinh - Yêu cầu: <span id="rebirthReqText">2,500</span> coins
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let coins = 0;
+        let clickPower = 1;
+        let autoClickers = 0;
+        let multiplier = 1;
+        let isAdmin = false;
+        let clickCooldown = 0.5;
+        let canClick = true;
+        let gamePasses = {
+            vip: false,
+            premium: false,
+            legend: false
+        };
+        let inventory = {
+            potion_2x: 0,
+            potion_3x: 0,
+            potion_4x: 0
+        };
+        let activePotion = null;
+        let potionTimer = 0;
+        let potionInterval = null;
+        let afkTimer = null;
+        let afkTimeLeft = 1800;
+        let isAfk = false;
+        let playTime = 0;
+        let playTimeInterval = null;
+        let shopDiscount = 0;
+        let rebirthCount = 0;
+        let rebirthMultiplier = 1;
+        let clickTimes = [];
+        let isBanned = false;
+        let discountTicket = 0;
+        let discountTicketTimer = 0;
+        let discountTicketInterval = null;
+        let purchaseLimit = 5;
+        let purchaseCounts = {};
+
+        // ===== WEATHER SYSTEM =====
+        let activeWeathers = [];
+        let weatherTimers = {};
+        let weatherIntervals = {};
+        
+        // Weather configuration
+        const weatherConfig = {
+            wind: {
+                name: '💨 Gió',
+                effect: 'Tốc độ click +0.3s',
+                duration: 5,
+                interval: 100,
+                icon: '💨',
+                class: 'wind'
+            },
+            cloud: {
+                name: '☁️ Mây',
+                effect: 'Thuốc & Vé giảm 3%',
+                duration: 45,
+                interval: 300,
+                icon: '☁️',
+                class: 'cloud'
+            },
+            rain: {
+                name: '🌧️ Mưa',
+                effect: '+2 Click Power',
+                duration: 45,
+                interval: 600,
+                icon: '🌧️',
+                class: 'rain'
+            },
+            night: {
+                name: '🌙 Ban Đêm',
+                effect: '+5 Click Power',
+                duration: 30,
+                interval: 1200,
+                icon: '🌙',
+                class: 'night'
+            },
+            moonlight: {
+                name: '✨ Ánh Trăng',
+                effect: 'x5 Click Power',
+                duration: 60,
+                interval: 2400,
+                icon: '✨',
+                class: 'moonlight'
+            },
+            meteor: {
+                name: '☄️ Mưa Sao Băng',
+                effect: 'x10 Click Power',
+                duration: 60,
+                interval: 3600,
+                icon: '☄️',
+                class: 'meteor'
+            },
+            snow: {
+                name: '❄️ Mưa Tuyết',
+                effect: 'Cooldown +0.5s',
+                duration: 30,
+                interval: 800,
+                icon: '❄️',
+                class: 'snow'
+            },
+            acid: {
+                name: '☣️ Mưa Acid',
+                effect: '-2 Click Power',
+                duration: 60,
+                interval: 10800,
+                icon: '☣️',
+                class: 'acid'
+            },
+            diamond: {
+                name: '💎 Mưa Kim Cương',
+                effect: 'x10 Click Power',
+                duration: 90,
+                interval: 14400,
+                icon: '💎',
+                class: 'diamond'
+            },
+            emerald: {
+                name: '💚 Mưa Lục Kim',
+                effect: 'x300 Click Power',
+                duration: 120,
+                interval: 18000,
+                icon: '💚',
+                class: 'emerald'
+            },
+            adminabuse: {
+                name: '🛸 Admin Abuse',
+                effect: 'x500 Click Power',
+                duration: 150,
+                interval: 36000,
+                icon: '🛸',
+                class: 'adminabuse'
+            }
+        };
+        // Weather next spawn times
+        let weatherNextSpawn = {
+            wind: 100,
+            cloud: 300,
+            rain: 600,
+            night: 1200,
+            moonlight: 2400,
+            meteor: 3600,
+            snow: 800,
+            acid: 10800,
+            diamond: 14400,
+            emerald: 18000,
+            adminabuse: 36000
+        };
+
+        const shopItems = [
+            {
+                id: 1,
+                name: '+1 Click Power',
+                description: 'Tăng 1 coin mỗi click',
+                icon: '⚡',
+                basePrice: 10,
+                currentPrice: 10,
+                owned: 0,
+                effect: () => clickPower++
+            },
+            {
+                id: 2,
+                name: 'Auto Clicker',
+                description: '+1 coin mỗi giây',
+                icon: '🤖',
+                basePrice: 100,
+                currentPrice: 100,
+                owned: 0,
+                effect: () => autoClickers++
+            },
+            {
+                id: 3,
+                name: 'Faster Click',
+                description: 'Giảm 0.05s thời gian chờ click',
+                icon: '⚡',
+                basePrice: 500,
+                currentPrice: 500,
+                owned: 0,
+                effect: () => {
+                    clickCooldown = Math.max(0.05, clickCooldown - 0.05);
+                }
+            },
+            {
+                id: 4,
+                name: 'Super Click',
+                description: '+5 click power',
+                icon: '⭐',
+                basePrice: 1000,
+                currentPrice: 1000,
+                owned: 0,
+                effect: () => clickPower += 5
+            },
+            {
+                id: 5,
+                name: 'Mega Clicker',
+                description: '+10 coins mỗi giây',
+                icon: '✨',
+                basePrice: 3000,
+                currentPrice: 3000,
+                owned: 0,
+                effect: () => autoClickers += 10
+            },
+            {
+                id: 6,
+                name: '2x Multiplier',
+                description: 'Nhân đôi tất cả thu nhập',
+                icon: '👑',
+                basePrice: 15000,
+                currentPrice: 15000,
+                owned: 0,
+                effect: () => multiplier *= 2
+            },
+            {
+                id: 7,
+                name: 'Ultra Click',
+                description: '+20 click power',
+                icon: '💎',
+                basePrice: 10000,
+                currentPrice: 10000,
+                owned: 0,
+                effect: () => clickPower += 20
+            },
+            {
+                id: 8,
+                name: 'Factory',
+                description: '+50 coins mỗi giây',
+                icon: '🏭',
+                basePrice: 30000,
+                currentPrice: 30000,
+                owned: 0,
+                effect: () => autoClickers += 50
+            },
+            {
+                id: 9,
+                name: 'Golden Touch',
+                description: '+100 click power',
+                icon: '🌟',
+                basePrice: 75000,
+                currentPrice: 75000,
+                owned: 0,
+                effect: () => clickPower += 100
+            },
+            {
+                id: 10,
+                name: 'Time Warp',
+                description: 'Giảm 0.03s cooldown',
+                icon: '⏰',
+                basePrice: 120000,
+                currentPrice: 120000,
+                owned: 0,
+                effect: () => {
+                    clickCooldown = Math.max(0.01, clickCooldown - 0.03);
+                }
+            },
+            {
+                id: 11,
+                name: 'Robot Army',
+                description: '+100 coins mỗi giây',
+                icon: '🤖',
+                basePrice: 200000,
+                currentPrice: 200000,
+                owned: 0,
+                effect: () => autoClickers += 100
+            },
+            {
+                id: 12,
+                name: 'Diamond Finger',
+                description: '+250 click power',
+                icon: '💍',
+                basePrice: 350000,
+                currentPrice: 350000,
+                owned: 0,
+                effect: () => clickPower += 250
+            },
+            {
+                id: 13,
+                name: 'Money Printer',
+                description: '+200 coins mỗi giây',
+                icon: '🖨️',
+                basePrice: 600000,
+                currentPrice: 600000,
+                owned: 0,
+                effect: () => autoClickers += 200
+            },
+            {
+                id: 14,
+                name: 'Cosmic Power',
+                description: '+400 click power',
+                icon: '🌌',
+                basePrice: 1200000,
+                currentPrice: 1200000,
+                owned: 0,
+                effect: () => clickPower += 400
+            },
+            {
+                id: 15,
+                name: 'Quantum Clicker',
+                description: '+500 coins mỗi giây',
+                icon: '⚛️',
+                basePrice: 2500000,
+                currentPrice: 2500000,
+                owned: 0,
+                effect: () => autoClickers += 500
+            },
+            {
+                id: 16,
+                name: 'Infinity Stone',
+                description: '+1000 click power',
+                icon: '💠',
+                basePrice: 6000000,
+                currentPrice: 6000000,
+                owned: 0,
+                effect: () => clickPower += 1000
+            },
+            {
+                id: 17,
+                name: 'Universe Generator',
+                description: '+1500 coins mỗi giây',
+                icon: '🌠',
+                basePrice: 25000000,
+                currentPrice: 25000000,
+                owned: 0,
+                effect: () => autoClickers += 1500
+            },
+            {
+                id: 18,
+                name: 'The Divine',
+                description: '5% giảm giá mọi vật phẩm',
+                icon: '✨',
+                basePrice: 50000000,
+                currentPrice: 50000000,
+                owned: 0,
+                effect: () => {
+                    shopDiscount += 5;
+                }
+            },
+            {
+                id: 19,
+                name: 'The Primastic',
+                description: '1.2% cơ hội hoàn tiền',
+                icon: '💎',
+                basePrice: 1000000000,
+                currentPrice: 1000000000,
+                owned: 0,
+                effect: () => {}
+            },
+            {
+                id: 20,
+                name: 'The Transcendent',
+                description: '0.8% cơ hội hoàn x10 tiền',
+                icon: '🌟',
+                basePrice: 2500000000,
+                currentPrice: 2500000000,
+                owned: 0,
+                effect: () => {}
+            },
+            {
+                id: 21,
+                name: 'The God',
+                description: '+1 giới hạn mua vật phẩm',
+                icon: '⚜️',
+                basePrice: 2500000000,
+                currentPrice: 2500000000,
+                owned: 0,
+                effect: () => {
+                    purchaseLimit++;
+                }
+            }
+        ];
+
+        const rebirthRequirements = [5000, 100000, 500000, 2000000];
+
+        // ===== WEATHER FUNCTIONS =====
+        function activateWeather(type) {
+            if (activeWeathers.includes(type)) return; // Already active
+            
+            activeWeathers.push(type);
+            const config = weatherConfig[type];
+            weatherTimers[type] = config.duration;
+            
+            // Apply weather effect
+            applyWeatherEffect(type, true);
+            
+            // Start countdown
+            weatherIntervals[type] = setInterval(() => {
+                weatherTimers[type]--;
+                updateWeatherDisplay();
+                
+                if (weatherTimers[type] <= 0) {
+                    deactivateWeather(type);
+                }
+            }, 1000);
+            
+            updateWeatherDisplay();
+        }
+
+        function deactivateWeather(type) {
+            if (!activeWeathers.includes(type)) return;
+            
+            // Remove weather effect
+            applyWeatherEffect(type, false);
+            
+            // Clean up
+            clearInterval(weatherIntervals[type]);
+            delete weatherIntervals[type];
+            delete weatherTimers[type];
+            activeWeathers = activeWeathers.filter(w => w !== type);
+            
+            updateWeatherDisplay();
+        }
+
+        function applyWeatherEffect(type, apply) {
+            switch(type) {
+                case 'wind':
+                    // Tăng/giảm 0.3s cooldown
+                    if (apply) {
+                        clickCooldown = Math.max(0.01, clickCooldown - 0.3);
+                    } else {
+                        clickCooldown += 0.3;
+                    }
+                    break;
+                case 'cloud':
+                    // Giảm giá được xử lý trong renderShop()
+                    renderShop();
+                    break;
+                case 'rain':
+                    // +2/-2 click power
+                    if (apply) {
+                        clickPower += 2;
+                    } else {
+                        clickPower = Math.max(1, clickPower - 2);
+                    }
+                    break;
+                case 'night':
+                    // +5/-5 click power
+                    if (apply) {
+                        clickPower += 5;
+                    } else {
+                        clickPower = Math.max(1, clickPower - 5);
+                    }
+                    break;
+                case 'moonlight':
+                    // x5 click power (nhân/chia)
+                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
+                    break;
+                case 'meteor':
+                    // x10 click power (nhân/chia)
+                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
+                    break;
+                case 'acid':
+                    // -2/+2 click power
+                    if (apply) {
+                        clickPower = Math.max(1, clickPower - 2);
+                    } else {
+                        clickPower += 2;
+                    }
+                    break;
+                case 'diamond':
+                    // x10 click power
+                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
+                    break;
+                case 'emerald':
+                    // x300 click power
+                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
+                    break;
+                case 'adminabuse':
+                    // x500 click power
+                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
+                    break;
+            }
+            updateDisplay();
+        }
+
+        function getWeatherMultiplier() {
+            let multiplier = 1;
+            if (activeWeathers.includes('moonlight')) multiplier *= 5;
+            if (activeWeathers.includes('meteor')) multiplier *= 10;
+            if (activeWeathers.includes('diamond')) multiplier *= 10;
+            if (activeWeathers.includes('emerald')) multiplier *= 300;
+            if (activeWeathers.includes('adminabuse')) multiplier *= 500;
+            return multiplier;
+        }
+
+
+        function getWeatherDiscount() {
+            let discount = 0;
+            if (activeWeathers.includes('cloud')) discount += 3;
+            return discount;
+        }
+
+        function updateWeatherDisplay() {
+            const weatherList = document.getElementById('weatherList');
+            
+            if (activeWeathers.length === 0) {
+                weatherList.innerHTML = '<div class="weather-empty">Không có thời tiết nào</div>';
+                return;
+            }
+            
+            let html = '';
+            activeWeathers.forEach(type => {
+                const config = weatherConfig[type];
+                const timeLeft = weatherTimers[type];
+                html += `
+                    <div class="weather-item ${config.class}">
+                        <div class="weather-info">
+                            <div class="weather-name">${config.name}</div>
+                            <div class="weather-effect">${config.effect}</div>
+                        </div>
+                        <div class="weather-timer">${timeLeft}s</div>
+                    </div>
+                `;
+            });
+            
+            weatherList.innerHTML = html;
+        }
+
+        function summonWeather(type) {
+            if (!isAdmin) return;
+            activateWeather(type);
+        }
+
+        function clearAllWeather() {
+            if (!isAdmin) return;
+            
+            // Deactivate all active weathers
+            [...activeWeathers].forEach(type => {
+                deactivateWeather(type);
+            });
+        }
+
+        function checkWeatherSpawns() {
+            if (isBanned || isAfk) return;
+            
+            // Check each weather type
+            Object.keys(weatherNextSpawn).forEach(type => {
+                weatherNextSpawn[type]--;
+                
+                if (weatherNextSpawn[type] <= 0) {
+                    activateWeather(type);
+                    // Reset spawn timer
+                    weatherNextSpawn[type] = weatherConfig[type].interval;
+                }
+            });
+        }
+
+        // ===== ANTI-AUTO CLICKER SYSTEM =====
+        function checkAutoClicker() {
+            const now = Date.now();
+            clickTimes.push(now);
+            
+            // Chỉ giữ lại 10 lần click gần nhất
+            if (clickTimes.length > 10) {
+                clickTimes.shift();
+            }
+            
+            // Kiểm tra nếu có ít nhất 5 lần click
+            if (clickTimes.length >= 5) {
+                // Tính khoảng cách thời gian giữa các lần click
+                const intervals = [];
+                for (let i = 1; i < clickTimes.length; i++) {
+                    intervals.push(clickTimes[i] - clickTimes[i - 1]);
+                }
+                
+                // Tính trung bình khoảng cách
+                const avgInterval = intervals.reduce((a, b) => a + b, 0) / intervals.length;
+                
+                // Tính độ lệch chuẩn
+                const variance = intervals.reduce((sum, interval) => {
+                    return sum + Math.pow(interval - avgInterval, 2);
+                }, 0) / intervals.length;
+                const stdDev = Math.sqrt(variance);
+                
+                // PHÁT HIỆN AUTO CLICKER:
+                // 1. Click quá nhanh (< 50ms trung bình)
+                // 2. Click quá đều (độ lệch chuẩn < 10ms)
+                // 3. Click với pattern giống nhau (variance quá thấp)
+                
+                const tooFast = avgInterval < 50;
+                const tooConsistent = stdDev < 10;
+                const suspiciousPattern = variance < 100 && clickTimes.length >= 8;
+                
+                if ((tooFast && tooConsistent) || suspiciousPattern) {
+                    // BAN PLAYER!
+                    isBanned = true;
+                    document.getElementById('banOverlay').classList.add('active');
+                    document.getElementById('clickButton').classList.add('disabled');
+                    
+                    // Dừng tất cả hoạt động
+                    if (afkTimer) clearInterval(afkTimer);
+                    if (playTimeInterval) clearInterval(playTimeInterval);
+                    if (potionInterval) clearInterval(potionInterval);
+                    if (discountTicketInterval) clearInterval(discountTicketInterval);
+                    
+                    return true; // Ngăn không cho click
+                }
+            }
+            
+            return false; // Cho phép click
+        }
+
+        function updateDisplay() {
+            document.getElementById('coins').textContent = Math.floor(coins).toLocaleString();
+            document.getElementById('clickPower').textContent = clickPower;
+            document.getElementById('autoClickers').textContent = autoClickers;
+            document.getElementById('multiplier').textContent = multiplier;
+            document.getElementById('clickCooldown').textContent = clickCooldown.toFixed(2);
+            document.getElementById('rebirthMultiplierDisplay').textContent = rebirthMultiplier.toFixed(2);
+            document.getElementById('discountDisplay').textContent = shopDiscount;
+            document.getElementById('ticketDiscountDisplay').textContent = discountTicket;
+            document.getElementById('purchaseLimitDisplay').textContent = purchaseLimit;
+            
+            document.getElementById('inv2x').textContent = inventory.potion_2x;
+            document.getElementById('inv3x').textContent = inventory.potion_3x;
+            document.getElementById('inv4x').textContent = inventory.potion_4x;
+            
+            const hours = Math.floor(playTime / 3600);
+            const minutes = Math.floor((playTime % 3600) / 60);
+            const seconds = playTime % 60;
+            document.getElementById('playTime').textContent = 
+                `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        function renderShop() {
+            const shopContainer = document.getElementById('shopItems');
+            shopContainer.innerHTML = '';
+
+            shopItems.forEach(item => {
+                const currentPurchases = purchaseCounts[item.id] || 0;
+                const isLimitReached = currentPurchases >= purchaseLimit;
+                
+                // Tính giảm giá từ shop, ticket VÀ weather
+                let totalDiscount = shopDiscount + discountTicket;
+                
+                // Chỉ áp dụng weather discount cho potions và discount tickets (items không có basePrice cao)
+                const isPotionOrTicket = item.basePrice <= 100000 && (
+                    item.name.includes('Potion') || 
+                    item.name.includes('Vé giảm')
+                );
+                
+                if (isPotionOrTicket) {
+                    totalDiscount += getWeatherDiscount();
+                }
+                
+                const discountedPrice = Math.floor(item.currentPrice * (1 - totalDiscount / 100));
+                const canBuy = coins >= discountedPrice && !isLimitReached;
+                const itemDiv = document.createElement('div');
+                itemDiv.className = `shop-item ${!canBuy ? 'disabled' : ''}`;
+                
+                let priceDisplay = discountedPrice.toLocaleString();
+                if (totalDiscount > 0) {
+                    priceDisplay += ` (-${totalDiscount}%)`;
+                }
+                
+                let limitInfo = '';
+                if (isLimitReached) {
+                    limitInfo = '<div style="color: #ff6b6b; font-size: 0.9em; margin-top: 5px;">⚠️ Đã đạt giới hạn mua!</div>';
+                } else {
+                    limitInfo = `<div style="color: #ffd700; font-size: 0.8em; margin-top: 5px;">Còn lại: ${purchaseLimit - currentPurchases}/${purchaseLimit}</div>`;
+                }
+                
+                itemDiv.innerHTML = `
+                    <span class="icon">${item.icon}</span>
+                    <div class="item-info">
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-description">${item.description}</div>
+                        <div class="item-owned">Đã mua: ${item.owned}</div>
+                        ${limitInfo}
+                    </div>
+                    <button class="buy-button ${!canBuy ? 'disabled' : ''}" onclick="buyItem(${item.id})">
+                        ${isLimitReached ? 'Hết lượt' : priceDisplay + ' 💰'}
+                    </button>
+                `;
+                shopContainer.appendChild(itemDiv);
+            });
+        }
+
+        function buyItem(itemId) {
+            const item = shopItems.find(i => i.id === itemId);
+            const currentPurchases = purchaseCounts[item.id] || 0;
+            
+            if (currentPurchases >= purchaseLimit) {
+                alert('❌ Đã đạt giới hạn mua cho item này! Mua "The God" hoặc Tái sinh để tăng giới hạn.');
+                return;
+            }
+            
+            // Tính giảm giá bao gồm weather
+            let totalDiscount = shopDiscount + discountTicket;
+            
+            const isPotionOrTicket = item.basePrice <= 100000 && (
+                item.name.includes('Potion') || 
+                item.name.includes('Vé giảm')
+            );
+            
+            if (isPotionOrTicket) {
+                totalDiscount += getWeatherDiscount();
+            }
+            
+            const discountedPrice = Math.floor(item.currentPrice * (1 - totalDiscount / 100));
+            
+            if (coins >= discountedPrice) {
+                coins -= discountedPrice;
+                
+                // Xử lý The Primastic
+                if (item.id === 19) {
+                    const primasticCount = item.owned;
+                    const refundChance = 1.2 * (primasticCount + 1);
+                    const random = Math.random() * 100;
+                    
+                    if (random < refundChance) {
+                        coins += discountedPrice;
+                        alert(`🎉 The Primastic kích hoạt! Hoàn lại ${discountedPrice.toLocaleString()} coins!`);
+                    }
+                }
+                
+                // Xử lý The Transcendent
+                if (item.id === 20) {
+                    const transcendentCount = item.owned;
+                    const refundChance = 0.8 * (transcendentCount + 1);
+                    const random = Math.random() * 100;
+                    
+                    if (random < refundChance) {
+                        coins += discountedPrice * 10;
+                        alert(`💫 The Transcendent kích hoạt! Hoàn lại x10 = ${(discountedPrice * 10).toLocaleString()} coins!`);
+                    }
+                }
+                
+                item.effect();
+                item.owned++;
+                item.currentPrice = Math.floor(item.currentPrice * 2);
+                
+                purchaseCounts[item.id] = currentPurchases + 1;
+                
+                updateDisplay();
+                renderShop();
+            }
+        }
+
+        function checkAdminCode() {
+            const code = document.getElementById('adminCode').value;
+            const statusDiv = document.getElementById('adminStatus');
+            
+            if (code === 'havehag817') {
+                isAdmin = true;
+                statusDiv.innerHTML = '<div class="admin-status">✅ Admin đã đăng nhập!</div>';
+                document.getElementById('adminControls').style.display = 'block';
+                document.getElementById('adminCode').disabled = true;
+            } else {
+                statusDiv.innerHTML = '<div style="color: #ff0000; margin-top: 5px;">❌ Sai mã!</div>';
+                setTimeout(() => {
+                    statusDiv.innerHTML = '';
+                }, 2000);
+            }
+        }
+
+        function addAdminMoney() {
+            if (isAdmin) {
+                coins += 1000000000000000;
+                updateDisplay();
+                renderShop();
+            }
+        }
+
+        function saveGame() {
+            const gameData = {
+                coins: coins,
+                clickPower: clickPower,
+                autoClickers: autoClickers,
+                multiplier: multiplier,
+                clickCooldown: clickCooldown,
+                isAdmin: isAdmin,
+                gamePasses: gamePasses,
+                inventory: inventory,
+                playTime: playTime,
+                shopDiscount: shopDiscount,
+                rebirthCount: rebirthCount,
+                rebirthMultiplier: rebirthMultiplier,
+                purchaseLimit: purchaseLimit,
+                purchaseCounts: purchaseCounts,
+                weatherNextSpawn: weatherNextSpawn,
+                shopItems: shopItems.map(item => ({
+                    id: item.id,
+                    currentPrice: item.currentPrice,
+                    owned: item.owned
+                })),
+                saveDate: new Date().toISOString()
+            };
+
+            const dataStr = JSON.stringify(gameData, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(dataBlob);
+            link.download = `cookie-clicker-save-${Date.now()}.json`;
+            link.click();
+            
+            alert('✅ Game đã được lưu thành công!');
+        }
+
+        function loadGame(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const gameData = JSON.parse(e.target.result);
+                    
+                    coins = gameData.coins || 0;
+                    clickPower = gameData.clickPower || 1;
+                    autoClickers = gameData.autoClickers || 0;
+                    multiplier = gameData.multiplier || 1;
+                    clickCooldown = gameData.clickCooldown || 0.5;
+                    isAdmin = gameData.isAdmin || false;
+                    
+                    if (gameData.gamePasses) {
+                        gamePasses = gameData.gamePasses;
+                        updateGamePassUI();
+                    }
+                    
+                    if (gameData.inventory) {
+                        inventory = gameData.inventory;
+                    }
+                    
+                    playTime = gameData.playTime || 0;
+                    shopDiscount = gameData.shopDiscount || 0;
+                    rebirthCount = gameData.rebirthCount || 0;
+                    rebirthMultiplier = gameData.rebirthMultiplier || 1;
+                    purchaseLimit = gameData.purchaseLimit || 5;
+                    purchaseCounts = gameData.purchaseCounts || {};
+                    
+                    if (gameData.weatherNextSpawn) {
+                        weatherNextSpawn = gameData.weatherNextSpawn;
+                    }
+                    
+                    if (gameData.shopItems) {
+                        gameData.shopItems.forEach(savedItem => {
+                            const item = shopItems.find(i => i.id === savedItem.id);
+                            if (item) {
+                                item.currentPrice = savedItem.currentPrice;
+                                item.owned = savedItem.owned;
+                            }
+                        });
+                    }
+                    
+                    if (isAdmin) {
+                        document.getElementById('adminStatus').innerHTML = '<div class="admin-status">✅ Admin đã đăng nhập!</div>';
+                        document.getElementById('adminControls').style.display = 'block';
+                        document.getElementById('adminCode').disabled = true;
+                    }
+                    
+                    updateDisplay();
+                    renderShop();
+                    
+                    const saveDate = new Date(gameData.saveDate).toLocaleString('vi-VN');
+                    alert(`✅ Tải game thành công!\n📅 Lưu lúc: ${saveDate}`);
+                } catch (error) {
+                    alert('❌ File không hợp lệ! Vui lòng chọn file save đúng.');
+                }
+            };
+            reader.readAsText(file);
+            
+            event.target.value = '';
+        }
+
+        function redeemGamePass() {
+            const code = document.getElementById('gamepassCode').value.toUpperCase();
+            let success = false;
+            let passName = '';
+
+            if (code === 'VIP2025' && !gamePasses.vip) {
+                gamePasses.vip = true;
+                clickPower += 30;
+                clickCooldown = Math.max(0.01, clickCooldown - 0.15);
+                autoClickers += 50;
+                passName = 'VIP Pass';
+                success = true;
+            } else if (code === 'PREMIUM999' && !gamePasses.premium) {
+                gamePasses.premium = true;
+                clickPower += 100;
+                clickCooldown = Math.max(0.01, clickCooldown - 0.2);
+                autoClickers += 200;
+                multiplier *= 2;
+                passName = 'Premium Pass';
+                success = true;
+            } else if (code === 'LEGEND777' && !gamePasses.legend) {
+                gamePasses.legend = true;
+                clickPower += 500;
+                clickCooldown = 0.01;
+                autoClickers += 1000;
+                multiplier *= 5;
+                coins += 500000;
+                passName = 'Legend Pass';
+                success = true;
+            } else if (gamePasses.vip && code === 'VIP2025') {
+                alert('❌ Bạn đã sở hữu VIP Pass rồi!');
+                return;
+            } else if (gamePasses.premium && code === 'PREMIUM999') {
+                alert('❌ Bạn đã sở hữu Premium Pass rồi!');
+                return;
+            } else if (gamePasses.legend && code === 'LEGEND777') {
+                alert('❌ Bạn đã sở hữu Legend Pass rồi!');
+                return;
+            } else {
+                alert('❌ Code không hợp lệ!');
+                return;
+            }
+
+            if (success) {
+                updateGamePassUI();
+                updateDisplay();
+                renderShop();
+                document.getElementById('gamepassCode').value = '';
+                alert(`✅ Đã kích hoạt ${passName} thành công!`);
+            }
+        }
+
+        function buyPotion(type, price) {
+            if (coins >= price) {
+                coins -= price;
+                
+                if (type === '2x') {
+                    inventory.potion_2x++;
+                } else if (type === '3x') {
+                    inventory.potion_3x++;
+                } else if (type === '4x') {
+                    inventory.potion_4x++;
+                }
+                
+                updateDisplay();
+                renderShop();
+                alert(`✅ Đã mua Potion ${type} thành công!`);
+            } else {
+                alert('❌ Không đủ tiền!');
+            }
+        }
+
+        function buyDiscountTicket(percent, price) {
+            if (coins >= price) {
+                if (discountTicket > 0) {
+                    alert('⚠️ Đã có vé giảm giá đang hoạt động! Vui lòng đợi hết hiệu lực.');
+                    return;
+                }
+                
+                coins -= price;
+                discountTicket = percent;
+                discountTicketTimer = 60;
+                
+                const timerElement = document.getElementById('discountTicketTimer');
+                timerElement.classList.add('active');
+                document.getElementById('ticketDiscountPercent').textContent = percent;
+                
+                discountTicketInterval = setInterval(() => {
+                    discountTicketTimer--;
+                    document.getElementById('ticketTimeLeft').textContent = discountTicketTimer;
+                    
+                    if (discountTicketTimer <= 0) {
+                        clearInterval(discountTicketInterval);
+                        discountTicket = 0;
+                        timerElement.classList.remove('active');
+                        updateDisplay();
+                        renderShop();
+                    }
+                }, 1000);
+                
+                updateDisplay();
+                renderShop();
+                alert(`✅ Đã kích hoạt vé giảm giá ${percent}% trong 60 giây!`);
+            } else {
+                alert('❌ Không đủ tiền!');
+            }
+        }
+
+        function usePotion(type, multiplierValue) {
+            let hasPotion = false;
+            
+            if (type === '2x' && inventory.potion_2x > 0) {
+                inventory.potion_2x--;
+                hasPotion = true;
+            } else if (type === '3x' && inventory.potion_3x > 0) {
+                inventory.potion_3x--;
+                hasPotion = true;
+            } else if (type === '4x' && inventory.potion_4x > 0) {
+                inventory.potion_4x--;
+                hasPotion = true;
+            }
+            
+            if (!hasPotion) {
+                alert('❌ Không có thuốc này trong túi!');
+                return;
+            }
+            
+            if (activePotion) {
+                alert('⚠️ Đã có thuốc đang hoạt động! Vui lòng đợi hết hiệu lực.');
+                if (type === '2x') inventory.potion_2x++;
+                else if (type === '3x') inventory.potion_3x++;
+                else if (type === '4x') inventory.potion_4x++;
+                return;
+            }
+            
+            const oldMultiplier = multiplier;
+            activePotion = type;
+            multiplier = multiplier * multiplierValue;
+            potionTimer = 60;
+            
+            const timerElement = document.getElementById('potionTimer');
+            timerElement.classList.add('active');
+            
+            potionInterval = setInterval(() => {
+                potionTimer--;
+                document.getElementById('potionTimerText').textContent = `${type} - ${potionTimer}s`;
+                
+                if (potionTimer <= 0) {
+                    clearInterval(potionInterval);
+                    multiplier = oldMultiplier;
+                    activePotion = null;
+                    timerElement.classList.remove('active');
+                    updateDisplay();
+                }
+            }, 1000);
+            
+            updateDisplay();
+        }
+
+        function resetAFKTimer() {
+            if (isAfk || isBanned) return;
+            
+            afkTimeLeft = 1800;
+            document.getElementById('afkWarning').classList.remove('active');
+            
+            if (afkTimer) {
+                clearInterval(afkTimer);
+            }
+            
+            afkTimer = setInterval(() => {
+                afkTimeLeft--;
+                
+                if (afkTimeLeft <= 60 && afkTimeLeft > 0) {
+                    document.getElementById('afkWarning').classList.add('active');
+                    document.getElementById('afkCountdown').textContent = afkTimeLeft;
+                }
+                
+                if (afkTimeLeft <= 0) {
+                    clearInterval(afkTimer);
+                    activateAFK();
+                }
+            }, 1000);
+        }
+
+        function activateAFK() {
+            isAfk = true;
+            document.getElementById('afkOverlay').classList.add('active');
+            document.getElementById('afkWarning').classList.remove('active');
+        }
+
+        function resumeFromAFK() {
+            isAfk = false;
+            document.getElementById('afkOverlay').classList.remove('active');
+            resetAFKTimer();
+        }
+
+        function updateRebirthUI() {
+            const nextReq = rebirthCount < rebirthRequirements.length 
+                ? rebirthRequirements[rebirthCount] 
+                : rebirthRequirements[rebirthRequirements.length - 1] * Math.pow(2, rebirthCount - rebirthRequirements.length + 1);
+            
+            const nextMult = rebirthMultiplier + 0.75;
+            const canRebirth = coins >= nextReq;
+            
+            document.getElementById('rebirthCountDisplay').textContent = rebirthCount;
+            document.getElementById('rebirthMultiplierStat').textContent = `x${rebirthMultiplier.toFixed(2)}`;
+            document.getElementById('nextRebirthReq').textContent = `${nextReq.toLocaleString()} coins`;
+            document.getElementById('nextRebirthMult').textContent = `x${nextMult.toFixed(2)}`;
+            document.getElementById('rebirthReqText').textContent = nextReq.toLocaleString();
+            
+            const rebirthBtn = document.getElementById('rebirthButton');
+            if (canRebirth) {
+                rebirthBtn.classList.remove('disabled');
+            } else {
+                rebirthBtn.classList.add('disabled');
+            }
+        }
+
+        function performRebirth() {
+            const nextReq = rebirthCount < rebirthRequirements.length 
+                ? rebirthRequirements[rebirthCount] 
+                : rebirthRequirements[rebirthRequirements.length - 1] * Math.pow(2, rebirthCount - rebirthRequirements.length + 1);
+            
+            if (coins < nextReq) {
+                alert('❌ Không đủ coins để tái sinh!');
+                return;
+            }
+            
+            const confirm = window.confirm(
+                `🔄 XÁC NHẬN TÁI SINH\n\n` +
+                `Bạn sẽ mất:\n` +
+                `- Tất cả coins\n` +
+                `- Tất cả vật phẩm đã mua\n` +
+                `- Click power, Auto clickers, Multiplier\n` +
+                `- Cooldown về mặc định\n` +
+                `- Giảm giá về 0%\n` +
+                `- Số lần mua items về 0\n\n` +
+                `Bạn sẽ giữ:\n` +
+                `- Game Passes\n` +
+                `- Túi đồ (Potions)\n` +
+                `- Thời gian chơi\n\n` +
+                `Bạn sẽ nhận:\n` +
+                `- +0.75x thu nhập vĩnh viễn (${rebirthMultiplier.toFixed(2)} → ${(rebirthMultiplier + 0.75).toFixed(2)})\n` +
+                `- +5 giới hạn mua vật phẩm (${purchaseLimit} → ${purchaseLimit + 5})\n\n` +
+                `Tiếp tục?`
+            );
+            
+            if (!confirm) return;
+            
+            coins = 0;
+            clickPower = 1;
+            autoClickers = 0;
+            multiplier = 1;
+            clickCooldown = 0.5;
+            shopDiscount = 0;
+            
+            shopItems.forEach(item => {
+                item.currentPrice = item.basePrice;
+                item.owned = 0;
+            });
+            
+            purchaseCounts = {};
+            
+            rebirthCount++;
+            rebirthMultiplier += 0.75;
+            purchaseLimit += 5;
+            
+            updateDisplay();
+            renderShop();
+            updateRebirthUI();
+            
+            alert(`✅ Tái sinh thành công!\n🌟 Thu nhập mới: x${rebirthMultiplier.toFixed(2)}\n🎯 Giới hạn mua mới: ${purchaseLimit}`);
+        }
+
+        function updateGamePassUI() {
+            if (gamePasses.vip) {
+                document.getElementById('vipCard').classList.add('owned');
+                document.getElementById('vipStatus').className = 'gamepass-status owned';
+                document.getElementById('vipStatus').textContent = '✅ Đã sở hữu';
+            }
+
+            if (gamePasses.premium) {
+                document.getElementById('premiumCard').classList.add('owned');
+                document.getElementById('premiumStatus').className = 'gamepass-status owned';
+                document.getElementById('premiumStatus').textContent = '✅ Đã sở hữu';
+            }
+
+            if (gamePasses.legend) {
+                document.getElementById('legendCard').classList.add('owned');
+                document.getElementById('legendStatus').className = 'gamepass-status owned';
+                document.getElementById('legendStatus').textContent = '✅ Đã sở hữu';
+            }
+        }
+
+        // ===== CLICK BUTTON EVENT =====
+        document.getElementById('clickButton').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            if (!canClick || isAfk || isBanned) return;
+            
+            // Kiểm tra auto clicker TRƯỚC khi xử lý click
+            if (checkAutoClicker()) {
+                return; // Dừng ngay nếu phát hiện auto clicker
+            }
+            
+            resetAFKTimer();
+            
+            // Áp dụng multiplier từ weather
+            const weatherMult = getWeatherMultiplier();
+            const totalMultiplier = multiplier * rebirthMultiplier * weatherMult;
+            coins += clickPower * totalMultiplier;
+            updateDisplay();
+            renderShop();
+            updateRebirthUI();
+            
+            // Bắt đầu cooldown
+            canClick = false;
+            this.classList.add('disabled');
+            
+            setTimeout(() => {
+                canClick = true;
+                this.classList.remove('disabled');
+            }, clickCooldown * 1000);
+        });
+
+        // Auto clicker
+        setInterval(() => {
+            if (autoClickers > 0 && !isAfk && !isBanned) {
+                const weatherMult = getWeatherMultiplier();
+                const totalMultiplier = multiplier * rebirthMultiplier * weatherMult;
+                coins += autoClickers * totalMultiplier;
+                updateDisplay();
+                renderShop();
+                updateRebirthUI();
+            }
+        }, 1000);
+
+        // Weather spawn checker (every second)
+        setInterval(() => {
+            checkWeatherSpawns();
+        }, 1000);
+
+        // Initialize
+        updateDisplay();
+        renderShop();
+        updateGamePassUI();
+        updateRebirthUI();
+        resetAFKTimer();
+        updateWeatherDisplay();
+
+        // Playtime counter
+        playTimeInterval = setInterval(() => {
+            if (!isAfk && !isBanned) {
+                playTime++;
+                updateDisplay();
+            }
+        }, 1000);
+
+        // Event listeners để reset AFK timer
+        document.addEventListener('mousemove', resetAFKTimer);
+        document.addEventListener('keypress', resetAFKTimer);
+        document.addEventListener('scroll', resetAFKTimer);
+        document.addEventListener('touchstart', resetAFKTimer);
+    </script>
+</body>
+</html>
