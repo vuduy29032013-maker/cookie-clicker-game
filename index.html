@@ -1,7 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta name="google-site-verification" content="cr-TrJQ3tPjhS7BRid35X7JyOKWHbtHNVhW1bTYJl6g" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookie Clicker Game-By Vuduy 7/7  </title>
@@ -393,6 +393,79 @@
         .weather-item.adminabuse {
             border-color: #ff00ff;
             background: rgba(255, 0, 255, 0.2);
+        }
+
+        .weather-item.earthquake {
+            border-color: #ff4500;
+            background: rgba(255, 69, 0, 0.2);
+        }
+
+        .weather-item.thunderstorm {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .weather-item.superstorm {
+            border-color: #8b00ff;
+            background: rgba(139, 0, 255, 0.2);
+        }
+
+        .weather-item.winteraurora {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.2);
+        }
+
+        .weather-item.shootingstars {
+            border-color: #ffe4b5;
+            background: rgba(255, 228, 181, 0.2);
+        }
+
+        .weather-item.permafrost {
+            border-color: #00bfff;
+            background: rgba(0, 191, 255, 0.2);
+        }
+
+        .weather-item.cyclone {
+            border-color: #adff2f;
+            background: rgba(173, 255, 47, 0.2);
+        }
+
+        .weather-item.dissonant {
+            border-color: #ff1493;
+            background: rgba(255, 20, 147, 0.2);
+        }
+
+        .weather-item.beestorm {
+            border-color: #ffa500;
+            background: rgba(255, 165, 0, 0.2);
+        }
+
+        .weather-item.tropicalrain {
+            border-color: #32cd32;
+            background: rgba(50, 205, 50, 0.2);
+        }
+
+        .weather-item.gentledrizzle {
+            border-color: #87ceeb;
+            background: rgba(135, 206, 235, 0.2);
+        }
+
+        .weather-item.ownerabuse {
+            border-color: #ff0000;
+            background: rgba(255, 0, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            animation: ownerPulse 2s infinite;
+        }
+
+        @keyframes ownerPulse {
+            0%, 100% {
+                border-color: #ff0000;
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            }
+            50% {
+                border-color: #ffd700;
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            }
         }
 
         .weather-info {
@@ -1071,6 +1144,18 @@
                     <button class="weather-summon-btn" onclick="summonWeather('diamond')">💎 Kim Cương</button>
                     <button class="weather-summon-btn" onclick="summonWeather('emerald')">💚 Lục Kim</button>
                     <button class="weather-summon-btn" onclick="summonWeather('adminabuse')">🛸 Admin</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('earthquake')">🌋 Động Đất</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('thunderstorm')">⚡ Bão Sấm</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('superstorm')">🌪️ Siêu Bão</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('winteraurora')">🌌 Cực Quang</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('shootingstars')">🌠 Mưa Sao</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('permafrost')">❄️🔥 Nổ Băng</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('cyclone')">🌀 Lốc Xoáy</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('dissonant')">🎭 Hỗn Loạn</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('beestorm')">🐝 Bão Ong</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('tropicalrain')">🌴 Mưa Nhiệt Đới</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('gentledrizzle')">🌧️💧 Mưa Phùn</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('ownerabuse')" style="background: linear-gradient(135deg, #ff0000 0%, #ffd700 100%);">⚜️ OWNER</button>
                 </div>
                 <button class="weather-clear-btn" onclick="clearAllWeather()">🚫 Xóa tất cả thời tiết</button>
             </div>
@@ -1432,6 +1517,102 @@
                 interval: 36000,
                 icon: '🛸',
                 class: 'adminabuse'
+            },
+            earthquake: {
+                name: '🌋 Động Đất',
+                effect: '+15 Click Power',
+                duration: 120,
+                interval: 21600,
+                icon: '🌋',
+                class: 'earthquake'
+            },
+            thunderstorm: {
+                name: '⚡ Bão Sấm',
+                effect: 'x100 Click Power',
+                duration: 180,
+                interval: 28800,
+                icon: '⚡',
+                class: 'thunderstorm'
+            },
+            superstorm: {
+                name: '🌪️ Siêu Bão',
+                effect: 'x300 Click Power',
+                duration: 240,
+                interval: 36000,
+                icon: '🌪️',
+                class: 'superstorm'
+            },
+            winteraurora: {
+                name: '🌌 Cực Quang Đông',
+                effect: 'x500 Click Power',
+                duration: 300,
+                interval: 72000,
+                icon: '🌌',
+                class: 'winteraurora'
+            },
+            shootingstars: {
+                name: '🌠 Mưa Sao',
+                effect: 'x5 Tiền Hiện Có',
+                duration: 60,
+                interval: 108000,
+                icon: '🌠',
+                class: 'shootingstars'
+            },
+            permafrost: {
+                name: '❄️🔥 Nổ Băng Vĩnh Cửu',
+                effect: 'x1000 Tiền Hiện Có',
+                duration: 90,
+                interval: 144000,
+                icon: '❄️🔥',
+                class: 'permafrost'
+            },
+            cyclone: {
+                name: '🌀 Lốc Xoáy',
+                effect: '+10% Click Power',
+                duration: 150,
+                interval: 180000,
+                icon: '🌀',
+                class: 'cyclone'
+            },
+            dissonant: {
+                name: '🎭 Hỗn Loạn',
+                effect: '+300 Click Power',
+                duration: 180,
+                interval: 360000,
+                icon: '🎭',
+                class: 'dissonant'
+            },
+            beestorm: {
+                name: '🐝 Bão Ong',
+                effect: '+34920111 Click Power',
+                duration: 300,
+                interval: 86400,
+                icon: '🐝',
+                class: 'beestorm'
+            },
+            tropicalrain: {
+                name: '🌴 Mưa Nhiệt Đới',
+                effect: '+150 Click Power',
+                duration: 90,
+                interval: 1680,
+                icon: '🌴',
+                class: 'tropicalrain'
+            },
+            gentledrizzle: {
+                name: '🌧️💧 Mưa Phùn',
+                effect: 'x2 Tiền Hiện Có',
+                duration: 120,
+                interval: 1860,
+                icon: '🌧️💧',
+                class: 'gentledrizzle'
+            },
+            ownerabuse: {
+                name: '⚜️ Owner Abuse',
+                effect: 'x10000 Click Power',
+                duration: 600,
+                interval: 1800000,
+                icon: '⚜️',
+                class: 'ownerabuse'
             }
         };
         // Weather next spawn times
@@ -1446,7 +1627,19 @@
             acid: 10800,
             diamond: 14400,
             emerald: 18000,
-            adminabuse: 36000
+            adminabuse: 36000,
+            earthquake: 21600,
+            thunderstorm: 28800,
+            superstorm: 36000,
+            winteraurora: 72000,
+            shootingstars: 108000,
+            permafrost: 144000,
+            cyclone: 180000,
+            dissonant: 360000,
+            beestorm: 86400,
+            tropicalrain: 1680,
+            gentledrizzle: 1860,
+            ownerabuse: 1800000
         };
 
         const shopItems = [
@@ -1769,6 +1962,75 @@
                     // x500 click power
                     // Không áp dụng trực tiếp vào clickPower, xử lý khi click
                     break;
+                case 'earthquake':
+                    if (apply) {
+                        clickPower += 15;
+                    } else {
+                        clickPower = Math.max(1, clickPower - 15);
+                    }
+                    break;
+                case 'thunderstorm':
+                    // x100 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'superstorm':
+                    // x300 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'winteraurora':
+                    // x500 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'shootingstars':
+                    // x5 tiền hiện có - xử lý khi activate
+                    if (apply) {
+                        coins *= 5;
+                        updateDisplay();
+                    }
+                    break;
+                case 'permafrost':
+                    // x1000 tiền hiện có - xử lý khi activate
+                    if (apply) {
+                        coins *= 1000;
+                        updateDisplay();
+                    }
+                    break;
+                case 'cyclone':
+                    // +10% click power
+                    if (apply) {
+                        clickPower = Math.ceil(clickPower * 1.1);
+                    } else {
+                        clickPower = Math.ceil(clickPower / 1.1);
+                    }
+                    break;
+                case 'dissonant':
+                    if (apply) {
+                        clickPower += 300;
+                    } else {
+                        clickPower = Math.max(1, clickPower - 300);
+                    }
+                    break;
+                case 'beestorm':
+                    if (apply) {
+                        clickPower += 34920111;
+                    } else {
+                        clickPower = Math.max(1, clickPower - 34920111);
+                    }
+                    break;
+                case 'tropicalrain':
+                    if (apply) {
+                        clickPower += 150;
+                    } else {
+                        clickPower = Math.max(1, clickPower - 150);
+                    }
+                    break;
+                case 'gentledrizzle':
+                    // x2 tiền hiện có - xử lý khi activate
+                    if (apply) {
+                        coins *= 2;
+                        updateDisplay();
+                    }
+                    break;
+                case 'ownerabuse':
+                    // x10000 click power - xử lý trong getWeatherMultiplier
+                    break;
             }
             updateDisplay();
         }
@@ -1780,6 +2042,10 @@
             if (activeWeathers.includes('diamond')) multiplier *= 10;
             if (activeWeathers.includes('emerald')) multiplier *= 300;
             if (activeWeathers.includes('adminabuse')) multiplier *= 500;
+            if (activeWeathers.includes('thunderstorm')) multiplier *= 100;
+            if (activeWeathers.includes('superstorm')) multiplier *= 300;
+            if (activeWeathers.includes('winteraurora')) multiplier *= 500;
+            if (activeWeathers.includes('ownerabuse')) multiplier *= 10000;
             return multiplier;
         }
 
@@ -2529,5 +2795,4 @@
         document.addEventListener('touchstart', resetAFKTimer);
     </script>
 </body>
-
 </html>
