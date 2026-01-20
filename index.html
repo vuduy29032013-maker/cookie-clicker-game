@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -240,6 +239,27 @@
             margin-top: 10px;
             padding-top: 10px;
             border-top: 1px solid #ffd700;
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .admin-controls::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .admin-controls::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .admin-controls::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            border-radius: 4px;
+        }
+
+        .admin-controls::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff8c00 0%, #ffd700 100%);
         }
 
         .admin-money-button {
@@ -274,6 +294,27 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 5px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        .weather-buttons::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .weather-buttons::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .weather-buttons::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            border-radius: 4px;
+        }
+
+        .weather-buttons::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
         }
 
         .weather-summon-btn {
@@ -466,6 +507,492 @@
                 border-color: #ffd700;
                 box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
             }
+        }
+
+        .weather-item.rainbowrain {
+            border-color: #ff69b4;
+            background: linear-gradient(135deg, rgba(255,0,0,0.2), rgba(255,165,0,0.2), rgba(255,255,0,0.2), rgba(0,255,0,0.2), rgba(0,0,255,0.2), rgba(75,0,130,0.2), rgba(238,130,238,0.2));
+        }
+
+        .weather-item.goldrain {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.3);
+        }
+
+        .weather-item.silverrain {
+            border-color: #c0c0c0;
+            background: rgba(192, 192, 192, 0.3);
+        }
+
+        .weather-item.cosmicrain {
+            border-color: #4b0082;
+            background: rgba(75, 0, 130, 0.3);
+        }
+
+        .weather-item.secretrain {
+            border-color: #8a2be2;
+            background: rgba(138, 43, 226, 0.3);
+        }
+
+        .weather-item.whitehole {
+            border-color: #ffffff;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .weather-item.supernova {
+            border-color: #ff4500;
+            background: rgba(255, 69, 0, 0.3);
+        }
+
+        .weather-item.nancorenova {
+            border-color: #00ffff;
+            background: rgba(0, 255, 255, 0.3);
+        }
+
+        .weather-item.corruptzenaura {
+            border-color: #800080;
+            background: rgba(128, 0, 128, 0.3);
+        }
+
+        .weather-item.fullmoon {
+            border-color: #f0e68c;
+            background: rgba(240, 230, 140, 0.3);
+        }
+
+        .weather-item.safaridusk {
+            border-color: #ff8c00;
+            background: rgba(255, 140, 0, 0.3);
+        }
+
+        .weather-item.yetinight {
+            border-color: #add8e6;
+            background: rgba(173, 216, 230, 0.3);
+        }
+
+        .weather-item.silentnight {
+            border-color: #191970;
+            background: rgba(25, 25, 112, 0.3);
+        }
+
+        .weather-item.boomboxparty {
+            border-color: #ff1493;
+            background: rgba(255, 20, 147, 0.3);
+        }
+
+        .weather-item.frozeniceking {
+            border-color: #00bfff;
+            background: rgba(0, 191, 255, 0.3);
+        }
+
+        .weather-item.radioactiverain {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.3);
+        }
+
+        .weather-item.oilrain {
+            border-color: #000000;
+            background: rgba(50, 50, 50, 0.5);
+        }
+
+        .weather-item.sandstrike {
+            border-color: #daa520;
+            background: rgba(218, 165, 32, 0.3);
+            box-shadow: 0 0 15px rgba(218, 165, 32, 0.4);
+        }
+
+        /* EGG SHOP & PETS */
+        .diamond-display {
+            font-size: 1.3em;
+            color: #00ffff;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+
+        .egg-shop {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(0, 255, 255, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .egg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .egg-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #00ffff;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .egg-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .egg-details-btn {
+            margin-top: 10px;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            color: white;
+            font-size: 0.85em;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .egg-details-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .egg-icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        .egg-name {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .egg-price {
+            color: #00ffff;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .pets-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 215, 0, 0.5);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+        }
+
+        .pet-inventory-section {
+            margin-bottom: 30px;
+        }
+
+        .equipped-pets-bar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 2px solid #00ff00;
+        }
+
+        .equipped-slot {
+            width: 80px;
+            height: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed #666;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .equipped-slot.filled {
+            border: 2px solid #00ff00;
+            background: rgba(0, 255, 0, 0.1);
+        }
+
+        .equipped-pet-icon {
+            font-size: 2em;
+        }
+
+        .equipped-pet-mult {
+            font-size: 0.7em;
+            color: #00ff00;
+            font-weight: bold;
+        }
+
+        .unequip-btn {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.7em;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .unequip-btn:hover {
+            background: #ff0000;
+        }
+
+        .pets-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .pet-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            position: relative;
+        }
+
+        .pet-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+
+        .pet-card.equipped {
+            border-color: #00ff00;
+            background: rgba(0, 255, 0, 0.15);
+        }
+
+        .pet-equipped-badge {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #00ff00;
+            color: #000;
+            font-size: 0.7em;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .pet-icon {
+            font-size: 2.5em;
+        }
+
+        .pet-name {
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .pet-multiplier {
+            color: #00ff00;
+            font-weight: bold;
+            font-size: 0.85em;
+        }
+
+        .pet-count {
+            color: #ffd700;
+            font-size: 0.8em;
+        }
+
+        .pet-actions {
+            margin-top: 5px;
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+        }
+
+        .equip-btn {
+            padding: 4px 10px;
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+            font-size: 0.75em;
+            cursor: pointer;
+        }
+
+        .equip-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .equip-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        .section-subtitle {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #ffd700;
+            text-align: center;
+        }
+
+        .hatch-animation {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 5px solid #ffd700;
+            border-radius: 20px;
+            padding: 40px;
+            z-index: 10000;
+            text-align: center;
+            min-width: 400px;
+            animation: hatchPulse 0.5s infinite;
+        }
+
+        .egg-details-modal {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.95);
+            border: 3px solid #00ffff;
+            border-radius: 15px;
+            padding: 30px;
+            z-index: 10000;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .egg-details-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9999;
+        }
+
+        .egg-details-title {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #00ffff;
+        }
+
+        .pet-chance-list {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .pet-chance-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 8px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            border-left: 4px solid #ffd700;
+        }
+
+        .pet-chance-item.legendary {
+            border-left-color: #ff69b4;
+            background: rgba(255, 105, 180, 0.1);
+        }
+
+        .pet-chance-item.epic {
+            border-left-color: #9370db;
+            background: rgba(147, 112, 219, 0.1);
+        }
+
+        .pet-chance-item.rare {
+            border-left-color: #4169e1;
+            background: rgba(65, 105, 225, 0.1);
+        }
+
+        .pet-chance-item.common {
+            border-left-color: #90ee90;
+            background: rgba(144, 238, 144, 0.1);
+        }
+
+        .pet-chance-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pet-chance-icon {
+            font-size: 1.5em;
+        }
+
+        .pet-chance-name {
+            font-weight: bold;
+        }
+
+        .pet-chance-mult {
+            color: #00ff00;
+            font-size: 0.9em;
+        }
+
+        .pet-chance-percent {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .close-modal-btn {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .close-modal-btn:hover {
+            transform: scale(1.05);
+        }
+
+        @keyframes hatchPulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.05); }
+        }
+
+        .hatch-egg {
+            font-size: 6em;
+            margin-bottom: 20px;
+            animation: shake 0.5s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        .hatch-result {
+            font-size: 8em;
+            margin: 20px 0;
+        }
+
+        .hatch-text {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .hatch-multiplier {
+            color: #00ff00;
+            font-size: 1.3em;
+            font-weight: bold;
         }
 
         .weather-info {
@@ -1130,6 +1657,7 @@
         <div id="adminStatus"></div>
         <div id="adminControls" style="display: none;" class="admin-controls">
             <button class="admin-money-button" onclick="addAdminMoney()">💰 +1QA Coins</button>
+            <button class="admin-money-button" onclick="addAdminDiamonds()" style="background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%); margin-top: 10px;">💎 +1000 Diamonds</button>
             
             <div class="weather-controls">
                 <div class="weather-control-title">🌦️ Triệu hồi Thời tiết</div>
@@ -1156,6 +1684,24 @@
                     <button class="weather-summon-btn" onclick="summonWeather('tropicalrain')">🌴 Mưa Nhiệt Đới</button>
                     <button class="weather-summon-btn" onclick="summonWeather('gentledrizzle')">🌧️💧 Mưa Phùn</button>
                     <button class="weather-summon-btn" onclick="summonWeather('ownerabuse')" style="background: linear-gradient(135deg, #ff0000 0%, #ffd700 100%);">⚜️ OWNER</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('rainbowrain')">🌈 Rainbow</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('goldrain')">💰 Gold</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('silverrain')">🪙 Silver</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('cosmicrain')">🌌 Cosmic</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('secretrain')">🔮 Secret</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('whitehole')">⚪ White Hole</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('supernova')">💥 Supernova</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('nancorenova')">⚛️ Nancore</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('corruptzenaura')">👹 Corrupt Zen</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('fullmoon')">🌕 Full Moon</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('safaridusk')">🌅 Safari</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('yetinight')">🏔️ Yeti</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('silentnight')">🌃 Silent</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('boomboxparty')">🎵 Boombox</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('frozeniceking')">❄️👑 Ice King</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('radioactiverain')">☢️ Radioactive</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('oilrain')">🛢️ Oil</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('sandstrike')">🏜️ Sand</button>
                 </div>
                 <button class="weather-clear-btn" onclick="clearAllWeather()">🚫 Xóa tất cả thời tiết</button>
             </div>
@@ -1176,6 +1722,9 @@
             <div class="coins-display">
                 <span>💰</span>
                 <span id="coins">1</span>
+                <span class="diamond-display">
+                    💎 <span id="diamonds">0</span>
+                </span>
             </div>
             <div class="stats">
                 Click Power: <span id="clickPower">1</span> | 
@@ -1183,6 +1732,7 @@
                 Multiplier: x<span id="multiplier">1</span> |
                 Click Cooldown: <span id="clickCooldown">0.5</span>s |
                 Rebirth: x<span id="rebirthMultiplierDisplay">1</span> |
+                <span style="color: #00ff00;">🐾 Pets: x<span id="petMultiplierDisplay">1</span></span> |
                 Giảm giá: <span id="discountDisplay">0</span>% |
                 Vé giảm: <span id="ticketDiscountDisplay">0</span>% |
                 Giới hạn mua: <span id="purchaseLimitDisplay">5</span>
@@ -1383,8 +1933,44 @@
                     🔄 Tái Sinh - Yêu cầu: <span id="rebirthReqText">2,500</span> coins
                 </button>
             </div>
+
+            <!-- Egg Shop -->
+            <div class="egg-shop">
+                <div class="section-title">🥚 Egg Shop - Mua bằng Kim Cương 💎</div>
+                <div class="egg-grid" id="eggGrid">
+                    <!-- Eggs will be generated here -->
+                </div>
+            </div>
+
+            <!-- Pets Collection -->
+            <div class="pets-panel">
+                <div class="section-title">🐾 Pet System</div>
+                
+                <!-- Equipped Pets Bar -->
+                <div class="pet-inventory-section">
+                    <div class="section-subtitle">⚔️ Pets Đang Trang Bị (Tối đa 5)</div>
+                    <div class="equipped-pets-bar" id="equippedPetsBar">
+                        <!-- Equipped pets will be shown here -->
+                    </div>
+                </div>
+
+                <!-- All Pets Collection -->
+                <div class="pet-inventory-section">
+                    <div class="section-subtitle">📦 Tất Cả Pets</div>
+                    <div class="pets-grid" id="petsGrid">
+                        <!-- Pets will be displayed here -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Hatch Animation -->
+    <div id="hatchAnimation" style="display: none;"></div>
+
+    <!-- Egg Details Modal -->
+    <div id="eggDetailsOverlay" class="egg-details-overlay" style="display: none;" onclick="closeEggDetails()"></div>
+    <div id="eggDetailsModal" class="egg-details-modal" style="display: none;"></div>
 
     <script>
         let coins = 0;
@@ -1423,10 +2009,174 @@
         let purchaseLimit = 5;
         let purchaseCounts = {};
 
+        // ===== DIAMOND & PETS SYSTEM =====
+        let diamonds = 0;
+        let pets = [];
+        let ownedPets = {};
+        let equippedPets = []; // Mảng chứa tối đa 5 pets đang được trang bị
+        const MAX_EQUIPPED_PETS = 5;
+
+        // Egg data
+        const eggShop = [
+            {
+                id: 1,
+                name: 'Common Egg',
+                icon: '🥚',
+                price: 10,
+                pets: [
+                    { name: 'Bunny', icon: '🐰', chance: 33.33, multiplier: 1.1 },
+                    { name: 'Dog', icon: '🐕', chance: 33.33, multiplier: 1.1 },
+                    { name: 'Golden Lab', icon: '🦮', chance: 33.33, multiplier: 1.15 }
+                ]
+            },
+            {
+                id: 2,
+                name: 'Uncommon Egg',
+                icon: '🥚',
+                price: 50,
+                pets: [
+                    { name: 'Black Bunny', icon: '🐇', chance: 25, multiplier: 1.2 },
+                    { name: 'Cat', icon: '🐈', chance: 25, multiplier: 1.2 },
+                    { name: 'Chicken', icon: '🐔', chance: 25, multiplier: 1.2 },
+                    { name: 'Deer', icon: '🦌', chance: 25, multiplier: 1.25 }
+                ]
+            },
+            {
+                id: 3,
+                name: 'Rare Egg',
+                icon: '🥚',
+                price: 150,
+                pets: [
+                    { name: 'Orange Tabby', icon: '🐈‍⬛', chance: 33.33, multiplier: 1.5 },
+                    { name: 'Spotted Deer', icon: '🦌', chance: 25, multiplier: 1.6 },
+                    { name: 'Pig', icon: '🐷', chance: 16.67, multiplier: 1.7 },
+                    { name: 'Rooster', icon: '🐓', chance: 16.67, multiplier: 1.7 },
+                    { name: 'Monkey', icon: '🐒', chance: 8.33, multiplier: 2 }
+                ]
+            },
+            {
+                id: 4,
+                name: 'Legendary Egg',
+                icon: '🥚',
+                price: 500,
+                pets: [
+                    { name: 'Cow', icon: '🐄', chance: 42.55, multiplier: 2.5 },
+                    { name: 'Silver Monkey', icon: '🐵', chance: 42.55, multiplier: 2.5 },
+                    { name: 'Sea Otter', icon: '🦦', chance: 10.64, multiplier: 3 },
+                    { name: 'Polar Bear', icon: '🐻‍❄️', chance: 2.13, multiplier: 5 },
+                    { name: 'Turtle', icon: '🐢', chance: 2.13, multiplier: 5 }
+                ]
+            },
+            {
+                id: 5,
+                name: 'Mythical Egg',
+                icon: '🥚',
+                price: 1000,
+                pets: [
+                    { name: 'Grey Mouse', icon: '🐭', chance: 35.7, multiplier: 3 },
+                    { name: 'Brown Mouse', icon: '🐭', chance: 26.8, multiplier: 3.5 },
+                    { name: 'Squirrel', icon: '🐿️', chance: 26.8, multiplier: 3.5 },
+                    { name: 'Red Giant Ant', icon: '🐜', chance: 8.9, multiplier: 5 },
+                    { name: 'Red Fox', icon: '🦊', chance: 1.8, multiplier: 10 }
+                ]
+            },
+            {
+                id: 6,
+                name: 'Bug Egg',
+                icon: '🥚',
+                price: 2000,
+                pets: [
+                    { name: 'Snail', icon: '🐌', chance: 40, multiplier: 4 },
+                    { name: 'Giant Ant', icon: '🐜', chance: 30, multiplier: 5 },
+                    { name: 'Caterpillar', icon: '🐛', chance: 25, multiplier: 6 },
+                    { name: 'Praying Mantis', icon: '🦗', chance: 4, multiplier: 10 },
+                    { name: 'Dragonfly', icon: '🦋', chance: 1, multiplier: 20 }
+                ]
+            },
+            {
+                id: 7,
+                name: 'Night Egg',
+                icon: '🌙',
+                price: 5000,
+                pets: [
+                    { name: 'Hedgehog', icon: '🦔', chance: 47, multiplier: 5 },
+                    { name: 'Mole', icon: '🦡', chance: 23.5, multiplier: 6 },
+                    { name: 'Frog', icon: '🐸', chance: 17.63, multiplier: 7 },
+                    { name: 'Echo Frog', icon: '🐸', chance: 8.23, multiplier: 10 },
+                    { name: 'Night Owl', icon: '🦉', chance: 3.53, multiplier: 15 },
+                    { name: 'Raccoon', icon: '🦝', chance: 0.12, multiplier: 50 }
+                ]
+            },
+            {
+                id: 8,
+                name: 'Bee Egg',
+                icon: '🐝',
+                price: 10000,
+                pets: [
+                    { name: 'Bee', icon: '🐝', chance: 65, multiplier: 8 },
+                    { name: 'Honey Bee', icon: '🐝', chance: 25, multiplier: 10 },
+                    { name: 'Bear Bee', icon: '🐻', chance: 5, multiplier: 20 },
+                    { name: 'Petal Bee', icon: '🌸', chance: 4, multiplier: 25 },
+                    { name: 'Queen Bee', icon: '👑', chance: 1, multiplier: 100 }
+                ]
+            },
+            {
+                id: 9,
+                name: 'Anti Bee Egg',
+                icon: '🦟',
+                price: 25000,
+                pets: [
+                    { name: 'Wasp', icon: '🦟', chance: 55, multiplier: 15 },
+                    { name: 'Tarantula Hawk', icon: '🕷️', chance: 30, multiplier: 20 },
+                    { name: 'Moth', icon: '🦋', chance: 13.75, multiplier: 30 },
+                    { name: 'Butterfly', icon: '🦋', chance: 1, multiplier: 100 },
+                    { name: 'Disco Bee', icon: '💎', chance: 0.25, multiplier: 500 }
+                ]
+            }
+        ];
+
         // ===== WEATHER SYSTEM =====
         let activeWeathers = [];
         let weatherTimers = {};
         let weatherIntervals = {};
+        
+        // ===== NUMBER FORMATTING =====
+        function formatNumber(num) {
+            if (num < 1000) return Math.floor(num).toString();
+            
+            const suffixes = [
+                { value: 1e63, symbol: 'VG' },   // Vigintillion
+                { value: 1e60, symbol: 'ND' },   // Novemdecillion
+                { value: 1e57, symbol: 'OD' },   // Octodecillion
+                { value: 1e54, symbol: 'SD' },   // Septendecillion
+                { value: 1e51, symbol: 'SXD' },  // Sexdecillion
+                { value: 1e48, symbol: 'QID' },  // Quindecillion
+                { value: 1e45, symbol: 'QAD' },  // Quattuordecillion
+                { value: 1e42, symbol: 'TD' },   // Tredecillion
+                { value: 1e39, symbol: 'DD' },   // Duodecillion
+                { value: 1e36, symbol: 'UD' },   // Undecillion
+                { value: 1e33, symbol: 'DC' },   // Decillion
+                { value: 1e30, symbol: 'NO' },   // Nonillion
+                { value: 1e27, symbol: 'OC' },   // Octillion
+                { value: 1e24, symbol: 'SP' },   // Septillion
+                { value: 1e21, symbol: 'SX' },   // Sextillion
+                { value: 1e18, symbol: 'QI' },   // Quintillion
+                { value: 1e15, symbol: 'QA' },   // Quadrillion
+                { value: 1e12, symbol: 'T' },    // Trillion
+                { value: 1e9, symbol: 'B' },     // Billion
+                { value: 1e6, symbol: 'M' },     // Million
+                { value: 1e3, symbol: 'K' }      // Thousand
+            ];
+            
+            for (let i = 0; i < suffixes.length; i++) {
+                if (num >= suffixes[i].value) {
+                    const shortened = num / suffixes[i].value;
+                    return shortened.toFixed(2) + suffixes[i].symbol;
+                }
+            }
+            
+            return Math.floor(num).toLocaleString();
+        }
         
         // Weather configuration
         const weatherConfig = {
@@ -1613,6 +2363,150 @@
                 interval: 1800000,
                 icon: '⚜️',
                 class: 'ownerabuse'
+            },
+            rainbowrain: {
+                name: '🌈 Rainbow Rain',
+                effect: 'x50 Click Power',
+                duration: 180,
+                interval: 2700,
+                icon: '🌈',
+                class: 'rainbowrain'
+            },
+            goldrain: {
+                name: '💰 Gold Rain',
+                effect: 'x200 Click Power',
+                duration: 240,
+                interval: 3600,
+                icon: '💰',
+                class: 'goldrain'
+            },
+            silverrain: {
+                name: '🪙 Silver Rain',
+                effect: 'x75 Click Power',
+                duration: 200,
+                interval: 3000,
+                icon: '🪙',
+                class: 'silverrain'
+            },
+            cosmicrain: {
+                name: '🌌 Cosmic Rain',
+                effect: 'x1000 Click Power',
+                duration: 300,
+                interval: 7200,
+                icon: '🌌',
+                class: 'cosmicrain'
+            },
+            secretrain: {
+                name: '🔮 Secret Rain',
+                effect: 'x5000 Click Power',
+                duration: 360,
+                interval: 10800,
+                icon: '🔮',
+                class: 'secretrain'
+            },
+            whitehole: {
+                name: '⚪ White Hole',
+                effect: 'x500 Tiền Hiện Có',
+                duration: 240,
+                interval: 14400,
+                icon: '⚪',
+                class: 'whitehole'
+            },
+            supernova: {
+                name: '💥 Super Nova',
+                effect: 'x2000 Click Power',
+                duration: 300,
+                interval: 18000,
+                icon: '💥',
+                class: 'supernova'
+            },
+            nancorenova: {
+                name: '⚛️ Nancore Nova',
+                effect: '+1000000 Click Power',
+                duration: 360,
+                interval: 21600,
+                icon: '⚛️',
+                class: 'nancorenova'
+            },
+            corruptzenaura: {
+                name: '👹 Corrupt Zen Aura',
+                effect: 'x3000 Click Power',
+                duration: 420,
+                interval: 28800,
+                icon: '👹',
+                class: 'corruptzenaura'
+            },
+            fullmoon: {
+                name: '🌕 Full Moon',
+                effect: 'x150 Click Power',
+                duration: 480,
+                interval: 43200,
+                icon: '🌕',
+                class: 'fullmoon'
+            },
+            safaridusk: {
+                name: '🌅 Safari Dusk',
+                effect: '+5000 Click Power',
+                duration: 540,
+                interval: 54000,
+                icon: '🌅',
+                class: 'safaridusk'
+            },
+            yetinight: {
+                name: '🏔️ Yeti Night',
+                effect: 'x800 Click Power',
+                duration: 600,
+                interval: 64800,
+                icon: '🏔️',
+                class: 'yetinight'
+            },
+            silentnight: {
+                name: '🌃 Silent Night',
+                effect: '+50% Click Power',
+                duration: 660,
+                interval: 72000,
+                icon: '🌃',
+                class: 'silentnight'
+            },
+            boomboxparty: {
+                name: '🎵 Boombox Party',
+                effect: 'x250 Click Power',
+                duration: 720,
+                interval: 86400,
+                icon: '🎵',
+                class: 'boomboxparty'
+            },
+            frozeniceking: {
+                name: '❄️👑 Frozen Ice King',
+                effect: 'x4000 Click Power',
+                duration: 780,
+                interval: 108000,
+                icon: '❄️👑',
+                class: 'frozeniceking'
+            },
+            radioactiverain: {
+                name: '☢️ Radioactive Rain',
+                effect: '+100000 Click Power',
+                duration: 840,
+                interval: 144000,
+                icon: '☢️',
+                class: 'radioactiverain'
+            },
+            oilrain: {
+                name: '🛢️ Oil Rain',
+                effect: 'x100 Tiền Hiện Có',
+                duration: 900,
+                interval: 180000,
+                icon: '🛢️',
+                class: 'oilrain'
+            },
+            sandstrike: {
+                name: '🏜️ Sand Strike',
+                effect: 'x1500 Click Power',
+                duration: 480,
+                interval: 360000,
+                icon: '🏜️',
+                class: 'sandstrike'
             }
         };
         // Weather next spawn times
@@ -1639,7 +2533,25 @@
             beestorm: 86400,
             tropicalrain: 1680,
             gentledrizzle: 1860,
-            ownerabuse: 1800000
+            ownerabuse: 1800000,
+            rainbowrain: 2700,
+            goldrain: 3600,
+            silverrain: 3000,
+            cosmicrain: 7200,
+            secretrain: 10800,
+            whitehole: 14400,
+            supernova: 18000,
+            nancorenova: 21600,
+            corruptzenaura: 28800,
+            fullmoon: 43200,
+            safaridusk: 54000,
+            yetinight: 64800,
+            silentnight: 72000,
+            boomboxparty: 86400,
+            frozeniceking: 108000,
+            radioactiverain: 144000,
+            oilrain: 180000,
+            sandstrike: 360000
         };
 
         const shopItems = [
@@ -1860,6 +2772,66 @@
                 effect: () => {
                     purchaseLimit++;
                 }
+            },
+            {
+                id: 22,
+                name: 'Admin Power',
+                description: '+50 Click Power',
+                icon: '🔱',
+                basePrice: 50000000000, // 50B
+                currentPrice: 50000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 50;
+                }
+            },
+            {
+                id: 23,
+                name: 'Owner Power',
+                description: '+200 Click Power',
+                icon: '👑',
+                basePrice: 2000000000000000, // 2QA
+                currentPrice: 2000000000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 200;
+                }
+            },
+            {
+                id: 24,
+                name: '67 Power',
+                description: '+670 Click Power',
+                icon: '⚡',
+                basePrice: 5000000000000000, // 5QA
+                currentPrice: 5000000000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 670;
+                }
+            },
+            {
+                id: 25,
+                name: '36 Power',
+                description: '+3600 Click Power',
+                icon: '💫',
+                basePrice: 1000000000000000000, // 1QI
+                currentPrice: 1000000000000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 3600;
+                }
+            },
+            {
+                id: 26,
+                name: 'Nancore',
+                description: '+10000 Click Power',
+                icon: '⚛️',
+                basePrice: 2000000000000000000000, // 2SX
+                currentPrice: 2000000000000000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 10000;
+                }
             }
         ];
 
@@ -2031,6 +3003,88 @@
                 case 'ownerabuse':
                     // x10000 click power - xử lý trong getWeatherMultiplier
                     break;
+                case 'rainbowrain':
+                    // x50 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'goldrain':
+                    // x200 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'silverrain':
+                    // x75 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'cosmicrain':
+                    // x1000 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'secretrain':
+                    // x5000 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'whitehole':
+                    // x500 tiền hiện có
+                    if (apply) {
+                        coins *= 500;
+                        updateDisplay();
+                    }
+                    break;
+                case 'supernova':
+                    // x2000 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'nancorenova':
+                    // +1000000 click power
+                    if (apply) {
+                        clickPower += 1000000;
+                    } else {
+                        clickPower = Math.max(1, clickPower - 1000000);
+                    }
+                    break;
+                case 'corruptzenaura':
+                    // x3000 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'fullmoon':
+                    // x150 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'safaridusk':
+                    // +5000 click power
+                    if (apply) {
+                        clickPower += 5000;
+                    } else {
+                        clickPower = Math.max(1, clickPower - 5000);
+                    }
+                    break;
+                case 'yetinight':
+                    // x800 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'silentnight':
+                    // +50% click power
+                    if (apply) {
+                        clickPower = Math.ceil(clickPower * 1.5);
+                    } else {
+                        clickPower = Math.ceil(clickPower / 1.5);
+                    }
+                    break;
+                case 'boomboxparty':
+                    // x250 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'frozeniceking':
+                    // x4000 click power - xử lý trong getWeatherMultiplier
+                    break;
+                case 'radioactiverain':
+                    // +100000 click power
+                    if (apply) {
+                        clickPower += 100000;
+                    } else {
+                        clickPower = Math.max(1, clickPower - 100000);
+                    }
+                    break;
+                case 'oilrain':
+                    // x100 tiền hiện có
+                    if (apply) {
+                        coins *= 100;
+                        updateDisplay();
+                    }
+                    break;
+                case 'sandstrike':
+                    // x1500 click power - xử lý trong getWeatherMultiplier
+                    break;
             }
             updateDisplay();
         }
@@ -2046,6 +3100,18 @@
             if (activeWeathers.includes('superstorm')) multiplier *= 300;
             if (activeWeathers.includes('winteraurora')) multiplier *= 500;
             if (activeWeathers.includes('ownerabuse')) multiplier *= 10000;
+            if (activeWeathers.includes('rainbowrain')) multiplier *= 50;
+            if (activeWeathers.includes('goldrain')) multiplier *= 200;
+            if (activeWeathers.includes('silverrain')) multiplier *= 75;
+            if (activeWeathers.includes('cosmicrain')) multiplier *= 1000;
+            if (activeWeathers.includes('secretrain')) multiplier *= 5000;
+            if (activeWeathers.includes('supernova')) multiplier *= 2000;
+            if (activeWeathers.includes('corruptzenaura')) multiplier *= 3000;
+            if (activeWeathers.includes('fullmoon')) multiplier *= 150;
+            if (activeWeathers.includes('yetinight')) multiplier *= 800;
+            if (activeWeathers.includes('boomboxparty')) multiplier *= 250;
+            if (activeWeathers.includes('frozeniceking')) multiplier *= 4000;
+            if (activeWeathers.includes('sandstrike')) multiplier *= 1500;
             return multiplier;
         }
 
@@ -2167,12 +3233,18 @@
         }
 
         function updateDisplay() {
-            document.getElementById('coins').textContent = Math.floor(coins).toLocaleString();
+            document.getElementById('coins').textContent = formatNumber(coins);
+            document.getElementById('diamonds').textContent = formatNumber(diamonds);
             document.getElementById('clickPower').textContent = clickPower;
             document.getElementById('autoClickers').textContent = autoClickers;
             document.getElementById('multiplier').textContent = multiplier;
             document.getElementById('clickCooldown').textContent = clickCooldown.toFixed(2);
             document.getElementById('rebirthMultiplierDisplay').textContent = rebirthMultiplier.toFixed(2);
+            
+            // Pet Multiplier Display
+            const petMult = getPetMultiplier();
+            document.getElementById('petMultiplierDisplay').textContent = petMult >= 1000 ? petMult.toExponential(2) : petMult.toFixed(2);
+            
             document.getElementById('discountDisplay').textContent = shopDiscount;
             document.getElementById('ticketDiscountDisplay').textContent = discountTicket;
             document.getElementById('purchaseLimitDisplay').textContent = purchaseLimit;
@@ -2214,7 +3286,7 @@
                 const itemDiv = document.createElement('div');
                 itemDiv.className = `shop-item ${!canBuy ? 'disabled' : ''}`;
                 
-                let priceDisplay = discountedPrice.toLocaleString();
+                let priceDisplay = formatNumber(discountedPrice);
                 if (totalDiscount > 0) {
                     priceDisplay += ` (-${totalDiscount}%)`;
                 }
@@ -2276,7 +3348,7 @@
                     
                     if (random < refundChance) {
                         coins += discountedPrice;
-                        alert(`🎉 The Primastic kích hoạt! Hoàn lại ${discountedPrice.toLocaleString()} coins!`);
+                        alert(`🎉 The Primastic kích hoạt! Hoàn lại ${formatNumber(discountedPrice)} coins!`);
                     }
                 }
                 
@@ -2288,7 +3360,7 @@
                     
                     if (random < refundChance) {
                         coins += discountedPrice * 10;
-                        alert(`💫 The Transcendent kích hoạt! Hoàn lại x10 = ${(discountedPrice * 10).toLocaleString()} coins!`);
+                        alert(`💫 The Transcendent kích hoạt! Hoàn lại x10 = ${formatNumber(discountedPrice * 10)} coins!`);
                     }
                 }
                 
@@ -2328,9 +3400,17 @@
             }
         }
 
+        function addAdminDiamonds() {
+            if (isAdmin) {
+                diamonds += 1000;
+                updateDisplay();
+            }
+        }
+
         function saveGame() {
             const gameData = {
                 coins: coins,
+                diamonds: diamonds,
                 clickPower: clickPower,
                 autoClickers: autoClickers,
                 multiplier: multiplier,
@@ -2345,6 +3425,8 @@
                 purchaseLimit: purchaseLimit,
                 purchaseCounts: purchaseCounts,
                 weatherNextSpawn: weatherNextSpawn,
+                ownedPets: ownedPets,
+                equippedPets: equippedPets,
                 shopItems: shopItems.map(item => ({
                     id: item.id,
                     currentPrice: item.currentPrice,
@@ -2374,6 +3456,7 @@
                     const gameData = JSON.parse(e.target.result);
                     
                     coins = gameData.coins || 0;
+                    diamonds = gameData.diamonds || 0;
                     clickPower = gameData.clickPower || 1;
                     autoClickers = gameData.autoClickers || 0;
                     multiplier = gameData.multiplier || 1;
@@ -2387,6 +3470,14 @@
                     
                     if (gameData.inventory) {
                         inventory = gameData.inventory;
+                    }
+                    
+                    if (gameData.ownedPets) {
+                        ownedPets = gameData.ownedPets;
+                    }
+                    
+                    if (gameData.equippedPets) {
+                        equippedPets = gameData.equippedPets;
                     }
                     
                     playTime = gameData.playTime || 0;
@@ -2418,6 +3509,7 @@
                     
                     updateDisplay();
                     renderShop();
+                    renderPets();
                     
                     const saveDate = new Date(gameData.saveDate).toLocaleString('vi-VN');
                     alert(`✅ Tải game thành công!\n📅 Lưu lúc: ${saveDate}`);
@@ -2440,6 +3532,7 @@
                 clickPower += 30;
                 clickCooldown = Math.max(0.01, clickCooldown - 0.15);
                 autoClickers += 50;
+                diamonds += 100;
                 passName = 'VIP Pass';
                 success = true;
             } else if (code === 'PREMIUM999' && !gamePasses.premium) {
@@ -2448,6 +3541,7 @@
                 clickCooldown = Math.max(0.01, clickCooldown - 0.2);
                 autoClickers += 200;
                 multiplier *= 2;
+                diamonds += 500;
                 passName = 'Premium Pass';
                 success = true;
             } else if (code === 'LEGEND777' && !gamePasses.legend) {
@@ -2457,6 +3551,7 @@
                 autoClickers += 1000;
                 multiplier *= 5;
                 coins += 500000;
+                diamonds += 2000;
                 passName = 'Legend Pass';
                 success = true;
             } else if (gamePasses.vip && code === 'VIP2025') {
@@ -2670,10 +3765,12 @@
                 `Bạn sẽ giữ:\n` +
                 `- Game Passes\n` +
                 `- Túi đồ (Potions)\n` +
-                `- Thời gian chơi\n\n` +
+                `- Thời gian chơi\n` +
+                `- Tất cả Pets\n\n` +
                 `Bạn sẽ nhận:\n` +
                 `- +0.75x thu nhập vĩnh viễn (${rebirthMultiplier.toFixed(2)} → ${(rebirthMultiplier + 0.75).toFixed(2)})\n` +
-                `- +5 giới hạn mua vật phẩm (${purchaseLimit} → ${purchaseLimit + 5})\n\n` +
+                `- +5 giới hạn mua vật phẩm (${purchaseLimit} → ${purchaseLimit + 5})\n` +
+                `- +50 💎 Kim Cương\n\n` +
                 `Tiếp tục?`
             );
             
@@ -2696,6 +3793,7 @@
             rebirthCount++;
             rebirthMultiplier += 0.75;
             purchaseLimit += 5;
+            diamonds += 50; // Thêm 50 kim cương
             
             updateDisplay();
             renderShop();
@@ -2724,6 +3822,267 @@
             }
         }
 
+        // ===== EGG & PETS SYSTEM =====
+        function renderEggShop() {
+            const eggGrid = document.getElementById('eggGrid');
+            eggGrid.innerHTML = '';
+            
+            eggShop.forEach(egg => {
+                const eggCard = document.createElement('div');
+                eggCard.className = 'egg-card';
+                
+                eggCard.innerHTML = `
+                    <div class="egg-icon">${egg.icon}</div>
+                    <div class="egg-name">${egg.name}</div>
+                    <div class="egg-price">💎 ${egg.price}</div>
+                    <button class="egg-details-btn" onclick="event.stopPropagation(); showEggDetails(${egg.id})">📊 Xem Tỷ Lệ</button>
+                    <button class="admin-button" onclick="event.stopPropagation(); buyEgg(${egg.id})" style="margin-top: 10px; width: 100%;">Mua Trứng</button>
+                `;
+                
+                eggGrid.appendChild(eggCard);
+            });
+        }
+
+        function showEggDetails(eggId) {
+            const egg = eggShop.find(e => e.id === eggId);
+            if (!egg) return;
+            
+            const modal = document.getElementById('eggDetailsModal');
+            const overlay = document.getElementById('eggDetailsOverlay');
+            
+            let petsHTML = '';
+            egg.pets.forEach(pet => {
+                let rarity = 'common';
+                if (pet.chance < 1) rarity = 'legendary';
+                else if (pet.chance < 5) rarity = 'epic';
+                else if (pet.chance < 15) rarity = 'rare';
+                
+                petsHTML += `
+                    <div class="pet-chance-item ${rarity}">
+                        <div class="pet-chance-info">
+                            <div class="pet-chance-icon">${pet.icon}</div>
+                            <div>
+                                <div class="pet-chance-name">${pet.name}</div>
+                                <div class="pet-chance-mult">x${pet.multiplier} multiplier</div>
+                            </div>
+                        </div>
+                        <div class="pet-chance-percent">${pet.chance}%</div>
+                    </div>
+                `;
+            });
+            
+            modal.innerHTML = `
+                <div class="egg-details-title">${egg.icon} ${egg.name}</div>
+                <div style="color: #00ffff; font-size: 1.2em; margin-bottom: 10px;">Giá: 💎 ${egg.price}</div>
+                <div style="margin-bottom: 15px; color: #ddd;">Tỷ lệ nở ra các pet:</div>
+                <div class="pet-chance-list">
+                    ${petsHTML}
+                </div>
+                <button class="close-modal-btn" onclick="closeEggDetails()">Đóng</button>
+            `;
+            
+            modal.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        function closeEggDetails() {
+            document.getElementById('eggDetailsModal').style.display = 'none';
+            document.getElementById('eggDetailsOverlay').style.display = 'none';
+        }
+
+        function buyEgg(eggId) {
+            const egg = eggShop.find(e => e.id === eggId);
+            
+            if (diamonds < egg.price) {
+                alert(`❌ Không đủ kim cương! Cần ${egg.price} 💎`);
+                return;
+            }
+            
+            diamonds -= egg.price;
+            hatchEgg(egg);
+            updateDisplay();
+        }
+
+        function hatchEgg(egg) {
+            // Calculate which pet to hatch based on chances
+            const random = Math.random() * 100;
+            let cumulativeChance = 0;
+            let hatchedPet = null;
+            
+            for (const pet of egg.pets) {
+                cumulativeChance += pet.chance;
+                if (random <= cumulativeChance) {
+                    hatchedPet = pet;
+                    break;
+                }
+            }
+            
+            if (!hatchedPet) {
+                hatchedPet = egg.pets[egg.pets.length - 1];
+            }
+            
+            // Add pet to collection
+            const petKey = hatchedPet.name;
+            if (!ownedPets[petKey]) {
+                ownedPets[petKey] = {
+                    ...hatchedPet,
+                    count: 0
+                };
+            }
+            ownedPets[petKey].count++;
+            
+            // Show hatch animation
+            showHatchAnimation(egg, hatchedPet);
+            
+            // Update pets display
+            renderPets();
+        }
+
+        function showHatchAnimation(egg, pet) {
+            const animDiv = document.getElementById('hatchAnimation');
+            animDiv.style.display = 'block';
+            
+            // Phase 1: Shaking egg
+            animDiv.innerHTML = `
+                <div class="hatch-animation">
+                    <div class="hatch-egg">${egg.icon}</div>
+                    <div class="hatch-text">Đang nở...</div>
+                </div>
+            `;
+            
+            // Phase 2: Show result after 2 seconds
+            setTimeout(() => {
+                animDiv.innerHTML = `
+                    <div class="hatch-animation">
+                        <div class="hatch-result">${pet.icon}</div>
+                        <div class="hatch-text">🎉 ${pet.name}!</div>
+                        <div class="hatch-multiplier">x${pet.multiplier} Thu nhập</div>
+                        <button class="admin-button" onclick="closeHatchAnimation()" style="margin-top: 20px;">OK</button>
+                    </div>
+                `;
+            }, 2000);
+        }
+
+        function closeHatchAnimation() {
+            document.getElementById('hatchAnimation').style.display = 'none';
+        }
+
+        function renderPets() {
+            const petsGrid = document.getElementById('petsGrid');
+            petsGrid.innerHTML = '';
+            
+            const petArray = Object.entries(ownedPets).map(([key, pet]) => ({...pet, key})).sort((a, b) => b.multiplier - a.multiplier);
+            
+            if (petArray.length === 0) {
+                petsGrid.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #999;">Chưa có pet nào. Mua trứng để bắt đầu!</div>';
+                renderEquippedPets();
+                return;
+            }
+            
+            petArray.forEach(pet => {
+                const petCard = document.createElement('div');
+                const isEquipped = equippedPets.some(p => p.key === pet.key);
+                petCard.className = `pet-card ${isEquipped ? 'equipped' : ''}`;
+                
+                petCard.innerHTML = `
+                    ${isEquipped ? '<div class="pet-equipped-badge">✓ Equipped</div>' : ''}
+                    <div class="pet-icon">${pet.icon}</div>
+                    <div class="pet-name">${pet.name}</div>
+                    <div class="pet-multiplier">x${pet.multiplier}</div>
+                    <div class="pet-count">Owned: ${pet.count}</div>
+                    <div class="pet-actions">
+                        ${isEquipped 
+                            ? `<button class="equip-btn" onclick="unequipPet('${pet.key}')" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);">Gỡ Ra</button>`
+                            : `<button class="equip-btn" onclick="equipPet('${pet.key}')" ${equippedPets.length >= MAX_EQUIPPED_PETS ? 'disabled' : ''}>Trang Bị</button>`
+                        }
+                    </div>
+                `;
+                
+                petsGrid.appendChild(petCard);
+            });
+            
+            renderEquippedPets();
+        }
+
+        function renderEquippedPets() {
+            const equippedBar = document.getElementById('equippedPetsBar');
+            equippedBar.innerHTML = '';
+            
+            // Render 5 slots
+            for (let i = 0; i < MAX_EQUIPPED_PETS; i++) {
+                const slot = document.createElement('div');
+                
+                if (equippedPets[i]) {
+                    const pet = equippedPets[i];
+                    slot.className = 'equipped-slot filled';
+                    slot.innerHTML = `
+                        <button class="unequip-btn" onclick="unequipPetByIndex(${i})">×</button>
+                        <div class="equipped-pet-icon">${pet.icon}</div>
+                        <div class="equipped-pet-mult">x${pet.multiplier}</div>
+                    `;
+                } else {
+                    slot.className = 'equipped-slot';
+                    slot.innerHTML = '<div style="color: #666; font-size: 0.8em;">Empty</div>';
+                }
+                
+                equippedBar.appendChild(slot);
+            }
+        }
+
+        function equipPet(petKey) {
+            if (equippedPets.length >= MAX_EQUIPPED_PETS) {
+                alert('❌ Đã đạt giới hạn 5 pets! Gỡ pet khác để trang bị pet mới.');
+                return;
+            }
+            
+            const pet = ownedPets[petKey];
+            if (!pet) return;
+            
+            // Check if already equipped
+            if (equippedPets.some(p => p.key === petKey)) {
+                alert('⚠️ Pet này đã được trang bị rồi!');
+                return;
+            }
+            
+            equippedPets.push({...pet, key: petKey});
+            renderPets();
+            updateDisplay();
+            alert(`✅ Đã trang bị ${pet.name}!`);
+        }
+
+        function unequipPet(petKey) {
+            equippedPets = equippedPets.filter(p => p.key !== petKey);
+            renderPets();
+            updateDisplay();
+            
+            const pet = ownedPets[petKey];
+            if (pet) {
+                alert(`✅ Đã gỡ ${pet.name}!`);
+            }
+        }
+
+        function unequipPetByIndex(index) {
+            if (equippedPets[index]) {
+                const pet = equippedPets[index];
+                equippedPets.splice(index, 1);
+                renderPets();
+                updateDisplay();
+                alert(`✅ Đã gỡ ${pet.name}!`);
+            }
+        }
+
+        function getPetMultiplier() {
+            let totalMult = 1;
+            equippedPets.forEach(pet => {
+                // Each equipped pet applies its multiplier based on owned count
+                const ownedPet = ownedPets[pet.key];
+                if (ownedPet) {
+                    totalMult *= Math.pow(pet.multiplier, ownedPet.count);
+                }
+            });
+            return totalMult;
+        }
+
         // ===== CLICK BUTTON EVENT =====
         document.getElementById('clickButton').addEventListener('click', function(e) {
             e.preventDefault();
@@ -2737,9 +4096,10 @@
             
             resetAFKTimer();
             
-            // Áp dụng multiplier từ weather
+            // Áp dụng multiplier từ weather và pets
             const weatherMult = getWeatherMultiplier();
-            const totalMultiplier = multiplier * rebirthMultiplier * weatherMult;
+            const petMult = getPetMultiplier();
+            const totalMultiplier = multiplier * rebirthMultiplier * weatherMult * petMult;
             coins += clickPower * totalMultiplier;
             updateDisplay();
             renderShop();
@@ -2759,7 +4119,8 @@
         setInterval(() => {
             if (autoClickers > 0 && !isAfk && !isBanned) {
                 const weatherMult = getWeatherMultiplier();
-                const totalMultiplier = multiplier * rebirthMultiplier * weatherMult;
+                const petMult = getPetMultiplier();
+                const totalMultiplier = multiplier * rebirthMultiplier * weatherMult * petMult;
                 coins += autoClickers * totalMultiplier;
                 updateDisplay();
                 renderShop();
@@ -2779,6 +4140,8 @@
         updateRebirthUI();
         resetAFKTimer();
         updateWeatherDisplay();
+        renderEggShop();
+        renderPets();
 
         // Playtime counter
         playTimeInterval = setInterval(() => {
