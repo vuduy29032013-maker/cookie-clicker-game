@@ -957,6 +957,52 @@
             color: #ffd700;
         }
 
+        /* Mini Game Styles */
+        .multiplier-btn {
+            padding: 15px;
+            background: linear-gradient(135deg, #2d3561 0%, #1f2544 100%);
+            border: 2px solid #0f3460;
+            border-radius: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+
+        .multiplier-btn:hover {
+            transform: scale(1.05);
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .multiplier-btn.selected {
+            background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%);
+            border-color: #00ff00;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.7);
+        }
+
+        .choice-btn {
+            padding: 20px;
+            background: linear-gradient(135deg, #2d3561 0%, #1f2544 100%);
+            border: 3px solid #0f3460;
+            border-radius: 15px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .choice-btn:hover {
+            transform: scale(1.1);
+            border-color: #ffd700;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+        }
+
+        .choice-btn:active {
+            transform: scale(0.95);
+        }
+
         .close-modal-btn {
             margin-top: 20px;
             padding: 10px 30px;
@@ -2070,6 +2116,123 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Mini Game Panel -->
+            <div class="shop-panel" style="margin-top: 20px;">
+                <div class="section-title">🎮 Mini Game - Kéo Búa Bao</div>
+                
+                <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 20px; border-radius: 15px; border: 2px solid #0f3460;">
+                    <!-- Game Status -->
+                    <div id="gameStatus" style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 1.3em; color: #00d4ff; margin-bottom: 10px;">
+                            🎯 Chọn Multiplier & Đặt Cược
+                        </div>
+                    </div>
+
+                    <!-- Multiplier Selection -->
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center;">
+                            📊 Chọn Mục Tiêu:
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+                            <button onclick="selectMultiplier(2, 2)" class="multiplier-btn" id="mult2">
+                                <div style="font-size: 1.5em;">x2</div>
+                                <div style="font-size: 0.9em;">2 thắng</div>
+                            </button>
+                            <button onclick="selectMultiplier(3, 6)" class="multiplier-btn" id="mult3">
+                                <div style="font-size: 1.5em;">x3</div>
+                                <div style="font-size: 0.9em;">6 thắng</div>
+                            </button>
+                            <button onclick="selectMultiplier(5, 10)" class="multiplier-btn" id="mult5">
+                                <div style="font-size: 1.5em;">x5</div>
+                                <div style="font-size: 0.9em;">10 thắng</div>
+                            </button>
+                            <button onclick="selectMultiplier(20, 40)" class="multiplier-btn" id="mult20">
+                                <div style="font-size: 1.5em;">x20</div>
+                                <div style="font-size: 0.9em;">40 thắng</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Bet Input -->
+                    <div style="margin-bottom: 20px;">
+                        <div style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center;">
+                            💰 Đặt Cược:
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center;">
+                            <select id="betType" style="padding: 10px; border-radius: 8px; flex: 1; font-size: 1em;">
+                                <option value="coins">💰 Coins</option>
+                                <option value="diamonds">💎 Diamonds</option>
+                            </select>
+                            <input type="number" id="betAmount" placeholder="Số tiền cược" style="padding: 10px; border-radius: 8px; flex: 2; font-size: 1em;" value="1000">
+                            <button onclick="startGame()" style="
+                                padding: 10px 20px;
+                                background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%);
+                                border: none;
+                                border-radius: 8px;
+                                color: white;
+                                font-weight: bold;
+                                cursor: pointer;
+                                font-size: 1em;
+                            ">🎮 Bắt Đầu</button>
+                        </div>
+                    </div>
+
+                    <!-- Game Progress -->
+                    <div id="gameProgress" style="display: none; margin-bottom: 20px;">
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                            <div style="color: #00ff00; font-size: 1.2em; margin-bottom: 5px;">
+                                🏆 Tiến Độ: <span id="currentWins">0</span>/<span id="requiredWins">0</span> thắng
+                            </div>
+                            <div style="color: #ffd700;">
+                                💰 Đang cược: <span id="currentBet">0</span> <span id="currentBetType">Coins</span>
+                            </div>
+                            <div style="color: #ff6b6b; margin-top: 5px; font-size: 0.9em;">
+                                ⚠️ Thua 1 trận = Mất toàn bộ!
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game Buttons -->
+                    <div id="gameButtons" style="display: none;">
+                        <div style="color: #00ff00; font-size: 1.3em; text-align: center; margin-bottom: 15px;">
+                            🤖 Bot đang chọn...
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;">
+                            <button onclick="playerChoice('rock')" class="choice-btn">
+                                <div style="font-size: 3em;">✊</div>
+                                <div style="margin-top: 10px;">Búa</div>
+                            </button>
+                            <button onclick="playerChoice('paper')" class="choice-btn">
+                                <div style="font-size: 3em;">✋</div>
+                                <div style="margin-top: 10px;">Bao</div>
+                            </button>
+                            <button onclick="playerChoice('scissors')" class="choice-btn">
+                                <div style="font-size: 3em;">✌️</div>
+                                <div style="margin-top: 10px;">Kéo</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Result Display -->
+                    <div id="gameResult" style="display: none; margin-top: 20px;">
+                        <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; text-align: center;">
+                            <div id="resultText" style="font-size: 1.5em; margin-bottom: 10px;"></div>
+                            <div id="resultDetail" style="font-size: 1.1em; margin-bottom: 15px;"></div>
+                            <button onclick="continueGame()" id="continueBtn" style="
+                                padding: 10px 30px;
+                                background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+                                border: none;
+                                border-radius: 8px;
+                                color: white;
+                                font-weight: bold;
+                                cursor: pointer;
+                                font-size: 1.1em;
+                            ">Tiếp Tục ➡️</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -2123,6 +2286,15 @@
         let ownedPets = {};
         let equippedPets = []; // Mảng chứa tối đa 5 pets đang được trang bị
         const MAX_EQUIPPED_PETS = 5;
+
+        // Mini Game State
+        let gameActive = false;
+        let selectedMultiplier = 0;
+        let requiredWins = 0;
+        let currentWins = 0;
+        let betAmount = 0;
+        let betType = 'coins';
+        let botChoice = '';
 
         // Egg data
         const eggShop = [
@@ -4429,6 +4601,195 @@
         document.addEventListener('keypress', resetAFKTimer);
         document.addEventListener('scroll', resetAFKTimer);
         document.addEventListener('touchstart', resetAFKTimer);
+        // ===== MINI GAME - KÉO BÚA BAO =====
+
+        function selectMultiplier(mult, wins) {
+            selectedMultiplier = mult;
+            requiredWins = wins;
+            
+            // Update UI
+            document.querySelectorAll('.multiplier-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            document.getElementById(`mult${mult}`).classList.add('selected');
+        }
+
+        function startGame() {
+            if (selectedMultiplier === 0) {
+                alert('⚠️ Vui lòng chọn mục tiêu (x2, x3, x5, x20)!');
+                return;
+            }
+
+            const amount = parseInt(document.getElementById('betAmount').value);
+            betType = document.getElementById('betType').value;
+
+            if (!amount || amount <= 0) {
+                alert('⚠️ Vui lòng nhập số tiền cược hợp lệ!');
+                return;
+            }
+
+            // Check if player has enough
+            if (betType === 'coins' && coins < amount) {
+                alert('❌ Không đủ Coins!');
+                return;
+            }
+            if (betType === 'diamonds' && diamonds < amount) {
+                alert('❌ Không đủ Diamonds!');
+                return;
+            }
+
+            // Deduct bet
+            if (betType === 'coins') {
+                coins -= amount;
+            } else {
+                diamonds -= amount;
+            }
+            updateDisplay();
+
+            // Start game
+            gameActive = true;
+            betAmount = amount;
+            currentWins = 0;
+
+            // Update UI
+            document.getElementById('currentWins').textContent = currentWins;
+            document.getElementById('requiredWins').textContent = requiredWins;
+            document.getElementById('currentBet').textContent = formatNumber(betAmount);
+            document.getElementById('currentBetType').textContent = betType === 'coins' ? 'Coins' : 'Diamonds';
+
+            document.getElementById('gameProgress').style.display = 'block';
+            document.getElementById('gameButtons').style.display = 'block';
+            document.getElementById('gameResult').style.display = 'none';
+
+            // Generate bot choice
+            const choices = ['rock', 'paper', 'scissors'];
+            botChoice = choices[Math.floor(Math.random() * 3)];
+        }
+
+        function playerChoice(choice) {
+            if (!gameActive) return;
+
+            // Disable buttons
+            gameActive = false;
+
+            const choiceNames = {
+                rock: 'Búa ✊',
+                paper: 'Bao ✋',
+                scissors: 'Kéo ✌️'
+            };
+
+            const botChoiceName = choiceNames[botChoice];
+            const playerChoiceName = choiceNames[choice];
+
+            // Determine winner
+            let result = '';
+            let win = false;
+
+            if (choice === botChoice) {
+                result = 'Hòa';
+            } else if (
+                (choice === 'rock' && botChoice === 'scissors') ||
+                (choice === 'paper' && botChoice === 'rock') ||
+                (choice === 'scissors' && botChoice === 'paper')
+            ) {
+                result = 'Thắng';
+                win = true;
+                currentWins++;
+            } else {
+                result = 'Thua';
+            }
+
+            // Update UI
+            document.getElementById('gameButtons').style.display = 'none';
+            document.getElementById('gameResult').style.display = 'block';
+
+            if (result === 'Thắng') {
+                document.getElementById('resultText').innerHTML = '🎉 THẮNG!';
+                document.getElementById('resultText').style.color = '#00ff00';
+                document.getElementById('resultDetail').innerHTML = `
+                    Bạn: ${playerChoiceName} vs Bot: ${botChoiceName}<br>
+                    Tiến độ: ${currentWins}/${requiredWins} thắng
+                `;
+                document.getElementById('resultDetail').style.color = '#ffffff';
+
+                // Check if won all
+                if (currentWins >= requiredWins) {
+                    const prize = betAmount * selectedMultiplier;
+                    if (betType === 'coins') {
+                        coins += prize;
+                    } else {
+                        diamonds += prize;
+                    }
+                    updateDisplay();
+
+                    document.getElementById('resultText').innerHTML = '🏆 HOÀN THÀNH!';
+                    document.getElementById('resultDetail').innerHTML = `
+                        Bạn đã thắng ${requiredWins} trận!<br>
+                        🎁 Nhận: ${formatNumber(prize)} ${betType === 'coins' ? 'Coins' : 'Diamonds'} (x${selectedMultiplier})
+                    `;
+                    document.getElementById('continueBtn').textContent = '🎮 Chơi Lại';
+                    document.getElementById('continueBtn').style.background = 'linear-gradient(135deg, #ffd700 0%, #ff8c00 100%)';
+                } else {
+                    document.getElementById('continueBtn').textContent = 'Tiếp Tục ➡️';
+                    document.getElementById('continueBtn').style.background = 'linear-gradient(135deg, #00ff00 0%, #00cc00 100%)';
+                }
+
+            } else if (result === 'Hòa') {
+                document.getElementById('resultText').innerHTML = '🤝 HÒA!';
+                document.getElementById('resultText').style.color = '#ffd700';
+                document.getElementById('resultDetail').innerHTML = `
+                    Bạn: ${playerChoiceName} vs Bot: ${botChoiceName}<br>
+                    Chơi lại vòng này!
+                `;
+                document.getElementById('resultDetail').style.color = '#ffffff';
+                document.getElementById('continueBtn').textContent = 'Tiếp Tục ➡️';
+                document.getElementById('continueBtn').style.background = 'linear-gradient(135deg, #00ff00 0%, #00cc00 100%)';
+
+            } else {
+                document.getElementById('resultText').innerHTML = '💀 THUA!';
+                document.getElementById('resultText').style.color = '#ff0000';
+                document.getElementById('resultDetail').innerHTML = `
+                    Bạn: ${playerChoiceName} vs Bot: ${botChoiceName}<br>
+                    ❌ Mất ${formatNumber(betAmount)} ${betType === 'coins' ? 'Coins' : 'Diamonds'}!
+                `;
+                document.getElementById('resultDetail').style.color = '#ff6b6b';
+                document.getElementById('continueBtn').textContent = '😢 Về Menu';
+                document.getElementById('continueBtn').style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%)';
+            }
+
+            // Update progress display
+            document.getElementById('currentWins').textContent = currentWins;
+        }
+
+        function continueGame() {
+            // Check if game ended
+            if (currentWins >= requiredWins || document.getElementById('resultText').textContent.includes('THUA')) {
+                // Reset game
+                gameActive = false;
+                currentWins = 0;
+                selectedMultiplier = 0;
+                betAmount = 0;
+
+                document.getElementById('gameProgress').style.display = 'none';
+                document.getElementById('gameButtons').style.display = 'none';
+                document.getElementById('gameResult').style.display = 'none';
+
+                document.querySelectorAll('.multiplier-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+
+                return;
+            }
+
+            // Continue game - generate new bot choice
+            const choices = ['rock', 'paper', 'scissors'];
+            botChoice = choices[Math.floor(Math.random() * 3)];
+
+            gameActive = true;
+            document.getElementById('gameButtons').style.display = 'block';
+            document.getElementById('gameResult').style.display = 'none';
+        }
+
     </script>
 </body>
 </html>
