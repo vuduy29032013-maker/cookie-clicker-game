@@ -509,6 +509,17 @@
             }
         }
 
+        @keyframes godPulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 255, 255, 0.5);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 50px rgba(255, 215, 0, 1), 0 0 80px rgba(255, 255, 255, 0.8);
+            }
+        }
+
         .weather-item.rainbowrain {
             border-color: #ff69b4;
             background: linear-gradient(135deg, rgba(255,0,0,0.2), rgba(255,165,0,0.2), rgba(255,255,0,0.2), rgba(0,255,0,0.2), rgba(0,0,255,0.2), rgba(75,0,130,0.2), rgba(238,130,238,0.2));
@@ -1650,12 +1661,25 @@
     </div>
 
     <!-- Admin Panel -->
-    <div class="admin-panel">
-        <div style="font-size: 1.2em; margin-bottom: 10px;">🔐 Admin Panel</div>
-        <input type="password" id="adminCode" class="admin-input" placeholder="Nhập admin code">
-        <button class="admin-button" onclick="checkAdminCode()">Đăng nhập</button>
-        <div id="adminStatus"></div>
-        <div id="adminControls" style="display: none;" class="admin-controls">
+    <div class="admin-panel" id="adminPanel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div style="font-size: 1.2em;">🔐 Admin Panel</div>
+            <button onclick="toggleAdminPanel()" id="toggleAdminBtn" style="
+                padding: 5px 15px;
+                background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+                border: 2px solid #ff4444;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 0.9em;
+            ">👁️ Ẩn</button>
+        </div>
+        <div id="adminPanelContent">
+            <input type="password" id="adminCode" class="admin-input" placeholder="Nhập admin code">
+            <button class="admin-button" onclick="checkAdminCode()">Đăng nhập</button>
+            <div id="adminStatus"></div>
+            <div id="adminControls" style="display: none;" class="admin-controls">
             <button class="admin-money-button" onclick="addAdminMoney()">💰 +1QA Coins</button>
             <button class="admin-money-button" onclick="addAdminDiamonds()" style="background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%); margin-top: 10px;">💎 +1000 Diamonds</button>
             
@@ -1705,14 +1729,68 @@
                 </div>
                 <button class="weather-clear-btn" onclick="clearAllWeather()">🚫 Xóa tất cả thời tiết</button>
             </div>
+
+            <div class="weather-controls" style="margin-top: 20px;">
+                <div class="weather-control-title">🐾 Triệu Hồi Pet</div>
+                <div class="weather-buttons">
+                    <button class="weather-summon-btn" onclick="summonPet('Bunny', '🐰', 1.1)">🐰 Bunny</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Dog', '🐕', 1.1)">🐕 Dog</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Golden Lab', '🦮', 1.15)">🦮 Golden Lab</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Black Bunny', '🐇', 1.2)">🐇 Black Bunny</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Cat', '🐈', 1.2)">🐈 Cat</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Chicken', '🐔', 1.2)">🐔 Chicken</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Deer', '🦌', 1.25)">🦌 Deer</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Orange Tabby', '🐈‍⬛', 1.5)">🐈‍⬛ Orange Tabby</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Spotted Deer', '🦌', 1.6)">🦌 Spotted Deer</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Pig', '🐷', 1.7)">🐷 Pig</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Rooster', '🐓', 1.7)">🐓 Rooster</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Monkey', '🐒', 2)">🐒 Monkey</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Cow', '🐄', 2.5)">🐄 Cow</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Silver Monkey', '🐵', 2.5)">🐵 Silver Monkey</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Sea Otter', '🦦', 3)">🦦 Sea Otter</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Polar Bear', '🐻‍❄️', 5)">🐻‍❄️ Polar Bear</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Turtle', '🐢', 5)">🐢 Turtle</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Grey Mouse', '🐭', 3)">🐭 Grey Mouse</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Brown Mouse', '🐭', 3.5)">🐭 Brown Mouse</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Squirrel', '🐿️', 3.5)">🐿️ Squirrel</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Red Giant Ant', '🐜', 5)">🐜 Red Giant Ant</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Red Fox', '🦊', 10)">🦊 Red Fox</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Queen Bee', '👑', 100)">👑 Queen Bee</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Disco Bee', '💎', 500)">💎 Disco Bee</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Hacker Dog', '🐕‍🦺', 150000)" style="background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);">💻 Hacker Dog</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Hacker Bunny', '🐰', 200000)" style="background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);">💻 Hacker Bunny</button>
+                    <button class="weather-summon-btn" onclick="summonPet(`Admin's Dog`, '🐕‍🦺', 1000)" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);">🐕‍🦺 Admin's Dog</button>
+                    <button class="weather-summon-btn" onclick="summonPet(`Admin's Cat`, '😺', 2000)" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);">😺 Admin's Cat</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Bird Admin', '🦅', 5000)" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);">🦅 Bird Admin</button>
+                    <button class="weather-summon-btn" onclick="summonPet(`God's Pet`, '🌟', 100000)" style="background: linear-gradient(135deg, #ffd700 0%, #ffffff 50%, #ffd700 100%); font-weight: bold; box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); animation: godPulse 2s infinite;">🌟 GOD'S PET</button>
+                </div>
+            </div>
         </div>
+        </div> <!-- Close adminPanelContent -->
     </div>
 
     <!-- Weather Panel -->
-    <div class="weather-panel">
-        <div class="weather-title">🌦️ Thời Tiết Hiện Tại</div>
-        <div class="weather-list" id="weatherList">
-            <div class="weather-empty">Không có thời tiết nào</div>
+    <div class="weather-panel" id="weatherPanel">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+            <div class="weather-title">🌦️ Thời Tiết Hiện Tại</div>
+            <button onclick="toggleWeatherPanel()" id="toggleWeatherBtn" style="
+                padding: 5px 15px;
+                background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+                border: 2px solid #ff4444;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 0.9em;
+            ">👁️ Ẩn</button>
+        </div>
+        <div id="weatherCountHidden" style="display: none; color: #00ffff; font-size: 1.1em; margin-bottom: 10px;">
+            Số thời tiết hiện tại: <strong><span id="weatherCountNumber">0</span></strong>
+        </div>
+        <div id="weatherPanelContent">
+            <div class="weather-list" id="weatherList">
+                <div class="weather-empty">Không có thời tiết nào</div>
+            </div>
         </div>
     </div>
 
@@ -1949,6 +2027,36 @@
                 <!-- Equipped Pets Bar -->
                 <div class="pet-inventory-section">
                     <div class="section-subtitle">⚔️ Pets Đang Trang Bị (Tối đa 5)</div>
+                    <div style="text-align: center; margin-bottom: 10px;">
+                        <button onclick="equipBestPets()" style="
+                            padding: 10px 20px;
+                            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+                            border: 2px solid #ffd700;
+                            border-radius: 8px;
+                            color: #000;
+                            font-weight: bold;
+                            cursor: pointer;
+                            font-size: 1em;
+                            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+                            transition: transform 0.2s;
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            ⭐ Sử Dụng Pet Tốt Nhất
+                        </button>
+                        <button onclick="unequipAllPets()" style="
+                            padding: 10px 20px;
+                            background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+                            border: 2px solid #ff4444;
+                            border-radius: 8px;
+                            color: white;
+                            font-weight: bold;
+                            cursor: pointer;
+                            font-size: 1em;
+                            margin-left: 10px;
+                            transition: transform 0.2s;
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            ❌ Gỡ Tất Cả
+                        </button>
+                    </div>
                     <div class="equipped-pets-bar" id="equippedPetsBar">
                         <!-- Equipped pets will be shown here -->
                     </div>
@@ -2131,6 +2239,36 @@
                     { name: 'Moth', icon: '🦋', chance: 13.75, multiplier: 30 },
                     { name: 'Butterfly', icon: '🦋', chance: 1, multiplier: 100 },
                     { name: 'Disco Bee', icon: '💎', chance: 0.25, multiplier: 500 }
+                ]
+            },
+            {
+                id: 10,
+                name: 'Admin Egg',
+                icon: '👑',
+                price: 500000,
+                pets: [
+                    { name: "Admin's Dog", icon: '🐕‍🦺', chance: 50, multiplier: 1000 },
+                    { name: "Admin's Cat", icon: '😺', chance: 30, multiplier: 2000 },
+                    { name: 'Bird Admin', icon: '🦅', chance: 20, multiplier: 5000 }
+                ]
+            },
+            {
+                id: 11,
+                name: 'Hacker Egg',
+                icon: '💻',
+                price: 200000,
+                pets: [
+                    { name: 'Hacker Dog', icon: '🐕‍🦺', chance: 60, multiplier: 150000 },
+                    { name: 'Hacker Bunny', icon: '🐰', chance: 40, multiplier: 200000 }
+                ]
+            },
+            {
+                id: 12,
+                name: 'God Egg',
+                icon: '⚜️',
+                price: 10000000,
+                pets: [
+                    { name: "God's Pet", icon: '🌟', chance: 100, multiplier: 100000 }
                 ]
             }
         ];
@@ -3125,6 +3263,9 @@
         function updateWeatherDisplay() {
             const weatherList = document.getElementById('weatherList');
             
+            // Update count for hidden mode
+            document.getElementById('weatherCountNumber').textContent = activeWeathers.length;
+            
             if (activeWeathers.length === 0) {
                 weatherList.innerHTML = '<div class="weather-empty">Không có thời tiết nào</div>';
                 return;
@@ -3375,6 +3516,45 @@
             }
         }
 
+        function toggleAdminPanel() {
+            const content = document.getElementById('adminPanelContent');
+            const btn = document.getElementById('toggleAdminBtn');
+            
+            if (content.style.display === 'none') {
+                // Show
+                content.style.display = 'block';
+                btn.textContent = '👁️ Ẩn';
+                btn.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%)';
+            } else {
+                // Hide
+                content.style.display = 'none';
+                btn.textContent = '👁️ Bỏ Ẩn';
+                btn.style.background = 'linear-gradient(135deg, #00ff00 0%, #00cc00 100%)';
+            }
+        }
+
+        function toggleWeatherPanel() {
+            const content = document.getElementById('weatherPanelContent');
+            const btn = document.getElementById('toggleWeatherBtn');
+            const countHidden = document.getElementById('weatherCountHidden');
+            
+            if (content.style.display === 'none') {
+                // Show
+                content.style.display = 'block';
+                countHidden.style.display = 'none';
+                btn.textContent = '👁️ Ẩn';
+                btn.style.background = 'linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%)';
+            } else {
+                // Hide
+                content.style.display = 'none';
+                countHidden.style.display = 'block';
+                // Update count
+                document.getElementById('weatherCountNumber').textContent = activeWeathers.length;
+                btn.textContent = '👁️ Bỏ Ẩn';
+                btn.style.background = 'linear-gradient(135deg, #00ff00 0%, #00cc00 100%)';
+            }
+        }
+
         function checkAdminCode() {
             const code = document.getElementById('adminCode').value;
             const statusDiv = document.getElementById('adminStatus');
@@ -3405,6 +3585,29 @@
                 diamonds += 1000;
                 updateDisplay();
             }
+        }
+
+        function summonPet(petName, petIcon, petMultiplier) {
+            if (!isAdmin) return;
+            
+            const petKey = petName;
+            
+            // Add pet to ownedPets
+            if (!ownedPets[petKey]) {
+                ownedPets[petKey] = {
+                    name: petName,
+                    icon: petIcon,
+                    multiplier: petMultiplier,
+                    count: 0
+                };
+            }
+            
+            ownedPets[petKey].count++;
+            
+            renderPets();
+            updateDisplay();
+            
+            alert(`✅ Đã triệu hồi ${petIcon} ${petName} (x${petMultiplier})!`);
         }
 
         function saveGame() {
@@ -3981,19 +4184,29 @@
             
             petArray.forEach(pet => {
                 const petCard = document.createElement('div');
-                const isEquipped = equippedPets.some(p => p.key === pet.key);
+                const equippedCount = equippedPets.filter(p => p.key === pet.key).length;
+                const isEquipped = equippedCount > 0;
                 petCard.className = `pet-card ${isEquipped ? 'equipped' : ''}`;
                 
+                // Escape single quotes in pet key for onclick
+                const escapedKey = pet.key.replace(/'/g, "\\'");
+                
+                // Check if can equip more
+                const canEquipMore = equippedCount < pet.count && equippedPets.length < MAX_EQUIPPED_PETS;
+                
                 petCard.innerHTML = `
-                    ${isEquipped ? '<div class="pet-equipped-badge">✓ Equipped</div>' : ''}
+                    ${isEquipped ? `<div class="pet-equipped-badge">✓ ${equippedCount}/${pet.count}</div>` : ''}
                     <div class="pet-icon">${pet.icon}</div>
                     <div class="pet-name">${pet.name}</div>
-                    <div class="pet-multiplier">x${pet.multiplier}</div>
+                    <div class="pet-multiplier">x${pet.multiplier.toLocaleString()}</div>
                     <div class="pet-count">Owned: ${pet.count}</div>
                     <div class="pet-actions">
                         ${isEquipped 
-                            ? `<button class="equip-btn" onclick="unequipPet('${pet.key}')" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);">Gỡ Ra</button>`
-                            : `<button class="equip-btn" onclick="equipPet('${pet.key}')" ${equippedPets.length >= MAX_EQUIPPED_PETS ? 'disabled' : ''}>Trang Bị</button>`
+                            ? `<button class="equip-btn" onclick="unequipPetOnce('${escapedKey}')" style="background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);">Gỡ 1</button>`
+                            : ''}
+                        <button class="equip-btn" onclick="equipPet('${escapedKey}')" ${!canEquipMore ? 'disabled' : ''}>
+                            ${equippedCount >= pet.count ? 'Hết' : 'Trang Bị'}
+                        </button>
                         }
                     </div>
                 `;
@@ -4038,16 +4251,19 @@
             const pet = ownedPets[petKey];
             if (!pet) return;
             
-            // Check if already equipped
-            if (equippedPets.some(p => p.key === petKey)) {
-                alert('⚠️ Pet này đã được trang bị rồi!');
+            // Count how many of this pet are already equipped
+            const equippedCount = equippedPets.filter(p => p.key === petKey).length;
+            
+            // Check if owned enough
+            if (equippedCount >= pet.count) {
+                alert(`⚠️ Bạn chỉ có ${pet.count} con ${pet.name}, đã trang bị ${equippedCount} con rồi!`);
                 return;
             }
             
             equippedPets.push({...pet, key: petKey});
             renderPets();
             updateDisplay();
-            alert(`✅ Đã trang bị ${pet.name}!`);
+            alert(`✅ Đã trang bị ${pet.name}! (${equippedCount + 1}/${pet.count})`);
         }
 
         function unequipPet(petKey) {
@@ -4057,7 +4273,23 @@
             
             const pet = ownedPets[petKey];
             if (pet) {
-                alert(`✅ Đã gỡ ${pet.name}!`);
+                alert(`✅ Đã gỡ tất cả ${pet.name}!`);
+            }
+        }
+
+        function unequipPetOnce(petKey) {
+            // Find first index of this pet and remove only one
+            const index = equippedPets.findIndex(p => p.key === petKey);
+            if (index !== -1) {
+                equippedPets.splice(index, 1);
+                renderPets();
+                updateDisplay();
+                
+                const pet = ownedPets[petKey];
+                const remainingCount = equippedPets.filter(p => p.key === petKey).length;
+                if (pet) {
+                    alert(`✅ Đã gỡ 1 con ${pet.name}! (Còn ${remainingCount} equipped)`);
+                }
             }
         }
 
@@ -4069,6 +4301,47 @@
                 updateDisplay();
                 alert(`✅ Đã gỡ ${pet.name}!`);
             }
+        }
+
+        function equipBestPets() {
+            // Get all owned pets sorted by multiplier (descending)
+            const petArray = Object.entries(ownedPets)
+                .map(([key, pet]) => ({...pet, key}))
+                .sort((a, b) => b.multiplier - a.multiplier);
+            
+            if (petArray.length === 0) {
+                alert('❌ Bạn chưa có pet nào!');
+                return;
+            }
+            
+            // Clear current equipped pets
+            equippedPets = [];
+            
+            // Equip top 5 pets (or all if less than 5)
+            const petsToEquip = petArray.slice(0, MAX_EQUIPPED_PETS);
+            petsToEquip.forEach(pet => {
+                equippedPets.push({...pet, key: pet.key});
+            });
+            
+            renderPets();
+            updateDisplay();
+            
+            const equippedNames = petsToEquip.map(p => p.icon + ' ' + p.name).join(', ');
+            alert(`✅ Đã trang bị ${petsToEquip.length} pets mạnh nhất:\n${equippedNames}`);
+        }
+
+        function unequipAllPets() {
+            if (equippedPets.length === 0) {
+                alert('⚠️ Không có pet nào đang trang bị!');
+                return;
+            }
+            
+            const count = equippedPets.length;
+            equippedPets = [];
+            renderPets();
+            updateDisplay();
+            
+            alert(`✅ Đã gỡ ${count} pets!`);
         }
 
         function getPetMultiplier() {
