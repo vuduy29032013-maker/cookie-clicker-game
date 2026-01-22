@@ -520,6 +520,22 @@
             }
         }
 
+        @keyframes goldGlow {
+            0%, 100% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+                transform: translateY(0);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 140, 0, 0.6);
+                transform: translateY(-2px);
+            }
+        }
+
+        @keyframes goldShine {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
         .weather-item.rainbowrain {
             border-color: #ff69b4;
             background: linear-gradient(135deg, rgba(255,0,0,0.2), rgba(255,165,0,0.2), rgba(255,255,0,0.2), rgba(0,255,0,0.2), rgba(0,0,255,0.2), rgba(75,0,130,0.2), rgba(238,130,238,0.2));
@@ -1727,6 +1743,7 @@
             <div id="adminControls" style="display: none;" class="admin-controls">
             <button class="admin-money-button" onclick="addAdminMoney()">💰 +100K Coins</button>
             <button class="admin-money-button" onclick="addAdminDiamonds()" style="background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%); margin-top: 10px;">💎 +1000 Diamonds</button>
+            <button class="admin-money-button" onclick="addAdminGoldBars()" style="background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); margin-top: 10px; animation: goldGlow 2s ease-in-out infinite;">🏆 +100 Gold Bars</button>
             
             <div class="weather-controls">
                 <div class="weather-control-title">🌦️ Triệu hồi Thời tiết</div>
@@ -1850,6 +1867,9 @@
                 </span>
                 <span class="diamond-display" style="margin-left: 10px;">
                     🎫 <span id="tickets">0</span>
+                </span>
+                <span class="diamond-display" style="margin-left: 10px; background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); padding: 5px 10px; border-radius: 8px; border: 2px solid #ffaa00; animation: goldGlow 2s ease-in-out infinite;">
+                    🏆 <span id="goldBars" style="font-weight: bold; color: #fff; text-shadow: 0 0 10px rgba(255,215,0,0.8);">0</span>
                 </span>
             </div>
             <div class="stats">
@@ -1999,6 +2019,60 @@
                 </div>
             </div>
 
+            <!-- Pay Store - Premium Currency -->
+            <div class="shop-panel" style="margin-top: 20px; background: linear-gradient(135deg, #1a0a0a 0%, #2d1b00 100%); border: 3px solid #ffd700; box-shadow: 0 0 20px rgba(255,215,0,0.4);">
+                <div class="section-title" style="color: #ffd700; font-size: 1.6em;">💰 CỬA HÀNG PREMIUM 💰</div>
+                <div style="text-align: center; margin: 12px 0; padding: 12px; background: rgba(255,215,0,0.1); border-radius: 10px; border: 2px dashed #ffd700;">
+                    <div style="font-size: 1.2em; color: #ffd700; font-weight: bold;">🏆 Thỏi Vàng 🏆</div>
+                    <div style="font-size: 0.9em; color: #ffaa00;">Mua vật phẩm đặc biệt!</div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-bottom: 15px;">
+                    <div style="background: linear-gradient(135deg, #3a3a3a 0%, #1a1a1a 100%); padding: 12px; border-radius: 10px; border: 2px solid #888; text-align: center; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#ffd700';" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#888';" onclick="buyGoldPackage(19, 0.50)">
+                        <div style="font-size: 1.5em;">🥉</div>
+                        <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">19 Thỏi</div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$0.50</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #4a4a2a 0%, #2a2a1a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ffd700; text-align: center; position: relative; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" onclick="buyGoldPackage(59, 1.00)">
+                        <div style="position: absolute; top: -8px; right: -8px; background: #ff0000; color: white; padding: 3px 8px; border-radius: 15px; font-size: 0.7em; font-weight: bold;">-30%</div>
+                        <div style="font-size: 1.5em;">🥈</div>
+                        <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">59 Thỏi</div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$1.00</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #4a3a2a 0%, #2a1a0a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ff8c00; text-align: center; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" onclick="buyGoldPackage(199, 1.99)">
+                        <div style="font-size: 1.5em;">🥇</div>
+                        <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">199 Thỏi</div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$1.99</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #5a4a3a 0%, #3a2a1a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ffd700; text-align: center; cursor: pointer; animation: goldGlow 3s ease-in-out infinite;" onclick="buyGoldPackage(599, 3.00)">
+                        <div style="font-size: 1.5em;">💎</div>
+                        <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">599 Thỏi</div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$3.00</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #6a5a4a 0%, #4a3a2a 100%); padding: 12px; border-radius: 10px; border: 3px solid #ffd700; text-align: center; position: relative; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" onclick="buyGoldPackage(1999, 5.00)">
+                        <div style="position: absolute; top: -8px; right: -8px; background: #ff0000; color: white; padding: 3px 8px; border-radius: 15px; font-size: 0.7em; font-weight: bold;">HOT</div>
+                        <div style="font-size: 1.5em;">👑</div>
+                        <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">1,999 Thỏi</div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$5.00</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #7a6a5a 0%, #5a4a3a 100%); padding: 12px; border-radius: 10px; border: 3px solid #ff8c00; text-align: center; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" onclick="buyGoldPackage(2999, 5.00)">
+                        <div style="font-size: 1.5em;">💰</div>
+                        <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">2,999 Thỏi</div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$5.00</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #8a7a6a 0%, #6a5a4a 100%); padding: 20px; border-radius: 15px; border: 5px solid #ffd700; text-align: center; position: relative; cursor: pointer; animation: godPulse 2s ease-in-out infinite; grid-column: span 2; transform: scale(1.05); box-shadow: 0 0 40px rgba(255,215,0,0.8);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1.05)'" onclick="buyGoldPackage(5999, 6.99)">
+                        <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; padding: 10px 20px; border-radius: 25px; font-size: 1em; font-weight: bold; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255,215,0,1); animation: goldGlow 2s ease-in-out infinite;">⚡ ULTIMATE PACK ⚡</div>
+                        <div style="font-size: 3.5em; margin: 20px 0 15px; animation: goldGlow 2s ease-in-out infinite;">🌟</div>
+                        <div style="font-size: 2em; font-weight: bold; color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,1), 0 0 40px rgba(255,140,0,0.8);">5,999 Thỏi Vàng</div>
+                        <div style="font-size: 2.2em; color: #4CAF50; font-weight: bold; margin: 15px 0; text-shadow: 0 0 10px rgba(76,175,80,0.8);">$6.99</div>
+                        <div style="font-size: 1.2em; color: #ffd700; font-weight: bold; margin-top: 10px;">💫 GIÁ TRỊ KHỦNG NHẤT 💫</div>
+                        <div style="font-size: 0.95em; color: #ffaa00; margin-top: 8px;">858 Thỏi/$1 - Tiết kiệm tối đa!</div>
+                    </div>
+                </div>
+                <div style="text-align: center; padding: 10px; background: rgba(255,0,0,0.1); border-radius: 8px; border: 2px solid #ff4444;">
+                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ DEMO ONLY - Không thanh toán thật ⚠️</div>
+                </div>
+            </div>
+
             <!-- Inventory -->
             <div class="inventory-panel">
                 <div class="section-title">🎒 Túi Đồ</div>
@@ -2142,7 +2216,7 @@
                                 <option value="coins">💰 Coins</option>
                                 <option value="diamonds">💎 Diamonds</option>
                             </select>
-                            <input type="number" id="betAmount" placeholder="Số tiền" style="padding: 8px; border-radius: 8px; flex: 2; font-size: 0.95em;" value="1000">
+                            <input type="number" id="betAmount" placeholder="Số tiền" style="padding: 8px; border-radius: 8px; flex: 2; font-size: 0.95em;" value="100">
                             <button onclick="startGame()" style="padding: 8px 15px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">🎮 Start</button>
                         </div>
                     </div>
@@ -2171,17 +2245,93 @@
                 </div>
             </div>
 
+            <!-- Gold Shop - Premium Items -->
+            <div class="shop-panel" style="margin-top: 20px; background: linear-gradient(135deg, #2a1a0a 0%, #1a0a0a 100%); border: 3px solid #ffd700;">
+                <div class="section-title" style="color: #ffd700;">🏆 GOLD SHOP - VẬT PHẨM ĐỘC QUYỀN 🏆</div>
+                <div style="text-align: center; margin-bottom: 15px; padding: 10px; background: rgba(255,215,0,0.1); border-radius: 8px;">
+                    <div style="color: #ffd700; font-weight: bold;">Chỉ mua bằng Thỏi Vàng! 💰</div>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                    <div style="background: linear-gradient(135deg, #4a3a2a 0%, #2a1a0a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ffd700; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="buyGoldItem('💎 Diamond Pack x1000', 50, '+1,000 Diamonds')">
+                        <div style="font-size: 2em; text-align: center;">💎</div>
+                        <div style="font-weight: bold; color: #00ffff; margin: 8px 0;">Diamond Pack x1000</div>
+                        <div style="font-size: 0.85em; color: #aaa;">+1,000 💎 Diamonds</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(255,215,0,0.2); border-radius: 5px; text-align: center; color: #ffd700; font-weight: bold;">50 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #5a4a3a 0%, #3a2a1a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ffd700; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="buyGoldItem('💰 Mega Coins x1M', 30, '+1,000,000 Coins')">
+                        <div style="font-size: 2em; text-align: center;">💰</div>
+                        <div style="font-weight: bold; color: #ffff00; margin: 8px 0;">Mega Coins x1M</div>
+                        <div style="font-size: 0.85em; color: #aaa;">+1,000,000 Coins</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(255,215,0,0.2); border-radius: 5px; text-align: center; color: #ffd700; font-weight: bold;">30 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #6a5a4a 0%, #4a3a2a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ff8c00; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="buyGoldItem('⚡ Auto Clicker x50', 80, '+50 Auto Clickers')">
+                        <div style="font-size: 2em; text-align: center;">⚡</div>
+                        <div style="font-weight: bold; color: #00ff00; margin: 8px 0;">Auto Clicker x50</div>
+                        <div style="font-size: 0.85em; color: #aaa;">+50 Auto Clickers</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(255,140,0,0.2); border-radius: 5px; text-align: center; color: #ff8c00; font-weight: bold;">80 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #7a6a5a 0%, #5a4a3a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ff6b6b; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="buyGoldItem('🔥 Click Power x100', 100, '+100 Click Power')">
+                        <div style="font-size: 2em; text-align: center;">🔥</div>
+                        <div style="font-weight: bold; color: #ff6b6b; margin: 8px 0;">Click Power x100</div>
+                        <div style="font-size: 0.85em; color: #aaa;">+100 Click Power</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(255,107,107,0.2); border-radius: 5px; text-align: center; color: #ff6b6b; font-weight: bold;">100 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #8a7a6a 0%, #6a5a4a 100%); padding: 12px; border-radius: 10px; border: 2px solid #00d4ff; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="buyGoldItem('🚀 Multiplier x5', 150, '+5 Multiplier')">
+                        <div style="font-size: 2em; text-align: center;">🚀</div>
+                        <div style="font-weight: bold; color: #00d4ff; margin: 8px 0;">Multiplier x5</div>
+                        <div style="font-size: 0.85em; color: #aaa;">+5 Multiplier</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(0,212,255,0.2); border-radius: 5px; text-align: center; color: #00d4ff; font-weight: bold;">150 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #9a8a7a 0%, #7a6a5a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ff69b4; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="buyGoldItem('⏱️ Speed Boost', 120, '-0.2s Cooldown')">
+                        <div style="font-size: 2em; text-align: center;">⏱️</div>
+                        <div style="font-weight: bold; color: #ff69b4; margin: 8px 0;">Speed Boost</div>
+                        <div style="font-size: 0.85em; color: #aaa;">-0.2s Click Cooldown</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(255,105,180,0.2); border-radius: 5px; text-align: center; color: #ff69b4; font-weight: bold;">120 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #aa9a8a 0%, #8a7a6a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ffd700; cursor: pointer; transition: all 0.3s; animation: goldGlow 3s ease-in-out infinite;" onclick="buyGoldItem('🎫 Ticket Pack x100', 200, '+100 Tickets')">
+                        <div style="font-size: 2em; text-align: center;">🎫</div>
+                        <div style="font-weight: bold; color: #ffd700; margin: 8px 0;">Ticket Pack x100</div>
+                        <div style="font-size: 0.85em; color: #aaa;">+100 🎫 Tickets</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(255,215,0,0.3); border-radius: 5px; text-align: center; color: #ffd700; font-weight: bold;">200 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #baaa9a 0%, #9a8a7a 100%); padding: 12px; border-radius: 10px; border: 3px solid #ffd700; cursor: pointer; transition: all 0.3s; animation: godPulse 2s ease-in-out infinite;" onclick="buyGoldItem('🥚 Legendary Egg', 500, 'Random Legendary Pet x100-150')">
+                        <div style="font-size: 2em; text-align: center;">🥚</div>
+                        <div style="font-weight: bold; color: #ffd700; margin: 8px 0; text-shadow: 0 0 10px rgba(255,215,0,0.8);">Legendary Egg</div>
+                        <div style="font-size: 0.85em; color: #ffaa00;">Pet x100-150 Multiplier!</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(255,215,0,0.4); border-radius: 5px; text-align: center; color: #ffd700; font-weight: bold; font-size: 1.1em;">500 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #cababa 0%, #aaaa9a 100%); padding: 12px; border-radius: 10px; border: 2px solid #00ffff; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" onclick="buyGoldItem('🏆 VIP Pass (30 Days)', 300, 'VIP Benefits')">
+                        <div style="font-size: 2em; text-align: center;">🏆</div>
+                        <div style="font-weight: bold; color: #00ffff; margin: 8px 0;">VIP Pass (30 Days)</div>
+                        <div style="font-size: 0.85em; color: #aaa;">-20% Shop Prices</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(0,255,255,0.2); border-radius: 5px; text-align: center; color: #00ffff; font-weight: bold;">300 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #dacaca 0%, #baaaa 100%); padding: 12px; border-radius: 10px; border: 3px solid #ff00ff; cursor: pointer; transition: all 0.3s; animation: goldGlow 2.5s ease-in-out infinite;" onclick="buyGoldItem('👑 Premium Pass (30 Days)', 500, 'Premium + VIP')">
+                        <div style="font-size: 2em; text-align: center;">👑</div>
+                        <div style="font-weight: bold; color: #ff00ff; margin: 8px 0;">Premium Pass</div>
+                        <div style="font-size: 0.85em; color: #ff69b4;">All Benefits!</div>
+                        <div style="margin-top: 8px; padding: 6px; background: rgba(255,0,255,0.2); border-radius: 5px; text-align: center; color: #ff00ff; font-weight: bold;">500 🏆</div>
+                    </div>
+                    <div style="background: linear-gradient(135deg, #eadada 0%, #cababa 100%); padding: 12px; border-radius: 10px; border: 4px solid #ffd700; cursor: pointer; transition: all 0.3s; animation: godPulse 3s ease-in-out infinite; box-shadow: 0 0 20px rgba(255,215,0,0.6);" onclick="buyGoldItem('🌟 Rebirth Multiplier +2x', 1000, 'Permanent +2x Income')">
+                        <div style="font-size: 2.5em; text-align: center;">🌟</div>
+                        <div style="font-weight: bold; color: #ffd700; margin: 8px 0; text-shadow: 0 0 15px rgba(255,215,0,1);">Rebirth Boost</div>
+                        <div style="font-size: 0.85em; color: #ffaa00;">+2x Multiplier Forever!</div>
+                        <div style="margin-top: 8px; padding: 8px; background: rgba(255,215,0,0.4); border-radius: 5px; text-align: center; color: #ffd700; font-weight: bold; font-size: 1.2em;">1000 🏆</div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Wheel Game Panel -->
             <div class="shop-panel" style="margin-top: 20px;">
                 <div class="section-title">🎡 Vòng Quay May Mắn</div>
                 <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 20px; border-radius: 15px; border: 2px solid #ffd700;">
                     <div style="text-align: center; margin-bottom: 15px;">
                         <div style="font-size: 1.2em; color: #ffd700;">🎫 Vé: <span id="wheelTickets">0</span></div>
-                        <div style="font-size: 0.85em; color: #aaa;">1 Vé = 100 💎</div>
+                        <div style="font-size: 0.85em; color: #aaa;">1 Vé = 500 💎 | 10 Vé = 5K 💎</div>
                     </div>
                     <div style="text-align: center; margin-bottom: 15px;">
-                        <button onclick="buyTickets(1)" style="padding: 8px 15px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; margin: 0 5px;">1 Vé (100💎)</button>
-                        <button onclick="buyTickets(10)" style="padding: 8px 15px; background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; margin: 0 5px;">10 Vé (1K💎)</button>
+                        <button onclick="buyTickets(1)" style="padding: 8px 15px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; margin: 0 5px;">1 Vé (500💎)</button>
+                        <button onclick="buyTickets(10)" style="padding: 8px 15px; background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; margin: 0 5px;">10 Vé (5K💎)</button>
                     </div>
                     <div style="text-align: center; margin-bottom: 15px;">
                         <div id="wheelDisplay" style="width: 250px; height: 250px; margin: 0 auto; border: 4px solid #ffd700; border-radius: 50%; background: conic-gradient(from 0deg, #ff6b6b 0deg 45deg, #4ecdc4 45deg 90deg, #ffd93d 90deg 135deg, #95e1d3 135deg 180deg, #f38181 180deg 225deg, #aa96da 225deg 270deg, #fcbad3 270deg 315deg, #6c5ce7 315deg 360deg); position: relative; transition: transform 3s cubic-bezier(0.17, 0.67, 0.12, 0.99);">
@@ -2198,6 +2348,28 @@
                         <div id="wheelResultList" style="font-size: 0.9em; color: #fff;"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Code Redemption Modal -->
+    <div id="codeRedemptionOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 10000; backdrop-filter: blur(5px);" onclick="closeCodeModal()"></div>
+    <div id="codeRedemptionModal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #1a0a0a 0%, #2d1b00 100%); padding: 30px; border-radius: 20px; border: 4px solid #ffd700; z-index: 10001; min-width: 400px; box-shadow: 0 0 50px rgba(255,215,0,0.8); animation: goldGlow 2s ease-in-out infinite;">
+        <div style="text-align: center;">
+            <div style="font-size: 3em; margin-bottom: 15px; animation: goldGlow 2s ease-in-out infinite;">🏆</div>
+            <div style="font-size: 1.8em; color: #ffd700; font-weight: bold; margin-bottom: 10px; text-shadow: 0 0 10px rgba(255,215,0,0.8);">NHẬP MÃ CODE</div>
+            <div id="codePackageInfo" style="font-size: 1.2em; color: #ffaa00; margin-bottom: 20px;">Gói: <span id="codePackageName"></span></div>
+            <div style="margin-bottom: 20px;">
+                <input type="text" id="codeInput" placeholder="Nhập code ở đây..." style="width: 100%; padding: 15px; font-size: 1.2em; border: 3px solid #ffd700; border-radius: 10px; background: rgba(255,215,0,0.1); color: #ffd700; text-align: center; font-weight: bold; text-transform: uppercase;" maxlength="20">
+            </div>
+            <div style="display: flex; gap: 15px; justify-content: center;">
+                <button onclick="redeemCode()" style="padding: 15px 30px; background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%); border: none; border-radius: 10px; color: white; font-weight: bold; font-size: 1.1em; cursor: pointer; box-shadow: 0 4px 15px rgba(0,255,0,0.4);">✅ XÁC NHẬN</button>
+                <button onclick="closeCodeModal()" style="padding: 15px 30px; background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%); border: none; border-radius: 10px; color: white; font-weight: bold; font-size: 1.1em; cursor: pointer; box-shadow: 0 4px 15px rgba(255,0,0,0.4);">❌ HỦY</button>
+            </div>
+            <div style="margin-top: 20px; padding: 15px; background: rgba(255,215,0,0.1); border-radius: 10px; border: 2px dashed #ffd700;">
+                <div style="font-size: 0.95em; color: #ffaa00; font-weight: bold; margin-bottom: 5px;">💡 Lấy code ở đâu?</div>
+                <div style="font-size: 0.85em; color: #ff8c00;">Trong game thật: Mua qua email hoặc zalo thanh toán → Nhận code qua email:vuduy29032013@gmail.com hoặc liên hệ +84 932 980 429 zalo + điện thoại </div>
+                <div style="font-size: 0.85em; color: #ff8c00; margin-top: 3px;">chúc bạn mua thành công!</div>
             </div>
         </div>
     </div>
@@ -2249,6 +2421,44 @@
         // ===== DIAMOND & PETS SYSTEM =====
         let diamonds = 0;
         let tickets = 0; // Vé quay
+        let goldBars = 0; // Thỏi vàng - Premium currency
+
+        // Gold Bar Redemption Codes (20 codes)
+        const goldCodes = {
+            // $0.50 packages (19 Gold)
+            'GOLD19A': { amount: 19, price: 0.50, used: false },
+            'GOLD19B': { amount: 19, price: 0.50, used: false },
+            
+            // $1.00 packages (59 Gold) - 30% save
+            'GOLD59A': { amount: 59, price: 1.00, used: false },
+            'GOLD59B': { amount: 59, price: 1.00, used: false },
+            'GOLD59C': { amount: 59, price: 1.00, used: false },
+            
+            // $1.99 packages (199 Gold)
+            'GOLD199A': { amount: 199, price: 1.99, used: false },
+            'GOLD199B': { amount: 199, price: 1.99, used: false },
+            
+            // $3.00 packages (599 Gold)
+            'GOLD599A': { amount: 599, price: 3.00, used: false },
+            'GOLD599B': { amount: 599, price: 3.00, used: false },
+            'GOLD599C': { amount: 599, price: 3.00, used: false },
+            
+            // $5.00 packages (1999 Gold) - HOT
+            'GOLD1999A': { amount: 1999, price: 5.00, used: false },
+            'GOLD1999B': { amount: 1999, price: 5.00, used: false },
+            'GOLD1999C': { amount: 1999, price: 5.00, used: false },
+            'GOLD1999D': { amount: 1999, price: 5.00, used: false },
+            
+            // $5.00 packages (2999 Gold) - Mega
+            'GOLD2999A': { amount: 2999, price: 5.00, used: false },
+            'GOLD2999B': { amount: 2999, price: 5.00, used: false },
+            
+            // $6.99 packages (5999 Gold) - ULTIMATE
+            'GOLD5999A': { amount: 5999, price: 6.99, used: false },
+            'GOLD5999B': { amount: 5999, price: 6.99, used: false },
+            'GOLD5999C': { amount: 5999, price: 6.99, used: false },
+            'GOLD5999D': { amount: 5999, price: 6.99, used: false }
+        };
         let pets = [];
         let ownedPets = {};
         let equippedPets = []; // Mảng chứa tối đa 5 pets đang được trang bị
@@ -2257,14 +2467,14 @@
         // Wheel Game
         let isSpinning = false;
         const wheelPrizes = [
-            { name: '100 Coins', value: 100, type: 'coins', chance: 25, icon: '💰' },
-            { name: '500 Coins', value: 500, type: 'coins', chance: 20, icon: '💰' },
-            { name: '1K Coins', value: 1000, type: 'coins', chance: 15, icon: '💰' },
+            { name: '100 Coins', value: 100, type: 'coins', chance: 30, icon: '💰' },
+            { name: '500 Coins', value: 500, type: 'coins', chance: 25, icon: '💰' },
+            { name: '1K Coins', value: 1000, type: 'coins', chance: 20, icon: '💰' },
             { name: '5K Coins', value: 5000, type: 'coins', chance: 10, icon: '💰' },
-            { name: '10 Diamonds', value: 10, type: 'diamonds', chance: 12, icon: '💎' },
-            { name: '50 Diamonds', value: 50, type: 'diamonds', chance: 8, icon: '💎' },
-            { name: '100 Diamonds', value: 100, type: 'diamonds', chance: 5, icon: '💎' },
-            { name: '1 Pet Random', value: 1, type: 'pet', chance: 5, icon: '🐾' }
+            { name: '10 Diamonds', value: 10, type: 'diamonds', chance: 8, icon: '💎' },
+            { name: '25 Diamonds', value: 25, type: 'diamonds', chance: 5, icon: '💎' },
+            { name: '50 Diamonds', value: 50, type: 'diamonds', chance: 1, icon: '💎' },
+            { name: '1 Pet Random', value: 1, type: 'pet', chance: 1, icon: '🐾' }
         ];
 
         // Egg data
@@ -3116,7 +3326,7 @@
             }
         ];
 
-        const rebirthRequirements = [5000, 100000, 500000, 2000000];
+        const rebirthRequirements = [100000]; // Chỉ cần 1 giá trị, sau đó x5 mỗi lần
 
         // ===== WEATHER FUNCTIONS =====
         function activateWeather(type) {
@@ -3520,6 +3730,7 @@
             document.getElementById('coins').textContent = formatNumber(coins);
             document.getElementById('diamonds').textContent = formatNumber(diamonds);
             document.getElementById('tickets').textContent = formatNumber(tickets);
+            document.getElementById('goldBars').textContent = formatNumber(goldBars);
             document.getElementById('wheelTickets').textContent = formatNumber(tickets);
             document.getElementById('clickPower').textContent = clickPower;
             document.getElementById('autoClickers').textContent = autoClickers;
@@ -3732,6 +3943,14 @@
             }
         }
 
+        function addAdminGoldBars() {
+            if (isAdmin) {
+                goldBars += 100;
+                updateDisplay();
+                alert('✅ Đã thêm 100 🏆 Thỏi Vàng!');
+            }
+        }
+
         function summonPet(petName, petIcon, petMultiplier) {
             if (!isAdmin) return;
             
@@ -3760,6 +3979,8 @@
                 coins: coins,
                 diamonds: diamonds,
                 tickets: tickets,
+                goldBars: goldBars,
+                goldCodes: goldCodes,
                 clickPower: clickPower,
                 autoClickers: autoClickers,
                 multiplier: multiplier,
@@ -3807,6 +4028,16 @@
                     coins = gameData.coins || 0;
                     diamonds = gameData.diamonds || 0;
                     tickets = gameData.tickets || 0;
+                    goldBars = gameData.goldBars || 0;
+                    
+                    // Restore used codes
+                    if (gameData.goldCodes) {
+                        Object.keys(gameData.goldCodes).forEach(code => {
+                            if (goldCodes[code]) {
+                                goldCodes[code].used = gameData.goldCodes[code].used;
+                            }
+                        });
+                    }
                     clickPower = gameData.clickPower || 1;
                     autoClickers = gameData.autoClickers || 0;
                     multiplier = gameData.multiplier || 1;
@@ -4072,9 +4303,8 @@
         }
 
         function updateRebirthUI() {
-            const nextReq = rebirthCount < rebirthRequirements.length 
-                ? rebirthRequirements[rebirthCount] 
-                : rebirthRequirements[rebirthRequirements.length - 1] * Math.pow(2, rebirthCount - rebirthRequirements.length + 1);
+            // Công thức: 100K lần đầu, sau đó x5 mỗi lần
+            const nextReq = 100000 * Math.pow(5, rebirthCount);
             
             const nextMult = rebirthMultiplier + 0.75;
             const canRebirth = coins >= nextReq;
@@ -4094,9 +4324,8 @@
         }
 
         function performRebirth() {
-            const nextReq = rebirthCount < rebirthRequirements.length 
-                ? rebirthRequirements[rebirthCount] 
-                : rebirthRequirements[rebirthRequirements.length - 1] * Math.pow(2, rebirthCount - rebirthRequirements.length + 1);
+            // Công thức: 100K lần đầu, sau đó x5 mỗi lần
+            const nextReq = 100000 * Math.pow(5, rebirthCount);
             
             if (coins < nextReq) {
                 alert('❌ Không đủ coins để tái sinh!');
@@ -4104,7 +4333,7 @@
             }
             
             const confirm = window.confirm(
-                `🔄 XÁC NHẬN TÁI SINH\n\n` +
+                `🔄 XÁC NHẬN TÁI SINH LẦN ${rebirthCount + 1}\n\n` +
                 `Bạn sẽ mất:\n` +
                 `- Tất cả coins\n` +
                 `- Tất cả vật phẩm đã mua\n` +
@@ -4120,7 +4349,7 @@
                 `Bạn sẽ nhận:\n` +
                 `- +0.75x thu nhập vĩnh viễn (${rebirthMultiplier.toFixed(2)} → ${(rebirthMultiplier + 0.75).toFixed(2)})\n` +
                 `- +5 giới hạn mua vật phẩm (${purchaseLimit} → ${purchaseLimit + 5})\n` +
-                `- +50 💎 Kim Cương\n\n` +
+                `- +500 💎 Kim Cương\n\n` +
                 `Tiếp tục?`
             );
             
@@ -4143,7 +4372,7 @@
             rebirthCount++;
             rebirthMultiplier += 0.75;
             purchaseLimit += 5;
-            diamonds += 50; // Thêm 50 kim cương
+            diamonds += 500; // Thêm 500 kim cương
             
             updateDisplay();
             renderShop();
@@ -4735,9 +4964,162 @@
             document.getElementById('gameResult').style.display = 'none';
         }
 
+        // ===== GOLD BARS SYSTEM =====
+        function buyGoldPackage(amount, price) {
+            // Store package info for redemption
+            window.currentGoldPackage = { amount, price };
+            
+            // Show modal
+            document.getElementById('codePackageName').textContent = `${amount} 🏆 Thỏi Vàng ($${price.toFixed(2)})`;
+            document.getElementById('codeRedemptionOverlay').style.display = 'block';
+            document.getElementById('codeRedemptionModal').style.display = 'block';
+            document.getElementById('codeInput').value = '';
+            document.getElementById('codeInput').focus();
+            
+            // Log available codes for demo
+            console.log('🏆 AVAILABLE CODES FOR DEMO:');
+            console.log('═══════════════════════════════════');
+            Object.keys(goldCodes).forEach(code => {
+                if (!goldCodes[code].used) {
+                    console.log(`${code} → ${goldCodes[code].amount} Gold ($${goldCodes[code].price})`);
+                }
+            });
+            console.log('═══════════════════════════════════');
+        }
+
+        function closeCodeModal() {
+            document.getElementById('codeRedemptionOverlay').style.display = 'none';
+            document.getElementById('codeRedemptionModal').style.display = 'none';
+            document.getElementById('codeInput').value = '';
+        }
+
+        function redeemCode() {
+            const code = document.getElementById('codeInput').value.toUpperCase().trim();
+            
+            if (!code) {
+                alert('❌ Vui lòng nhập code!');
+                return;
+            }
+            
+            // Check if code exists
+            if (!goldCodes[code]) {
+                alert('❌ CODE KHÔNG HỢP LỆ!\n\nCode này không tồn tại. Vui lòng kiểm tra lại.');
+                return;
+            }
+            
+            // Check if code is already used
+            if (goldCodes[code].used) {
+                alert('❌ CODE ĐÃ ĐƯỢC SỬ DỤNG!\n\nCode này đã được dùng rồi. Mỗi code chỉ dùng được 1 lần.');
+                return;
+            }
+            
+            // Get code info
+            const codeInfo = goldCodes[code];
+            
+            // Mark as used
+            goldCodes[code].used = true;
+            
+            // Add gold bars
+            goldBars += codeInfo.amount;
+            
+            // Close modal
+            closeCodeModal();
+            
+            // Update display
+            updateDisplay();
+            
+            // Success message
+            alert(
+                `🎉 CODE HỢP LỆ!\n\n` +
+                `✅ Đã nhận: ${codeInfo.amount} 🏆 Thỏi Vàng\n` +
+                `💰 Tổng: ${goldBars} 🏆 Thỏi Vàng\n\n` +
+                `🎁 Cảm ơn bạn đã mua gói $${codeInfo.price.toFixed(2)}!`
+            );
+        }
+
+        // Allow Enter key to redeem
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeInput = document.getElementById('codeInput');
+            if (codeInput) {
+                codeInput.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        redeemCode();
+                    }
+                });
+            }
+        });
+
+        function buyGoldItem(itemName, cost, effect) {
+            if (goldBars < cost) {
+                alert(`❌ Không đủ Thỏi Vàng!\n\nCần: ${cost} 🏆\nCó: ${goldBars} 🏆`);
+                return;
+            }
+            
+            const confirm = window.confirm(
+                `🏆 MUA VẬT PHẨM PREMIUM\n\n` +
+                `${itemName}\n` +
+                `Giá: ${cost} 🏆 Thỏi Vàng\n\n` +
+                `Hiệu ứng: ${effect}\n\n` +
+                `Xác nhận mua?`
+            );
+            
+            if (!confirm) return;
+            
+            goldBars -= cost;
+            
+            // Apply effects based on item
+            if (itemName === '💎 Diamond Pack x1000') {
+                diamonds += 1000;
+            } else if (itemName === '💰 Mega Coins x1M') {
+                coins += 1000000;
+            } else if (itemName === '⚡ Auto Clicker x50') {
+                autoClickers += 50;
+            } else if (itemName === '🔥 Click Power x100') {
+                clickPower += 100;
+            } else if (itemName === '🚀 Multiplier x5') {
+                multiplier += 5;
+            } else if (itemName === '⏱️ Speed Boost') {
+                clickCooldown = Math.max(0.01, clickCooldown - 0.2);
+            } else if (itemName === '🎒 Inventory Slot +10') {
+                // Placeholder for inventory expansion
+            } else if (itemName === '🏆 VIP Pass (30 Days)') {
+                gamePasses.vip = true;
+                updateGamePassUI();
+            } else if (itemName === '👑 Premium Pass (30 Days)') {
+                gamePasses.premium = true;
+                updateGamePassUI();
+            } else if (itemName === '🎫 Ticket Pack x100') {
+                tickets += 100;
+            } else if (itemName === '🥚 Legendary Egg') {
+                // Give legendary pet
+                const legendaryPets = [
+                    { name: 'Phoenix', icon: '🔥', multiplier: 100 },
+                    { name: 'Dragon', icon: '🐉', multiplier: 150 },
+                    { name: 'Unicorn', icon: '🦄', multiplier: 120 }
+                ];
+                const pet = legendaryPets[Math.floor(Math.random() * legendaryPets.length)];
+                const petKey = `${pet.name}_${Date.now()}`;
+                ownedPets[petKey] = {
+                    key: petKey,
+                    name: pet.name,
+                    icon: pet.icon,
+                    multiplier: pet.multiplier,
+                    count: 1
+                };
+                renderPets();
+                alert(`🎉 Nhận được pet Legendary: ${pet.icon} ${pet.name} (x${pet.multiplier})!`);
+            } else if (itemName === '🌟 Rebirth Multiplier +2x') {
+                rebirthMultiplier += 2;
+            }
+            
+            updateDisplay();
+            renderShop();
+            alert(`✅ Đã mua ${itemName}!\n\n💰 Còn lại: ${goldBars} 🏆 Thỏi Vàng`);
+        }
+
         // ===== WHEEL GAME FUNCTIONS =====
         function buyTickets(amount) {
-            const cost = amount * 100;
+            const cost = amount * 500;
             if (diamonds < cost) {
                 alert(`❌ Không đủ Diamonds! Cần ${cost} 💎`);
                 return;
