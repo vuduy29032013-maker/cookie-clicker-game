@@ -245,7 +245,7 @@
         }
 
         .admin-controls::-webkit-scrollbar {
-            width: 8px;
+            width: 5px;
         }
 
         .admin-controls::-webkit-scrollbar-track {
@@ -1957,7 +1957,7 @@
                     </label>
                     <input type="file" id="loadFile" class="file-input" accept=".json" onchange="loadGame(event)">
                 </div>
-                <div class="save-info" id="saveInfo">
+                <div class="save-info">
                     💡 Export để lưu game, Import để tải lại tiến trình
                 </div>
             </div>
@@ -2489,7 +2489,6 @@
                 
                 // Cookie
                 clickMe: 'Click Me!',
-                perClick: 'per click',
                 
                 // Admin Panel
                 adminPanel: 'Admin Panel',
@@ -2501,8 +2500,6 @@
                 addGold: '+100 Gold Bars',
                 summonWeather: 'Summon Weather',
                 summonPet: 'Summon Pet',
-                clearWeather: 'Clear All Weather',
-                currentWeather: 'Current Weather',
                 
                 // Shop
                 shop: 'Shop',
@@ -2512,62 +2509,39 @@
                 speedBoostItem: 'Speed Boost',
                 buy: 'Buy',
                 owned: 'Owned',
-                remaining: 'Remaining',
-                effect: 'Effect',
-                increase: 'Increase',
-                perSecond: 'per second',
-                reduce: 'Reduce',
-                shopDescription1: 'Increase click power by 1 per purchase',
-                shopDescription2: 'Auto-generate 1 coin per second',
-                shopDescription3: 'Multiply all income by 1.5x',
-                shopDescription4: 'Reduce click cooldown by 0.1s',
                 
                 // Rebirth
                 rebirthPanel: 'Rebirth System',
                 rebirthCount: 'Rebirth Count',
-                rebirthMulti: 'Rebirth Multiplier',
+                rebirthMulti: 'Rebirth Multi',
                 nextRebirth: 'Next Rebirth',
                 requirement: 'Requirement',
                 rebirthBtn: 'Rebirth',
-                rebirthReward: 'Reward',
-                times: 'times',
                 
-                // Game Pass Store
-                gamePassPanel: 'Game Pass Store',
+                // Game Pass
+                gamePassPanel: 'Game Pass',
                 vipPass: 'VIP Pass',
                 premiumPass: 'Premium Pass',
-                shopDiscount: 'Shop Discount',
-                noLimit: 'No Purchase Limit',
-                autoSave: 'Auto Save',
-                allBenefits: 'All Benefits',
-                
-                // Potion Shop
-                potionShop: 'Potion Shop',
-                clickPotion: 'Click Potion',
-                autoPotion: 'Auto Potion',
-                doubleClick: 'Double click power for 60s',
-                doubleAuto: 'Double auto-clickers for 60s',
                 
                 // Inventory
                 inventory: 'Inventory',
+                clickPotion: 'Click Potion',
+                autoPotion: 'Auto Potion',
                 use: 'Use',
                 
                 // Pets
-                petsPanel: 'Pet System',
+                petsPanel: 'Pets',
                 equippedPets: 'Equipped Pets',
                 ownedPets: 'Owned Pets',
                 equip: 'Equip',
                 unequip: 'Unequip',
-                maxEquipped: 'Max Equipped',
                 
                 // Eggs
                 eggShop: 'Egg Shop',
-                hatchChance: 'Hatch Chance',
                 
                 // Weather
                 weatherPanel: 'Weather System',
                 activeWeather: 'Active Weather',
-                noWeather: 'No active weather',
                 
                 // Mini Games
                 miniGameRPS: 'Mini Game - Rock Paper Scissors',
@@ -2578,41 +2552,16 @@
                 start: 'Start',
                 continue: 'Continue',
                 backToMenu: 'Back to Menu',
-                rock: 'Rock',
-                paper: 'Paper',
-                scissors: 'Scissors',
-                youWin: 'You Win!',
-                youLose: 'You Lose!',
-                draw: 'Draw!',
                 
                 // Wheel
                 wheelGame: 'Lucky Wheel',
                 tickets: 'Tickets',
                 buyTicket: 'Buy Ticket',
                 spin: 'Spin',
-                ticketPrice: 'Ticket Price',
-                
-                // Discount Ticket Shop
-                discountShop: 'Discount Ticket Shop',
-                ticketDiscount: 'Ticket Discount',
-                currentDiscount: 'Current Discount',
                 
                 // Gold Shop
                 goldShop: 'GOLD SHOP - EXCLUSIVE ITEMS',
                 onlyGold: 'Only buyable with Gold Bars!',
-                diamondPack: 'Diamond Pack',
-                megaCoins: 'Mega Coins',
-                autoClicker: 'Auto Clicker',
-                clickPowerBoost: 'Click Power',
-                multiplierBoost: 'Multiplier',
-                speedBoost: 'Speed Boost',
-                ticketPack: 'Ticket Pack',
-                legendaryEgg: 'Legendary Egg',
-                vipPassItem: 'VIP Pass',
-                premiumPassItem: 'Premium Pass',
-                rebirthBoost: 'Rebirth Multiplier',
-                bestValue: 'BEST VALUE',
-                permanent: 'Permanent',
                 
                 // Pay Store
                 payStore: 'PREMIUM STORE',
@@ -2620,15 +2569,6 @@
                 premiumCurrency: 'Extremely rare! Only purchasable with real money!',
                 buySpecial: 'Buy special items with Gold Bars',
                 demoOnly: 'DEMO ONLY - No real payment',
-                starterPack: 'Starter Pack',
-                valuePack: 'Value Pack',
-                goodDeal: 'Good Deal',
-                greatValue: 'Great Value',
-                bestPack: 'Best Value',
-                megaPack: 'Mega Pack',
-                ultimatePack: 'ULTIMATE PACK',
-                save30: 'SAVE 30%',
-                hot: 'HOT',
                 
                 // Settings
                 settings: 'Settings',
@@ -2638,8 +2578,8 @@
                 save: 'Save',
                 load: 'Load',
                 deleteSave: 'Delete Save',
-                export: 'Export to save game',
-                import: 'Import to load progress',
+                export: 'Export',
+                import: 'Import',
                 
                 // Alerts
                 notEnough: 'Not enough',
@@ -2661,7 +2601,6 @@
                 
                 // Cookie
                 clickMe: 'Click vào đây!',
-                perClick: 'mỗi click',
                 
                 // Admin Panel
                 adminPanel: 'Bảng Admin',
@@ -2673,8 +2612,6 @@
                 addGold: '+100 Thỏi vàng',
                 summonWeather: 'Triệu hồi Thời tiết',
                 summonPet: 'Triệu hồi Pet',
-                clearWeather: 'Xóa Tất cả Thời tiết',
-                currentWeather: 'Thời tiết Hiện tại',
                 
                 // Shop
                 shop: 'Cửa hàng',
@@ -2684,15 +2621,6 @@
                 speedBoostItem: 'Tăng tốc',
                 buy: 'Mua',
                 owned: 'Đã mua',
-                remaining: 'Còn lại',
-                effect: 'Tác dụng',
-                increase: 'Tăng',
-                perSecond: 'mỗi giây',
-                reduce: 'Giảm',
-                shopDescription1: 'Tăng sức mạnh click thêm 1 mỗi lần mua',
-                shopDescription2: 'Tự động tạo 1 coin mỗi giây',
-                shopDescription3: 'Nhân toàn bộ thu nhập x1.5',
-                shopDescription4: 'Giảm thời gian hồi chiêu 0.1s',
                 
                 // Rebirth
                 rebirthPanel: 'Hệ thống Tái sinh',
@@ -2701,45 +2629,31 @@
                 nextRebirth: 'Tái sinh tiếp theo',
                 requirement: 'Yêu cầu',
                 rebirthBtn: 'Tái sinh',
-                rebirthReward: 'Phần thưởng',
-                times: 'lần',
                 
-                // Game Pass Store
-                gamePassPanel: 'Cửa hàng Game Pass',
+                // Game Pass
+                gamePassPanel: 'Game Pass',
                 vipPass: 'VIP Pass',
                 premiumPass: 'Premium Pass',
-                shopDiscount: 'Giảm giá Shop',
-                noLimit: 'Mua không giới hạn',
-                autoSave: 'Tự động Lưu',
-                allBenefits: 'Toàn bộ Quyền lợi',
-                
-                // Potion Shop
-                potionShop: 'Cửa hàng Thuốc',
-                clickPotion: 'Thuốc Click',
-                autoPotion: 'Thuốc Auto',
-                doubleClick: 'Nhân đôi sức click trong 60s',
-                doubleAuto: 'Nhân đôi auto-clicker trong 60s',
                 
                 // Inventory
-                inventory: 'Túi Đồ',
+                inventory: 'Túi đồ',
+                clickPotion: 'Thuốc Click',
+                autoPotion: 'Thuốc Auto',
                 use: 'Dùng',
                 
                 // Pets
-                petsPanel: 'Hệ thống Pet',
+                petsPanel: 'Thú cưng',
                 equippedPets: 'Pets đang trang bị',
                 ownedPets: 'Pets đã sở hữu',
                 equip: 'Trang bị',
                 unequip: 'Gỡ',
-                maxEquipped: 'Trang bị Tối đa',
                 
                 // Eggs
                 eggShop: 'Cửa hàng Trứng',
-                hatchChance: 'Tỷ lệ nở',
                 
                 // Weather
                 weatherPanel: 'Hệ thống Thời tiết',
                 activeWeather: 'Thời tiết đang có',
-                noWeather: 'Không có thời tiết nào',
                 
                 // Mini Games
                 miniGameRPS: 'Mini Game - Kéo Búa Bao',
@@ -2750,41 +2664,16 @@
                 start: 'Bắt đầu',
                 continue: 'Tiếp tục',
                 backToMenu: 'Về Menu',
-                rock: 'Búa',
-                paper: 'Bao',
-                scissors: 'Kéo',
-                youWin: 'Bạn Thắng!',
-                youLose: 'Bạn Thua!',
-                draw: 'Hòa!',
                 
                 // Wheel
                 wheelGame: 'Vòng quay May mắn',
                 tickets: 'Vé',
                 buyTicket: 'Mua vé',
                 spin: 'Quay',
-                ticketPrice: 'Giá vé',
-                
-                // Discount Ticket Shop
-                discountShop: 'Cửa Hàng Vé Giảm Giá',
-                ticketDiscount: 'Giảm giá Vé',
-                currentDiscount: 'Giảm giá Hiện tại',
                 
                 // Gold Shop
                 goldShop: 'GOLD SHOP - VẬT PHẨM ĐỘC QUYỀN',
                 onlyGold: 'Chỉ mua bằng Thỏi Vàng!',
-                diamondPack: 'Gói Kim Cương',
-                megaCoins: 'Mega Coins',
-                autoClicker: 'Auto Clicker',
-                clickPowerBoost: 'Click Power',
-                multiplierBoost: 'Bội số',
-                speedBoost: 'Tăng tốc',
-                ticketPack: 'Gói Vé',
-                legendaryEgg: 'Trứng Huyền thoại',
-                vipPassItem: 'VIP Pass',
-                premiumPassItem: 'Premium Pass',
-                rebirthBoost: 'Bội số Tái sinh',
-                bestValue: 'GIÁ TRỊ TỐT NHẤT',
-                permanent: 'Vĩnh viễn',
                 
                 // Pay Store
                 payStore: 'CỬA HÀNG PREMIUM',
@@ -2792,15 +2681,6 @@
                 premiumCurrency: 'Cực kỳ hiếm! Chỉ có thể mua bằng tiền thật!',
                 buySpecial: 'Mua vật phẩm đặc biệt chỉ với Thỏi Vàng',
                 demoOnly: 'DEMO ONLY - Không thanh toán thật',
-                starterPack: 'Gói Khởi đầu',
-                valuePack: 'Gói Giá trị',
-                goodDeal: 'Ưu đãi Tốt',
-                greatValue: 'Giá trị Lớn',
-                bestPack: 'Tốt Nhất',
-                megaPack: 'Gói Khủng',
-                ultimatePack: 'GÓI SIÊU CẤP',
-                save30: 'TIẾT KIỆM 30%',
-                hot: 'HOT',
                 
                 // Settings
                 settings: 'Cài đặt',
@@ -2810,8 +2690,8 @@
                 save: 'Lưu game',
                 load: 'Tải game',
                 deleteSave: 'Xóa save',
-                export: 'Export để lưu game',
-                import: 'Import để tải lại tiến trình',
+                export: 'Xuất file',
+                import: 'Nhập file',
                 
                 // Alerts
                 notEnough: 'Không đủ',
@@ -2864,7 +2744,6 @@
             const importBtn = document.getElementById('importBtn');
             const settingsButtonText = document.getElementById('settingsButtonText');
             const playTimeLabel = document.getElementById('playTimeLabel');
-            const saveInfo = document.getElementById('saveInfo');
             
             if (settingsTitle) settingsTitle.textContent = t('settings');
             if (languageLabel) languageLabel.textContent = t('language');
@@ -2876,9 +2755,6 @@
             if (importBtn) importBtn.textContent = t('import');
             if (settingsButtonText) settingsButtonText.textContent = t('settings');
             if (playTimeLabel) playTimeLabel.textContent = currentLanguage === 'en' ? 'Time' : 'Thời gian';
-            if (saveInfo) saveInfo.textContent = currentLanguage === 'en' 
-                ? '💡 Export to save game, Import to load progress' 
-                : '💡 Export để lưu game, Import để tải lại tiến trình';
             
             // Update header stats labels
             const statsDiv = document.querySelector('.stats');
@@ -2913,7 +2789,7 @@
                     title.textContent = '🎫 ' + t('gamePassPanel');
                 } else if (text.includes('Inventory') || text.includes('Túi')) {
                     title.textContent = '🎒 ' + t('inventory');
-                } else if (text.includes('Pets') || text.includes('Thú') || text.includes('Pet System')) {
+                } else if (text.includes('Pets') || text.includes('Thú')) {
                     title.textContent = '🐾 ' + t('petsPanel');
                 } else if (text.includes('Egg') || text.includes('Trứng')) {
                     title.textContent = '🥚 ' + t('eggShop');
@@ -2927,39 +2803,11 @@
                     title.textContent = '🏆 ' + t('goldShop');
                 } else if (text.includes('PREMIUM') || text.includes('CỬA HÀNG')) {
                     title.textContent = '💰 ' + t('payStore');
-                } else if (text.includes('Potion') || text.includes('Thuốc')) {
-                    title.textContent = '🧪 ' + t('potionShop');
-                } else if (text.includes('Discount') || text.includes('Giảm Giá')) {
-                    title.textContent = '🎫 ' + t('discountShop');
-                }
-            });
-            
-            // Update buttons with class "buy-button"
-            const buyButtons = document.querySelectorAll('.buy-button');
-            buyButtons.forEach(btn => {
-                if (btn.textContent.includes('Mua') || btn.textContent.includes('Buy')) {
-                    btn.textContent = '💰 ' + t('buy');
-                }
-            });
-            
-            // Update "Owned/Đã mua" and "Remaining/Còn lại" text
-            const ownedTexts = document.querySelectorAll('div');
-            ownedTexts.forEach(div => {
-                const text = div.textContent;
-                if (text.includes('Đã mua:') || text.includes('Owned:')) {
-                    const number = text.match(/\d+/);
-                    if (number) div.textContent = `${t('owned')}: ${number[0]}`;
-                } else if (text.includes('Còn lại:') || text.includes('Remaining:')) {
-                    const number = text.match(/\d+/);
-                    if (number) div.textContent = `${t('remaining')}: ${number[0]}`;
                 }
             });
             
             updateDisplay();
             updateWeatherDisplay();
-            
-            // Force re-render of dynamic content
-            if (typeof renderShop === 'function') renderShop();
         }
 
         // Console protection
@@ -4345,7 +4193,7 @@
                 // 2. Click quá đều (độ lệch chuẩn < 10ms)
                 // 3. Click với pattern giống nhau (variance quá thấp)
                 
-                const tooFast = avgInterval < 50;
+                const tooFast = avgInterval < 30;
                 const tooConsistent = stdDev < 10;
                 const suspiciousPattern = variance < 100 && clickTimes.length >= 8;
                 
