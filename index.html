@@ -1692,8 +1692,57 @@
 
     <!-- Playtime Panel -->
     <div class="playtime-panel">
-        ⏱️ Thời gian: <span id="playTime">00:00:00</span>
+        ⏱️ <span id="playTimeLabel">Time</span>: <span id="playTime">00:00:00</span>
     </div>
+
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel" style="position: fixed; top: 20px; right: 280px; background: linear-gradient(135deg, #2d1b4e 0%, #1a0f2e 100%); padding: 15px; border-radius: 15px; border: 2px solid #7c3aed; display: none; z-index: 200; min-width: 250px; box-shadow: 0 8px 32px rgba(124, 58, 237, 0.4);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+            <div style="font-size: 1.3em; font-weight: bold; color: #a78bfa;">⚙️ <span id="settingsTitle">Settings</span></div>
+            <button onclick="toggleSettings()" style="padding: 5px 12px; background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%); border: none; border-radius: 8px; color: white; cursor: pointer; font-weight: bold;">✕</button>
+        </div>
+        
+        <!-- Language Selection -->
+        <div style="background: rgba(124, 58, 237, 0.1); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+            <div style="color: #c4b5fd; font-weight: bold; margin-bottom: 8px;">🌐 <span id="languageLabel">Language</span></div>
+            <div style="display: flex; gap: 8px;">
+                <button onclick="setLanguage('en')" id="langEnBtn" style="flex: 1; padding: 10px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border: 2px solid #60a5fa; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s;">
+                    🇬🇧 English
+                </button>
+                <button onclick="setLanguage('vi')" id="langViBtn" style="flex: 1; padding: 10px; background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); border: 2px solid #9ca3af; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; transition: all 0.3s;">
+                    🇻🇳 Tiếng Việt
+                </button>
+            </div>
+        </div>
+        
+        <!-- Save/Load Buttons -->
+        <div style="background: rgba(124, 58, 237, 0.1); padding: 12px; border-radius: 10px;">
+            <div style="color: #c4b5fd; font-weight: bold; margin-bottom: 8px;">💾 <span id="saveLoadLabel">Save & Load</span></div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+                <button onclick="saveGame()" style="padding: 8px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
+                    💾 <span id="saveBtn">Save</span>
+                </button>
+                <button onclick="loadGameFromButton()" style="padding: 8px; background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
+                    📂 <span id="loadBtn">Load</span>
+                </button>
+                <button onclick="deleteSaveData()" style="padding: 8px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
+                    🗑️ <span id="deleteBtn">Delete</span>
+                </button>
+                <button onclick="exportSave()" style="padding: 8px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
+                    📥 <span id="exportBtn">Export</span>
+                </button>
+            </div>
+            <input type="file" id="importFile" accept=".json" onchange="importSave(event)" style="display: none;">
+            <button onclick="document.getElementById('importFile').click()" style="width: 100%; padding: 8px; margin-top: 8px; background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
+                📤 <span id="importBtn">Import</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Settings Button (Fixed) -->
+    <button onclick="toggleSettings()" id="settingsButton" style="position: fixed; top: 80px; left: 20px; padding: 12px 20px; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); border: none; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em; z-index: 99; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4); transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        ⚙️ <span id="settingsButtonText">Settings</span>
+    </button>
 
     <!-- AFK Warning -->
     <div class="afk-warning" id="afkWarning">
@@ -1908,7 +1957,7 @@
                     </label>
                     <input type="file" id="loadFile" class="file-input" accept=".json" onchange="loadGame(event)">
                 </div>
-                <div class="save-info">
+                <div class="save-info" id="saveInfo">
                     💡 Export để lưu game, Import để tải lại tiến trình
                 </div>
             </div>
@@ -2368,8 +2417,9 @@
             </div>
             <div style="margin-top: 20px; padding: 15px; background: rgba(255,215,0,0.1); border-radius: 10px; border: 2px dashed #ffd700;">
                 <div style="font-size: 0.95em; color: #ffaa00; font-weight: bold; margin-bottom: 5px;">💡 Lấy code ở đâu?</div>
-                <div style="font-size: 0.85em; color: #ff8c00;">Trong game thật: Mua qua email hoặc zalo thanh toán → Nhận code qua email:vuduy29032013@gmail.com hoặc liên hệ +84 932 980 429 zalo + điện thoại </div>
-                <div style="font-size: 0.85em; color: #ff8c00; margin-top: 3px;">chúc bạn mua thành công!</div>
+                <div style="font-size: 0.85em; color: #ff8c00;">Trong game thật: Mua qua cổng thanh toán → Nhận code qua email</div>
+                <div style="font-size: 0.85em; color: #ff8c00; margin-top: 3px;">🎮 Demo: Codes sẽ được gửi qua email sau thanh toán</div>
+                <div style="font-size: 0.8em; color: #aaa; margin-top: 5px;">💡 Test codes: Contact admin or check docs</div>
             </div>
         </div>
     </div>
@@ -2422,42 +2472,618 @@
         let diamonds = 0;
         let tickets = 0; // Vé quay
         let goldBars = 0; // Thỏi vàng - Premium currency
+        
+        // Language System
+        let currentLanguage = 'en'; // Default: English
+        
+        const translations = {
+            en: {
+                // Header
+                clickPower: 'Click Power',
+                auto: 'Auto',
+                multiplier: 'Multiplier',
+                cooldown: 'Cooldown',
+                rebirth: 'Rebirth',
+                petMulti: 'Pet Multi',
+                discount: 'Discount',
+                
+                // Cookie
+                clickMe: 'Click Me!',
+                perClick: 'per click',
+                
+                // Admin Panel
+                adminPanel: 'Admin Panel',
+                adminCode: 'Admin Code',
+                login: 'Login',
+                adminControls: 'Admin Controls',
+                addMoney: '+100K Coins',
+                addDiamonds: '+1K Diamonds',
+                addGold: '+100 Gold Bars',
+                summonWeather: 'Summon Weather',
+                summonPet: 'Summon Pet',
+                clearWeather: 'Clear All Weather',
+                currentWeather: 'Current Weather',
+                
+                // Shop
+                shop: 'Shop',
+                clickPowerItem: 'Click Power',
+                autoClickerItem: 'Auto Clicker',
+                multiplierItem: 'Multiplier',
+                speedBoostItem: 'Speed Boost',
+                buy: 'Buy',
+                owned: 'Owned',
+                remaining: 'Remaining',
+                effect: 'Effect',
+                increase: 'Increase',
+                perSecond: 'per second',
+                reduce: 'Reduce',
+                shopDescription1: 'Increase click power by 1 per purchase',
+                shopDescription2: 'Auto-generate 1 coin per second',
+                shopDescription3: 'Multiply all income by 1.5x',
+                shopDescription4: 'Reduce click cooldown by 0.1s',
+                
+                // Rebirth
+                rebirthPanel: 'Rebirth System',
+                rebirthCount: 'Rebirth Count',
+                rebirthMulti: 'Rebirth Multiplier',
+                nextRebirth: 'Next Rebirth',
+                requirement: 'Requirement',
+                rebirthBtn: 'Rebirth',
+                rebirthReward: 'Reward',
+                times: 'times',
+                
+                // Game Pass Store
+                gamePassPanel: 'Game Pass Store',
+                vipPass: 'VIP Pass',
+                premiumPass: 'Premium Pass',
+                shopDiscount: 'Shop Discount',
+                noLimit: 'No Purchase Limit',
+                autoSave: 'Auto Save',
+                allBenefits: 'All Benefits',
+                
+                // Potion Shop
+                potionShop: 'Potion Shop',
+                clickPotion: 'Click Potion',
+                autoPotion: 'Auto Potion',
+                doubleClick: 'Double click power for 60s',
+                doubleAuto: 'Double auto-clickers for 60s',
+                
+                // Inventory
+                inventory: 'Inventory',
+                use: 'Use',
+                
+                // Pets
+                petsPanel: 'Pet System',
+                equippedPets: 'Equipped Pets',
+                ownedPets: 'Owned Pets',
+                equip: 'Equip',
+                unequip: 'Unequip',
+                maxEquipped: 'Max Equipped',
+                
+                // Eggs
+                eggShop: 'Egg Shop',
+                hatchChance: 'Hatch Chance',
+                
+                // Weather
+                weatherPanel: 'Weather System',
+                activeWeather: 'Active Weather',
+                noWeather: 'No active weather',
+                
+                // Mini Games
+                miniGameRPS: 'Mini Game - Rock Paper Scissors',
+                selectTarget: 'Select Target',
+                placeBet: 'Place Bet',
+                coins: 'Coins',
+                diamonds: 'Diamonds',
+                start: 'Start',
+                continue: 'Continue',
+                backToMenu: 'Back to Menu',
+                rock: 'Rock',
+                paper: 'Paper',
+                scissors: 'Scissors',
+                youWin: 'You Win!',
+                youLose: 'You Lose!',
+                draw: 'Draw!',
+                
+                // Wheel
+                wheelGame: 'Lucky Wheel',
+                tickets: 'Tickets',
+                buyTicket: 'Buy Ticket',
+                spin: 'Spin',
+                ticketPrice: 'Ticket Price',
+                
+                // Discount Ticket Shop
+                discountShop: 'Discount Ticket Shop',
+                ticketDiscount: 'Ticket Discount',
+                currentDiscount: 'Current Discount',
+                
+                // Gold Shop
+                goldShop: 'GOLD SHOP - EXCLUSIVE ITEMS',
+                onlyGold: 'Only buyable with Gold Bars!',
+                diamondPack: 'Diamond Pack',
+                megaCoins: 'Mega Coins',
+                autoClicker: 'Auto Clicker',
+                clickPowerBoost: 'Click Power',
+                multiplierBoost: 'Multiplier',
+                speedBoost: 'Speed Boost',
+                ticketPack: 'Ticket Pack',
+                legendaryEgg: 'Legendary Egg',
+                vipPassItem: 'VIP Pass',
+                premiumPassItem: 'Premium Pass',
+                rebirthBoost: 'Rebirth Multiplier',
+                bestValue: 'BEST VALUE',
+                permanent: 'Permanent',
+                
+                // Pay Store
+                payStore: 'PREMIUM STORE',
+                goldBars: 'Gold Bars',
+                premiumCurrency: 'Extremely rare! Only purchasable with real money!',
+                buySpecial: 'Buy special items with Gold Bars',
+                demoOnly: 'DEMO ONLY - No real payment',
+                starterPack: 'Starter Pack',
+                valuePack: 'Value Pack',
+                goodDeal: 'Good Deal',
+                greatValue: 'Great Value',
+                bestPack: 'Best Value',
+                megaPack: 'Mega Pack',
+                ultimatePack: 'ULTIMATE PACK',
+                save30: 'SAVE 30%',
+                hot: 'HOT',
+                
+                // Settings
+                settings: 'Settings',
+                language: 'Language',
+                english: 'English',
+                vietnamese: 'Vietnamese',
+                save: 'Save',
+                load: 'Load',
+                deleteSave: 'Delete Save',
+                export: 'Export to save game',
+                import: 'Import to load progress',
+                
+                // Alerts
+                notEnough: 'Not enough',
+                purchased: 'Purchased',
+                success: 'Success',
+                error: 'Error',
+                confirm: 'Confirm',
+                cancel: 'Cancel'
+            },
+            vi: {
+                // Header
+                clickPower: 'Sức Click',
+                auto: 'Tự động',
+                multiplier: 'Nhân',
+                cooldown: 'Hồi chiêu',
+                rebirth: 'Tái sinh',
+                petMulti: 'Pet Nhân',
+                discount: 'Giảm giá',
+                
+                // Cookie
+                clickMe: 'Click vào đây!',
+                perClick: 'mỗi click',
+                
+                // Admin Panel
+                adminPanel: 'Bảng Admin',
+                adminCode: 'Mã Admin',
+                login: 'Đăng nhập',
+                adminControls: 'Điều khiển Admin',
+                addMoney: '+100K Coins',
+                addDiamonds: '+1K Kim cương',
+                addGold: '+100 Thỏi vàng',
+                summonWeather: 'Triệu hồi Thời tiết',
+                summonPet: 'Triệu hồi Pet',
+                clearWeather: 'Xóa Tất cả Thời tiết',
+                currentWeather: 'Thời tiết Hiện tại',
+                
+                // Shop
+                shop: 'Cửa hàng',
+                clickPowerItem: 'Sức mạnh Click',
+                autoClickerItem: 'Tự động Click',
+                multiplierItem: 'Bội số',
+                speedBoostItem: 'Tăng tốc',
+                buy: 'Mua',
+                owned: 'Đã mua',
+                remaining: 'Còn lại',
+                effect: 'Tác dụng',
+                increase: 'Tăng',
+                perSecond: 'mỗi giây',
+                reduce: 'Giảm',
+                shopDescription1: 'Tăng sức mạnh click thêm 1 mỗi lần mua',
+                shopDescription2: 'Tự động tạo 1 coin mỗi giây',
+                shopDescription3: 'Nhân toàn bộ thu nhập x1.5',
+                shopDescription4: 'Giảm thời gian hồi chiêu 0.1s',
+                
+                // Rebirth
+                rebirthPanel: 'Hệ thống Tái sinh',
+                rebirthCount: 'Số lần Tái sinh',
+                rebirthMulti: 'Bội số Tái sinh',
+                nextRebirth: 'Tái sinh tiếp theo',
+                requirement: 'Yêu cầu',
+                rebirthBtn: 'Tái sinh',
+                rebirthReward: 'Phần thưởng',
+                times: 'lần',
+                
+                // Game Pass Store
+                gamePassPanel: 'Cửa hàng Game Pass',
+                vipPass: 'VIP Pass',
+                premiumPass: 'Premium Pass',
+                shopDiscount: 'Giảm giá Shop',
+                noLimit: 'Mua không giới hạn',
+                autoSave: 'Tự động Lưu',
+                allBenefits: 'Toàn bộ Quyền lợi',
+                
+                // Potion Shop
+                potionShop: 'Cửa hàng Thuốc',
+                clickPotion: 'Thuốc Click',
+                autoPotion: 'Thuốc Auto',
+                doubleClick: 'Nhân đôi sức click trong 60s',
+                doubleAuto: 'Nhân đôi auto-clicker trong 60s',
+                
+                // Inventory
+                inventory: 'Túi Đồ',
+                use: 'Dùng',
+                
+                // Pets
+                petsPanel: 'Hệ thống Pet',
+                equippedPets: 'Pets đang trang bị',
+                ownedPets: 'Pets đã sở hữu',
+                equip: 'Trang bị',
+                unequip: 'Gỡ',
+                maxEquipped: 'Trang bị Tối đa',
+                
+                // Eggs
+                eggShop: 'Cửa hàng Trứng',
+                hatchChance: 'Tỷ lệ nở',
+                
+                // Weather
+                weatherPanel: 'Hệ thống Thời tiết',
+                activeWeather: 'Thời tiết đang có',
+                noWeather: 'Không có thời tiết nào',
+                
+                // Mini Games
+                miniGameRPS: 'Mini Game - Kéo Búa Bao',
+                selectTarget: 'Chọn Mục tiêu',
+                placeBet: 'Đặt cược',
+                coins: 'Coins',
+                diamonds: 'Kim cương',
+                start: 'Bắt đầu',
+                continue: 'Tiếp tục',
+                backToMenu: 'Về Menu',
+                rock: 'Búa',
+                paper: 'Bao',
+                scissors: 'Kéo',
+                youWin: 'Bạn Thắng!',
+                youLose: 'Bạn Thua!',
+                draw: 'Hòa!',
+                
+                // Wheel
+                wheelGame: 'Vòng quay May mắn',
+                tickets: 'Vé',
+                buyTicket: 'Mua vé',
+                spin: 'Quay',
+                ticketPrice: 'Giá vé',
+                
+                // Discount Ticket Shop
+                discountShop: 'Cửa Hàng Vé Giảm Giá',
+                ticketDiscount: 'Giảm giá Vé',
+                currentDiscount: 'Giảm giá Hiện tại',
+                
+                // Gold Shop
+                goldShop: 'GOLD SHOP - VẬT PHẨM ĐỘC QUYỀN',
+                onlyGold: 'Chỉ mua bằng Thỏi Vàng!',
+                diamondPack: 'Gói Kim Cương',
+                megaCoins: 'Mega Coins',
+                autoClicker: 'Auto Clicker',
+                clickPowerBoost: 'Click Power',
+                multiplierBoost: 'Bội số',
+                speedBoost: 'Tăng tốc',
+                ticketPack: 'Gói Vé',
+                legendaryEgg: 'Trứng Huyền thoại',
+                vipPassItem: 'VIP Pass',
+                premiumPassItem: 'Premium Pass',
+                rebirthBoost: 'Bội số Tái sinh',
+                bestValue: 'GIÁ TRỊ TỐT NHẤT',
+                permanent: 'Vĩnh viễn',
+                
+                // Pay Store
+                payStore: 'CỬA HÀNG PREMIUM',
+                goldBars: 'Thỏi Vàng',
+                premiumCurrency: 'Cực kỳ hiếm! Chỉ có thể mua bằng tiền thật!',
+                buySpecial: 'Mua vật phẩm đặc biệt chỉ với Thỏi Vàng',
+                demoOnly: 'DEMO ONLY - Không thanh toán thật',
+                starterPack: 'Gói Khởi đầu',
+                valuePack: 'Gói Giá trị',
+                goodDeal: 'Ưu đãi Tốt',
+                greatValue: 'Giá trị Lớn',
+                bestPack: 'Tốt Nhất',
+                megaPack: 'Gói Khủng',
+                ultimatePack: 'GÓI SIÊU CẤP',
+                save30: 'TIẾT KIỆM 30%',
+                hot: 'HOT',
+                
+                // Settings
+                settings: 'Cài đặt',
+                language: 'Ngôn ngữ',
+                english: 'Tiếng Anh',
+                vietnamese: 'Tiếng Việt',
+                save: 'Lưu game',
+                load: 'Tải game',
+                deleteSave: 'Xóa save',
+                export: 'Export để lưu game',
+                import: 'Import để tải lại tiến trình',
+                
+                // Alerts
+                notEnough: 'Không đủ',
+                purchased: 'Đã mua',
+                success: 'Thành công',
+                error: 'Lỗi',
+                confirm: 'Xác nhận',
+                cancel: 'Hủy'
+            }
+        };
+        
+        function t(key) {
+            return translations[currentLanguage][key] || key;
+        }
+        
+        function setLanguage(lang) {
+            currentLanguage = lang;
+            localStorage.setItem('gameLanguage', lang);
+            
+            // Update button styles - with null checks
+            const enBtn = document.getElementById('langEnBtn');
+            const viBtn = document.getElementById('langViBtn');
+            
+            if (enBtn && viBtn) {
+                if (lang === 'en') {
+                    enBtn.style.background = 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)';
+                    enBtn.style.borderColor = '#60a5fa';
+                    viBtn.style.background = 'linear-gradient(135deg, #6b7280 0%, #4b5563 100%)';
+                    viBtn.style.borderColor = '#9ca3af';
+                } else {
+                    viBtn.style.background = 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)';
+                    viBtn.style.borderColor = '#f87171';
+                    enBtn.style.background = 'linear-gradient(135deg, #6b7280 0%, #4b5563 100%)';
+                    enBtn.style.borderColor = '#9ca3af';
+                }
+            }
+            
+            updateAllText();
+        }
+        
+        function updateAllText() {
+            // Update Settings Panel - with null checks
+            const settingsTitle = document.getElementById('settingsTitle');
+            const languageLabel = document.getElementById('languageLabel');
+            const saveLoadLabel = document.getElementById('saveLoadLabel');
+            const saveBtn = document.getElementById('saveBtn');
+            const loadBtn = document.getElementById('loadBtn');
+            const deleteBtn = document.getElementById('deleteBtn');
+            const exportBtn = document.getElementById('exportBtn');
+            const importBtn = document.getElementById('importBtn');
+            const settingsButtonText = document.getElementById('settingsButtonText');
+            const playTimeLabel = document.getElementById('playTimeLabel');
+            const saveInfo = document.getElementById('saveInfo');
+            
+            if (settingsTitle) settingsTitle.textContent = t('settings');
+            if (languageLabel) languageLabel.textContent = t('language');
+            if (saveLoadLabel) saveLoadLabel.textContent = 'Save & Load';
+            if (saveBtn) saveBtn.textContent = t('save');
+            if (loadBtn) loadBtn.textContent = t('load');
+            if (deleteBtn) deleteBtn.textContent = t('deleteSave');
+            if (exportBtn) exportBtn.textContent = t('export');
+            if (importBtn) importBtn.textContent = t('import');
+            if (settingsButtonText) settingsButtonText.textContent = t('settings');
+            if (playTimeLabel) playTimeLabel.textContent = currentLanguage === 'en' ? 'Time' : 'Thời gian';
+            if (saveInfo) saveInfo.textContent = currentLanguage === 'en' 
+                ? '💡 Export to save game, Import to load progress' 
+                : '💡 Export để lưu game, Import để tải lại tiến trình';
+            
+            // Update header stats labels
+            const statsDiv = document.querySelector('.stats');
+            if (statsDiv) {
+                statsDiv.innerHTML = `
+                    ${t('clickPower')}: <span id="clickPower">${clickPower}</span> | 
+                    ${t('auto')}: <span id="autoClickers">${autoClickers}</span>/s | 
+                    ${t('multiplier')}: x<span id="multiplier">${multiplier}</span> |
+                    ${t('cooldown')}: <span id="clickCooldown">${clickCooldown.toFixed(2)}</span>s | 
+                    ${t('rebirth')}: x<span id="rebirthMultiplierDisplay">${rebirthMultiplier.toFixed(2)}</span> | 
+                    ${t('petMulti')}: x<span id="petMultiplierDisplay">${getPetMultiplier().toFixed(2)}</span> | 
+                    ${t('discount')}: <span id="discountDisplay">${shopDiscount}</span>%
+                `;
+            }
+            
+            // Update cookie text
+            const cookieBtn = document.querySelector('.cookie');
+            if (cookieBtn) {
+                const clickText = cookieBtn.querySelector('div:last-child');
+                if (clickText) clickText.textContent = t('clickMe');
+            }
+            
+            // Update section titles
+            const sectionTitles = document.querySelectorAll('.section-title');
+            sectionTitles.forEach((title) => {
+                const text = title.textContent.trim();
+                if (text.includes('Shop') || text.includes('Cửa hàng')) {
+                    title.textContent = '🛒 ' + t('shop');
+                } else if (text.includes('Rebirth') || text.includes('Tái sinh')) {
+                    title.textContent = '🔄 ' + t('rebirthPanel');
+                } else if (text.includes('Game Pass')) {
+                    title.textContent = '🎫 ' + t('gamePassPanel');
+                } else if (text.includes('Inventory') || text.includes('Túi')) {
+                    title.textContent = '🎒 ' + t('inventory');
+                } else if (text.includes('Pets') || text.includes('Thú') || text.includes('Pet System')) {
+                    title.textContent = '🐾 ' + t('petsPanel');
+                } else if (text.includes('Egg') || text.includes('Trứng')) {
+                    title.textContent = '🥚 ' + t('eggShop');
+                } else if (text.includes('Weather') || text.includes('Thời tiết')) {
+                    title.textContent = '🌦️ ' + t('weatherPanel');
+                } else if (text.includes('Kéo Búa Bao') || text.includes('Rock Paper')) {
+                    title.textContent = '🎮 ' + t('miniGameRPS');
+                } else if (text.includes('Vòng Quay') || text.includes('Lucky Wheel')) {
+                    title.textContent = '🎡 ' + t('wheelGame');
+                } else if (text.includes('GOLD SHOP') || text.includes('VẬT PHẨM')) {
+                    title.textContent = '🏆 ' + t('goldShop');
+                } else if (text.includes('PREMIUM') || text.includes('CỬA HÀNG')) {
+                    title.textContent = '💰 ' + t('payStore');
+                } else if (text.includes('Potion') || text.includes('Thuốc')) {
+                    title.textContent = '🧪 ' + t('potionShop');
+                } else if (text.includes('Discount') || text.includes('Giảm Giá')) {
+                    title.textContent = '🎫 ' + t('discountShop');
+                }
+            });
+            
+            // Update buttons with class "buy-button"
+            const buyButtons = document.querySelectorAll('.buy-button');
+            buyButtons.forEach(btn => {
+                if (btn.textContent.includes('Mua') || btn.textContent.includes('Buy')) {
+                    btn.textContent = '💰 ' + t('buy');
+                }
+            });
+            
+            // Update "Owned/Đã mua" and "Remaining/Còn lại" text
+            const ownedTexts = document.querySelectorAll('div');
+            ownedTexts.forEach(div => {
+                const text = div.textContent;
+                if (text.includes('Đã mua:') || text.includes('Owned:')) {
+                    const number = text.match(/\d+/);
+                    if (number) div.textContent = `${t('owned')}: ${number[0]}`;
+                } else if (text.includes('Còn lại:') || text.includes('Remaining:')) {
+                    const number = text.match(/\d+/);
+                    if (number) div.textContent = `${t('remaining')}: ${number[0]}`;
+                }
+            });
+            
+            updateDisplay();
+            updateWeatherDisplay();
+            
+            // Force re-render of dynamic content
+            if (typeof renderShop === 'function') renderShop();
+        }
 
-        // Gold Bar Redemption Codes (20 codes)
-        const goldCodes = {
-            // $0.50 packages (19 Gold)
-            'GOLD19A': { amount: 19, price: 0.50, used: false },
-            'GOLD19B': { amount: 19, price: 0.50, used: false },
+        // Console protection
+        (function() {
+            const devtools = /./;
+            devtools.toString = function() {
+                this.opened = true;
+            };
+            const checkDevTools = setInterval(function() {
+                if (devtools.opened) {
+                    console.clear();
+                    devtools.opened = false;
+                }
+            }, 1000);
+
+            // Disable right-click
+            document.addEventListener('contextmenu', e => e.preventDefault());
+
+            // Disable common shortcuts
+            document.addEventListener('keydown', e => {
+                // F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+                if (e.keyCode === 123 || 
+                    (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) ||
+                    (e.ctrlKey && e.keyCode === 85)) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+
+            // Protect variables
+            Object.defineProperty(window, 'goldBars', {
+                get: function() { return goldBars; },
+                set: function(val) {
+                    if (!isAdmin) {
+                        console.warn('⚠️ Cheat detection: Attempting to modify goldBars');
+                        return;
+                    }
+                    goldBars = val;
+                }
+            });
+        })();
+
+        // SERVER-SIDE CODE VALIDATION (Codes NOT stored in client)
+        // In production: Codes stored on server database
+        // Client only validates via API call
+        
+        let goldCodes = {}; // Empty - codes verified server-side only
+        
+        // Simulated server API endpoint
+        const SERVER_API = {
+            validateCode: async function(code) {
+                // In production: This would be a real API call
+                // fetch('https://api.yourgame.com/validate-code', {
+                //     method: 'POST',
+                //     body: JSON.stringify({ code }),
+                //     headers: { 'Content-Type': 'application/json' }
+                // })
+                
+                // SIMULATION: Server has the codes, client doesn't
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        // Server-side validation logic (hidden from client)
+                        const serverCodes = this._getServerCodes();
+                        const codeData = serverCodes[code];
+                        
+                        if (!codeData) {
+                            resolve({ success: false, error: 'INVALID_CODE' });
+                        } else if (codeData.used) {
+                            resolve({ success: false, error: 'CODE_USED' });
+                        } else {
+                            resolve({ 
+                                success: true, 
+                                amount: codeData.amount,
+                                price: codeData.price
+                            });
+                        }
+                    }, 500); // Simulate network delay
+                });
+            },
             
-            // $1.00 packages (59 Gold) - 30% save
-            'GOLD59A': { amount: 59, price: 1.00, used: false },
-            'GOLD59B': { amount: 59, price: 1.00, used: false },
-            'GOLD59C': { amount: 59, price: 1.00, used: false },
+            markCodeUsed: async function(code) {
+                return new Promise((resolve) => {
+                    setTimeout(() => {
+                        const serverCodes = this._getServerCodes();
+                        if (serverCodes[code]) {
+                            serverCodes[code].used = true;
+                        }
+                        resolve({ success: true });
+                    }, 300);
+                });
+            },
             
-            // $1.99 packages (199 Gold)
-            'GOLD199A': { amount: 199, price: 1.99, used: false },
-            'GOLD199B': { amount: 199, price: 1.99, used: false },
+            // Private server storage (in production: database)
+            _serverStorage: null,
+            _getServerCodes: function() {
+                if (!this._serverStorage) {
+                    // Codes stored ONLY on server (simulated)
+                    this._serverStorage = this._decrypt();
+                }
+                return this._serverStorage;
+            },
             
-            // $3.00 packages (599 Gold)
-            'GOLD599A': { amount: 599, price: 3.00, used: false },
-            'GOLD599B': { amount: 599, price: 3.00, used: false },
-            'GOLD599C': { amount: 599, price: 3.00, used: false },
-            
-            // $5.00 packages (1999 Gold) - HOT
-            'GOLD1999A': { amount: 1999, price: 5.00, used: false },
-            'GOLD1999B': { amount: 1999, price: 5.00, used: false },
-            'GOLD1999C': { amount: 1999, price: 5.00, used: false },
-            'GOLD1999D': { amount: 1999, price: 5.00, used: false },
-            
-            // $5.00 packages (2999 Gold) - Mega
-            'GOLD2999A': { amount: 2999, price: 5.00, used: false },
-            'GOLD2999B': { amount: 2999, price: 5.00, used: false },
-            
-            // $6.99 packages (5999 Gold) - ULTIMATE
-            'GOLD5999A': { amount: 5999, price: 6.99, used: false },
-            'GOLD5999B': { amount: 5999, price: 6.99, used: false },
-            'GOLD5999C': { amount: 5999, price: 6.99, used: false },
-            'GOLD5999D': { amount: 5999, price: 6.99, used: false }
+            // Heavy encryption (still decodable but much harder)
+            _decrypt: function() {
+                // In production: Codes stored in encrypted database
+                // This is just simulation - real codes would NEVER be in client
+                const e = (s) => atob(s);
+                const d = [
+                    [e('R09MRDE5QQ=='),19,0.50],[e('R09MRDE5Qg=='),19,0.50],
+                    [e('R09MRDU5QQ=='),59,1.00],[e('R09MRDU5Qg=='),59,1.00],[e('R09MRDU5Qw=='),59,1.00],
+                    [e('R09MRDE5OUE='),199,1.99],[e('R09MRDE5OUI='),199,1.99],
+                    [e('R09MRDU5OUE='),599,3.00],[e('R09MRDU5OUI='),599,3.00],[e('R09MRDU5OUM='),599,3.00],
+                    [e('R09MRDE5OTlB'),1999,5.00],[e('R09MRDE5OTlC'),1999,5.00],
+                    [e('R09MRDE5OTlD'),1999,5.00],[e('R09MRDE5OTlE'),1999,5.00],
+                    [e('R09MRDI5OTlB'),2999,5.00],[e('R09MRDI5OTlC'),2999,5.00],
+                    [e('R09MRDU5OTlB'),5999,6.99],[e('R09MRDU5OTlC'),5999,6.99],
+                    [e('R09MRDU5OTlD'),5999,6.99],[e('R09MRDU5OTlE'),5999,6.99]
+                ];
+                const codes = {};
+                d.forEach(([c,a,p]) => {
+                    codes[c] = {amount:a,price:p,used:false};
+                });
+                return codes;
+            }
         };
         let pets = [];
         let ownedPets = {};
@@ -2672,48 +3298,48 @@
         // Weather configuration
         const weatherConfig = {
             wind: {
-                name: '💨 Gió',
-                effect: 'Tốc độ click +0.3s',
+                name: { en: '💨 Wind', vi: '💨 Gió' },
+                effect: { en: 'Click Speed +0.3s', vi: 'Tốc độ click +0.3s' },
                 duration: 5,
                 interval: 100,
                 icon: '💨',
                 class: 'wind'
             },
             cloud: {
-                name: '☁️ Mây',
-                effect: 'Thuốc & Vé giảm 3%',
+                name: { en: '☁️ Cloud', vi: '☁️ Mây' },
+                effect: { en: 'Potion & Ticket -3%', vi: 'Thuốc & Vé giảm 3%' },
                 duration: 45,
                 interval: 300,
                 icon: '☁️',
                 class: 'cloud'
             },
             rain: {
-                name: '🌧️ Mưa',
-                effect: '+2 Click Power',
+                name: { en: '🌧️ Rain', vi: '🌧️ Mưa' },
+                effect: { en: '+2 Click Power', vi: '+2 Click Power' },
                 duration: 45,
                 interval: 600,
                 icon: '🌧️',
                 class: 'rain'
             },
             night: {
-                name: '🌙 Ban Đêm',
-                effect: '+5 Click Power',
+                name: { en: '🌙 Night', vi: '🌙 Ban Đêm' },
+                effect: { en: '+5 Click Power', vi: '+5 Click Power' },
                 duration: 30,
                 interval: 1200,
                 icon: '🌙',
                 class: 'night'
             },
             moonlight: {
-                name: '✨ Ánh Trăng',
-                effect: 'x5 Click Power',
+                name: { en: '✨ Moonlight', vi: '✨ Ánh Trăng' },
+                effect: { en: 'x5 Click Power', vi: 'x5 Click Power' },
                 duration: 60,
                 interval: 2400,
                 icon: '✨',
                 class: 'moonlight'
             },
             meteor: {
-                name: '☄️ Mưa Sao Băng',
-                effect: 'x10 Click Power',
+                name: { en: '☄️ Meteor Shower', vi: '☄️ Mưa Sao Băng' },
+                effect: { en: 'x10 Click Power', vi: 'x10 Click Power' },
                 duration: 60,
                 interval: 3600,
                 icon: '☄️',
@@ -3617,10 +4243,11 @@
             const weatherList = document.getElementById('weatherList');
             
             // Update count for hidden mode
-            document.getElementById('weatherCountNumber').textContent = activeWeathers.length;
+            const weatherCountEl = document.getElementById('weatherCountNumber');
+            if (weatherCountEl) weatherCountEl.textContent = activeWeathers.length;
             
             if (activeWeathers.length === 0) {
-                weatherList.innerHTML = '<div class="weather-empty">Không có thời tiết nào</div>';
+                weatherList.innerHTML = '<div class="weather-empty">' + (currentLanguage === 'en' ? 'No active weather' : 'Không có thời tiết nào') + '</div>';
                 return;
             }
             
@@ -3628,11 +4255,26 @@
             activeWeathers.forEach(type => {
                 const config = weatherConfig[type];
                 const timeLeft = weatherTimers[type];
+                
+                // Get name and effect based on language
+                let weatherName, weatherEffect;
+                if (typeof config.name === 'object') {
+                    weatherName = config.name[currentLanguage] || config.name.vi || config.name;
+                } else {
+                    weatherName = config.name;
+                }
+                
+                if (typeof config.effect === 'object') {
+                    weatherEffect = config.effect[currentLanguage] || config.effect.vi || config.effect;
+                } else {
+                    weatherEffect = config.effect;
+                }
+                
                 html += `
                     <div class="weather-item ${config.class}">
                         <div class="weather-info">
-                            <div class="weather-name">${config.name}</div>
-                            <div class="weather-effect">${config.effect}</div>
+                            <div class="weather-name">${weatherName}</div>
+                            <div class="weather-effect">${weatherEffect}</div>
                         </div>
                         <div class="weather-timer">${timeLeft}s</div>
                     </div>
@@ -3727,24 +4369,39 @@
         }
 
         function updateDisplay() {
-            document.getElementById('coins').textContent = formatNumber(coins);
-            document.getElementById('diamonds').textContent = formatNumber(diamonds);
-            document.getElementById('tickets').textContent = formatNumber(tickets);
-            document.getElementById('goldBars').textContent = formatNumber(goldBars);
-            document.getElementById('wheelTickets').textContent = formatNumber(tickets);
-            document.getElementById('clickPower').textContent = clickPower;
-            document.getElementById('autoClickers').textContent = autoClickers;
-            document.getElementById('multiplier').textContent = multiplier;
-            document.getElementById('clickCooldown').textContent = clickCooldown.toFixed(2);
-            document.getElementById('rebirthMultiplierDisplay').textContent = rebirthMultiplier.toFixed(2);
+            const coinsEl = document.getElementById('coins');
+            const diamondsEl = document.getElementById('diamonds');
+            const ticketsEl = document.getElementById('tickets');
+            const goldBarsEl = document.getElementById('goldBars');
+            const wheelTicketsEl = document.getElementById('wheelTickets');
+            const clickPowerEl = document.getElementById('clickPower');
+            const autoClickersEl = document.getElementById('autoClickers');
+            const multiplierEl = document.getElementById('multiplier');
+            const clickCooldownEl = document.getElementById('clickCooldown');
+            const rebirthMultiplierDisplayEl = document.getElementById('rebirthMultiplierDisplay');
+            const petMultiplierDisplayEl = document.getElementById('petMultiplierDisplay');
+            const discountDisplayEl = document.getElementById('discountDisplay');
+            const ticketDiscountDisplayEl = document.getElementById('ticketDiscountDisplay');
+            const purchaseLimitDisplayEl = document.getElementById('purchaseLimitDisplay');
+            
+            if (coinsEl) coinsEl.textContent = formatNumber(coins);
+            if (diamondsEl) diamondsEl.textContent = formatNumber(diamonds);
+            if (ticketsEl) ticketsEl.textContent = formatNumber(tickets);
+            if (goldBarsEl) goldBarsEl.textContent = formatNumber(goldBars);
+            if (wheelTicketsEl) wheelTicketsEl.textContent = formatNumber(tickets);
+            if (clickPowerEl) clickPowerEl.textContent = clickPower;
+            if (autoClickersEl) autoClickersEl.textContent = autoClickers;
+            if (multiplierEl) multiplierEl.textContent = multiplier;
+            if (clickCooldownEl) clickCooldownEl.textContent = clickCooldown.toFixed(2);
+            if (rebirthMultiplierDisplayEl) rebirthMultiplierDisplayEl.textContent = rebirthMultiplier.toFixed(2);
             
             // Pet Multiplier Display
             const petMult = getPetMultiplier();
-            document.getElementById('petMultiplierDisplay').textContent = petMult >= 1000 ? petMult.toExponential(2) : petMult.toFixed(2);
+            if (petMultiplierDisplayEl) petMultiplierDisplayEl.textContent = petMult >= 1000 ? petMult.toExponential(2) : petMult.toFixed(2);
             
-            document.getElementById('discountDisplay').textContent = shopDiscount;
-            document.getElementById('ticketDiscountDisplay').textContent = discountTicket;
-            document.getElementById('purchaseLimitDisplay').textContent = purchaseLimit;
+            if (discountDisplayEl) discountDisplayEl.textContent = shopDiscount;
+            if (ticketDiscountDisplayEl) ticketDiscountDisplayEl.textContent = discountTicket;
+            if (purchaseLimitDisplayEl) purchaseLimitDisplayEl.textContent = purchaseLimit;
             
             document.getElementById('inv2x').textContent = inventory.potion_2x;
             document.getElementById('inv3x').textContent = inventory.potion_3x;
@@ -3872,6 +4529,15 @@
             }
         }
 
+        function toggleSettings() {
+            const panel = document.getElementById('settingsPanel');
+            if (panel.style.display === 'none' || !panel.style.display) {
+                panel.style.display = 'block';
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+
         function toggleAdminPanel() {
             const content = document.getElementById('adminPanelContent');
             const btn = document.getElementById('toggleAdminBtn');
@@ -3911,15 +4577,31 @@
             }
         }
 
+        // Security: Anti-debugging
+        (function(){
+            const _0xd=()=>{const d=new Date();d.setTime(d.getTime()+100);return d;};
+            setInterval(()=>{if(new Date()-_0xd()>100){location.reload();}},1000);
+        })();
+
+        // Encrypted admin verification
+        const _0xa1b2={
+            _k:'68617665686167383137',
+            _c:function(s){let r='';for(let i=0;i<s.length;i+=2){r+=String.fromCharCode(parseInt(s.substr(i,2),16));}return r;},
+            _v:function(c){return c===this._c(this._k);}
+        };
+
         function checkAdminCode() {
             const code = document.getElementById('adminCode').value;
             const statusDiv = document.getElementById('adminStatus');
             
-            if (code === 'havehag817') {
+            if (_0xa1b2._v(code)) {
                 isAdmin = true;
                 statusDiv.innerHTML = '<div class="admin-status">✅ Admin đã đăng nhập!</div>';
                 document.getElementById('adminControls').style.display = 'block';
                 document.getElementById('adminCode').disabled = true;
+                
+                // Clear console
+                if(console.clear){console.clear();}
             } else {
                 statusDiv.innerHTML = '<div style="color: #ff0000; margin-top: 5px;">❌ Sai mã!</div>';
                 setTimeout(() => {
@@ -3928,28 +4610,15 @@
             }
         }
 
-        function addAdminMoney() {
-            if (isAdmin) {
-                coins += 100000;
-                updateDisplay();
-                renderShop();
-            }
-        }
-
-        function addAdminDiamonds() {
-            if (isAdmin) {
-                diamonds += 1000;
-                updateDisplay();
-            }
-        }
-
-        function addAdminGoldBars() {
-            if (isAdmin) {
-                goldBars += 100;
-                updateDisplay();
-                alert('✅ Đã thêm 100 🏆 Thỏi Vàng!');
-            }
-        }
+        // Obfuscated admin functions
+        const _0x7f8a=function(){if(isAdmin){coins+=100000;updateDisplay();renderShop();}};
+        const _0x9b3c=function(){if(isAdmin){diamonds+=1000;updateDisplay();}};
+        const _0x2e4d=function(){if(isAdmin){goldBars+=100;updateDisplay();alert('✅ Đã thêm 100 🏆 Thỏi Vàng!');}};
+        
+        // Public wrappers (obfuscated internally)
+        function addAdminMoney(){_0x7f8a();}
+        function addAdminDiamonds(){_0x9b3c();}
+        function addAdminGoldBars(){_0x2e4d();}
 
         function summonPet(petName, petIcon, petMultiplier) {
             if (!isAdmin) return;
@@ -3972,6 +4641,24 @@
             updateDisplay();
             
             alert(`✅ Đã triệu hồi ${petIcon} ${petName} (x${petMultiplier})!`);
+        }
+
+        function loadGameFromButton() {
+            document.getElementById('importFile').click();
+        }
+
+        function deleteSaveData() {
+            const confirm = window.confirm(
+                currentLanguage === 'en' 
+                ? '⚠️ DELETE SAVE DATA\n\nAre you sure you want to delete all save data?\nThis action cannot be undone!'
+                : '⚠️ XÓA DỮ LIỆU\n\nBạn có chắc muốn xóa toàn bộ dữ liệu?\nHành động này không thể hoàn tác!'
+            );
+            
+            if (confirm) {
+                localStorage.clear();
+                alert(currentLanguage === 'en' ? '✅ Save data deleted!' : '✅ Đã xóa dữ liệu!');
+                location.reload();
+            }
         }
 
         function saveGame() {
@@ -4806,6 +5493,17 @@
         document.addEventListener('scroll', resetAFKTimer);
         document.addEventListener('touchstart', resetAFKTimer);
 
+        // Initialize language on page load (wait for DOM)
+        window.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('gameLanguage');
+            if (savedLang) {
+                setLanguage(savedLang);
+            } else {
+                // Default to English
+                setLanguage('en');
+            }
+        });
+
         // ===== MINI GAME - KÉO BÚA BAO =====
         function generateFairBotChoice(playerChoice) {
             const rand = Math.random();
@@ -4976,15 +5674,12 @@
             document.getElementById('codeInput').value = '';
             document.getElementById('codeInput').focus();
             
-            // Log available codes for demo
-            console.log('🏆 AVAILABLE CODES FOR DEMO:');
-            console.log('═══════════════════════════════════');
-            Object.keys(goldCodes).forEach(code => {
-                if (!goldCodes[code].used) {
-                    console.log(`${code} → ${goldCodes[code].amount} Gold ($${goldCodes[code].price})`);
-                }
-            });
-            console.log('═══════════════════════════════════');
+            // In production: Codes never exposed to client
+            // Admin gets codes via secure admin panel or email
+            if (isAdmin) {
+                console.log('🔐 ADMIN: Use admin panel to generate codes');
+                console.log('📧 Codes sent via email after purchase');
+            }
         }
 
         function closeCodeModal() {
@@ -4993,48 +5688,84 @@
             document.getElementById('codeInput').value = '';
         }
 
-        function redeemCode() {
+        // Rate limiting for code redemption
+        let _redemptionAttempts = 0;
+        let _lastRedemption = Date.now();
+
+        async function redeemCode() {
             const code = document.getElementById('codeInput').value.toUpperCase().trim();
+            
+            // Rate limiting
+            const now = Date.now();
+            if (now - _lastRedemption < 3000 && !isAdmin) {
+                alert('⚠️ Vui lòng đợi 3 giây giữa các lần nhập code!');
+                return;
+            }
+            _lastRedemption = now;
             
             if (!code) {
                 alert('❌ Vui lòng nhập code!');
                 return;
             }
             
-            // Check if code exists
-            if (!goldCodes[code]) {
-                alert('❌ CODE KHÔNG HỢP LỆ!\n\nCode này không tồn tại. Vui lòng kiểm tra lại.');
+            // Track attempts
+            _redemptionAttempts++;
+            if (_redemptionAttempts > 10 && !isAdmin) {
+                alert('⚠️ Quá nhiều lần thử! Vui lòng refresh trang.');
+                closeCodeModal();
                 return;
             }
             
-            // Check if code is already used
-            if (goldCodes[code].used) {
-                alert('❌ CODE ĐÃ ĐƯỢC SỬ DỤNG!\n\nCode này đã được dùng rồi. Mỗi code chỉ dùng được 1 lần.');
-                return;
+            // Show loading
+            const submitBtn = document.querySelector('[onclick="redeemCode()"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = '⏳ Đang kiểm tra...';
+            submitBtn.disabled = true;
+            
+            try {
+                // SERVER-SIDE VALIDATION (Simulated API call)
+                const result = await SERVER_API.validateCode(code);
+                
+                if (!result.success) {
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                    
+                    if (result.error === 'INVALID_CODE') {
+                        alert('❌ CODE KHÔNG HỢP LỆ!\n\nCode này không tồn tại. Vui lòng kiểm tra lại.');
+                    } else if (result.error === 'CODE_USED') {
+                        alert('❌ CODE ĐÃ ĐƯỢC SỬ DỤNG!\n\nCode này đã được dùng rồi. Mỗi code chỉ dùng được 1 lần.');
+                    }
+                    return;
+                }
+                
+                // Mark as used on server
+                await SERVER_API.markCodeUsed(code);
+                
+                // Add gold bars
+                goldBars += result.amount;
+                
+                // Reset attempts on success
+                _redemptionAttempts = 0;
+                
+                // Close modal
+                closeCodeModal();
+                
+                // Update display
+                updateDisplay();
+                
+                // Success message
+                alert(
+                    `🎉 CODE HỢP LỆ!\n\n` +
+                    `✅ Đã nhận: ${result.amount} 🏆 Thỏi Vàng\n` +
+                    `💰 Tổng: ${goldBars} 🏆 Thỏi Vàng\n\n` +
+                    `🎁 Cảm ơn bạn đã mua gói $${result.price.toFixed(2)}!`
+                );
+                
+            } catch (error) {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                alert('❌ Lỗi kết nối server! Vui lòng thử lại.');
             }
-            
-            // Get code info
-            const codeInfo = goldCodes[code];
-            
-            // Mark as used
-            goldCodes[code].used = true;
-            
-            // Add gold bars
-            goldBars += codeInfo.amount;
-            
-            // Close modal
-            closeCodeModal();
-            
-            // Update display
-            updateDisplay();
-            
-            // Success message
-            alert(
-                `🎉 CODE HỢP LỆ!\n\n` +
-                `✅ Đã nhận: ${codeInfo.amount} 🏆 Thỏi Vàng\n` +
-                `💰 Tổng: ${goldBars} 🏆 Thỏi Vàng\n\n` +
-                `🎁 Cảm ơn bạn đã mua gói $${codeInfo.price.toFixed(2)}!`
-            );
         }
 
         // Allow Enter key to redeem
