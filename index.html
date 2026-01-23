@@ -3520,286 +3520,505 @@
         };
 
         const shopItems = [
-            {
-                id: 1,
-                name: '+1 Click Power',
-                description: 'Tăng 1 coin mỗi click',
-                icon: '⚡',
-                basePrice: 10,
-                currentPrice: 10,
-                owned: 0,
-                effect: () => clickPower++
-            },
-            {
-                id: 2,
-                name: 'Auto Clicker',
-                description: '+1 coin mỗi giây',
-                icon: '🤖',
-                basePrice: 100,
-                currentPrice: 100,
-                owned: 0,
-                effect: () => autoClickers++
-            },
-            {
-                id: 3,
-                name: 'Faster Click',
-                description: 'Giảm 0.05s thời gian chờ click',
-                icon: '⚡',
-                basePrice: 500,
-                currentPrice: 500,
-                owned: 0,
-                effect: () => {
-                    clickCooldown = Math.max(0.05, clickCooldown - 0.05);
-                }
-            },
-            {
-                id: 4,
-                name: 'Super Click',
-                description: '+5 click power',
-                icon: '⭐',
-                basePrice: 1000,
-                currentPrice: 1000,
-                owned: 0,
-                effect: () => clickPower += 5
-            },
-            {
-                id: 5,
-                name: 'Mega Clicker',
-                description: '+10 coins mỗi giây',
-                icon: '✨',
-                basePrice: 3000,
-                currentPrice: 3000,
-                owned: 0,
-                effect: () => autoClickers += 10
-            },
-            {
-                id: 6,
-                name: '2x Multiplier',
-                description: 'Nhân đôi tất cả thu nhập',
-                icon: '👑',
-                basePrice: 15000,
-                currentPrice: 15000,
-                owned: 0,
-                effect: () => multiplier *= 2
-            },
-            {
-                id: 7,
-                name: 'Ultra Click',
-                description: '+20 click power',
-                icon: '💎',
-                basePrice: 10000,
-                currentPrice: 10000,
-                owned: 0,
-                effect: () => clickPower += 20
-            },
-            {
-                id: 8,
-                name: 'Factory',
-                description: '+50 coins mỗi giây',
-                icon: '🏭',
-                basePrice: 30000,
-                currentPrice: 30000,
-                owned: 0,
-                effect: () => autoClickers += 50
-            },
-            {
-                id: 9,
-                name: 'Golden Touch',
-                description: '+100 click power',
-                icon: '🌟',
-                basePrice: 75000,
-                currentPrice: 75000,
-                owned: 0,
-                effect: () => clickPower += 100
-            },
-            {
-                id: 10,
-                name: 'Time Warp',
-                description: 'Giảm 0.03s cooldown',
-                icon: '⏰',
-                basePrice: 120000,
-                currentPrice: 120000,
-                owned: 0,
-                effect: () => {
-                    clickCooldown = Math.max(0.01, clickCooldown - 0.03);
-                }
-            },
-            {
-                id: 11,
-                name: 'Robot Army',
-                description: '+100 coins mỗi giây',
-                icon: '🤖',
-                basePrice: 200000,
-                currentPrice: 200000,
-                owned: 0,
-                effect: () => autoClickers += 100
-            },
-            {
-                id: 12,
-                name: 'Diamond Finger',
-                description: '+250 click power',
-                icon: '💍',
-                basePrice: 350000,
-                currentPrice: 350000,
-                owned: 0,
-                effect: () => clickPower += 250
-            },
-            {
-                id: 13,
-                name: 'Money Printer',
-                description: '+200 coins mỗi giây',
-                icon: '🖨️',
-                basePrice: 600000,
-                currentPrice: 600000,
-                owned: 0,
-                effect: () => autoClickers += 200
-            },
-            {
-                id: 14,
-                name: 'Cosmic Power',
-                description: '+400 click power',
-                icon: '🌌',
-                basePrice: 1200000,
-                currentPrice: 1200000,
-                owned: 0,
-                effect: () => clickPower += 400
-            },
-            {
-                id: 15,
-                name: 'Quantum Clicker',
-                description: '+500 coins mỗi giây',
-                icon: '⚛️',
-                basePrice: 2500000,
-                currentPrice: 2500000,
-                owned: 0,
-                effect: () => autoClickers += 500
-            },
-            {
-                id: 16,
-                name: 'Infinity Stone',
-                description: '+1000 click power',
-                icon: '💠',
-                basePrice: 6000000,
-                currentPrice: 6000000,
-                owned: 0,
-                effect: () => clickPower += 1000
-            },
-            {
-                id: 17,
-                name: 'Universe Generator',
-                description: '+1500 coins mỗi giây',
-                icon: '🌠',
-                basePrice: 25000000,
-                currentPrice: 25000000,
-                owned: 0,
-                effect: () => autoClickers += 1500
-            },
-            {
-                id: 18,
-                name: 'The Divine',
-                description: '5% giảm giá mọi vật phẩm',
-                icon: '✨',
-                basePrice: 50000000,
-                currentPrice: 50000000,
-                owned: 0,
-                effect: () => {
-                    shopDiscount += 5;
-                }
-            },
-            {
-                id: 19,
-                name: 'The Primastic',
-                description: '1.2% cơ hội hoàn tiền',
-                icon: '💎',
-                basePrice: 1000000000,
-                currentPrice: 1000000000,
-                owned: 0,
-                effect: () => {}
-            },
-            {
-                id: 20,
-                name: 'The Transcendent',
-                description: '0.8% cơ hội hoàn x10 tiền',
-                icon: '🌟',
-                basePrice: 2500000000,
-                currentPrice: 2500000000,
-                owned: 0,
-                effect: () => {}
-            },
-            {
-                id: 21,
-                name: 'The God',
-                description: '+1 giới hạn mua vật phẩm',
-                icon: '⚜️',
-                basePrice: 2500000000,
-                currentPrice: 2500000000,
-                owned: 0,
-                effect: () => {
-                    purchaseLimit++;
-                }
-            },
-            {
-                id: 22,
-                name: 'Admin Power',
-                description: '+50 Click Power',
-                icon: '🔱',
-                basePrice: 50000000000, // 50B
-                currentPrice: 50000000000,
-                owned: 0,
-                effect: () => {
-                    clickPower += 50;
-                }
-            },
-            {
-                id: 23,
-                name: 'Owner Power',
-                description: '+200 Click Power',
-                icon: '👑',
-                basePrice: 2000000000000000, // 2QA
-                currentPrice: 2000000000000000,
-                owned: 0,
-                effect: () => {
-                    clickPower += 200;
-                }
-            },
-            {
-                id: 24,
-                name: '67 Power',
-                description: '+670 Click Power',
-                icon: '⚡',
-                basePrice: 5000000000000000, // 5QA
-                currentPrice: 5000000000000000,
-                owned: 0,
-                effect: () => {
-                    clickPower += 670;
-                }
-            },
-            {
-                id: 25,
-                name: '36 Power',
-                description: '+3600 Click Power',
-                icon: '💫',
-                basePrice: 1000000000000000000, // 1QI
-                currentPrice: 1000000000000000000,
-                owned: 0,
-                effect: () => {
-                    clickPower += 3600;
-                }
-            },
-            {
-                id: 26,
-                name: 'Nancore',
-                description: '+10000 Click Power',
-                icon: '⚛️',
-                basePrice: 2000000000000000000000, // 2SX
-                currentPrice: 2000000000000000000000,
-                owned: 0,
-                effect: () => {
-                    clickPower += 10000;
-                }
-            }
-        ];
-
+    {
+        id: 1,
+        name: '+1 Click Power',
+        description: 'Tăng 1 coin mỗi click',
+        icon: '⚡',
+        basePrice: 10,
+        currentPrice: 10,
+        owned: 0,
+        effect: () => clickPower++
+    },
+    {
+        id: 2,
+        name: 'Auto Clicker',
+        description: '+1 coin mỗi giây',
+        icon: '🤖',
+        basePrice: 100,
+        currentPrice: 100,
+        owned: 0,
+        effect: () => autoClickers++
+    },
+    {
+        id: 3,
+        name: 'Faster Click',
+        description: 'Giảm 0.05s thời gian chờ click',
+        icon: '⚡',
+        basePrice: 500,
+        currentPrice: 500,
+        owned: 0,
+        effect: () => {
+            clickCooldown = Math.max(0.05, clickCooldown - 0.05);
+        }
+    },
+    {
+        id: 4,
+        name: 'Super Click',
+        description: '+5 click power',
+        icon: '⭐',
+        basePrice: 1000,
+        currentPrice: 1000,
+        owned: 0,
+        effect: () => clickPower += 5
+    },
+    {
+        id: 5,
+        name: 'Mega Clicker',
+        description: '+10 coins mỗi giây',
+        icon: '✨',
+        basePrice: 3000,
+        currentPrice: 3000,
+        owned: 0,
+        effect: () => autoClickers += 10
+    },
+    {
+        id: 6,
+        name: '2x Multiplier',
+        description: 'Nhân đôi tất cả thu nhập',
+        icon: '👑',
+        basePrice: 15000,
+        currentPrice: 15000,
+        owned: 0,
+        effect: () => multiplier *= 2
+    },
+    {
+        id: 7,
+        name: 'Ultra Click',
+        description: '+20 click power',
+        icon: '💎',
+        basePrice: 10000,
+        currentPrice: 10000,
+        owned: 0,
+        effect: () => clickPower += 20
+    },
+    {
+        id: 8,
+        name: 'Factory',
+        description: '+50 coins mỗi giây',
+        icon: '🏭',
+        basePrice: 30000,
+        currentPrice: 30000,
+        owned: 0,
+        effect: () => autoClickers += 50
+    },
+    {
+        id: 9,
+        name: 'Golden Touch',
+        description: '+100 click power',
+        icon: '🌟',
+        basePrice: 75000,
+        currentPrice: 75000,
+        owned: 0,
+        effect: () => clickPower += 100
+    },
+    {
+        id: 10,
+        name: 'Time Warp',
+        description: 'Giảm 0.03s cooldown',
+        icon: '⏰',
+        basePrice: 120000,
+        currentPrice: 120000,
+        owned: 0,
+        effect: () => {
+            clickCooldown = Math.max(0.01, clickCooldown - 0.03);
+        }
+    },
+    {
+        id: 11,
+        name: 'Robot Army',
+        description: '+100 coins mỗi giây',
+        icon: '🤖',
+        basePrice: 200000,
+        currentPrice: 200000,
+        owned: 0,
+        effect: () => autoClickers += 100
+    },
+    {
+        id: 12,
+        name: 'Diamond Finger',
+        description: '+250 click power',
+        icon: '💍',
+        basePrice: 350000,
+        currentPrice: 350000,
+        owned: 0,
+        effect: () => clickPower += 250
+    },
+    {
+        id: 13,
+        name: 'Money Printer',
+        description: '+200 coins mỗi giây',
+        icon: '🖨️',
+        basePrice: 600000,
+        currentPrice: 600000,
+        owned: 0,
+        effect: () => autoClickers += 200
+    },
+    {
+        id: 14,
+        name: 'Cosmic Power',
+        description: '+400 click power',
+        icon: '🌌',
+        basePrice: 1200000,
+        currentPrice: 1200000,
+        owned: 0,
+        effect: () => clickPower += 400
+    },
+    {
+        id: 15,
+        name: 'Quantum Clicker',
+        description: '+500 coins mỗi giây',
+        icon: '⚛️',
+        basePrice: 2500000,
+        currentPrice: 2500000,
+        owned: 0,
+        effect: () => autoClickers += 500
+    },
+    {
+        id: 16,
+        name: 'Infinity Stone',
+        description: '+1000 click power',
+        icon: '💠',
+        basePrice: 6000000,
+        currentPrice: 6000000,
+        owned: 0,
+        effect: () => clickPower += 1000
+    },
+    {
+        id: 17,
+        name: 'Universe Generator',
+        description: '+1500 coins mỗi giây',
+        icon: '🌠',
+        basePrice: 25000000,
+        currentPrice: 25000000,
+        owned: 0,
+        effect: () => autoClickers += 1500
+    },
+    {
+        id: 18,
+        name: 'The Divine',
+        description: '5% giảm giá mọi vật phẩm',
+        icon: '✨',
+        basePrice: 50000000,
+        currentPrice: 50000000,
+        owned: 0,
+        effect: () => {
+            shopDiscount += 5;
+        }
+    },
+    {
+        id: 19,
+        name: 'The Primastic',
+        description: '1.2% cơ hội hoàn tiền',
+        icon: '💎',
+        basePrice: 1000000000,
+        currentPrice: 1000000000,
+        owned: 0,
+        effect: () => {}
+    },
+    {
+        id: 20,
+        name: 'The Transcendent',
+        description: '0.8% cơ hội hoàn x10 tiền',
+        icon: '🌟',
+        basePrice: 2500000000,
+        currentPrice: 2500000000,
+        owned: 0,
+        effect: () => {}
+    },
+    {
+        id: 21,
+        name: 'The God',
+        description: '+1 giới hạn mua vật phẩm',
+        icon: '⚜️',
+        basePrice: 2500000000,
+        currentPrice: 2500000000,
+        owned: 0,
+        effect: () => {
+            purchaseLimit++;
+        }
+    },
+    {
+        id: 22,
+        name: 'Admin Power',
+        description: '+50 Click Power',
+        icon: '📱',
+        basePrice: 50000000000,
+        currentPrice: 50000000000,
+        owned: 0,
+        effect: () => {
+            clickPower += 50;
+        }
+    },
+    {
+        id: 23,
+        name: 'Owner Power',
+        description: '+200 Click Power',
+        icon: '👑',
+        basePrice: 2000000000000000,
+        currentPrice: 2000000000000000,
+        owned: 0,
+        effect: () => {
+            clickPower += 200;
+        }
+    },
+    {
+        id: 24,
+        name: '67 Power',
+        description: '+670 Click Power',
+        icon: '⚡',
+        basePrice: 5000000000000000,
+        currentPrice: 5000000000000000,
+        owned: 0,
+        effect: () => {
+            clickPower += 670;
+        }
+    },
+    {
+        id: 25,
+        name: '36 Power',
+        description: '+3600 Click Power',
+        icon: '💫',
+        basePrice: 1000000000000000000,
+        currentPrice: 1000000000000000000,
+        owned: 0,
+        effect: () => {
+            clickPower += 3600;
+        }
+    },
+    {
+        id: 26,
+        name: 'Nancore',
+        description: '+10000 Click Power',
+        icon: '⚛️',
+        basePrice: 2000000000000000000000,
+        currentPrice: 2000000000000000000000,
+        owned: 0,
+        effect: () => {
+            clickPower += 10000;
+        }
+    },
+    // ===== 21 VẬT PHẨM MỚI =====
+    {
+        id: 27,
+        name: 'Stellar Engine',
+        description: '+5000 coins mỗi giây',
+        icon: '🌟',
+        basePrice: 10000000000000000000000000, // 10SP
+        currentPrice: 10000000000000000000000000,
+        owned: 0,
+        effect: () => autoClickers += 5000
+    },
+    {
+        id: 28,
+        name: 'Black Hole Generator',
+        description: '+50000 click power',
+        icon: '⚫',
+        basePrice: 50000000000000000000000000, // 50SP
+        currentPrice: 50000000000000000000000000,
+        owned: 0,
+        effect: () => clickPower += 50000
+    },
+    {
+        id: 29,
+        name: 'Dimension Portal',
+        description: '+3x multiplier',
+        icon: '🌀',
+        basePrice: 200000000000000000000000000, // 200SP
+        currentPrice: 200000000000000000000000000,
+        owned: 0,
+        effect: () => multiplier *= 3
+    },
+    {
+        id: 30,
+        name: 'Singularity Core',
+        description: '+100000 click power',
+        icon: '🔮',
+        basePrice: 1000000000000000000000000000, // 1OC
+        currentPrice: 1000000000000000000000000000,
+        owned: 0,
+        effect: () => clickPower += 100000
+    },
+    {
+        id: 31,
+        name: 'Galaxy Forge',
+        description: '+10000 coins mỗi giây',
+        icon: '🌌',
+        basePrice: 5000000000000000000000000000, // 5OC
+        currentPrice: 5000000000000000000000000000,
+        owned: 0,
+        effect: () => autoClickers += 10000
+    },
+    {
+        id: 32,
+        name: 'Reality Manipulator',
+        description: '10% giảm giá mọi vật phẩm',
+        icon: '🎭',
+        basePrice: 25000000000000000000000000000, // 25OC
+        currentPrice: 25000000000000000000000000000,
+        owned: 0,
+        effect: () => {
+            shopDiscount += 10;
+        }
+    },
+    {
+        id: 33,
+        name: 'Void Harvester',
+        description: '+500000 click power',
+        icon: '🕳️',
+        basePrice: 100000000000000000000000000000, // 100OC
+        currentPrice: 100000000000000000000000000000,
+        owned: 0,
+        effect: () => clickPower += 500000
+    },
+    {
+        id: 34,
+        name: 'Multiverse Farm',
+        description: '+50000 coins mỗi giây',
+        icon: '🌐',
+        basePrice: 500000000000000000000000000000, // 500OC
+        currentPrice: 500000000000000000000000000000,
+        owned: 0,
+        effect: () => autoClickers += 50000
+    },
+    {
+        id: 35,
+        name: 'Eternal Flame',
+        description: '+1M click power',
+        icon: '🔥',
+        basePrice: 1000000000000000000000000000000, // 1NO
+        currentPrice: 1000000000000000000000000000000,
+        owned: 0,
+        effect: () => clickPower += 1000000
+    },
+    {
+        id: 36,
+        name: 'Time Accelerator',
+        description: 'Giảm 0.001s cooldown',
+        icon: '⏱️',
+        basePrice: 5000000000000000000000000000000, // 5NO
+        currentPrice: 5000000000000000000000000000000,
+        owned: 0,
+        effect: () => {
+            clickCooldown = Math.max(0.001, clickCooldown - 0.001);
+        }
+    },
+    {
+        id: 37,
+        name: 'Omega Reactor',
+        description: '+100000 coins mỗi giây',
+        icon: '⚛️',
+        basePrice: 10000000000000000000000000000000, // 10NO
+        currentPrice: 10000000000000000000000000000000,
+        owned: 0,
+        effect: () => autoClickers += 100000
+    },
+    {
+        id: 38,
+        name: 'Divine Blessing',
+        description: '+5x multiplier',
+        icon: '🙏',
+        basePrice: 50000000000000000000000000000000, // 50NO
+        currentPrice: 50000000000000000000000000000000,
+        owned: 0,
+        effect: () => multiplier *= 5
+    },
+    {
+        id: 39,
+        name: 'Celestial Crown',
+        description: '+5M click power',
+        icon: '👸',
+        basePrice: 100000000000000000000000000000000, // 100NO
+        currentPrice: 100000000000000000000000000000000,
+        owned: 0,
+        effect: () => clickPower += 5000000
+    },
+    {
+        id: 40,
+        name: 'Infinity Matrix',
+        description: '+500000 coins mỗi giây',
+        icon: '∞',
+        basePrice: 1000000000000000000000000000000000, // 1DC
+        currentPrice: 1000000000000000000000000000000000,
+        owned: 0,
+        effect: () => autoClickers += 500000
+    },
+    {
+        id: 41,
+        name: 'Chaos Orb',
+        description: '+10M click power',
+        icon: '🔴',
+        basePrice: 5000000000000000000000000000000000, // 5DC
+        currentPrice: 5000000000000000000000000000000000,
+        owned: 0,
+        effect: () => clickPower += 10000000
+    },
+    {
+        id: 42,
+        name: 'Universal Nexus',
+        description: '+1M coins mỗi giây',
+        icon: '🌌',
+        basePrice: 10000000000000000000000000000000000, // 10DC
+        currentPrice: 10000000000000000000000000000000000,
+        owned: 0,
+        effect: () => autoClickers += 1000000
+    },
+    {
+        id: 43,
+        name: 'Supreme Authority',
+        description: '+2 giới hạn mua vật phẩm',
+        icon: '🎯',
+        basePrice: 50000000000000000000000000000000000, // 50DC
+        currentPrice: 50000000000000000000000000000000000,
+        owned: 0,
+        effect: () => {
+            purchaseLimit += 2;
+        }
+    },
+    {
+        id: 44,
+        name: 'Absolute Zero',
+        description: '+50M click power',
+        icon: '❄️',
+        basePrice: 100000000000000000000000000000000000, // 100DC
+        currentPrice: 100000000000000000000000000000000000,
+        owned: 0,
+        effect: () => clickPower += 50000000
+    },
+    {
+        id: 45,
+        name: 'Final Form',
+        description: '+10x multiplier',
+        icon: '🎆',
+        basePrice: 500000000000000000000000000000000000, // 500DC
+        currentPrice: 500000000000000000000000000000000000,
+        owned: 0,
+        effect: () => multiplier *= 10
+    },
+    {
+        id: 46,
+        name: 'Omnipotence',
+        description: '+100M click power',
+        icon: '👁️',
+        basePrice: 1000000000000000000000000000000000000, // 1UD
+        currentPrice: 1000000000000000000000000000000000000,
+        owned: 0,
+        effect: () => clickPower += 100000000
+    },
+    {
+        id: 47,
+        name: 'The Creator',
+        description: '+5M coins/s, +500M click power',
+        icon: '🌠',
+        basePrice: 10000000000000000000000000000000000000, // 10UD
+        currentPrice: 10000000000000000000000000000000000000,
+        owned: 0,
+        effect: () => {
+            autoClickers += 5000000;
+            clickPower += 500000000;
+        }
+    }
+];
         const rebirthRequirements = [100000]; // Chỉ cần 1 giá trị, sau đó x5 mỗi lần
 
         // ===== WEATHER FUNCTIONS =====
