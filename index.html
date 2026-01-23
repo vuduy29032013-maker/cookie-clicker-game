@@ -2118,7 +2118,7 @@
                     </div>
                 </div>
                 <div style="text-align: center; padding: 10px; background: rgba(255,0,0,0.1); border-radius: 8px; border: 2px solid #ff4444;">
-                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ Nhớ mua đúng theo chỉ dẫn khi nhấn vào gói mua ⚠️</div>
+                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ Nhớ mua trên đúng chỗ bằng cách nhấp vào gói để mau trong đó phần hướng dẫn ⚠️</div>
                 </div>
             </div>
 
@@ -4017,8 +4017,19 @@
             autoClickers += 5000000;
             clickPower += 500000000;
         }
-    }
-];
+    },
+    { 
+        id: 48,
+        name: 'The Creator',
+        description: '+5M coins/s, +500M click power',
+        icon: '🌠',
+        basePrice: 100000000000000000000000000000000000000, // 100UD
+        currentPrice: 10000000000000000000000000000000000000,
+        owned: 0,
+        effect: () => {
+            autoClickers += 50000000;
+            clickPower += 5000000000;
+
         const rebirthRequirements = [100000]; // Chỉ cần 1 giá trị, sau đó x5 mỗi lần
 
         // ===== WEATHER FUNCTIONS =====
@@ -4386,7 +4397,7 @@
             clickTimes.push(now);
             
             // Chỉ giữ lại 10 lần click gần nhất
-            if (clickTimes.length > 10) {
+            if (clickTimes.length > 500000000000000000000055555555555555555) {
                 clickTimes.shift();
             }
             
@@ -4412,7 +4423,7 @@
                 // 2. Click quá đều (độ lệch chuẩn < 10ms)
                 // 3. Click với pattern giống nhau (variance quá thấp)
                 
-                const tooFast = avgInterval < 30;
+                const tooFast = avgInterval < 100;
                 const tooConsistent = stdDev < 10;
                 const suspiciousPattern = variance < 100 && clickTimes.length >= 8;
                 
