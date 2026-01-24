@@ -17,6 +17,5 @@ The goal of this project is not perfection, but growth — both for the game and
 If you’re looking for a polished, bug-free experience, this project may not be suitable yet. But if you’re curious, patient, and interested in seeing how a small game develops over time, feel free to give it a try.
 
 👉 Play in 
-
-
+https://vuduy29032013-maker.github.io/cookie-clicker-game/
 Thank you
