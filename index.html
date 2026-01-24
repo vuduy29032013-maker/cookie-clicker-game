@@ -4607,244 +4607,125 @@
             updateWeatherDisplay();
         }
 
+
         function applyWeatherEffect(type, apply) {
-            switch(type) {
-                case 'wind':
-                    // Tăng/giảm 0.3s cooldown
-                    if (apply) {
-                        clickCooldown = Math.max(0.01, clickCooldown - 0.3);
-                    } else {
-                        clickCooldown += 0.3;
-                    }
-                    break;
-                case 'cloud':
-                    // Giảm giá được xử lý trong renderShop()
-                    renderShop();
-                    break;
-                case 'rain':
-                    // +2/-2 click power
-                    if (apply) {
-                        clickPower += 2;
-                    } else {
-                        clickPower = Math.max(1, clickPower - 2);
-                    }
-                    break;
-                case 'night':
-                    // +5/-5 click power
-                    if (apply) {
-                        clickPower += 5;
-                    } else {
-                        clickPower = Math.max(1, clickPower - 5);
-                    }
-                    break;
-                case 'moonlight':
-                    // x5 click power (nhân/chia)
-                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
-                    break;
-                case 'meteor':
-                    // x10 click power (nhân/chia)
-                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
-                    break;
-                case 'acid':
-                    // -2/+2 click power
-                    if (apply) {
-                        clickPower = Math.max(1, clickPower - 2);
-                    } else {
-                        clickPower += 2;
-                    }
-                    break;
-                case 'diamond':
-                    // x10 click power
-                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
-                    break;
-                case 'emerald':
-                    // x300 click power
-                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
-                    break;
-                case 'adminabuse':
-                    // x500 click power
-                    // Không áp dụng trực tiếp vào clickPower, xử lý khi click
-                    break;
-                case 'earthquake':
-                    if (apply) {
-                        clickPower += 15;
-                    } else {
-                        clickPower = Math.max(1, clickPower - 15);
-                    }
-                    break;
-                case 'thunderstorm':
-                    // x100 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'superstorm':
-                    // x300 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'winteraurora':
-                    // x500 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'shootingstars':
-                    // x5 tiền hiện có - xử lý khi activate
-                    if (apply) {
-                        coins *= 5;
-                        updateDisplay();
-                    }
-                    break;
-                case 'permafrost':
-                    // x1000 tiền hiện có - xử lý khi activate
-                    if (apply) {
-                        coins *= 1000;
-                        updateDisplay();
-                    }
-                    break;
-                case 'cyclone':
-                    // +10% click power
-                    if (apply) {
-                        clickPower = Math.ceil(clickPower * 1.1);
-                    } else {
-                        clickPower = Math.ceil(clickPower / 1.1);
-                    }
-                    break;
-                case 'dissonant':
-                    if (apply) {
-                        clickPower += 300;
-                    } else {
-                        clickPower = Math.max(1, clickPower - 300);
-                    }
-                    break;
-                case 'beestorm':
-                    if (apply) {
-                        clickPower += 34920111;
-                    } else {
-                        clickPower = Math.max(1, clickPower - 34920111);
-                    }
-                    break;
-                case 'tropicalrain':
-                    if (apply) {
-                        clickPower += 150;
-                    } else {
-                        clickPower = Math.max(1, clickPower - 150);
-                    }
-                    break;
-                case 'gentledrizzle':
-                    // x2 tiền hiện có - xử lý khi activate
-                    if (apply) {
-                        coins *= 2;
-                        updateDisplay();
-                    }
-                    break;
-                case 'ownerabuse':
-                    // x10000 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'rainbowrain':
-                    // x50 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'goldrain':
-                    // x200 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'silverrain':
-                    // x75 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'cosmicrain':
-                    // x1000 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'secretrain':
-                    // x5000 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'whitehole':
-                    // x500 tiền hiện có
-                    if (apply) {
-                        coins *= 500;
-                        updateDisplay();
-                    }
-                    break;
-                case 'supernova':
-                    // x2000 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'nancorenova':
-                    // +1000000 click power
-                    if (apply) {
-                        clickPower += 1000000;
-                    } else {
-                        clickPower = Math.max(1, clickPower - 1000000);
-                    }
-                    break;
-                case 'corruptzenaura':
-                    // x3000 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'fullmoon':
-                    // x150 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'safaridusk':
-                    // +5000 click power
-                    if (apply) {
-                        clickPower += 5000;
-                    } else {
-                        clickPower = Math.max(1, clickPower - 5000);
-                    }
-                    break;
-                case 'yetinight':
-                    // x800 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'silentnight':
-                    // +50% click power
-                    if (apply) {
-                        clickPower = Math.ceil(clickPower * 1.5);
-                    } else {
-                        clickPower = Math.ceil(clickPower / 1.5);
-                    }
-                    break;
-                case 'boomboxparty':
-                    // x250 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'frozeniceking':
-                    // x4000 click power - xử lý trong getWeatherMultiplier
-                    break;
-                case 'radioactiverain':
-                    // +100000 click power
-                    if (apply) {
-                        clickPower += 100000;
-                    } else {
-                        clickPower = Math.max(1, clickPower - 100000);
-                    }
-                    break;
-                case 'oilrain':
-                    // x100 tiền hiện có
-                    if (apply) {
-                        coins *= 100;
-                        updateDisplay();
-                    }
-                    break;
-                case 'sandstrike':
-                    // x1500 click power - xử lý trong getWeatherMultiplier
-                    break;
+            const config = weatherConfig[type];
+            if (!config) return;
+            
+            // Wind, Time Warp - Cooldown effects
+            if (type === 'wind') {
+                clickCooldown = apply ? Math.max(0.01, clickCooldown - 0.3) : clickCooldown + 0.3;
+            } else if (type === 'timewarp') {
+                clickCooldown = apply ? Math.max(0.01, clickCooldown - 0.5) : clickCooldown + 0.5;
             }
+            
+            // Cloud - Shop discount (handled in renderShop)
+            else if (type === 'cloud') {
+                renderShop();
+            }
+            
+            // Simple +X Click Power effects
+            else if (type === 'rain') {
+                clickPower = apply ? clickPower + 2 : Math.max(1, clickPower - 2);
+            } else if (type === 'night') {
+                clickPower = apply ? clickPower + 5 : Math.max(1, clickPower - 5);
+            } else if (type === 'drizzle') {
+                clickPower = apply ? clickPower + 8 : Math.max(1, clickPower - 8);
+            } else if (type === 'sunrise') {
+                clickPower = apply ? clickPower + 15 : Math.max(1, clickPower - 15);
+            } else if (type === 'hail') {
+                clickPower = apply ? clickPower + 25 : Math.max(1, clickPower - 25);
+            } else if (type === 'comet') {
+                clickPower = apply ? clickPower + 50 : Math.max(1, clickPower - 50);
+            } else if (type === 'wildfire') {
+                clickPower = apply ? clickPower + 100 : Math.max(1, clickPower - 100);
+            } else if (type === 'cosmic') {
+                clickPower = apply ? clickPower + 200 : Math.max(1, clickPower - 200);
+            }
+            
+            // +X Auto Clickers effects
+            else if (type === 'snow') {
+                autoClickers = apply ? autoClickers + 3 : Math.max(0, autoClickers - 3);
+            } else if (type === 'breeze') {
+                autoClickers = apply ? autoClickers + 10 : Math.max(0, autoClickers - 10);
+            } else if (type === 'sunset') {
+                autoClickers = apply ? autoClickers + 12 : Math.max(0, autoClickers - 12);
+            } else if (type === 'blizzard') {
+                autoClickers = apply ? autoClickers + 20 : Math.max(0, autoClickers - 20);
+            } else if (type === 'earthquake') {
+                autoClickers = apply ? autoClickers + 30 : Math.max(0, autoClickers - 30);
+            } else if (type === 'sandstorm') {
+                autoClickers = apply ? autoClickers + 40 : Math.max(0, autoClickers - 40);
+            } else if (type === 'pulsar') {
+                autoClickers = apply ? autoClickers + 100 : Math.max(0, autoClickers - 100);
+            }
+            
+            // +X Multiplier effects
+            else if (type === 'fog') {
+                multiplier = apply ? multiplier + 1 : Math.max(1, multiplier - 1);
+            } else if (type === 'rainbow') {
+                multiplier = apply ? multiplier + 2 : Math.max(1, multiplier - 2);
+            } else if (type === 'gravity') {
+                multiplier = apply ? multiplier + 3 : Math.max(1, multiplier - 3);
+            } else if (type === 'quantum') {
+                multiplier = apply ? multiplier + 5 : Math.max(1, multiplier - 5);
+            } else if (type === 'unicorn') {
+                multiplier = apply ? multiplier + 10 : Math.max(1, multiplier - 10);
+            } else if (type === 'eternity') {
+                multiplier = apply ? multiplier + 20 : Math.max(1, multiplier - 20);
+            }
+            
+            // Multiplier weathers (x2, x3, x5, etc) - handled in getWeatherMultiplier()
+            // moonlight, meteor, thunder, storm, tornado, aurora, eclipse, volcano, tsunami
+            // blackhole, supernova, plasma, dimension, nebula, stardust, galaxy
+            // divine, celestial, mythical, phoenix, kraken
+            // infinity, omnipotence, godmode, transcendence, ascension
+            
             updateDisplay();
         }
 
         function getWeatherMultiplier() {
-            let multiplier = 1;
-            if (activeWeathers.includes('moonlight')) multiplier *= 3;
-            if (activeWeathers.includes('meteor')) multiplier *= 5;
-            if (activeWeathers.includes('diamond')) multiplier *= 5;
-            if (activeWeathers.includes('emerald')) multiplier *= 10;
-            if (activeWeathers.includes('adminabuse')) multiplier *= 3;
-            if (activeWeathers.includes('thunderstorm')) multiplier *= 8;
-            if (activeWeathers.includes('superstorm')) multiplier *= 10;
-            if (activeWeathers.includes('winteraurora')) multiplier *= 3;
-            if (activeWeathers.includes('ownerabuse')) multiplier *= 50;
-            if (activeWeathers.includes('rainbowrain')) multiplier *= 4;
-            if (activeWeathers.includes('goldrain')) multiplier *= 8;
-            if (activeWeathers.includes('silverrain')) multiplier *= 6;
-            if (activeWeathers.includes('cosmicrain')) multiplier *= 5;
-            if (activeWeathers.includes('secretrain')) multiplier *= 25;
-            if (activeWeathers.includes('supernova')) multiplier *= 10;
-            if (activeWeathers.includes('corruptzenaura')) multiplier *= 15;
-            if (activeWeathers.includes('fullmoon')) multiplier *= 7;
-            if (activeWeathers.includes('yetinight')) multiplier *= 4;
-            if (activeWeathers.includes('boomboxparty')) multiplier *= 9;
-            if (activeWeathers.includes('frozeniceking')) multiplier *= 20;
-            if (activeWeathers.includes('sandstrike')) multiplier *= 8;
-            return multiplier;
+            let mult = 1;
+            
+            // TIER 1: COMMON
+            if (activeWeathers.includes('moonlight')) mult *= 2;
+            if (activeWeathers.includes('meteor')) mult *= 5;
+            
+            // TIER 2: UNCOMMON
+            if (activeWeathers.includes('thunder')) mult *= 3;
+            if (activeWeathers.includes('storm')) mult *= 4;
+            if (activeWeathers.includes('tornado')) mult *= 6;
+            if (activeWeathers.includes('aurora')) mult *= 7;
+            if (activeWeathers.includes('eclipse')) mult *= 8;
+            if (activeWeathers.includes('volcano')) mult *= 10;
+            if (activeWeathers.includes('tsunami')) mult *= 12;
+            
+            // TIER 3: RARE
+            if (activeWeathers.includes('blackhole')) mult *= 15;
+            if (activeWeathers.includes('supernova')) mult *= 20;
+            if (activeWeathers.includes('plasma')) mult *= 25;
+            if (activeWeathers.includes('dimension')) mult *= 30;
+            if (activeWeathers.includes('nebula')) mult *= 35;
+            if (activeWeathers.includes('stardust')) mult *= 40;
+            if (activeWeathers.includes('galaxy')) mult *= 50;
+            
+            // TIER 4: EPIC
+            if (activeWeathers.includes('divine')) mult *= 75;
+            if (activeWeathers.includes('celestial')) mult *= 100;
+            if (activeWeathers.includes('mythical')) mult *= 150;
+            if (activeWeathers.includes('phoenix')) mult *= 200;
+            if (activeWeathers.includes('kraken')) mult *= 250;
+            
+            // TIER 5: LEGENDARY
+            if (activeWeathers.includes('infinity')) mult *= 500;
+            if (activeWeathers.includes('omnipotence')) mult *= 1000;
+            if (activeWeathers.includes('godmode')) mult *= 2000;
+            if (activeWeathers.includes('transcendence')) mult *= 5000;
+            if (activeWeathers.includes('ascension')) mult *= 10000;
+            
+            return mult;
         }
+
 
 
         function getWeatherDiscount() {
