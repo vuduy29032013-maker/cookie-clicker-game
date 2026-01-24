@@ -1773,48 +1773,67 @@
             <button class="admin-money-button" onclick="addAdminGoldBars()" style="background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); margin-top: 10px; animation: goldGlow 2s ease-in-out infinite;">🏆 +100 Gold Bars</button>
             
             <div class="weather-controls">
-                <div class="weather-control-title">🌦️ Triệu hồi Thời tiết</div>
+                <div class="weather-control-title">🌦️ Triệu hồi Thời tiết (50 Weathers)</div>
                <div class="weather-buttons">
-                    <button class="weather-summon-btn" onclick="summonWeather('wind')">💨 Gió</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('cloud')">☁️ Mây</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('rain')">🌧️ Mưa</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('night')">🌙 Đêm</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('moonlight')">✨ Trăng</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('meteor')">☄️ Sao</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('acid')">☣️ Acid</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('diamond')">💎 Kim Cương</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('emerald')">💚 Lục Kim</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('adminabuse')">🛸 Admin</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('earthquake')">🌋 Động Đất</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('thunderstorm')">⚡ Bão Sấm</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('superstorm')">🌪️ Siêu Bão</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('winteraurora')">🌌 Cực Quang</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('shootingstars')">🌠 Mưa Sao</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('permafrost')">❄️🔥 Nổ Băng</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('cyclone')">🌀 Lốc Xoáy</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('dissonant')">🎭 Hỗn Loạn</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('beestorm')">🐝 Bão Ong</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('tropicalrain')">🌴 Mưa Nhiệt Đới</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('gentledrizzle')">🌧️💧 Mưa Phùn</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('ownerabuse')" style="background: linear-gradient(135deg, #ff0000 0%, #ffd700 100%);">⚜️ OWNER</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('rainbowrain')">🌈 Rainbow</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('goldrain')">💰 Gold</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('silverrain')">🪙 Silver</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('cosmicrain')">🌌 Cosmic</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('secretrain')">🔮 Secret</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('whitehole')">⚪ White Hole</button>
+                    <!-- TIER 1: COMMON (13) -->
+                    <button class="weather-summon-btn" onclick="summonWeather('wind')">💨 Wind</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('cloud')">☁️ Cloud</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('rain')">🌧️ Rain</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('night')">🌙 Night</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('moonlight')">✨ Moonlight</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('meteor')">☄️ Meteor</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('snow')">❄️ Snow</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('fog')">🌫️ Fog</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('breeze')">🍃 Breeze</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('drizzle')">🌦️ Drizzle</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('thunder')">⚡ Thunder</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('sunrise')">🌅 Sunrise</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('sunset')">🌇 Sunset</button>
+                    
+                    <!-- TIER 2: UNCOMMON (13) -->
+                    <button class="weather-summon-btn" onclick="summonWeather('storm')">🌩️ Storm</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('blizzard')">🌨️ Blizzard</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('hail')">🧊 Hail</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('tornado')">🌪️ Tornado</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('rainbow')">🌈 Rainbow</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('aurora')">🌌 Aurora</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('eclipse')">🌑 Eclipse</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('comet')">☄️ Comet</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('volcano')">🌋 Volcano</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('earthquake')">🌍 Earthquake</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('tsunami')">🌊 Tsunami</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('wildfire')">🔥 Wildfire</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('sandstorm')">🏜️ Sandstorm</button>
+                    
+                    <!-- TIER 3: RARE (12) -->
+                    <button class="weather-summon-btn" onclick="summonWeather('blackhole')">🕳️ Black Hole</button>
                     <button class="weather-summon-btn" onclick="summonWeather('supernova')">💥 Supernova</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('nancorenova')">⚛️ Nancore</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('corruptzenaura')">👹 Corrupt Zen</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('fullmoon')">🌕 Full Moon</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('safaridusk')">🌅 Safari</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('yetinight')">🏔️ Yeti</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('silentnight')">🌃 Silent</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('boomboxparty')">🎵 Boombox</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('frozeniceking')">❄️👑 Ice King</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('radioactiverain')">☢️ Radioactive</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('oilrain')">🛢️ Oil</button>
-                    <button class="weather-summon-btn" onclick="summonWeather('sandstrike')">🏜️ Sand</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('timewarp')">⏰ Time Warp</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('gravity')">🌐 Zero Gravity</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('plasma')">⚛️ Plasma Storm</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('quantum')">🔬 Quantum Flux</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('dimension')">🌀 Dimension Rift</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('cosmic')">✨ Cosmic Dust</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('nebula')">🌌 Nebula</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('pulsar')">💫 Pulsar</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('stardust')">⭐ Stardust</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('galaxy')">🌟 Galaxy Burst</button>
+                    
+                    <!-- TIER 4: EPIC (6) -->
+                    <button class="weather-summon-btn" onclick="summonWeather('divine')" style="background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);">🙏 Divine Light</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('celestial')" style="background: linear-gradient(135deg, #9370db 0%, #4b0082 100%);">👼 Celestial</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('mythical')" style="background: linear-gradient(135deg, #ff4500 0%, #ff1493 100%);">🐉 Mythical Dragon</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('phoenix')" style="background: linear-gradient(135deg, #ff6347 0%, #ffa500 100%);">🔥 Phoenix</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('unicorn')" style="background: linear-gradient(135deg, #ff69b4 0%, #ffb6c1 100%);">🦄 Unicorn</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('kraken')" style="background: linear-gradient(135deg, #1e90ff 0%, #00008b 100%);">🐙 Kraken</button>
+                    
+                    <!-- TIER 5: LEGENDARY (6) -->
+                    <button class="weather-summon-btn" onclick="summonWeather('infinity')" style="background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%); font-weight: bold;">∞ Infinity</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('eternity')" style="background: linear-gradient(135deg, #8b00ff 0%, #4b0082 100%); font-weight: bold;">⏳ Eternity</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('omnipotence')" style="background: linear-gradient(135deg, #ffd700 0%, #ff00ff 100%); font-weight: bold;">👁️ Omnipotence</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('godmode')" style="background: linear-gradient(135deg, #ff0000 0%, #ffff00 100%); font-weight: bold;">⚡ God Mode</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('transcendence')" style="background: linear-gradient(135deg, #00ff00 0%, #00ffff 100%); font-weight: bold;">🌠 Transcendence</button>
+                    <button class="weather-summon-btn" onclick="summonWeather('ascension')" style="background: linear-gradient(135deg, #ffffff 0%, #ffd700 100%); font-weight: bold; color: #000;">🚀 ASCENSION</button>
                 </div>
                 <button class="weather-clear-btn" onclick="clearAllWeather()">🚫 Xóa tất cả thời tiết</button>
             </div>
