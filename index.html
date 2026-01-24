@@ -2,13 +2,26 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>Cookie Clicker Game-By Vuduy 7/7  </title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* ANTI-ZOOM ABSOLUTE */
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        html, body {
+            /* MAXIMUM ANTI-ZOOM */
+            touch-action: manipulation;
+            -ms-touch-action: manipulation;
         }
 
         body {
@@ -17,11 +30,22 @@
             min-height: 100vh;
             color: white;
             padding: 20px;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        }
+
+        /* Exception: Allow text selection in inputs */
+        input, textarea, select {
+            user-select: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         .header {
@@ -82,10 +106,27 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            
+            /* Prevent text selection */
             user-select: none;
             -webkit-user-select: none;
             -moz-user-select: none;
             -ms-user-select: none;
+            
+            /* Prevent tap highlight */
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            
+            /* Prevent zoom on rapid tap */
+            touch-action: manipulation;
+            -ms-touch-action: manipulation;
+            
+            /* Prevent dragging */
+            -webkit-user-drag: none;
+            -khtml-user-drag: none;
+            -moz-user-drag: none;
+            -o-user-drag: none;
+            user-drag: none;
         }
 
         .click-button:hover:not(.disabled) {
@@ -1637,24 +1678,169 @@
             50% { opacity: 0.7; }
         }
 
-        @media (max-width: 768px) {
-            .main-content {
-                flex-direction: column;
+        /* ========================================
+           MOBILE OPTIMIZATION
+           ======================================== */
+        
+        /* Tablet & Small Desktop */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 10px;
             }
             
-            .admin-panel, .playtime-panel {
-                position: static;
-                margin-bottom: 20px;
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
             }
-
+        }
+        
+        /* Mobile Landscape & Tablet Portrait */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            
+            .container {
+                padding: 5px;
+                max-width: 100%;
+            }
+            
+            .main-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            /* Cookie Button - Bigger on mobile */
+            #cookie {
+                width: 200px !important;
+                height: 200px !important;
+                font-size: 120px !important;
+                margin: 20px auto;
+                /* Extra mobile anti-zoom */
+                -webkit-tap-highlight-color: transparent !important;
+                touch-action: manipulation !important;
+                user-select: none !important;
+                -webkit-user-select: none !important;
+            }
+            
+            /* Stats - 2 columns on mobile */
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+                font-size: 12px;
+            }
+            
+            .stat-label {
+                font-size: 10px;
+            }
+            
+            .stat-value {
+                font-size: 14px;
+            }
+            
+            /* Panels - Stack vertically */
+            .admin-panel, .playtime-panel, .settings-panel {
+                position: static !important;
+                width: 100% !important;
+                margin: 10px 0;
+                max-height: none !important;
+            }
+            
+            /* Settings Button */
+            .settings-button {
+                position: fixed !important;
+                bottom: 10px !important;
+                right: 10px !important;
+                top: auto !important;
+                left: auto !important;
+                width: 50px !important;
+                height: 50px !important;
+                font-size: 24px !important;
+                z-index: 999;
+            }
+            
+            /* Language Buttons - Smaller on mobile */
+            .language-buttons button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            /* Shop Items - 1 column on mobile */
+            .shop {
+                grid-template-columns: 1fr !important;
+                gap: 8px;
+            }
+            
+            .item {
+                padding: 10px;
+            }
+            
+            .item-name {
+                font-size: 14px;
+            }
+            
+            .item-description {
+                font-size: 11px;
+            }
+            
+            .item button {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            /* Pet System */
+            .pets-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px;
+            }
+            
+            .pet-card {
+                padding: 8px;
+            }
+            
+            /* Egg Shop */
+            .eggs-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 8px;
+            }
+            
+            /* Weather Panel */
+            .weather-panel {
+                top: auto !important;
+                bottom: 80px !important;
+                right: 10px !important;
+                width: calc(100% - 20px) !important;
+                max-width: 300px;
+            }
+            
+            .weather-buttons {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 5px;
+            }
+            
+            .weather-summon-btn {
+                padding: 6px 8px;
+                font-size: 11px;
+            }
+            
+            /* Mini Games */
+            .rps-choices button {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            /* Modals */
+            .modal-content, .afk-modal {
+                width: 90% !important;
+                max-width: 90% !important;
+                padding: 20px 15px;
+                margin: 20px auto;
+            }
+            
             .potion-timer {
                 font-size: 1.5em;
                 padding: 15px 30px;
-            }
-
-            .afk-modal {
-                padding: 30px 20px;
-                margin: 20px;
             }
 
             .afk-title {
@@ -1663,6 +1849,124 @@
 
             .afk-message {
                 font-size: 1em;
+            }
+            
+            /* Buttons - Bigger touch targets */
+            button {
+                min-height: 44px;
+                font-size: 14px;
+            }
+            
+            /* Section titles */
+            h2 {
+                font-size: 18px;
+                margin: 15px 0 10px 0;
+            }
+            
+            h3 {
+                font-size: 16px;
+            }
+        }
+        
+        /* Mobile Portrait (Small phones) */
+        @media (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+            
+            /* Cookie - Even bigger on small phones */
+            #cookie {
+                width: 180px !important;
+                height: 180px !important;
+                font-size: 100px !important;
+                /* Extra anti-zoom for small screens */
+                -webkit-tap-highlight-color: transparent !important;
+                touch-action: manipulation !important;
+            }
+            
+            /* Stats - Single column on tiny screens */
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            /* Shop - Full width items */
+            .shop {
+                gap: 6px;
+            }
+            
+            .item {
+                padding: 8px;
+            }
+            
+            /* Pets/Eggs - Single column */
+            .pets-grid, .eggs-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Weather buttons - 1 column */
+            .weather-buttons {
+                grid-template-columns: 1fr !important;
+            }
+            
+            /* Smaller fonts */
+            .stat-label {
+                font-size: 9px;
+            }
+            
+            .stat-value {
+                font-size: 12px;
+            }
+            
+            h2 {
+                font-size: 16px;
+            }
+            
+            h3 {
+                font-size: 14px;
+            }
+            
+            /* Settings button - Smaller */
+            .settings-button {
+                width: 44px !important;
+                height: 44px !important;
+                font-size: 20px !important;
+            }
+        }
+        
+        /* Touch-friendly improvements for all mobile */
+        @media (hover: none) and (pointer: coarse) {
+            /* All buttons larger touch targets */
+            button, .item button, .pet-card button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Remove hover effects on touch devices */
+            button:hover, .item:hover, .pet-card:hover {
+                transform: none;
+            }
+            
+            /* Active state for touch feedback */
+            button:active {
+                transform: scale(0.95);
+                opacity: 0.8;
+            }
+            
+            #cookie:active {
+                transform: scale(0.95) !important;
+            }
+            
+            /* Prevent text selection on touch */
+            * {
+                -webkit-user-select: none;
+                user-select: none;
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            /* Allow selection in inputs */
+            input, textarea {
+                -webkit-user-select: text;
+                user-select: text;
             }
         }
     </style>
@@ -2415,6 +2719,60 @@
     <div id="eggDetailsModal" class="egg-details-modal" style="display: none;"></div>
 
     <script>
+        // ===== MOBILE DETECTION =====
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        
+        // ===== JAVASCRIPT ANTI-ZOOM — MAXIMUM STRENGTH ☠️ =====
+        if (isMobile || isTouch) {
+            // 1️⃣ Block double-tap zoom
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function(e) {
+                const now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    e.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, { passive: false });
+            
+            // 2️⃣ Block pinch zoom (iOS Safari)
+            document.addEventListener('gesturestart', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+            
+            document.addEventListener('gesturechange', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+            
+            document.addEventListener('gestureend', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+            
+            // 3️⃣ Block wheel zoom (trackpad - optional but included)
+            document.addEventListener('wheel', function(e) {
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // 4️⃣ Block touchmove zoom (multi-finger zoom)
+            document.addEventListener('touchmove', function(e) {
+                if (e.scale !== 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // 5️⃣ Block keyboard zoom (Ctrl/Cmd + +/-)
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            console.log('🎮 ANTI-ZOOM ABSOLUTE ACTIVATED');
+        }
+        
+        // ===== GAME VARIABLES =====
         let coins = 0;
         let clickPower = 1;
         let autoClickers = 0;
@@ -5917,6 +6275,7 @@
         // ===== CLICK BUTTON EVENT =====
         document.getElementById('clickButton').addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation(); // Stop event bubbling
             
             if (!canClick || isAfk || isBanned) return;
             
@@ -5945,6 +6304,23 @@
                 this.classList.remove('disabled');
             }, clickCooldown * 1000);
         });
+        
+        // Extra: Prevent zoom on rapid cookie taps (touch devices)
+        const cookieBtn = document.getElementById('clickButton');
+        if (cookieBtn && (isMobile || isTouch)) {
+            // Prevent default touch behavior
+            cookieBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+            
+            cookieBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+            
+            cookieBtn.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+        }
 
         // Auto clicker
         setInterval(() => {
