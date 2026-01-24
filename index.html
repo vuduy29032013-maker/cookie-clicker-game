@@ -5,19 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>Cookie Clicker Game-By Vuduy 7/7  </title>
     <style>
-       * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* ANTI-ZOOM ABSOLUTE */
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         html, body {
-            /* ✅ ALLOW SCROLL - ❌ DISABLE ZOOM */
-            touch-action: pan-y;
-            -ms-touch-action: pan-y;
-            overflow-x: hidden;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            /* MAXIMUM ANTI-ZOOM but ALLOW SCROLL */
+            touch-action: manipulation; /* Allow scroll, block zoom */
+            -ms-touch-action: manipulation;
+            overflow-x: hidden; /* Prevent horizontal scroll on body */
+            overflow-y: auto; /* Allow vertical scroll */
         }
 
         body {
@@ -26,6 +32,7 @@
             min-height: 100vh;
             color: white;
             padding: 20px;
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
 
         /* Exception: Allow text selection in inputs */
@@ -39,7 +46,9 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            overflow-x: auto; /* Prevent horizontal scroll */
+            width: 100%; /* Full width on mobile */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-y: visible; /* Allow content to flow */
         }
 
         .header {
@@ -1692,11 +1701,17 @@
         @media (max-width: 768px) {
             body {
                 font-size: 14px;
+                overflow-y: auto !important; /* Force vertical scroll */
+                overflow-x: hidden !important; /* Block horizontal scroll */
+                height: auto;
+                min-height: 100vh;
             }
             
             .container {
                 padding: 5px;
                 max-width: 100%;
+                width: 100%;
+                overflow-y: visible !important; /* Allow content flow */
             }
             
             .main-content {
@@ -1866,6 +1881,8 @@
         @media (max-width: 480px) {
             body {
                 font-size: 12px;
+                overflow-y: auto !important; /* Force vertical scroll */
+                height: auto;
             }
             
             /* Cookie - Even bigger on small phones */
