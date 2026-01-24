@@ -5,23 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>Cookie Clicker Game-By Vuduy 7/7  </title>
     <style>
-        * {
+       * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* ANTI-ZOOM ABSOLUTE */
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
         }
 
         html, body {
-            /* MAXIMUM ANTI-ZOOM */
-            touch-action: manipulation;
-            -ms-touch-action: manipulation;
+            /* ✅ ALLOW SCROLL - ❌ DISABLE ZOOM */
+            touch-action: pan-y;
+            -ms-touch-action: pan-y;
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         body {
@@ -30,8 +26,6 @@
             min-height: 100vh;
             color: white;
             padding: 20px;
-            overflow-x: hidden; /* Prevent horizontal scroll */
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
 
         /* Exception: Allow text selection in inputs */
@@ -45,7 +39,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: auto; /* Prevent horizontal scroll */
         }
 
         .header {
