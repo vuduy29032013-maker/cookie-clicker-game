@@ -245,7 +245,7 @@
         }
 
         .admin-controls::-webkit-scrollbar {
-            width: 5px;
+            width: 8px;
         }
 
         .admin-controls::-webkit-scrollbar-track {
@@ -1715,28 +1715,6 @@
             </div>
         </div>
         
-        <!-- Save/Load Buttons -->
-        <div style="background: rgba(124, 58, 237, 0.1); padding: 12px; border-radius: 10px;">
-            <div style="color: #c4b5fd; font-weight: bold; margin-bottom: 8px;">💾 <span id="saveLoadLabel">Save & Load</span></div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                <button onclick="saveGame()" style="padding: 8px; background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
-                    💾 <span id="saveBtn">Save</span>
-                </button>
-                <button onclick="loadGameFromButton()" style="padding: 8px; background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
-                    📂 <span id="loadBtn">Load</span>
-                </button>
-                <button onclick="deleteSaveData()" style="padding: 8px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
-                    🗑️ <span id="deleteBtn">Delete</span>
-                </button>
-                <button onclick="exportSave()" style="padding: 8px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
-                    📥 <span id="exportBtn">Export</span>
-                </button>
-            </div>
-            <input type="file" id="importFile" accept=".json" onchange="importSave(event)" style="display: none;">
-            <button onclick="document.getElementById('importFile').click()" style="width: 100%; padding: 8px; margin-top: 8px; background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
-                📤 <span id="importBtn">Import</span>
-            </button>
-        </div>
     </div>
 
     <!-- Settings Button (Fixed) -->
@@ -1947,20 +1925,6 @@
                 </div>
             </div>
 
-            <!-- Save/Load Panel -->
-            <div class="save-panel">
-                <div class="save-title">💾 Save & Load Game</div>
-                <div class="save-buttons">
-                    <button class="save-button" onclick="saveGame()">📥 Export Save File</button>
-                    <label for="loadFile" class="load-button" style="cursor: pointer; display: inline-block;">
-                        📤 Import Save File
-                    </label>
-                    <input type="file" id="loadFile" class="file-input" accept=".json" onchange="loadGame(event)">
-                </div>
-                <div class="save-info">
-                    💡 Export để lưu game, Import để tải lại tiến trình
-                </div>
-            </div>
 
             <!-- Game Pass Panel -->
             <div class="gamepass-panel">
@@ -2118,7 +2082,7 @@
                     </div>
                 </div>
                 <div style="text-align: center; padding: 10px; background: rgba(255,0,0,0.1); border-radius: 8px; border: 2px solid #ff4444;">
-                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ Nhớ mua trên đúng chỗ bằng cách nhấp vào gói để mau trong đó phần hướng dẫn ⚠️</div>
+                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ DEMO ONLY - Không thanh toán thật ⚠️</div>
                 </div>
             </div>
 
@@ -2489,6 +2453,7 @@
                 
                 // Cookie
                 clickMe: 'Click Me!',
+                perClick: 'per click',
                 
                 // Admin Panel
                 adminPanel: 'Admin Panel',
@@ -2500,6 +2465,8 @@
                 addGold: '+100 Gold Bars',
                 summonWeather: 'Summon Weather',
                 summonPet: 'Summon Pet',
+                clearWeather: 'Clear All Weather',
+                currentWeather: 'Current Weather',
                 
                 // Shop
                 shop: 'Shop',
@@ -2509,39 +2476,62 @@
                 speedBoostItem: 'Speed Boost',
                 buy: 'Buy',
                 owned: 'Owned',
+                remaining: 'Remaining',
+                effect: 'Effect',
+                increase: 'Increase',
+                perSecond: 'per second',
+                reduce: 'Reduce',
+                shopDescription1: 'Increase click power by 1 per purchase',
+                shopDescription2: 'Auto-generate 1 coin per second',
+                shopDescription3: 'Multiply all income by 1.5x',
+                shopDescription4: 'Reduce click cooldown by 0.1s',
                 
                 // Rebirth
                 rebirthPanel: 'Rebirth System',
                 rebirthCount: 'Rebirth Count',
-                rebirthMulti: 'Rebirth Multi',
+                rebirthMulti: 'Rebirth Multiplier',
                 nextRebirth: 'Next Rebirth',
                 requirement: 'Requirement',
                 rebirthBtn: 'Rebirth',
+                rebirthReward: 'Reward',
+                times: 'times',
                 
-                // Game Pass
-                gamePassPanel: 'Game Pass',
+                // Game Pass Store
+                gamePassPanel: 'Game Pass Store',
                 vipPass: 'VIP Pass',
                 premiumPass: 'Premium Pass',
+                shopDiscount: 'Shop Discount',
+                noLimit: 'No Purchase Limit',
+                autoSave: 'Auto Save',
+                allBenefits: 'All Benefits',
+                
+                // Potion Shop
+                potionShop: 'Potion Shop',
+                clickPotion: 'Click Potion',
+                autoPotion: 'Auto Potion',
+                doubleClick: 'Double click power for 60s',
+                doubleAuto: 'Double auto-clickers for 60s',
                 
                 // Inventory
                 inventory: 'Inventory',
-                clickPotion: 'Click Potion',
-                autoPotion: 'Auto Potion',
                 use: 'Use',
                 
                 // Pets
-                petsPanel: 'Pets',
+                petsPanel: 'Pet System',
                 equippedPets: 'Equipped Pets',
                 ownedPets: 'Owned Pets',
                 equip: 'Equip',
                 unequip: 'Unequip',
+                maxEquipped: 'Max Equipped',
                 
                 // Eggs
                 eggShop: 'Egg Shop',
+                hatchChance: 'Hatch Chance',
                 
                 // Weather
                 weatherPanel: 'Weather System',
                 activeWeather: 'Active Weather',
+                noWeather: 'No active weather',
                 
                 // Mini Games
                 miniGameRPS: 'Mini Game - Rock Paper Scissors',
@@ -2552,16 +2542,41 @@
                 start: 'Start',
                 continue: 'Continue',
                 backToMenu: 'Back to Menu',
+                rock: 'Rock',
+                paper: 'Paper',
+                scissors: 'Scissors',
+                youWin: 'You Win!',
+                youLose: 'You Lose!',
+                draw: 'Draw!',
                 
                 // Wheel
                 wheelGame: 'Lucky Wheel',
                 tickets: 'Tickets',
                 buyTicket: 'Buy Ticket',
                 spin: 'Spin',
+                ticketPrice: 'Ticket Price',
+                
+                // Discount Ticket Shop
+                discountShop: 'Discount Ticket Shop',
+                ticketDiscount: 'Ticket Discount',
+                currentDiscount: 'Current Discount',
                 
                 // Gold Shop
                 goldShop: 'GOLD SHOP - EXCLUSIVE ITEMS',
                 onlyGold: 'Only buyable with Gold Bars!',
+                diamondPack: 'Diamond Pack',
+                megaCoins: 'Mega Coins',
+                autoClicker: 'Auto Clicker',
+                clickPowerBoost: 'Click Power',
+                multiplierBoost: 'Multiplier',
+                speedBoost: 'Speed Boost',
+                ticketPack: 'Ticket Pack',
+                legendaryEgg: 'Legendary Egg',
+                vipPassItem: 'VIP Pass',
+                premiumPassItem: 'Premium Pass',
+                rebirthBoost: 'Rebirth Multiplier',
+                bestValue: 'BEST VALUE',
+                permanent: 'Permanent',
                 
                 // Pay Store
                 payStore: 'PREMIUM STORE',
@@ -2569,6 +2584,15 @@
                 premiumCurrency: 'Extremely rare! Only purchasable with real money!',
                 buySpecial: 'Buy special items with Gold Bars',
                 demoOnly: 'DEMO ONLY - No real payment',
+                starterPack: 'Starter Pack',
+                valuePack: 'Value Pack',
+                goodDeal: 'Good Deal',
+                greatValue: 'Great Value',
+                bestPack: 'Best Value',
+                megaPack: 'Mega Pack',
+                ultimatePack: 'ULTIMATE PACK',
+                save30: 'SAVE 30%',
+                hot: 'HOT',
                 
                 // Settings
                 settings: 'Settings',
@@ -2578,8 +2602,8 @@
                 save: 'Save',
                 load: 'Load',
                 deleteSave: 'Delete Save',
-                export: 'Export',
-                import: 'Import',
+                export: 'Export to save game',
+                import: 'Import to load progress',
                 
                 // Alerts
                 notEnough: 'Not enough',
@@ -2601,6 +2625,7 @@
                 
                 // Cookie
                 clickMe: 'Click vào đây!',
+                perClick: 'mỗi click',
                 
                 // Admin Panel
                 adminPanel: 'Bảng Admin',
@@ -2612,6 +2637,8 @@
                 addGold: '+100 Thỏi vàng',
                 summonWeather: 'Triệu hồi Thời tiết',
                 summonPet: 'Triệu hồi Pet',
+                clearWeather: 'Xóa Tất cả Thời tiết',
+                currentWeather: 'Thời tiết Hiện tại',
                 
                 // Shop
                 shop: 'Cửa hàng',
@@ -2621,6 +2648,15 @@
                 speedBoostItem: 'Tăng tốc',
                 buy: 'Mua',
                 owned: 'Đã mua',
+                remaining: 'Còn lại',
+                effect: 'Tác dụng',
+                increase: 'Tăng',
+                perSecond: 'mỗi giây',
+                reduce: 'Giảm',
+                shopDescription1: 'Tăng sức mạnh click thêm 1 mỗi lần mua',
+                shopDescription2: 'Tự động tạo 1 coin mỗi giây',
+                shopDescription3: 'Nhân toàn bộ thu nhập x1.5',
+                shopDescription4: 'Giảm thời gian hồi chiêu 0.1s',
                 
                 // Rebirth
                 rebirthPanel: 'Hệ thống Tái sinh',
@@ -2629,31 +2665,45 @@
                 nextRebirth: 'Tái sinh tiếp theo',
                 requirement: 'Yêu cầu',
                 rebirthBtn: 'Tái sinh',
+                rebirthReward: 'Phần thưởng',
+                times: 'lần',
                 
-                // Game Pass
-                gamePassPanel: 'Game Pass',
+                // Game Pass Store
+                gamePassPanel: 'Cửa hàng Game Pass',
                 vipPass: 'VIP Pass',
                 premiumPass: 'Premium Pass',
+                shopDiscount: 'Giảm giá Shop',
+                noLimit: 'Mua không giới hạn',
+                autoSave: 'Tự động Lưu',
+                allBenefits: 'Toàn bộ Quyền lợi',
                 
-                // Inventory
-                inventory: 'Túi đồ',
+                // Potion Shop
+                potionShop: 'Cửa hàng Thuốc',
                 clickPotion: 'Thuốc Click',
                 autoPotion: 'Thuốc Auto',
+                doubleClick: 'Nhân đôi sức click trong 60s',
+                doubleAuto: 'Nhân đôi auto-clicker trong 60s',
+                
+                // Inventory
+                inventory: 'Túi Đồ',
                 use: 'Dùng',
                 
                 // Pets
-                petsPanel: 'Thú cưng',
+                petsPanel: 'Hệ thống Pet',
                 equippedPets: 'Pets đang trang bị',
                 ownedPets: 'Pets đã sở hữu',
                 equip: 'Trang bị',
                 unequip: 'Gỡ',
+                maxEquipped: 'Trang bị Tối đa',
                 
                 // Eggs
                 eggShop: 'Cửa hàng Trứng',
+                hatchChance: 'Tỷ lệ nở',
                 
                 // Weather
                 weatherPanel: 'Hệ thống Thời tiết',
                 activeWeather: 'Thời tiết đang có',
+                noWeather: 'Không có thời tiết nào',
                 
                 // Mini Games
                 miniGameRPS: 'Mini Game - Kéo Búa Bao',
@@ -2664,16 +2714,41 @@
                 start: 'Bắt đầu',
                 continue: 'Tiếp tục',
                 backToMenu: 'Về Menu',
+                rock: 'Búa',
+                paper: 'Bao',
+                scissors: 'Kéo',
+                youWin: 'Bạn Thắng!',
+                youLose: 'Bạn Thua!',
+                draw: 'Hòa!',
                 
                 // Wheel
                 wheelGame: 'Vòng quay May mắn',
                 tickets: 'Vé',
                 buyTicket: 'Mua vé',
                 spin: 'Quay',
+                ticketPrice: 'Giá vé',
+                
+                // Discount Ticket Shop
+                discountShop: 'Cửa Hàng Vé Giảm Giá',
+                ticketDiscount: 'Giảm giá Vé',
+                currentDiscount: 'Giảm giá Hiện tại',
                 
                 // Gold Shop
                 goldShop: 'GOLD SHOP - VẬT PHẨM ĐỘC QUYỀN',
                 onlyGold: 'Chỉ mua bằng Thỏi Vàng!',
+                diamondPack: 'Gói Kim Cương',
+                megaCoins: 'Mega Coins',
+                autoClicker: 'Auto Clicker',
+                clickPowerBoost: 'Click Power',
+                multiplierBoost: 'Bội số',
+                speedBoost: 'Tăng tốc',
+                ticketPack: 'Gói Vé',
+                legendaryEgg: 'Trứng Huyền thoại',
+                vipPassItem: 'VIP Pass',
+                premiumPassItem: 'Premium Pass',
+                rebirthBoost: 'Bội số Tái sinh',
+                bestValue: 'GIÁ TRỊ TỐT NHẤT',
+                permanent: 'Vĩnh viễn',
                 
                 // Pay Store
                 payStore: 'CỬA HÀNG PREMIUM',
@@ -2681,6 +2756,15 @@
                 premiumCurrency: 'Cực kỳ hiếm! Chỉ có thể mua bằng tiền thật!',
                 buySpecial: 'Mua vật phẩm đặc biệt chỉ với Thỏi Vàng',
                 demoOnly: 'DEMO ONLY - Không thanh toán thật',
+                starterPack: 'Gói Khởi đầu',
+                valuePack: 'Gói Giá trị',
+                goodDeal: 'Ưu đãi Tốt',
+                greatValue: 'Giá trị Lớn',
+                bestPack: 'Tốt Nhất',
+                megaPack: 'Gói Khủng',
+                ultimatePack: 'GÓI SIÊU CẤP',
+                save30: 'TIẾT KIỆM 30%',
+                hot: 'HOT',
                 
                 // Settings
                 settings: 'Cài đặt',
@@ -2690,8 +2774,8 @@
                 save: 'Lưu game',
                 load: 'Tải game',
                 deleteSave: 'Xóa save',
-                export: 'Xuất file',
-                import: 'Nhập file',
+                export: 'Export để lưu game',
+                import: 'Import để tải lại tiến trình',
                 
                 // Alerts
                 notEnough: 'Không đủ',
@@ -2744,6 +2828,7 @@
             const importBtn = document.getElementById('importBtn');
             const settingsButtonText = document.getElementById('settingsButtonText');
             const playTimeLabel = document.getElementById('playTimeLabel');
+            const saveInfo = document.getElementById('saveInfo');
             
             if (settingsTitle) settingsTitle.textContent = t('settings');
             if (languageLabel) languageLabel.textContent = t('language');
@@ -2755,6 +2840,9 @@
             if (importBtn) importBtn.textContent = t('import');
             if (settingsButtonText) settingsButtonText.textContent = t('settings');
             if (playTimeLabel) playTimeLabel.textContent = currentLanguage === 'en' ? 'Time' : 'Thời gian';
+            if (saveInfo) saveInfo.textContent = currentLanguage === 'en' 
+                ? '💡 Export to save game, Import to load progress' 
+                : '💡 Export để lưu game, Import để tải lại tiến trình';
             
             // Update header stats labels
             const statsDiv = document.querySelector('.stats');
@@ -2789,7 +2877,7 @@
                     title.textContent = '🎫 ' + t('gamePassPanel');
                 } else if (text.includes('Inventory') || text.includes('Túi')) {
                     title.textContent = '🎒 ' + t('inventory');
-                } else if (text.includes('Pets') || text.includes('Thú')) {
+                } else if (text.includes('Pets') || text.includes('Thú') || text.includes('Pet System')) {
                     title.textContent = '🐾 ' + t('petsPanel');
                 } else if (text.includes('Egg') || text.includes('Trứng')) {
                     title.textContent = '🥚 ' + t('eggShop');
@@ -2803,11 +2891,25 @@
                     title.textContent = '🏆 ' + t('goldShop');
                 } else if (text.includes('PREMIUM') || text.includes('CỬA HÀNG')) {
                     title.textContent = '💰 ' + t('payStore');
+                } else if (text.includes('Potion') || text.includes('Thuốc')) {
+                    title.textContent = '🧪 ' + t('potionShop');
+                } else if (text.includes('Discount') || text.includes('Giảm Giá')) {
+                    title.textContent = '🎫 ' + t('discountShop');
+                }
+            });
+            
+            // Update buttons with class "buy-button"
+            const buyButtons = document.querySelectorAll('.buy-button');
+            buyButtons.forEach(btn => {
+                if (btn.textContent.includes('Mua') || btn.textContent.includes('Buy')) {
+                    btn.textContent = '💰 ' + t('buy');
                 }
             });
             
             updateDisplay();
             updateWeatherDisplay();
+            
+            // Re-render will handle owned/remaining text
         }
 
         // Console protection
@@ -3145,25 +3247,26 @@
         
         // Weather configuration
         const weatherConfig = {
+            // TIER 1: COMMON WEATHERS (1-13)
             wind: {
                 name: { en: '💨 Wind', vi: '💨 Gió' },
-                effect: { en: 'Click Speed +0.3s', vi: 'Tốc độ click +0.3s' },
-                duration: 5,
+                effect: { en: 'Cooldown -0.3s', vi: 'Hồi chiêu -0.3s' },
+                duration: 45,
                 interval: 100,
                 icon: '💨',
                 class: 'wind'
             },
             cloud: {
                 name: { en: '☁️ Cloud', vi: '☁️ Mây' },
-                effect: { en: 'Potion & Ticket -3%', vi: 'Thuốc & Vé giảm 3%' },
-                duration: 45,
+                effect: { en: 'Shop Discount +3%', vi: 'Giảm giá +3%' },
+                duration: 60,
                 interval: 300,
                 icon: '☁️',
                 class: 'cloud'
             },
             rain: {
                 name: { en: '🌧️ Rain', vi: '🌧️ Mưa' },
-                effect: { en: '+2 Click Power', vi: '+2 Click Power' },
+                effect: { en: '+2 Click Power', vi: '+2 Sức Click' },
                 duration: 45,
                 interval: 600,
                 icon: '🌧️',
@@ -3171,7 +3274,7 @@
             },
             night: {
                 name: { en: '🌙 Night', vi: '🌙 Ban Đêm' },
-                effect: { en: '+5 Click Power', vi: '+5 Click Power' },
+                effect: { en: '+5 Click Power', vi: '+5 Sức Click' },
                 duration: 30,
                 interval: 1200,
                 icon: '🌙',
@@ -3179,7 +3282,7 @@
             },
             moonlight: {
                 name: { en: '✨ Moonlight', vi: '✨ Ánh Trăng' },
-                effect: { en: 'x5 Click Power', vi: 'x5 Click Power' },
+                effect: { en: 'x2 Click Power', vi: 'x2 Sức Click' },
                 duration: 60,
                 interval: 2400,
                 icon: '✨',
@@ -3187,291 +3290,371 @@
             },
             meteor: {
                 name: { en: '☄️ Meteor Shower', vi: '☄️ Mưa Sao Băng' },
-                effect: { en: 'x10 Click Power', vi: 'x10 Click Power' },
+                effect: { en: 'x5 Click Power', vi: 'x5 Sức Click' },
                 duration: 60,
                 interval: 3600,
                 icon: '☄️',
                 class: 'meteor'
             },
             snow: {
-                name: '❄️ Mưa Tuyết',
-                effect: 'Cooldown +0.5s',
-                duration: 30,
+                name: { en: '❄️ Snow', vi: '❄️ Tuyết' },
+                effect: { en: '+3 Auto Clickers', vi: '+3 Auto' },
+                duration: 40,
                 interval: 800,
                 icon: '❄️',
                 class: 'snow'
             },
-            acid: {
-                name: '☣️ Mưa Acid',
-                effect: '-2 Click Power',
+            fog: {
+                name: { en: '🌫️ Fog', vi: '🌫️ Sương Mù' },
+                effect: { en: '+1 Multiplier', vi: '+1 Nhân' },
+                duration: 50,
+                interval: 900,
+                icon: '🌫️',
+                class: 'fog'
+            },
+            breeze: {
+                name: { en: '🍃 Breeze', vi: '🍃 Gió Nhẹ' },
+                effect: { en: '+10 Auto Clickers', vi: '+10 Auto' },
+                duration: 55,
+                interval: 1000,
+                icon: '🍃',
+                class: 'breeze'
+            },
+            drizzle: {
+                name: { en: '🌦️ Drizzle', vi: '🌦️ Mưa Phùn' },
+                effect: { en: '+8 Click Power', vi: '+8 Sức Click' },
+                duration: 45,
+                interval: 1100,
+                icon: '🌦️',
+                class: 'drizzle'
+            },
+            thunder: {
+                name: { en: '⚡ Thunder', vi: '⚡ Sấm' },
+                effect: { en: 'x3 Click Power', vi: 'x3 Sức Click' },
+                duration: 30,
+                interval: 1500,
+                icon: '⚡',
+                class: 'thunder'
+            },
+            sunrise: {
+                name: { en: '🌅 Sunrise', vi: '🌅 Bình Minh' },
+                effect: { en: '+15 Click Power', vi: '+15 Sức Click' },
                 duration: 60,
-                interval: 10800,
-                icon: '☣️',
-                class: 'acid'
+                interval: 1800,
+                icon: '🌅',
+                class: 'sunrise'
             },
-            diamond: {
-                name: '💎 Mưa Kim Cương',
-                effect: 'x10 Click Power',
-                duration: 90,
-                interval: 14400,
-                icon: '💎',
-                class: 'diamond'
+            sunset: {
+                name: { en: '🌇 Sunset', vi: '🌇 Hoàng Hôn' },
+                effect: { en: '+12 Auto Clickers', vi: '+12 Auto' },
+                duration: 50,
+                interval: 2000,
+                icon: '🌇',
+                class: 'sunset'
             },
-            emerald: {
-                name: '💚 Mưa Lục Kim',
-                effect: 'x300 Click Power',
-                duration: 120,
-                interval: 18000,
-                icon: '💚',
-                class: 'emerald'
+
+            // TIER 2: UNCOMMON WEATHERS (14-26)
+            storm: {
+                name: { en: '🌩️ Storm', vi: '🌩️ Bão' },
+                effect: { en: 'x4 Click Power', vi: 'x4 Sức Click' },
+                duration: 45,
+                interval: 2200,
+                icon: '🌩️',
+                class: 'storm'
             },
-            adminabuse: {
-                name: '🛸 Admin Abuse',
-                effect: 'x500 Click Power',
-                duration: 150,
-                interval: 36000,
-                icon: '🛸',
-                class: 'adminabuse'
+            blizzard: {
+                name: { en: '🌨️ Blizzard', vi: '🌨️ Bão Tuyết' },
+                effect: { en: '+20 Auto Clickers', vi: '+20 Auto' },
+                duration: 40,
+                interval: 2500,
+                icon: '🌨️',
+                class: 'blizzard'
+            },
+            hail: {
+                name: { en: '🧊 Hail', vi: '🧊 Mưa Đá' },
+                effect: { en: '+25 Click Power', vi: '+25 Sức Click' },
+                duration: 35,
+                interval: 2800,
+                icon: '🧊',
+                class: 'hail'
+            },
+            tornado: {
+                name: { en: '🌪️ Tornado', vi: '🌪️ Lốc Xoáy' },
+                effect: { en: 'x6 Click Power', vi: 'x6 Sức Click' },
+                duration: 30,
+                interval: 3200,
+                icon: '🌪️',
+                class: 'tornado'
+            },
+            rainbow: {
+                name: { en: '🌈 Rainbow', vi: '🌈 Cầu Vồng' },
+                effect: { en: '+2 Multiplier', vi: '+2 Nhân' },
+                duration: 60,
+                interval: 3500,
+                icon: '🌈',
+                class: 'rainbow'
+            },
+            aurora: {
+                name: { en: '🌌 Aurora', vi: '🌌 Cực Quang' },
+                effect: { en: 'x7 Click Power', vi: 'x7 Sức Click' },
+                duration: 70,
+                interval: 4000,
+                icon: '🌌',
+                class: 'aurora'
+            },
+            eclipse: {
+                name: { en: '🌑 Eclipse', vi: '🌑 Nhật Thực' },
+                effect: { en: 'x8 Click Power', vi: 'x8 Sức Click' },
+                duration: 20,
+                interval: 4500,
+                icon: '🌑',
+                class: 'eclipse'
+            },
+            comet: {
+                name: { en: '☄️ Comet', vi: '☄️ Sao Chổi' },
+                effect: { en: '+50 Click Power', vi: '+50 Sức Click' },
+                duration: 40,
+                interval: 5000,
+                icon: '☄️',
+                class: 'comet'
+            },
+            volcano: {
+                name: { en: '🌋 Volcano', vi: '🌋 Núi Lửa' },
+                effect: { en: 'x10 Click Power', vi: 'x10 Sức Click' },
+                duration: 50,
+                interval: 5500,
+                icon: '🌋',
+                class: 'volcano'
             },
             earthquake: {
-                name: '🌋 Động Đất',
-                effect: '+15 Click Power',
-                duration: 120,
-                interval: 21600,
-                icon: '🌋',
+                name: { en: '🌍 Earthquake', vi: '🌍 Động Đất' },
+                effect: { en: '+30 Auto Clickers', vi: '+30 Auto' },
+                duration: 25,
+                interval: 6000,
+                icon: '🌍',
                 class: 'earthquake'
             },
-            thunderstorm: {
-                name: '⚡ Bão Sấm',
-                effect: 'x100 Click Power',
-                duration: 180,
-                interval: 28800,
-                icon: '⚡',
-                class: 'thunderstorm'
+            tsunami: {
+                name: { en: '🌊 Tsunami', vi: '🌊 Sóng Thần' },
+                effect: { en: 'x12 Click Power', vi: 'x12 Sức Click' },
+                duration: 35,
+                interval: 6500,
+                icon: '🌊',
+                class: 'tsunami'
             },
-            superstorm: {
-                name: '🌪️ Siêu Bão',
-                effect: 'x300 Click Power',
-                duration: 240,
-                interval: 36000,
-                icon: '🌪️',
-                class: 'superstorm'
+            wildfire: {
+                name: { en: '🔥 Wildfire', vi: '🔥 Cháy Rừng' },
+                effect: { en: '+100 Click Power', vi: '+100 Sức Click' },
+                duration: 30,
+                interval: 7000,
+                icon: '🔥',
+                class: 'wildfire'
             },
-            winteraurora: {
-                name: '🌌 Cực Quang Đông',
-                effect: 'x500 Click Power',
-                duration: 300,
-                interval: 72000,
-                icon: '🌌',
-                class: 'winteraurora'
+            sandstorm: {
+                name: { en: '🏜️ Sandstorm', vi: '🏜️ Bão Cát' },
+                effect: { en: '+40 Auto Clickers', vi: '+40 Auto' },
+                duration: 40,
+                interval: 7500,
+                icon: '🏜️',
+                class: 'sandstorm'
             },
-            shootingstars: {
-                name: '🌠 Mưa Sao',
-                effect: 'x5 Tiền Hiện Có',
+
+            // TIER 3: RARE WEATHERS (27-38)
+            blackhole: {
+                name: { en: '🕳️ Black Hole', vi: '🕳️ Lỗ Đen' },
+                effect: { en: 'x15 Click Power', vi: 'x15 Sức Click' },
                 duration: 60,
-                interval: 108000,
-                icon: '🌠',
-                class: 'shootingstars'
-            },
-            permafrost: {
-                name: '❄️🔥 Nổ Băng Vĩnh Cửu',
-                effect: 'x1000 Tiền Hiện Có',
-                duration: 90,
-                interval: 144000,
-                icon: '❄️🔥',
-                class: 'permafrost'
-            },
-            cyclone: {
-                name: '🌀 Lốc Xoáy',
-                effect: '+10% Click Power',
-                duration: 150,
-                interval: 180000,
-                icon: '🌀',
-                class: 'cyclone'
-            },
-            dissonant: {
-                name: '🎭 Hỗn Loạn',
-                effect: '+300 Click Power',
-                duration: 180,
-                interval: 360000,
-                icon: '🎭',
-                class: 'dissonant'
-            },
-            beestorm: {
-                name: '🐝 Bão Ong',
-                effect: '+34920111 Click Power',
-                duration: 300,
-                interval: 86400,
-                icon: '🐝',
-                class: 'beestorm'
-            },
-            tropicalrain: {
-                name: '🌴 Mưa Nhiệt Đới',
-                effect: '+150 Click Power',
-                duration: 90,
-                interval: 1680,
-                icon: '🌴',
-                class: 'tropicalrain'
-            },
-            gentledrizzle: {
-                name: '🌧️💧 Mưa Phùn',
-                effect: 'x2 Tiền Hiện Có',
-                duration: 120,
-                interval: 1860,
-                icon: '🌧️💧',
-                class: 'gentledrizzle'
-            },
-            ownerabuse: {
-                name: '⚜️ Owner Abuse',
-                effect: 'x10000 Click Power',
-                duration: 600,
-                interval: 1800000,
-                icon: '⚜️',
-                class: 'ownerabuse'
-            },
-            rainbowrain: {
-                name: '🌈 Rainbow Rain',
-                effect: 'x50 Click Power',
-                duration: 180,
-                interval: 2700,
-                icon: '🌈',
-                class: 'rainbowrain'
-            },
-            goldrain: {
-                name: '💰 Gold Rain',
-                effect: 'x200 Click Power',
-                duration: 240,
-                interval: 3600,
-                icon: '💰',
-                class: 'goldrain'
-            },
-            silverrain: {
-                name: '🪙 Silver Rain',
-                effect: 'x75 Click Power',
-                duration: 200,
-                interval: 3000,
-                icon: '🪙',
-                class: 'silverrain'
-            },
-            cosmicrain: {
-                name: '🌌 Cosmic Rain',
-                effect: 'x1000 Click Power',
-                duration: 300,
-                interval: 7200,
-                icon: '🌌',
-                class: 'cosmicrain'
-            },
-            secretrain: {
-                name: '🔮 Secret Rain',
-                effect: 'x5000 Click Power',
-                duration: 360,
-                interval: 10800,
-                icon: '🔮',
-                class: 'secretrain'
-            },
-            whitehole: {
-                name: '⚪ White Hole',
-                effect: 'x500 Tiền Hiện Có',
-                duration: 240,
-                interval: 14400,
-                icon: '⚪',
-                class: 'whitehole'
+                interval: 8000,
+                icon: '🕳️',
+                class: 'blackhole'
             },
             supernova: {
-                name: '💥 Super Nova',
-                effect: 'x2000 Click Power',
-                duration: 300,
-                interval: 18000,
+                name: { en: '💥 Supernova', vi: '💥 Siêu Tân Tinh' },
+                effect: { en: 'x20 Click Power', vi: 'x20 Sức Click' },
+                duration: 45,
+                interval: 9000,
                 icon: '💥',
                 class: 'supernova'
             },
-            nancorenova: {
-                name: '⚛️ Nancore Nova',
-                effect: '+1000000 Click Power',
-                duration: 360,
-                interval: 21600,
+            timewarp: {
+                name: { en: '⏰ Time Warp', vi: '⏰ Vặn Thời Gian' },
+                effect: { en: 'Cooldown -0.5s', vi: 'Hồi chiêu -0.5s' },
+                duration: 50,
+                interval: 10000,
+                icon: '⏰',
+                class: 'timewarp'
+            },
+            gravity: {
+                name: { en: '🌐 Zero Gravity', vi: '🌐 Không Trọng Lực' },
+                effect: { en: '+3 Multiplier', vi: '+3 Nhân' },
+                duration: 70,
+                interval: 11000,
+                icon: '🌐',
+                class: 'gravity'
+            },
+            plasma: {
+                name: { en: '⚛️ Plasma Storm', vi: '⚛️ Bão Plasma' },
+                effect: { en: 'x25 Click Power', vi: 'x25 Sức Click' },
+                duration: 40,
+                interval: 12000,
                 icon: '⚛️',
-                class: 'nancorenova'
+                class: 'plasma'
             },
-            corruptzenaura: {
-                name: '👹 Corrupt Zen Aura',
-                effect: 'x3000 Click Power',
-                duration: 420,
-                interval: 28800,
-                icon: '👹',
-                class: 'corruptzenaura'
+            quantum: {
+                name: { en: '🔬 Quantum Flux', vi: '🔬 Lượng Tử' },
+                effect: { en: '+5 Multiplier', vi: '+5 Nhân' },
+                duration: 60,
+                interval: 13000,
+                icon: '🔬',
+                class: 'quantum'
             },
-            fullmoon: {
-                name: '🌕 Full Moon',
-                effect: 'x150 Click Power',
-                duration: 480,
-                interval: 43200,
-                icon: '🌕',
-                class: 'fullmoon'
+            dimension: {
+                name: { en: '🌀 Dimension Rift', vi: '🌀 Khe Chiều' },
+                effect: { en: 'x30 Click Power', vi: 'x30 Sức Click' },
+                duration: 55,
+                interval: 14000,
+                icon: '🌀',
+                class: 'dimension'
             },
-            safaridusk: {
-                name: '🌅 Safari Dusk',
-                effect: '+5000 Click Power',
-                duration: 540,
-                interval: 54000,
-                icon: '🌅',
-                class: 'safaridusk'
+            cosmic: {
+                name: { en: '✨ Cosmic Dust', vi: '✨ Bụi Vũ Trụ' },
+                effect: { en: '+200 Click Power', vi: '+200 Sức Click' },
+                duration: 50,
+                interval: 15000,
+                icon: '✨',
+                class: 'cosmic'
             },
-            yetinight: {
-                name: '🏔️ Yeti Night',
-                effect: 'x800 Click Power',
-                duration: 600,
-                interval: 64800,
-                icon: '🏔️',
-                class: 'yetinight'
+            nebula: {
+                name: { en: '🌌 Nebula', vi: '🌌 Tinh Vân' },
+                effect: { en: 'x35 Click Power', vi: 'x35 Sức Click' },
+                duration: 65,
+                interval: 16000,
+                icon: '🌌',
+                class: 'nebula'
             },
-            silentnight: {
-                name: '🌃 Silent Night',
-                effect: '+50% Click Power',
-                duration: 660,
-                interval: 72000,
-                icon: '🌃',
-                class: 'silentnight'
+            pulsar: {
+                name: { en: '💫 Pulsar', vi: '💫 Sao Xung' },
+                effect: { en: '+100 Auto Clickers', vi: '+100 Auto' },
+                duration: 45,
+                interval: 17000,
+                icon: '💫',
+                class: 'pulsar'
             },
-            boomboxparty: {
-                name: '🎵 Boombox Party',
-                effect: 'x250 Click Power',
-                duration: 720,
-                interval: 86400,
-                icon: '🎵',
-                class: 'boomboxparty'
+            stardust: {
+                name: { en: '⭐ Stardust', vi: '⭐ Bụi Sao' },
+                effect: { en: 'x40 Click Power', vi: 'x40 Sức Click' },
+                duration: 70,
+                interval: 18000,
+                icon: '⭐',
+                class: 'stardust'
             },
-            frozeniceking: {
-                name: '❄️👑 Frozen Ice King',
-                effect: 'x4000 Click Power',
-                duration: 780,
-                interval: 108000,
-                icon: '❄️👑',
-                class: 'frozeniceking'
+            galaxy: {
+                name: { en: '🌟 Galaxy Burst', vi: '🌟 Nổ Ngân Hà' },
+                effect: { en: 'x50 Click Power', vi: 'x50 Sức Click' },
+                duration: 80,
+                interval: 20000,
+                icon: '🌟',
+                class: 'galaxy'
             },
-            radioactiverain: {
-                name: '☢️ Radioactive Rain',
-                effect: '+100000 Click Power',
-                duration: 840,
-                interval: 144000,
-                icon: '☢️',
-                class: 'radioactiverain'
+
+            // TIER 4: EPIC WEATHERS (39-44)
+            divine: {
+                name: { en: '🙏 Divine Light', vi: '🙏 Ánh Sáng Thần' },
+                effect: { en: 'x75 Click Power', vi: 'x75 Sức Click' },
+                duration: 90,
+                interval: 22000,
+                icon: '🙏',
+                class: 'divine'
             },
-            oilrain: {
-                name: '🛢️ Oil Rain',
-                effect: 'x100 Tiền Hiện Có',
-                duration: 900,
-                interval: 180000,
-                icon: '🛢️',
-                class: 'oilrain'
+            celestial: {
+                name: { en: '👼 Celestial Blessing', vi: '👼 Phước Lành' },
+                effect: { en: 'x100 Click Power', vi: 'x100 Sức Click' },
+                duration: 100,
+                interval: 25000,
+                icon: '👼',
+                class: 'celestial'
             },
-            sandstrike: {
-                name: '🏜️ Sand Strike',
-                effect: 'x1500 Click Power',
-                duration: 480,
-                interval: 360000,
-                icon: '🏜️',
-                class: 'sandstrike'
+            mythical: {
+                name: { en: '🐉 Mythical Dragon', vi: '🐉 Rồng Thần' },
+                effect: { en: 'x150 Click Power', vi: 'x150 Sức Click' },
+                duration: 120,
+                interval: 28000,
+                icon: '🐉',
+                class: 'mythical'
+            },
+            phoenix: {
+                name: { en: '🔥 Phoenix Rise', vi: '🔥 Phượng Hoàng' },
+                effect: { en: 'x200 Click Power', vi: 'x200 Sức Click' },
+                duration: 90,
+                interval: 30000,
+                icon: '🔥',
+                class: 'phoenix'
+            },
+            unicorn: {
+                name: { en: '🦄 Unicorn Magic', vi: '🦄 Kỳ Lân' },
+                effect: { en: '+10 Multiplier', vi: '+10 Nhân' },
+                duration: 150,
+                interval: 32000,
+                icon: '🦄',
+                class: 'unicorn'
+            },
+            kraken: {
+                name: { en: '🐙 Kraken Fury', vi: '🐙 Kraken' },
+                effect: { en: 'x250 Click Power', vi: 'x250 Sức Click' },
+                duration: 100,
+                interval: 35000,
+                icon: '🐙',
+                class: 'kraken'
+            },
+
+            // TIER 5: LEGENDARY WEATHERS (45-50)
+            infinity: {
+                name: { en: '∞ Infinity', vi: '∞ Vô Cực' },
+                effect: { en: 'x500 Click Power', vi: 'x500 Sức Click' },
+                duration: 180,
+                interval: 40000,
+                icon: '∞',
+                class: 'infinity'
+            },
+            eternity: {
+                name: { en: '⏳ Eternity', vi: '⏳ Vĩnh Cửu' },
+                effect: { en: '+20 Multiplier', vi: '+20 Nhân' },
+                duration: 200,
+                interval: 45000,
+                icon: '⏳',
+                class: 'eternity'
+            },
+            omnipotence: {
+                name: { en: '👁️ Omnipotence', vi: '👁️ Toàn Năng' },
+                effect: { en: 'x1000 Click Power', vi: 'x1000 Sức Click' },
+                duration: 150,
+                interval: 50000,
+                icon: '👁️',
+                class: 'omnipotence'
+            },
+            godmode: {
+                name: { en: '⚡ God Mode', vi: '⚡ Chế Độ Thần' },
+                effect: { en: 'x2000 Click Power', vi: 'x2000 Sức Click' },
+                duration: 120,
+                interval: 60000,
+                icon: '⚡',
+                class: 'godmode'
+            },
+            transcendence: {
+                name: { en: '🌠 Transcendence', vi: '🌠 Siêu Việt' },
+                effect: { en: 'x5000 Click Power', vi: 'x5000 Sức Click' },
+                duration: 90,
+                interval: 80000,
+                icon: '🌠',
+                class: 'transcendence'
+            },
+            ascension: {
+                name: { en: '🚀 Ascension', vi: '🚀 Thăng Thiên' },
+                effect: { en: 'x10000 Click Power', vi: 'x10000 Sức Click' },
+                duration: 60,
+                interval: 100000,
+                icon: '🚀',
+                class: 'ascension'
             }
         };
         // Weather next spawn times
@@ -3520,515 +3703,849 @@
         };
 
         const shopItems = [
-    {
-        id: 1,
-        name: '+1 Click Power',
-        description: 'Tăng 1 coin mỗi click',
-        icon: '⚡',
-        basePrice: 10,
-        currentPrice: 10,
-        owned: 0,
-        effect: () => clickPower++
-    },
-    {
-        id: 2,
-        name: 'Auto Clicker',
-        description: '+1 coin mỗi giây',
-        icon: '🤖',
-        basePrice: 100,
-        currentPrice: 100,
-        owned: 0,
-        effect: () => autoClickers++
-    },
-    {
-        id: 3,
-        name: 'Faster Click',
-        description: 'Giảm 0.05s thời gian chờ click',
-        icon: '⚡',
-        basePrice: 500,
-        currentPrice: 500,
-        owned: 0,
-        effect: () => {
-            clickCooldown = Math.max(0.05, clickCooldown - 0.05);
-        }
-    },
-    {
-        id: 4,
-        name: 'Super Click',
-        description: '+5 click power',
-        icon: '⭐',
-        basePrice: 1000,
-        currentPrice: 1000,
-        owned: 0,
-        effect: () => clickPower += 5
-    },
-    {
-        id: 5,
-        name: 'Mega Clicker',
-        description: '+10 coins mỗi giây',
-        icon: '✨',
-        basePrice: 3000,
-        currentPrice: 3000,
-        owned: 0,
-        effect: () => autoClickers += 10
-    },
-    {
-        id: 6,
-        name: '2x Multiplier',
-        description: 'Nhân đôi tất cả thu nhập',
-        icon: '👑',
-        basePrice: 15000,
-        currentPrice: 15000,
-        owned: 0,
-        effect: () => multiplier *= 2
-    },
-    {
-        id: 7,
-        name: 'Ultra Click',
-        description: '+20 click power',
-        icon: '💎',
-        basePrice: 10000,
-        currentPrice: 10000,
-        owned: 0,
-        effect: () => clickPower += 20
-    },
-    {
-        id: 8,
-        name: 'Factory',
-        description: '+50 coins mỗi giây',
-        icon: '🏭',
-        basePrice: 30000,
-        currentPrice: 30000,
-        owned: 0,
-        effect: () => autoClickers += 50
-    },
-    {
-        id: 9,
-        name: 'Golden Touch',
-        description: '+100 click power',
-        icon: '🌟',
-        basePrice: 75000,
-        currentPrice: 75000,
-        owned: 0,
-        effect: () => clickPower += 100
-    },
-    {
-        id: 10,
-        name: 'Time Warp',
-        description: 'Giảm 0.03s cooldown',
-        icon: '⏰',
-        basePrice: 120000,
-        currentPrice: 120000,
-        owned: 0,
-        effect: () => {
-            clickCooldown = Math.max(0.01, clickCooldown - 0.03);
-        }
-    },
-    {
-        id: 11,
-        name: 'Robot Army',
-        description: '+100 coins mỗi giây',
-        icon: '🤖',
-        basePrice: 200000,
-        currentPrice: 200000,
-        owned: 0,
-        effect: () => autoClickers += 100
-    },
-    {
-        id: 12,
-        name: 'Diamond Finger',
-        description: '+250 click power',
-        icon: '💍',
-        basePrice: 350000,
-        currentPrice: 350000,
-        owned: 0,
-        effect: () => clickPower += 250
-    },
-    {
-        id: 13,
-        name: 'Money Printer',
-        description: '+200 coins mỗi giây',
-        icon: '🖨️',
-        basePrice: 600000,
-        currentPrice: 600000,
-        owned: 0,
-        effect: () => autoClickers += 200
-    },
-    {
-        id: 14,
-        name: 'Cosmic Power',
-        description: '+400 click power',
-        icon: '🌌',
-        basePrice: 1200000,
-        currentPrice: 1200000,
-        owned: 0,
-        effect: () => clickPower += 400
-    },
-    {
-        id: 15,
-        name: 'Quantum Clicker',
-        description: '+500 coins mỗi giây',
-        icon: '⚛️',
-        basePrice: 2500000,
-        currentPrice: 2500000,
-        owned: 0,
-        effect: () => autoClickers += 500
-    },
-    {
-        id: 16,
-        name: 'Infinity Stone',
-        description: '+1000 click power',
-        icon: '💠',
-        basePrice: 6000000,
-        currentPrice: 6000000,
-        owned: 0,
-        effect: () => clickPower += 1000
-    },
-    {
-        id: 17,
-        name: 'Universe Generator',
-        description: '+1500 coins mỗi giây',
-        icon: '🌠',
-        basePrice: 25000000,
-        currentPrice: 25000000,
-        owned: 0,
-        effect: () => autoClickers += 1500
-    },
-    {
-        id: 18,
-        name: 'The Divine',
-        description: '5% giảm giá mọi vật phẩm',
-        icon: '✨',
-        basePrice: 50000000,
-        currentPrice: 50000000,
-        owned: 0,
-        effect: () => {
-            shopDiscount += 5;
-        }
-    },
-    {
-        id: 19,
-        name: 'The Primastic',
-        description: '1.2% cơ hội hoàn tiền',
-        icon: '💎',
-        basePrice: 1000000000,
-        currentPrice: 1000000000,
-        owned: 0,
-        effect: () => {}
-    },
-    {
-        id: 20,
-        name: 'The Transcendent',
-        description: '0.8% cơ hội hoàn x10 tiền',
-        icon: '🌟',
-        basePrice: 2500000000,
-        currentPrice: 2500000000,
-        owned: 0,
-        effect: () => {}
-    },
-    {
-        id: 21,
-        name: 'The God',
-        description: '+1 giới hạn mua vật phẩm',
-        icon: '⚜️',
-        basePrice: 2500000000,
-        currentPrice: 2500000000,
-        owned: 0,
-        effect: () => {
-            purchaseLimit++;
-        }
-    },
-    {
-        id: 22,
-        name: 'Admin Power',
-        description: '+50 Click Power',
-        icon: '📱',
-        basePrice: 50000000000,
-        currentPrice: 50000000000,
-        owned: 0,
-        effect: () => {
-            clickPower += 50;
-        }
-    },
-    {
-        id: 23,
-        name: 'Owner Power',
-        description: '+200 Click Power',
-        icon: '👑',
-        basePrice: 2000000000000000,
-        currentPrice: 2000000000000000,
-        owned: 0,
-        effect: () => {
-            clickPower += 200;
-        }
-    },
-    {
-        id: 24,
-        name: '67 Power',
-        description: '+670 Click Power',
-        icon: '⚡',
-        basePrice: 5000000000000000,
-        currentPrice: 5000000000000000,
-        owned: 0,
-        effect: () => {
-            clickPower += 670;
-        }
-    },
-    {
-        id: 25,
-        name: '36 Power',
-        description: '+3600 Click Power',
-        icon: '💫',
-        basePrice: 1000000000000000000,
-        currentPrice: 1000000000000000000,
-        owned: 0,
-        effect: () => {
-            clickPower += 3600;
-        }
-    },
-    {
-        id: 26,
-        name: 'Nancore',
-        description: '+10000 Click Power',
-        icon: '⚛️',
-        basePrice: 2000000000000000000000,
-        currentPrice: 2000000000000000000000,
-        owned: 0,
-        effect: () => {
-            clickPower += 10000;
-        }
-    },
-    // ===== 21 VẬT PHẨM MỚI =====
-    {
-        id: 27,
-        name: 'Stellar Engine',
-        description: '+5000 coins mỗi giây',
-        icon: '🌟',
-        basePrice: 10000000000000000000000000, // 10SP
-        currentPrice: 10000000000000000000000000,
-        owned: 0,
-        effect: () => autoClickers += 5000
-    },
-    {
-        id: 28,
-        name: 'Black Hole Generator',
-        description: '+50000 click power',
-        icon: '⚫',
-        basePrice: 50000000000000000000000000, // 50SP
-        currentPrice: 50000000000000000000000000,
-        owned: 0,
-        effect: () => clickPower += 50000
-    },
-    {
-        id: 29,
-        name: 'Dimension Portal',
-        description: '+3x multiplier',
-        icon: '🌀',
-        basePrice: 200000000000000000000000000, // 200SP
-        currentPrice: 200000000000000000000000000,
-        owned: 0,
-        effect: () => multiplier *= 3
-    },
-    {
-        id: 30,
-        name: 'Singularity Core',
-        description: '+100000 click power',
-        icon: '🔮',
-        basePrice: 1000000000000000000000000000, // 1OC
-        currentPrice: 1000000000000000000000000000,
-        owned: 0,
-        effect: () => clickPower += 100000
-    },
-    {
-        id: 31,
-        name: 'Galaxy Forge',
-        description: '+10000 coins mỗi giây',
-        icon: '🌌',
-        basePrice: 5000000000000000000000000000, // 5OC
-        currentPrice: 5000000000000000000000000000,
-        owned: 0,
-        effect: () => autoClickers += 10000
-    },
-    {
-        id: 32,
-        name: 'Reality Manipulator',
-        description: '10% giảm giá mọi vật phẩm',
-        icon: '🎭',
-        basePrice: 25000000000000000000000000000, // 25OC
-        currentPrice: 25000000000000000000000000000,
-        owned: 0,
-        effect: () => {
-            shopDiscount += 10;
-        }
-    },
-    {
-        id: 33,
-        name: 'Void Harvester',
-        description: '+500000 click power',
-        icon: '🕳️',
-        basePrice: 100000000000000000000000000000, // 100OC
-        currentPrice: 100000000000000000000000000000,
-        owned: 0,
-        effect: () => clickPower += 500000
-    },
-    {
-        id: 34,
-        name: 'Multiverse Farm',
-        description: '+50000 coins mỗi giây',
-        icon: '🌐',
-        basePrice: 500000000000000000000000000000, // 500OC
-        currentPrice: 500000000000000000000000000000,
-        owned: 0,
-        effect: () => autoClickers += 50000
-    },
-    {
-        id: 35,
-        name: 'Eternal Flame',
-        description: '+1M click power',
-        icon: '🔥',
-        basePrice: 1000000000000000000000000000000, // 1NO
-        currentPrice: 1000000000000000000000000000000,
-        owned: 0,
-        effect: () => clickPower += 1000000
-    },
-    {
-        id: 36,
-        name: 'Time Accelerator',
-        description: 'Giảm 0.001s cooldown',
-        icon: '⏱️',
-        basePrice: 5000000000000000000000000000000, // 5NO
-        currentPrice: 5000000000000000000000000000000,
-        owned: 0,
-        effect: () => {
-            clickCooldown = Math.max(0.001, clickCooldown - 0.001);
-        }
-    },
-    {
-        id: 37,
-        name: 'Omega Reactor',
-        description: '+100000 coins mỗi giây',
-        icon: '⚛️',
-        basePrice: 10000000000000000000000000000000, // 10NO
-        currentPrice: 10000000000000000000000000000000,
-        owned: 0,
-        effect: () => autoClickers += 100000
-    },
-    {
-        id: 38,
-        name: 'Divine Blessing',
-        description: '+5x multiplier',
-        icon: '🙏',
-        basePrice: 50000000000000000000000000000000, // 50NO
-        currentPrice: 50000000000000000000000000000000,
-        owned: 0,
-        effect: () => multiplier *= 5
-    },
-    {
-        id: 39,
-        name: 'Celestial Crown',
-        description: '+5M click power',
-        icon: '👸',
-        basePrice: 100000000000000000000000000000000, // 100NO
-        currentPrice: 100000000000000000000000000000000,
-        owned: 0,
-        effect: () => clickPower += 5000000
-    },
-    {
-        id: 40,
-        name: 'Infinity Matrix',
-        description: '+500000 coins mỗi giây',
-        icon: '∞',
-        basePrice: 1000000000000000000000000000000000, // 1DC
-        currentPrice: 1000000000000000000000000000000000,
-        owned: 0,
-        effect: () => autoClickers += 500000
-    },
-    {
-        id: 41,
-        name: 'Chaos Orb',
-        description: '+10M click power',
-        icon: '🔴',
-        basePrice: 5000000000000000000000000000000000, // 5DC
-        currentPrice: 5000000000000000000000000000000000,
-        owned: 0,
-        effect: () => clickPower += 10000000
-    },
-    {
-        id: 42,
-        name: 'Universal Nexus',
-        description: '+1M coins mỗi giây',
-        icon: '🌌',
-        basePrice: 10000000000000000000000000000000000, // 10DC
-        currentPrice: 10000000000000000000000000000000000,
-        owned: 0,
-        effect: () => autoClickers += 1000000
-    },
-    {
-        id: 43,
-        name: 'Supreme Authority',
-        description: '+2 giới hạn mua vật phẩm',
-        icon: '🎯',
-        basePrice: 50000000000000000000000000000000000, // 50DC
-        currentPrice: 50000000000000000000000000000000000,
-        owned: 0,
-        effect: () => {
-            purchaseLimit += 2;
-        }
-    },
-    {
-        id: 44,
-        name: 'Absolute Zero',
-        description: '+50M click power',
-        icon: '❄️',
-        basePrice: 100000000000000000000000000000000000, // 100DC
-        currentPrice: 100000000000000000000000000000000000,
-        owned: 0,
-        effect: () => clickPower += 50000000
-    },
-    {
-        id: 45,
-        name: 'Final Form',
-        description: '+10x multiplier',
-        icon: '🎆',
-        basePrice: 500000000000000000000000000000000000, // 500DC
-        currentPrice: 500000000000000000000000000000000000,
-        owned: 0,
-        effect: () => multiplier *= 10
-    },
-    {
-        id: 46,
-        name: 'Omnipotence',
-        description: '+100M click power',
-        icon: '👁️',
-        basePrice: 1000000000000000000000000000000000000, // 1UD
-        currentPrice: 1000000000000000000000000000000000000,
-        owned: 0,
-        effect: () => clickPower += 100000000
-    },
-    {
-        id: 47,
-        name: 'The Creator',
-        description: '+5M coins/s, +500M click power',
-        icon: '🌠',
-        basePrice: 10000000000000000000000000000000000000, // 10UD
-        currentPrice: 10000000000000000000000000000000000000,
-        owned: 0,
-        effect: () => {
-            autoClickers += 5000000;
-            clickPower += 500000000;
-        }
-    },
-    { 
-        id: 48,
-        name: 'The Creator',
-        description: '+5M coins/s, +500M click power',
-        icon: '🌠',
-        basePrice: 100000000000000000000000000000000000000, // 100UD
-        currentPrice: 10000000000000000000000000000000000000,
-        owned: 0,
-        effect: () => {
-            autoClickers += 50000000;
-            clickPower += 5000000000;
+            {
+                id: 1,
+                name: '+1 Click Power',
+                description: 'Tăng 1 coin mỗi click',
+                icon: '⚡',
+                basePrice: 10,
+                currentPrice: 10,
+                owned: 0,
+                effect: () => clickPower++
+            },
+            {
+                id: 2,
+                name: 'Auto Clicker',
+                description: '+1 coin mỗi giây',
+                icon: '🤖',
+                basePrice: 100,
+                currentPrice: 100,
+                owned: 0,
+                effect: () => autoClickers++
+            },
+            {
+                id: 3,
+                name: 'Faster Click',
+                description: 'Giảm 0.05s thời gian chờ click',
+                icon: '⚡',
+                basePrice: 500,
+                currentPrice: 500,
+                owned: 0,
+                effect: () => {
+                    clickCooldown = Math.max(0.05, clickCooldown - 0.05);
+                }
+            },
+            {
+                id: 4,
+                name: 'Super Click',
+                description: '+5 click power',
+                icon: '⭐',
+                basePrice: 1000,
+                currentPrice: 1000,
+                owned: 0,
+                effect: () => clickPower += 5
+            },
+            {
+                id: 5,
+                name: 'Mega Clicker',
+                description: '+10 coins mỗi giây',
+                icon: '✨',
+                basePrice: 3000,
+                currentPrice: 3000,
+                owned: 0,
+                effect: () => autoClickers += 10
+            },
+            {
+                id: 6,
+                name: '2x Multiplier',
+                description: 'Nhân đôi tất cả thu nhập',
+                icon: '👑',
+                basePrice: 15000,
+                currentPrice: 15000,
+                owned: 0,
+                effect: () => multiplier *= 2
+            },
+            {
+                id: 7,
+                name: 'Ultra Click',
+                description: '+20 click power',
+                icon: '💎',
+                basePrice: 10000,
+                currentPrice: 10000,
+                owned: 0,
+                effect: () => clickPower += 20
+            },
+            {
+                id: 8,
+                name: 'Factory',
+                description: '+50 coins mỗi giây',
+                icon: '🏭',
+                basePrice: 30000,
+                currentPrice: 30000,
+                owned: 0,
+                effect: () => autoClickers += 50
+            },
+            {
+                id: 9,
+                name: 'Golden Touch',
+                description: '+100 click power',
+                icon: '🌟',
+                basePrice: 75000,
+                currentPrice: 75000,
+                owned: 0,
+                effect: () => clickPower += 100
+            },
+            {
+                id: 10,
+                name: 'Time Warp',
+                description: 'Giảm 0.03s cooldown',
+                icon: '⏰',
+                basePrice: 120000,
+                currentPrice: 120000,
+                owned: 0,
+                effect: () => {
+                    clickCooldown = Math.max(0.01, clickCooldown - 0.03);
+                }
+            },
+            {
+                id: 11,
+                name: 'Robot Army',
+                description: '+100 coins mỗi giây',
+                icon: '🤖',
+                basePrice: 200000,
+                currentPrice: 200000,
+                owned: 0,
+                effect: () => autoClickers += 100
+            },
+            {
+                id: 12,
+                name: 'Diamond Finger',
+                description: '+250 click power',
+                icon: '💍',
+                basePrice: 350000,
+                currentPrice: 350000,
+                owned: 0,
+                effect: () => clickPower += 250
+            },
+            {
+                id: 13,
+                name: 'Money Printer',
+                description: '+200 coins mỗi giây',
+                icon: '🖨️',
+                basePrice: 600000,
+                currentPrice: 600000,
+                owned: 0,
+                effect: () => autoClickers += 200
+            },
+            {
+                id: 14,
+                name: 'Cosmic Power',
+                description: '+400 click power',
+                icon: '🌌',
+                basePrice: 1200000,
+                currentPrice: 1200000,
+                owned: 0,
+                effect: () => clickPower += 400
+            },
+            {
+                id: 15,
+                name: 'Quantum Clicker',
+                description: '+500 coins mỗi giây',
+                icon: '⚛️',
+                basePrice: 2500000,
+                currentPrice: 2500000,
+                owned: 0,
+                effect: () => autoClickers += 500
+            },
+            {
+                id: 16,
+                name: 'Infinity Stone',
+                description: '+1000 click power',
+                icon: '💠',
+                basePrice: 6000000,
+                currentPrice: 6000000,
+                owned: 0,
+                effect: () => clickPower += 1000
+            },
+            {
+                id: 17,
+                name: 'Universe Generator',
+                description: '+1500 coins mỗi giây',
+                icon: '🌠',
+                basePrice: 25000000,
+                currentPrice: 25000000,
+                owned: 0,
+                effect: () => autoClickers += 1500
+            },
+            {
+                id: 18,
+                name: 'The Divine',
+                description: '5% giảm giá mọi vật phẩm',
+                icon: '✨',
+                basePrice: 50000000,
+                currentPrice: 50000000,
+                owned: 0,
+                effect: () => {
+                    shopDiscount += 5;
+                }
+            },
+            {
+                id: 19,
+                name: 'The Primastic',
+                description: '1.2% cơ hội hoàn tiền',
+                icon: '💎',
+                basePrice: 1000000000,
+                currentPrice: 1000000000,
+                owned: 0,
+                effect: () => {}
+            },
+            {
+                id: 20,
+                name: 'The Transcendent',
+                description: '0.8% cơ hội hoàn x10 tiền',
+                icon: '🌟',
+                basePrice: 2500000000,
+                currentPrice: 2500000000,
+                owned: 0,
+                effect: () => {}
+            },
+            {
+                id: 21,
+                name: 'The God',
+                description: '+1 giới hạn mua vật phẩm',
+                icon: '⚜️',
+                basePrice: 2500000000,
+                currentPrice: 2500000000,
+                owned: 0,
+                effect: () => {
+                    purchaseLimit++;
+                }
+            },
+            {
+                id: 22,
+                name: 'Admin Power',
+                description: '+50 Click Power',
+                icon: '🔱',
+                basePrice: 50000000000, // 50B
+                currentPrice: 50000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 50;
+                }
+            },
+            {
+                id: 23,
+                name: 'Owner Power',
+                description: '+200 Click Power',
+                icon: '👑',
+                basePrice: 2000000000000000, // 2QA
+                currentPrice: 2000000000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 200;
+                }
+            },
+            {
+                id: 24,
+                name: '67 Power',
+                description: '+670 Click Power',
+                icon: '⚡',
+                basePrice: 5000000000000000, // 5QA
+                currentPrice: 5000000000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 670;
+                }
+            },
+            {
+                id: 25,
+                name: '36 Power',
+                description: '+3600 Click Power',
+                icon: '💫',
+                basePrice: 1000000000000000000, // 1QI
+                currentPrice: 1000000000000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 3600;
+                }
+            },
+            {
+                id: 26,
+                name: 'Nancore',
+                description: '+10000 Click Power',
+                icon: '⚛️',
+                basePrice: 2000000000000000000000, // 2SX
+                currentPrice: 2000000000000000000000,
+                owned: 0,
+                effect: () => {
+                    clickPower += 10000;
+                }
+            },
+            {
+                id: 27,
+                name: 'Quantum Leap',
+                description: '+50000 Click Power',
+                icon: '🔬',
+                basePrice: 10000000000000000000000,
+                currentPrice: 10000000000000000000000,
+                owned: 0,
+                effect: () => clickPower += 50000
+            },
+            {
+                id: 28,
+                name: 'Cosmic Factory',
+                description: '+10000 Auto Clickers',
+                icon: '🌌',
+                basePrice: 50000000000000000000000,
+                currentPrice: 50000000000000000000000,
+                owned: 0,
+                effect: () => autoClickers += 10000
+            },
+            {
+                id: 29,
+                name: 'Reality Bender',
+                description: '+50 Multiplier',
+                icon: '🌀',
+                basePrice: 100000000000000000000000,
+                currentPrice: 100000000000000000000000,
+                owned: 0,
+                effect: () => multiplier += 50
+            },
+            {
+                id: 30,
+                name: 'Divine Power',
+                description: '+100000 Click Power',
+                icon: '🙏',
+                basePrice: 500000000000000000000000,
+                currentPrice: 500000000000000000000000,
+                owned: 0,
+                effect: () => clickPower += 100000
+            },
+            {
+                id: 31,
+                name: 'The End',
+                description: 'ULTIMATE POWER',
+                icon: '🌌',
+                basePrice: 999999999999999999999999999999999999,
+                currentPrice: 999999999999999999999999999999999999,
+                owned: 0,
+                effect: () => {
+                    clickPower += 999999999999;
+                    autoClickers += 999999999;
+                    multiplier += 99999;
+                }
+            },
+            // ===== 50 NEW CREATIVE ITEMS =====
+            // THEME 1: MAGICAL ITEMS (32-41)
+            {
+                id: 32,
+                name: 'Magic Wand',
+                description: '+1000 Click Power per wave',
+                icon: '🪄',
+                basePrice: 5000,
+                currentPrice: 5000,
+                owned: 0,
+                effect: () => clickPower += 1000
+            },
+            {
+                id: 33,
+                name: 'Crystal Ball',
+                description: '+500 Auto Clickers',
+                icon: '🔮',
+                basePrice: 15000,
+                currentPrice: 15000,
+                owned: 0,
+                effect: () => autoClickers += 500
+            },
+            {
+                id: 34,
+                name: 'Wizard Hat',
+                description: '+10 Multiplier bonus',
+                icon: '🎩',
+                basePrice: 50000,
+                currentPrice: 50000,
+                owned: 0,
+                effect: () => multiplier += 10
+            },
+            {
+                id: 35,
+                name: 'Enchanted Staff',
+                description: '+5000 Click Power',
+                icon: '🧙',
+                basePrice: 100000,
+                currentPrice: 100000,
+                owned: 0,
+                effect: () => clickPower += 5000
+            },
+            {
+                id: 36,
+                name: 'Spell Book',
+                description: '+2000 Auto Clickers',
+                icon: '📖',
+                basePrice: 250000,
+                currentPrice: 250000,
+                owned: 0,
+                effect: () => autoClickers += 2000
+            },
+            {
+                id: 37,
+                name: 'Potion of Power',
+                description: '+20 Multiplier',
+                icon: '🧪',
+                basePrice: 500000,
+                currentPrice: 500000,
+                owned: 0,
+                effect: () => multiplier += 20
+            },
+            {
+                id: 38,
+                name: 'Magic Portal',
+                description: '+10000 Click Power',
+                icon: '🌀',
+                basePrice: 1000000,
+                currentPrice: 1000000,
+                owned: 0,
+                effect: () => clickPower += 10000
+            },
+            {
+                id: 39,
+                name: 'Mystic Orb',
+                description: '+5000 Auto Clickers',
+                icon: '🌐',
+                basePrice: 2500000,
+                currentPrice: 2500000,
+                owned: 0,
+                effect: () => autoClickers += 5000
+            },
+            {
+                id: 40,
+                name: 'Ancient Rune',
+                description: '+50 Multiplier',
+                icon: '🗿',
+                basePrice: 5000000,
+                currentPrice: 5000000,
+                owned: 0,
+                effect: () => multiplier += 50
+            },
+            {
+                id: 41,
+                name: 'Arcane Shield',
+                description: '+25000 Click Power',
+                icon: '🛡️',
+                basePrice: 10000000,
+                currentPrice: 10000000,
+                owned: 0,
+                effect: () => clickPower += 25000
+            },
+            // THEME 2: TECH ITEMS (42-51)
+            {
+                id: 42,
+                name: 'Robot Arm',
+                description: '+10000 Auto Clickers',
+                icon: '🦾',
+                basePrice: 25000000,
+                currentPrice: 25000000,
+                owned: 0,
+                effect: () => autoClickers += 10000
+            },
+            {
+                id: 43,
+                name: 'AI Chip',
+                description: '+100 Multiplier',
+                icon: '🔧',
+                basePrice: 50000000,
+                currentPrice: 50000000,
+                owned: 0,
+                effect: () => multiplier += 100
+            },
+            {
+                id: 44,
+                name: 'Quantum Computer',
+                description: '+50000 Click Power',
+                icon: '💻',
+                basePrice: 100000000,
+                currentPrice: 100000000,
+                owned: 0,
+                effect: () => clickPower += 50000
+            },
+            {
+                id: 45,
+                name: 'Nano Bots',
+                description: '+25000 Auto Clickers',
+                icon: '🤖',
+                basePrice: 250000000,
+                currentPrice: 250000000,
+                owned: 0,
+                effect: () => autoClickers += 25000
+            },
+            {
+                id: 46,
+                name: 'Cybernetic Eye',
+                description: '+200 Multiplier',
+                icon: '👁️',
+                basePrice: 500000000,
+                currentPrice: 500000000,
+                owned: 0,
+                effect: () => multiplier += 200
+            },
+            {
+                id: 47,
+                name: 'Fusion Core',
+                description: '+100000 Click Power',
+                icon: '⚡',
+                basePrice: 1000000000,
+                currentPrice: 1000000000,
+                owned: 0,
+                effect: () => clickPower += 100000
+            },
+            {
+                id: 48,
+                name: 'Drone Army',
+                description: '+50000 Auto Clickers',
+                icon: '🚁',
+                basePrice: 2500000000,
+                currentPrice: 2500000000,
+                owned: 0,
+                effect: () => autoClickers += 50000
+            },
+            {
+                id: 49,
+                name: 'Hologram Tech',
+                description: '+500 Multiplier',
+                icon: '📱',
+                basePrice: 5000000000,
+                currentPrice: 5000000000,
+                owned: 0,
+                effect: () => multiplier += 500
+            },
+            {
+                id: 50,
+                name: 'Teleporter',
+                description: '+250000 Click Power',
+                icon: '🔀',
+                basePrice: 10000000000,
+                currentPrice: 10000000000,
+                owned: 0,
+                effect: () => clickPower += 250000
+            },
+            {
+                id: 51,
+                name: 'Mech Suit',
+                description: '+100000 Auto Clickers',
+                icon: '🤖',
+                basePrice: 25000000000,
+                currentPrice: 25000000000,
+                owned: 0,
+                effect: () => autoClickers += 100000
+            },
+            // THEME 3: SPACE ITEMS (52-61)
+            {
+                id: 52,
+                name: 'Asteroid Mine',
+                description: '+1000 Multiplier',
+                icon: '☄️',
+                basePrice: 50000000000,
+                currentPrice: 50000000000,
+                owned: 0,
+                effect: () => multiplier += 1000
+            },
+            {
+                id: 53,
+                name: 'Satellite Array',
+                description: '+500000 Click Power',
+                icon: '🛰️',
+                basePrice: 100000000000,
+                currentPrice: 100000000000,
+                owned: 0,
+                effect: () => clickPower += 500000
+            },
+            {
+                id: 54,
+                name: 'Space Station',
+                description: '+250000 Auto Clickers',
+                icon: '🚀',
+                basePrice: 250000000000,
+                currentPrice: 250000000000,
+                owned: 0,
+                effect: () => autoClickers += 250000
+            },
+            {
+                id: 55,
+                name: 'Alien Tech',
+                description: '+2000 Multiplier',
+                icon: '👽',
+                basePrice: 500000000000,
+                currentPrice: 500000000000,
+                owned: 0,
+                effect: () => multiplier += 2000
+            },
+            {
+                id: 56,
+                name: 'Moon Base',
+                description: '+1000000 Click Power',
+                icon: '🌙',
+                basePrice: 1000000000000,
+                currentPrice: 1000000000000,
+                owned: 0,
+                effect: () => clickPower += 1000000
+            },
+            {
+                id: 57,
+                name: 'Mars Colony',
+                description: '+500000 Auto Clickers',
+                icon: '🔴',
+                basePrice: 2500000000000,
+                currentPrice: 2500000000000,
+                owned: 0,
+                effect: () => autoClickers += 500000
+            },
+            {
+                id: 58,
+                name: 'Star Forge',
+                description: '+5000 Multiplier',
+                icon: '⭐',
+                basePrice: 5000000000000,
+                currentPrice: 5000000000000,
+                owned: 0,
+                effect: () => multiplier += 5000
+            },
+            {
+                id: 59,
+                name: 'Solar Panel Grid',
+                description: '+2500000 Click Power',
+                icon: '☀️',
+                basePrice: 10000000000000,
+                currentPrice: 10000000000000,
+                owned: 0,
+                effect: () => clickPower += 2500000
+            },
+            {
+                id: 60,
+                name: 'Wormhole Generator',
+                description: '+1000000 Auto Clickers',
+                icon: '🌀',
+                basePrice: 25000000000000,
+                currentPrice: 25000000000000,
+                owned: 0,
+                effect: () => autoClickers += 1000000
+            },
+            {
+                id: 61,
+                name: 'Dyson Sphere',
+                description: '+10000 Multiplier',
+                icon: '🌟',
+                basePrice: 50000000000000,
+                currentPrice: 50000000000000,
+                owned: 0,
+                effect: () => multiplier += 10000
+            },
+            // THEME 4: MYTHICAL CREATURES (62-71)
+            {
+                id: 62,
+                name: 'Dragon Egg',
+                description: '+5000000 Click Power',
+                icon: '🥚',
+                basePrice: 100000000000000,
+                currentPrice: 100000000000000,
+                owned: 0,
+                effect: () => clickPower += 5000000
+            },
+            {
+                id: 63,
+                name: 'Phoenix Feather',
+                description: '+2500000 Auto Clickers',
+                icon: '🪶',
+                basePrice: 250000000000000,
+                currentPrice: 250000000000000,
+                owned: 0,
+                effect: () => autoClickers += 2500000
+            },
+            {
+                id: 64,
+                name: 'Unicorn Horn',
+                description: '+20000 Multiplier',
+                icon: '🦄',
+                basePrice: 500000000000000,
+                currentPrice: 500000000000000,
+                owned: 0,
+                effect: () => multiplier += 20000
+            },
+            {
+                id: 65,
+                name: 'Kraken Tentacle',
+                description: '+10000000 Click Power',
+                icon: '🐙',
+                basePrice: 1000000000000000,
+                currentPrice: 1000000000000000,
+                owned: 0,
+                effect: () => clickPower += 10000000
+            },
+            {
+                id: 66,
+                name: 'Griffin Wing',
+                description: '+5000000 Auto Clickers',
+                icon: '🦅',
+                basePrice: 2500000000000000,
+                currentPrice: 2500000000000000,
+                owned: 0,
+                effect: () => autoClickers += 5000000
+            },
+            {
+                id: 67,
+                name: 'Hydra Scale',
+                description: '+50000 Multiplier',
+                icon: '🐍',
+                basePrice: 5000000000000000,
+                currentPrice: 5000000000000000,
+                owned: 0,
+                effect: () => multiplier += 50000
+            },
+            {
+                id: 68,
+                name: 'Cerberus Collar',
+                description: '+25000000 Click Power',
+                icon: '🐕',
+                basePrice: 10000000000000000,
+                currentPrice: 10000000000000000,
+                owned: 0,
+                effect: () => clickPower += 25000000
+            },
+            {
+                id: 69,
+                name: 'Pegasus Saddle',
+                description: '+10000000 Auto Clickers',
+                icon: '🐴',
+                basePrice: 25000000000000000,
+                currentPrice: 25000000000000000,
+                owned: 0,
+                effect: () => autoClickers += 10000000
+            },
+            {
+                id: 70,
+                name: 'Basilisk Eye',
+                description: '+100000 Multiplier',
+                icon: '👁️',
+                basePrice: 50000000000000000,
+                currentPrice: 50000000000000000,
+                owned: 0,
+                effect: () => multiplier += 100000
+            },
+            {
+                id: 71,
+                name: 'Leviathan Heart',
+                description: '+50000000 Click Power',
+                icon: '🐋',
+                basePrice: 100000000000000000,
+                currentPrice: 100000000000000000,
+                owned: 0,
+                effect: () => clickPower += 50000000
+            },
+            // THEME 5: LEGENDARY ARTIFACTS (72-81)
+            {
+                id: 72,
+                name: 'Excalibur',
+                description: '+100000000 Click Power',
+                icon: '⚔️',
+                basePrice: 250000000000000000,
+                currentPrice: 250000000000000000,
+                owned: 0,
+                effect: () => clickPower += 100000000
+            },
+            {
+                id: 73,
+                name: 'Mjolnir',
+                description: '+50000000 Auto Clickers',
+                icon: '🔨',
+                basePrice: 500000000000000000,
+                currentPrice: 500000000000000000,
+                owned: 0,
+                effect: () => autoClickers += 50000000
+            },
+            {
+                id: 74,
+                name: 'Holy Grail',
+                description: '+500000 Multiplier',
+                icon: '🏆',
+                basePrice: 1000000000000000000,
+                currentPrice: 1000000000000000000,
+                owned: 0,
+                effect: () => multiplier += 500000
+            },
+            {
+                id: 75,
+                name: 'Pandora Box',
+                description: '+250000000 Click Power',
+                icon: '📦',
+                basePrice: 2500000000000000000,
+                currentPrice: 2500000000000000000,
+                owned: 0,
+                effect: () => clickPower += 250000000
+            },
+            {
+                id: 76,
+                name: 'Ark of Covenant',
+                description: '+100000000 Auto Clickers',
+                icon: '📜',
+                basePrice: 5000000000000000000,
+                currentPrice: 5000000000000000000,
+                owned: 0,
+                effect: () => autoClickers += 100000000
+            },
+            {
+                id: 77,
+                name: 'Philosopher Stone',
+                description: '+1000000 Multiplier',
+                icon: '💎',
+                basePrice: 10000000000000000000,
+                currentPrice: 10000000000000000000,
+                owned: 0,
+                effect: () => multiplier += 1000000
+            },
+            {
+                id: 78,
+                name: 'Crown of Kings',
+                description: '+500000000 Click Power',
+                icon: '👑',
+                basePrice: 25000000000000000000,
+                currentPrice: 25000000000000000000,
+                owned: 0,
+                effect: () => clickPower += 500000000
+            },
+            {
+                id: 79,
+                name: 'Trident of Poseidon',
+                description: '+250000000 Auto Clickers',
+                icon: '🔱',
+                basePrice: 50000000000000000000,
+                currentPrice: 50000000000000000000,
+                owned: 0,
+                effect: () => autoClickers += 250000000
+            },
+            {
+                id: 80,
+                name: 'Zeus Lightning Bolt',
+                description: '+5000000 Multiplier',
+                icon: '⚡',
+                basePrice: 100000000000000000000,
+                currentPrice: 100000000000000000000,
+                owned: 0,
+                effect: () => multiplier += 5000000
+            },
+            {
+                id: 81,
+                name: 'Infinity Gauntlet',
+                description: 'ALL STATS x1000000',
+                icon: '🧤',
+                basePrice: 999999999999999999999999999999999999,
+                currentPrice: 999999999999999999999999999999999999,
+                owned: 0,
+                effect: () => {
+                    clickPower *= 1000000;
+                    autoClickers *= 1000000;
+                    multiplier *= 1000000;
+                }
+            }
+        ];
 
         const rebirthRequirements = [100000]; // Chỉ cần 1 giá trị, sau đó x5 mỗi lần
 
@@ -4397,7 +4914,7 @@
             clickTimes.push(now);
             
             // Chỉ giữ lại 10 lần click gần nhất
-            if (clickTimes.length > 500000000000000000000055555555555555555) {
+            if (clickTimes.length > 10) {
                 clickTimes.shift();
             }
             
@@ -4423,7 +4940,7 @@
                 // 2. Click quá đều (độ lệch chuẩn < 10ms)
                 // 3. Click với pattern giống nhau (variance quá thấp)
                 
-                const tooFast = avgInterval < 100;
+                const tooFast = avgInterval < 50;
                 const tooConsistent = stdDev < 10;
                 const suspiciousPattern = variance < 100 && clickTimes.length >= 8;
                 
@@ -4525,9 +5042,9 @@
                 
                 let limitInfo = '';
                 if (isLimitReached) {
-                    limitInfo = '<div style="color: #ff6b6b; font-size: 0.9em; margin-top: 5px;">⚠️ Đã đạt giới hạn mua!</div>';
+                    limitInfo = `<div style="color: #ff6b6b; font-size: 0.9em; margin-top: 5px;">⚠️ ${currentLanguage === 'en' ? 'Purchase limit reached!' : 'Đã đạt giới hạn mua!'}</div>`;
                 } else {
-                    limitInfo = `<div style="color: #ffd700; font-size: 0.8em; margin-top: 5px;">Còn lại: ${purchaseLimit - currentPurchases}/${purchaseLimit}</div>`;
+                    limitInfo = `<div style="color: #ffd700; font-size: 0.8em; margin-top: 5px;">${t('remaining')}: ${purchaseLimit - currentPurchases}/${purchaseLimit}</div>`;
                 }
                 
                 itemDiv.innerHTML = `
@@ -4535,11 +5052,11 @@
                     <div class="item-info">
                         <div class="item-name">${item.name}</div>
                         <div class="item-description">${item.description}</div>
-                        <div class="item-owned">Đã mua: ${item.owned}</div>
+                        <div class="item-owned">${t('owned')}: ${item.owned}</div>
                         ${limitInfo}
                     </div>
                     <button class="buy-button ${!canBuy ? 'disabled' : ''}" onclick="buyItem(${item.id})">
-                        ${isLimitReached ? 'Hết lượt' : priceDisplay + ' 💰'}
+                        ${isLimitReached ? (currentLanguage === 'en' ? 'Sold Out' : 'Hết lượt') : priceDisplay + ' 💰'}
                     </button>
                 `;
                 shopContainer.appendChild(itemDiv);
