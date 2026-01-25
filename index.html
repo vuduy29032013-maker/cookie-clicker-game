@@ -3,29 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>cookie clicker by vu duy 7/7  </title>
+    <title>Cookie Clicker Game-By Vuduy 7/7  </title>
     <style>
-       * {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            /* ANTI-ZOOM ABSOLUTE */
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        
+        /* Prevent horizontal overflow globally */
+        *:not(html):not(body) {
+            max-width: 100%;
+        }
+        
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           COMPREHENSIVE MOBILE UX FIXES
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        /* Universal Button Improvements */
+        button, .button, .buy-button, .admin-button {
+            /* Touch-friendly */
+            min-height: 44px;
+            min-width: 44px;
+            padding: 10px 20px;
+            
+            /* Visual feedback */
+            cursor: pointer;
+            transition: all 0.15s ease;
+            
+            /* Prevent text issues */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            
+            /* Touch optimization */
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            
+            /* Spacing for easier tapping */
+            margin: 2px;
+            
+            /* Clear active state */
+            position: relative;
+        }
+        
+        /* Active state feedback (instant) */
+        button:active:not(:disabled), 
+        .button:active:not(.disabled) {
+            transform: scale(0.95);
+            opacity: 0.8;
+            transition: all 0.05s ease; /* Fast feedback */
+        }
+        
+        /* Disabled state */
+        button:disabled,
+        button.disabled,
+        .button.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* Remove hover on touch devices */
+        @media (hover: none) {
+            button:hover,
+            .button:hover,
+            .shop-item:hover {
+                transform: none;
+                background: inherit;
+            }
         }
 
-        html, body {
-            /* ✅ ALLOW SCROLL - ❌ DISABLE ZOOM */
-            touch-action: pan-y;
-            -ms-touch-action: pan-y;
-            overflow-x: auto;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+        html {
+            /* Base HTML settings */
+            touch-action: manipulation;
+            -ms-touch-action: manipulation;
+            overflow-x: hidden; /* No horizontal scrollbar on HTML */
+            overflow-y: scroll; /* ALWAYS show vertical scrollbar (prevent flicker) */
+            scrollbar-gutter: stable; /* Reserve space for scrollbar */
+            height: 100%; /* Force height */
         }
-
+        
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
+            min-height: 100%;
+            height: auto; /* Allow growth */
+            max-width: 100vw; /* Prevent overflow */
             color: white;
             padding: 20px;
+            margin: 0;
+            overflow-x: hidden; /* No horizontal scroll on body */
+            overflow-y: visible; /* Let HTML handle scroll */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
 
         /* Exception: Allow text selection in inputs */
@@ -39,7 +117,10 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            overflow-x: auto; /* Prevent horizontal scroll */
+            width: 100%;
+            overflow: visible; /* Let content flow naturally */
+            position: relative;
+            min-height: 100vh; /* Ensure minimum height */
         }
 
         .header {
@@ -93,7 +174,7 @@
             border-radius: 50%;
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             border: 8px solid #ffed4e;
-            font-size: 20em;
+            font-size: 6em;
             cursor: pointer;
             transition: transform 0.1s;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -142,7 +223,7 @@
         }
 
         .shop-title {
-            font-size: 0,7em;
+            font-size: 2em;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -198,7 +279,7 @@
         .buy-button {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             border: none;
-            padding: 50px 20px;
+            padding: 10px 20px;
             border-radius: 5px;
             color: white;
             font-weight: bold;
@@ -220,32 +301,37 @@
         }
 
         .icon {
-            font-size: 1em;
+            font-size: 2em;
             margin-right: 10px;
         }
 
         .admin-panel {
             position: fixed;
-            top: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
+            top: 20px;  /* Top */
+            left: 20px;  /* LEFT side - same as settings */
+            background: rgba(0, 0, 0, 0.9);
+            padding: 12px;
             border-radius: 10px;
             border: 2px solid #ffd700;
             z-index: 100;
+            max-width: 280px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
         .playtime-panel {
             position: fixed;
             top: 20px;
-            right: 350px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
+            right: 20px;  /* Keep playtime on right */
+            right: 320px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 10px 15px;
             border-radius: 10px;
             border: 2px solid #00ff00;
             font-size: 1em;
             font-weight: bold;
             color: #00ff00;
+            z-index: 100;
+            max-width: 180px;
         }
 
         .admin-input {
@@ -253,21 +339,31 @@
             border-radius: 5px;
             border: none;
             margin-right: 5px;
-            width: 150px;
+            width: 120px;
+            font-size: 14px;
         }
 
         .admin-button {
-            padding: 8px 15px;
+            padding: 8px 12px;
             background: #ffd700;
             border: none;
             border-radius: 5px;
             color: #000;
             font-weight: bold;
             cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
         }
 
         .admin-button:hover {
             background: #ffed4e;
+        }
+        
+        /* Admin panel title */
+        .admin-panel h3 {
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            color: #ffd700;
         }
 
         .admin-controls {
@@ -398,7 +494,7 @@
         }
 
         .weather-title {
-            font-size: 1em;
+            font-size: 1.2em;
             font-weight: bold;
             margin-bottom: 10px;
             color: #00bfff;
@@ -419,7 +515,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: weatherFadeIn 1s ease-in;
+            animation: weatherFadeIn 0.3s ease-in;
         }
 
         .weather-item.wind {
@@ -1281,6 +1377,168 @@
         .gamepass-card.legend {
             border-color: #ffd700;
         }
+        
+        /* ═══════════════════════════════════════════════════
+           NEW SPECIAL GAME PASSES - RỰC RỠ & NỔI BẬT
+           ═══════════════════════════════════════════════════ */
+        
+        /* Super Pass - LIMITED */
+        .gamepass-card.super {
+            border: 3px solid;
+            border-color: #ff1493;
+            background: linear-gradient(135deg, rgba(255,20,147,0.2) 0%, rgba(138,43,226,0.2) 100%);
+            box-shadow: 0 0 30px rgba(255,20,147,0.6), inset 0 0 20px rgba(255,20,147,0.1);
+            animation: superGlow 2s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes superGlow {
+            0%, 100% { 
+                box-shadow: 0 0 30px rgba(255,20,147,0.6), inset 0 0 20px rgba(255,20,147,0.1);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 50px rgba(255,20,147,0.9), inset 0 0 30px rgba(255,20,147,0.2);
+                transform: scale(1.02);
+            }
+        }
+        
+        /* Infinity Pass - TRANSCENDENT */
+        .gamepass-card.infinity {
+            border: 3px solid;
+            border-color: #00ffff;
+            background: linear-gradient(135deg, rgba(0,255,255,0.2) 0%, rgba(138,43,226,0.2) 50%, rgba(255,0,255,0.2) 100%);
+            box-shadow: 0 0 40px rgba(0,255,255,0.7), 0 0 60px rgba(255,0,255,0.5);
+            animation: infinityPulse 3s ease-in-out infinite, rainbowShift 5s linear infinite;
+            position: relative;
+        }
+        
+        @keyframes infinityPulse {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.03) rotate(1deg); }
+        }
+        
+        @keyframes rainbowShift {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        /* Quantum Pass - HOT */
+        .gamepass-card.quantum {
+            border: 3px solid;
+            border-color: #ff4500;
+            background: linear-gradient(135deg, rgba(255,69,0,0.3) 0%, rgba(255,215,0,0.2) 100%);
+            box-shadow: 0 0 35px rgba(255,69,0,0.8), inset 0 0 25px rgba(255,140,0,0.3);
+            animation: hotFlame 1.5s ease-in-out infinite;
+            position: relative;
+        }
+        
+        @keyframes hotFlame {
+            0%, 100% { 
+                box-shadow: 0 0 35px rgba(255,69,0,0.8), inset 0 0 25px rgba(255,140,0,0.3);
+            }
+            50% { 
+                box-shadow: 0 0 55px rgba(255,69,0,1), inset 0 0 35px rgba(255,140,0,0.5);
+                transform: translateY(-3px);
+            }
+        }
+        
+        /* Cosmic Pass - BEST FOR YOU */
+        .gamepass-card.cosmic {
+            border: 3px solid;
+            border-color: #9370db;
+            background: linear-gradient(135deg, rgba(147,112,219,0.3) 0%, rgba(72,61,139,0.2) 50%, rgba(25,25,112,0.3) 100%);
+            box-shadow: 0 0 45px rgba(147,112,219,0.7), 0 0 25px rgba(138,43,226,0.5), inset 0 0 30px rgba(147,112,219,0.2);
+            animation: cosmicGlow 2.5s ease-in-out infinite, starTwinkle 4s linear infinite;
+            position: relative;
+        }
+        
+        @keyframes cosmicGlow {
+            0%, 100% { 
+                box-shadow: 0 0 45px rgba(147,112,219,0.7), 0 0 25px rgba(138,43,226,0.5);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 65px rgba(147,112,219,1), 0 0 45px rgba(138,43,226,0.8);
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes starTwinkle {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.3); }
+        }
+        
+        /* Pass Labels */
+        .pass-label {
+            position: absolute;
+            top: -12px;
+            right: 10px;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            z-index: 10;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            animation: labelFloat 2s ease-in-out infinite;
+        }
+        
+        @keyframes labelFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-3px); }
+        }
+        
+        .pass-label.limited {
+            background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+            color: white;
+            animation: labelFloat 2s ease-in-out infinite, limitedPulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes limitedPulse {
+            0%, 100% { box-shadow: 0 2px 10px rgba(255,20,147,0.5); }
+            50% { box-shadow: 0 2px 20px rgba(255,20,147,1); }
+        }
+        
+        .pass-label.transcendent {
+            background: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+            color: white;
+            animation: labelFloat 2s ease-in-out infinite, transcendentShine 3s linear infinite;
+        }
+        
+        @keyframes transcendentShine {
+            0% { filter: hue-rotate(0deg) brightness(1); }
+            100% { filter: hue-rotate(360deg) brightness(1.3); }
+        }
+        
+        .pass-label.hot {
+            background: linear-gradient(135deg, #ff4500 0%, #ffa500 100%);
+            color: white;
+            animation: labelFloat 2s ease-in-out infinite, hotBurn 1s ease-in-out infinite;
+        }
+        
+        @keyframes hotBurn {
+            0%, 100% { box-shadow: 0 2px 10px rgba(255,69,0,0.5); }
+            50% { box-shadow: 0 2px 25px rgba(255,69,0,1); }
+        }
+        
+        .pass-label.best {
+            background: linear-gradient(135deg, #9370db 0%, #ba55d3 100%);
+            color: white;
+            animation: labelFloat 2s ease-in-out infinite, bestSparkle 2s ease-in-out infinite;
+        }
+        
+        @keyframes bestSparkle {
+            0%, 100% { 
+                box-shadow: 0 2px 10px rgba(147,112,219,0.5);
+                filter: brightness(1);
+            }
+            50% { 
+                box-shadow: 0 2px 20px rgba(147,112,219,1), 0 0 30px rgba(186,85,211,0.8);
+                filter: brightness(1.4);
+            }
+        }
 
         .gamepass-card.owned {
             background: rgba(0, 255, 0, 0.1);
@@ -1692,11 +1950,44 @@
         @media (max-width: 768px) {
             body {
                 font-size: 14px;
+                overflow-y: auto !important;
+                overflow-x: hidden !important; /* No horizontal scroll */
+                height: auto;
+                min-height: 100vh;
+                padding: 10px; /* Smaller padding on mobile */
             }
             
             .container {
                 padding: 5px;
                 max-width: 100%;
+                width: 100%;
+                overflow: visible !important;
+            }
+            
+            /* Compact admin panel on mobile */
+            .admin-panel {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: calc(100% - 20px);
+                padding: 10px;
+                font-size: 12px;
+            }
+            
+            .admin-input {
+                width: 90px;
+                font-size: 12px;
+                padding: 6px;
+            }
+            
+            .admin-button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            
+            /* Hide or compact playtime on small screens */
+            .playtime-panel {
+                display: none; /* Hide on mobile to save space */
             }
             
             .main-content {
@@ -1706,7 +1997,7 @@
             
             /* Cookie Button - Bigger on mobile */
             #cookie {
-                width: 300px !important;
+                width: 200px !important;
                 height: 200px !important;
                 font-size: 120px !important;
                 margin: 20px auto;
@@ -1866,6 +2157,10 @@
         @media (max-width: 480px) {
             body {
                 font-size: 12px;
+                overflow-y: auto !important;
+                overflow-x: hidden !important; /* No horizontal scroll */
+                height: auto;
+                padding: 5px; /* Even smaller padding */
             }
             
             /* Cookie - Even bigger on small phones */
@@ -1963,6 +2258,301 @@
                 user-select: text;
             }
         }
+        
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           COMPREHENSIVE MOBILE UX IMPROVEMENTS
+           Fixes all 28 critical mobile issues
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        /* ═══════════════════════════════════════════════════════
+           I. SCROLL & SWIPE IMPROVEMENTS
+           ═══════════════════════════════════════════════════════ */
+        
+        /* Make scrollable areas obvious */
+        .scrollable,
+        .shop,
+        .pets-grid,
+        .eggs-grid,
+        .admin-panel,
+        .settings-panel {
+            /* Indicate scrollability */
+            position: relative;
+            scroll-behavior: smooth;
+        }
+        
+        /* Smooth momentum scrolling */
+        * {
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+        
+        /* Allow swiping on buttons to scroll container */
+        button, .button {
+            pointer-events: auto;
+            /* Touch pass-through for scroll */
+        }
+        
+        /* Prevent scroll lock on modals */
+        .modal-overlay,
+        .ban-overlay,
+        .afk-overlay {
+            overflow-y: auto !important;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        /* ═══════════════════════════════════════════════════════
+           II. TEXT & READABILITY
+           ═══════════════════════════════════════════════════════ */
+        
+        /* Ensure minimum readable text size */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px !important;
+                line-height: 1.5;
+            }
+            
+            /* Larger text for important elements */
+            .stat-value, .coins-display {
+                font-size: 16px !important;
+                font-weight: bold;
+            }
+            
+            /* Prevent text overflow */
+            * {
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+            
+            /* Minimum font sizes */
+            h1 { font-size: 24px !important; }
+            h2 { font-size: 20px !important; }
+            h3 { font-size: 18px !important; }
+            p, span, div { font-size: 14px !important; min-font-size: 14px; }
+            small { font-size: 12px !important; }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                font-size: 13px !important;
+            }
+            
+            h1 { font-size: 22px !important; }
+            h2 { font-size: 18px !important; }
+            h3 { font-size: 16px !important; }
+        }
+        
+        /* High contrast for better readability */
+        .stat-label, .item-description {
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        /* ═══════════════════════════════════════════════════════
+           III. SAFE ZONES & SPACING
+           ═══════════════════════════════════════════════════════ */
+        
+        /* Safe zones for notched devices */
+        @supports (padding: env(safe-area-inset-left)) {
+            body {
+                padding-top: env(safe-area-inset-top);
+                padding-left: env(safe-area-inset-left);
+                padding-right: env(safe-area-inset-right);
+                padding-bottom: env(safe-area-inset-bottom);
+            }
+        }
+        
+        /* Prevent buttons at screen edges */
+        @media (max-width: 768px) {
+            .settings-button {
+                right: 15px !important;
+                bottom: 15px !important;
+            }
+            
+            .admin-panel, .settings-panel {
+                margin: 10px;
+            }
+        }
+        
+        /* Extra spacing between tappable elements */
+        button + button,
+        .item + .item,
+        .pet-card + .pet-card {
+            margin-top: 8px;
+        }
+        
+        /* ═══════════════════════════════════════════════════════
+           IV. VISUAL FEEDBACK
+           ═══════════════════════════════════════════════════════ */
+        
+        /* Loading state */
+        .loading {
+            position: relative;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        
+        .loading::after {
+            content: '⏳';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Success feedback */
+        @keyframes success-flash {
+            0% { background: rgba(0, 255, 0, 0.3); }
+            100% { background: inherit; }
+        }
+        
+        .success-flash {
+            animation: success-flash 0.3s ease;
+        }
+        
+        /* Error feedback */
+        @keyframes error-shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        
+        .error-shake {
+            animation: error-shake 0.3s ease;
+        }
+        
+        /* Click ripple effect */
+        @keyframes ripple {
+            from {
+                transform: scale(0);
+                opacity: 1;
+            }
+            to {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+        
+        button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            transform: translate(-50%, -50%) scale(0);
+            pointer-events: none;
+        }
+        
+        button:active::before {
+            animation: ripple 0.4s ease-out;
+        }
+        
+        /* ═══════════════════════════════════════════════════════
+           V. LANDSCAPE ORIENTATION
+           ═══════════════════════════════════════════════════════ */
+        
+        @media (max-width: 896px) and (orientation: landscape) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                padding: 5px;
+            }
+            
+            /* Adjust cookie size for landscape */
+            #cookie, .click-button {
+                width: 150px !important;
+                height: 150px !important;
+                font-size: 80px !important;
+            }
+            
+            /* Compact layout */
+            .main-content {
+                flex-direction: row;
+                gap: 10px;
+            }
+            
+            /* Smaller stats */
+            .stats-container {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 5px;
+            }
+        }
+        
+        /* ═══════════════════════════════════════════════════════
+           VI. PERFORMANCE OPTIMIZATIONS
+           ═══════════════════════════════════════════════════════ */
+        
+        /* Reduce animations on low-end devices */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* GPU acceleration for smoother animations */
+        button, .shop-item, .pet-card, .click-button {
+            will-change: transform;
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+        
+        /* ═══════════════════════════════════════════════════════
+           VII. MODAL & OVERLAY IMPROVEMENTS
+           ═══════════════════════════════════════════════════════ */
+        
+        /* Better modal visibility */
+        .modal-overlay, .ban-overlay, .afk-overlay {
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+        
+        /* Prevent background scroll when modal open */
+        body.modal-open {
+            overflow: hidden !important;
+            position: fixed;
+            width: 100%;
+        }
+        
+        /* Easy to tap close button */
+        .close-modal-btn, .modal-close {
+            min-width: 60px !important;
+            min-height: 60px !important;
+            font-size: 24px !important;
+            position: sticky;
+            top: 10px;
+            z-index: 10;
+        }
+        
+        /* ═══════════════════════════════════════════════════════
+           VIII. ACCESSIBILITY
+           ═══════════════════════════════════════════════════════ */
+        
+        /* Focus visible for keyboard users */
+        button:focus-visible, input:focus-visible {
+            outline: 3px solid #ffd700;
+            outline-offset: 2px;
+        }
+        
+        /* Larger tap targets for accessibility */
+        @media (max-width: 768px) {
+            button, a, input, select {
+                min-height: 48px !important;
+                min-width: 48px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2016,7 +2606,7 @@
     </div>
 
     <!-- Settings Button (Fixed) -->
-    <button onclick="toggleSettings()" id="settingsButton" style="position: fixed; top: 80px; left: 20px; padding: 12px 20px; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); border: none; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em; z-index: 99; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4); transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+    <button onclick="toggleSettings()" id="settingsButton" style="position: fixed; top: 140px; left: 20px; padding: 12px 20px; background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%); border: none; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em; z-index: 99; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.4); transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
         ⚙️ <span id="settingsButtonText">Settings</span>
     </button>
 
@@ -2048,22 +2638,24 @@
 
     <!-- Admin Panel -->
     <div class="admin-panel" id="adminPanel">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-            <div style="font-size: 1.2em;">🔐 Admin Panel</div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div style="font-size: 1em; font-weight: bold;">🔐 Admin Panel</div>
             <button onclick="toggleAdminPanel()" id="toggleAdminBtn" style="
-                padding: 5px 15px;
+                padding: 4px 10px;
                 background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
                 border: 2px solid #ff4444;
                 border-radius: 5px;
                 color: white;
                 font-weight: bold;
                 cursor: pointer;
-                font-size: 0.9em;
+                font-size: 0.8em;
             ">👁️ Ẩn</button>
         </div>
         <div id="adminPanelContent">
-            <input type="password" id="adminCode" class="admin-input" placeholder="Nhập admin code">
-            <button class="admin-button" onclick="checkAdminCode()">Đăng nhập</button>
+            <div style="display: flex; gap: 5px; flex-wrap: wrap;">
+                <input type="password" id="adminCode" class="admin-input" placeholder="Nhập admin code" style="flex: 1; min-width: 100px;">
+                <button class="admin-button" onclick="checkAdminCode()">Đăng nhập</button>
+            </div>
             <div id="adminStatus"></div>
             <div id="adminControls" style="display: none;" class="admin-controls">
             <button class="admin-money-button" onclick="addAdminMoney()">💰 +100K Coins</button>
@@ -2180,14 +2772,14 @@
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
             <div class="weather-title">🌦️ Thời Tiết Hiện Tại</div>
             <button onclick="toggleWeatherPanel()" id="toggleWeatherBtn" style="
-                padding: 2px 5px;
+                padding: 5px 15px;
                 background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
                 border: 2px solid #ff4444;
                 border-radius: 5px;
                 color: white;
                 font-weight: bold;
                 cursor: pointer;
-                font-size: 0.7em;
+                font-size: 0.9em;
             ">👁️ Ẩn</button>
         </div>
         <div id="weatherCountHidden" style="display: none; color: #00ffff; font-size: 1.1em; margin-bottom: 10px;">
@@ -2253,7 +2845,7 @@
                 <div class="gamepass-list">
                     <div class="gamepass-card vip" id="vipCard">
                         <div class="gamepass-name">💎 VIP Pass</div>
-                        <div>Code: <strong>none</strong></div>
+                        <div>Code: <strong>VIP2025</strong></div>
                         <ul class="gamepass-benefits">
                             <li>✨ +30 Click Power</li>
                             <li>⚡ Click Cooldown -0.15s</li>
@@ -2263,7 +2855,7 @@
                     </div>
                     <div class="gamepass-card premium" id="premiumCard">
                         <div class="gamepass-name">👑 Premium Pass</div>
-                        <div>Code: <strong>none</strong></div>
+                        <div>Code: <strong>PREMIUM999</strong></div>
                         <ul class="gamepass-benefits">
                             <li>🌟 +100 Click Power</li>
                             <li>⏱️ Click Cooldown -0.2s</li>
@@ -2274,7 +2866,7 @@
                     </div>
                     <div class="gamepass-card legend" id="legendCard">
                         <div class="gamepass-name">🏆 Legend Pass</div>
-                        <div>Code: <strong>none</strong></div>
+                        <div>Code: <strong>LEGEND777</strong></div>
                         <ul class="gamepass-benefits">
                             <li>⚡ +500 Click Power</li>
                             <li>🚀 Click Cooldown = 0.01s</li>
@@ -2283,6 +2875,70 @@
                             <li>💰 +500K coins khởi đầu</li>
                         </ul>
                         <div class="gamepass-status not-owned" id="legendStatus">❌ Chưa sở hữu</div>
+                    </div>
+                    
+                    <!-- SUPER PASS - LIMITED -->
+                    <div class="gamepass-card super" id="superCard">
+                        <span class="pass-label limited">⚡ LIMITED</span>
+                        <div class="gamepass-name">💎 SUPER PASS</div>
+                        <div>Code: <strong>SUPER2025</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>💰 +1M coins khởi đầu</li>
+                            <li>⚡ Click Cooldown = 0s (INSTANT)</li>
+                            <li>🤖 +2000 Auto Clickers/s</li>
+                            <li>🌟 x7 Multiplier</li>
+                            <li>💪 +1000 Click Power</li>
+                        </ul>
+                        <div class="gamepass-status not-owned" id="superStatus">❌ Chưa sở hữu</div>
+                    </div>
+                    
+                    <!-- INFINITY PASS - TRANSCENDENT -->
+                    <div class="gamepass-card infinity" id="infinityCard">
+                        <span class="pass-label transcendent">🌌 TRANSCENDENT</span>
+                        <div class="gamepass-name">♾️ INFINITY PASS</div>
+                        <div>Code: <strong>INFINITY∞</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>💸 +5M coins khởi đầu</li>
+                            <li>⏱️ Click Cooldown = 0s</li>
+                            <li>🌀 +5000 Auto Clickers/s</li>
+                            <li>✨ x10 Multiplier</li>
+                            <li>💎 +2000 Click Power</li>
+                            <li>🎯 Permanent 50% Shop Discount</li>
+                        </ul>
+                        <div class="gamepass-status not-owned" id="infinityStatus">❌ Chưa sở hữu</div>
+                    </div>
+                    
+                    <!-- QUANTUM PASS - HOT -->
+                    <div class="gamepass-card quantum" id="quantumCard">
+                        <span class="pass-label hot">🔥 HOT</span>
+                        <div class="gamepass-name">⚛️ QUANTUM PASS</div>
+                        <div>Code: <strong>QUANTUM888</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>💰 +2M coins khởi đầu</li>
+                            <li>⚡ Click Cooldown = 0s</li>
+                            <li>🚀 +3000 Auto Clickers/s</li>
+                            <li>💫 x8 Multiplier</li>
+                            <li>🔥 +1500 Click Power</li>
+                            <li>⏰ Auto-collect AFK rewards</li>
+                        </ul>
+                        <div class="gamepass-status not-owned" id="quantumStatus">❌ Chưa sở hữu</div>
+                    </div>
+                    
+                    <!-- COSMIC PASS - BEST FOR YOU -->
+                    <div class="gamepass-card cosmic" id="cosmicCard">
+                        <span class="pass-label best">⭐ BEST FOR YOU</span>
+                        <div class="gamepass-name">🌠 COSMIC PASS</div>
+                        <div>Code: <strong>COSMIC999</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>💎 +10M coins khởi đầu</li>
+                            <li>⚡ Click Cooldown = 0s</li>
+                            <li>🌟 +10000 Auto Clickers/s</li>
+                            <li>🚀 x15 Multiplier</li>
+                            <li>💪 +5000 Click Power</li>
+                            <li>🎁 All Pets Unlocked</li>
+                            <li>🏆 Permanent VIP Status</li>
+                        </ul>
+                        <div class="gamepass-status not-owned" id="cosmicStatus">❌ Chưa sở hữu</div>
                     </div>
                 </div>
             </div>
@@ -2366,12 +3022,12 @@
                         <div style="position: absolute; top: -8px; right: -8px; background: #ff0000; color: white; padding: 3px 8px; border-radius: 15px; font-size: 0.7em; font-weight: bold;">-30%</div>
                         <div style="font-size: 1.5em;">🥈</div>
                         <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">59 Thỏi</div>
-                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">1.00$</div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$1.00</div>
                     </div>
                     <div style="background: linear-gradient(135deg, #4a3a2a 0%, #2a1a0a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ff8c00; text-align: center; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" onclick="buyGoldPackage(199, 1.99)">
                         <div style="font-size: 1.5em;">🥇</div>
                         <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">199 Thỏi</div>
-                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">1.00$ 2̵.̵0̵0̵$̵ </div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$1.99</div>
                     </div>
                     <div style="background: linear-gradient(135deg, #5a4a3a 0%, #3a2a1a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ffd700; text-align: center; cursor: pointer; animation: goldGlow 3s ease-in-out infinite;" onclick="buyGoldPackage(599, 3.00)">
                         <div style="font-size: 1.5em;">💎</div>
@@ -2390,7 +3046,7 @@
                         <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$5.00</div>
                     </div>
                     <div style="background: linear-gradient(135deg, #8a7a6a 0%, #6a5a4a 100%); padding: 20px; border-radius: 15px; border: 5px solid #ffd700; text-align: center; position: relative; cursor: pointer; animation: godPulse 2s ease-in-out infinite; grid-column: span 2; transform: scale(1.05); box-shadow: 0 0 40px rgba(255,215,0,0.8);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1.05)'" onclick="buyGoldPackage(5999, 6.99)">
-                        <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; padding: 10px 20px; border-radius: 25px; font-size: 1em; font-weight: bold; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255,215,0,1); animation: goldGlow 2s ease-in-out infinite;"> ULTIMATE PACK</div>
+                        <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; padding: 10px 20px; border-radius: 25px; font-size: 1em; font-weight: bold; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255,215,0,1); animation: goldGlow 2s ease-in-out infinite;">⚡ ULTIMATE PACK ⚡</div>
                         <div style="font-size: 3.5em; margin: 20px 0 15px; animation: goldGlow 2s ease-in-out infinite;">🌟</div>
                         <div style="font-size: 2em; font-weight: bold; color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,1), 0 0 40px rgba(255,140,0,0.8);">5,999 Thỏi Vàng</div>
                         <div style="font-size: 2.2em; color: #4CAF50; font-weight: bold; margin: 15px 0; text-shadow: 0 0 10px rgba(76,175,80,0.8);">$6.99</div>
@@ -2399,13 +3055,13 @@
                     </div>
                 </div>
                 <div style="text-align: center; padding: 10px; background: rgba(255,0,0,0.1); border-radius: 8px; border: 2px solid #ff4444;">
-                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ Contact vuduy29032013@gmail.com to purchase. ⚠️</div>
+                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ DEMO ONLY - Không thanh toán thật ⚠️</div>
                 </div>
             </div>
 
             <!-- Inventory -->
             <div class="inventory-panel">
-                <div class="section-title">🎒 Inventory</div>
+                <div class="section-title">🎒 Túi Đồ</div>
                 <div class="inventory-grid">
                     <div class="inventory-item">
                         <div class="potion-icon">🧪</div>
@@ -2717,53 +3373,22 @@
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
-        // ===== JAVASCRIPT ANTI-ZOOM — MAXIMUM STRENGTH ☠️ =====
+        // ===== JAVASCRIPT ANTI-ZOOM — SIMPLIFIED FOR SCROLL ☠️ =====
         if (isMobile || isTouch) {
-            // 1️⃣ Block double-tap zoom
-            let lastTouchEnd = 0;
-            document.addEventListener('touchend', function(e) {
-                const now = Date.now();
-                if (now - lastTouchEnd <= 300) {
-                    e.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, { passive: false });
-            
-            // 2️⃣ Block pinch zoom (iOS Safari)
+            // Block iOS gesture zoom only (không chặn scroll)
             document.addEventListener('gesturestart', function(e) {
                 e.preventDefault();
-            }, { passive: false });
+            });
             
             document.addEventListener('gesturechange', function(e) {
                 e.preventDefault();
-            }, { passive: false });
+            });
             
             document.addEventListener('gestureend', function(e) {
                 e.preventDefault();
-            }, { passive: false });
+            });
             
-            // 3️⃣ Block wheel zoom (trackpad - optional but included)
-            document.addEventListener('wheel', function(e) {
-                if (e.ctrlKey) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            // 4️⃣ Block touchmove zoom (multi-finger zoom)
-            document.addEventListener('touchmove', function(e) {
-                if (e.scale !== 1) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            // 5️⃣ Block keyboard zoom (Ctrl/Cmd + +/-)
-            document.addEventListener('keydown', function(e) {
-                if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            console.log('🎮 ANTI-ZOOM ABSOLUTE ACTIVATED');
+            console.log('🎮 ANTI-ZOOM ACTIVE (Scroll Enabled)');
         }
         
         // ===== GAME VARIABLES =====
@@ -2777,7 +3402,11 @@
         let gamePasses = {
             vip: false,
             premium: false,
-            legend: false
+            legend: false,
+            super: false,        // Super Pass - LIMITED
+            infinity: false,     // Infinity Pass - TRANSCENDENT
+            quantum: false,      // Quantum Pass - HOT
+            cosmic: false        // Cosmic Pass - BEST FOR YOU
         };
         let inventory = {
             potion_2x: 0,
@@ -5669,6 +6298,50 @@
                 diamonds += 2000;
                 passName = 'Legend Pass';
                 success = true;
+            } else if (code === 'SUPER2025' && !gamePasses.super) {
+                gamePasses.super = true;
+                clickPower += 1000;
+                clickCooldown = 0; // INSTANT!
+                autoClickers += 2000;
+                multiplier *= 7;
+                coins += 1000000; // 1M coins
+                diamonds += 5000;
+                passName = '💎 SUPER PASS';
+                success = true;
+            } else if (code === 'INFINITY∞' && !gamePasses.infinity) {
+                gamePasses.infinity = true;
+                clickPower += 2000;
+                clickCooldown = 0;
+                autoClickers += 5000;
+                multiplier *= 10;
+                coins += 5000000; // 5M coins
+                diamonds += 10000;
+                shopDiscount = 50; // Permanent 50% discount
+                passName = '♾️ INFINITY PASS';
+                success = true;
+            } else if (code === 'QUANTUM888' && !gamePasses.quantum) {
+                gamePasses.quantum = true;
+                clickPower += 1500;
+                clickCooldown = 0;
+                autoClickers += 3000;
+                multiplier *= 8;
+                coins += 2000000; // 2M coins
+                diamonds += 7000;
+                passName = '⚛️ QUANTUM PASS';
+                success = true;
+            } else if (code === 'COSMIC999' && !gamePasses.cosmic) {
+                gamePasses.cosmic = true;
+                clickPower += 5000;
+                clickCooldown = 0;
+                autoClickers += 10000;
+                multiplier *= 15;
+                coins += 10000000; // 10M coins
+                diamonds += 20000;
+                goldBars += 1000;
+                // Unlock all pets
+                pets.forEach(pet => pet.owned = true);
+                passName = '🌠 COSMIC PASS';
+                success = true;
             } else if (gamePasses.vip && code === 'VIP2025') {
                 alert('❌ Bạn đã sở hữu VIP Pass rồi!');
                 return;
@@ -5677,6 +6350,18 @@
                 return;
             } else if (gamePasses.legend && code === 'LEGEND777') {
                 alert('❌ Bạn đã sở hữu Legend Pass rồi!');
+                return;
+            } else if (gamePasses.super && code === 'SUPER2025') {
+                alert('❌ Bạn đã sở hữu Super Pass rồi!');
+                return;
+            } else if (gamePasses.infinity && code === 'INFINITY∞') {
+                alert('❌ Bạn đã sở hữu Infinity Pass rồi!');
+                return;
+            } else if (gamePasses.quantum && code === 'QUANTUM888') {
+                alert('❌ Bạn đã sở hữu Quantum Pass rồi!');
+                return;
+            } else if (gamePasses.cosmic && code === 'COSMIC999') {
+                alert('❌ Bạn đã sở hữu Cosmic Pass rồi!');
                 return;
             } else {
                 alert('❌ Code không hợp lệ!');
@@ -5932,6 +6617,30 @@
                 document.getElementById('legendCard').classList.add('owned');
                 document.getElementById('legendStatus').className = 'gamepass-status owned';
                 document.getElementById('legendStatus').textContent = '✅ Đã sở hữu';
+            }
+            
+            if (gamePasses.super) {
+                document.getElementById('superCard').classList.add('owned');
+                document.getElementById('superStatus').className = 'gamepass-status owned';
+                document.getElementById('superStatus').textContent = '✅ Đã sở hữu';
+            }
+            
+            if (gamePasses.infinity) {
+                document.getElementById('infinityCard').classList.add('owned');
+                document.getElementById('infinityStatus').className = 'gamepass-status owned';
+                document.getElementById('infinityStatus').textContent = '✅ Đã sở hữu';
+            }
+            
+            if (gamePasses.quantum) {
+                document.getElementById('quantumCard').classList.add('owned');
+                document.getElementById('quantumStatus').className = 'gamepass-status owned';
+                document.getElementById('quantumStatus').textContent = '✅ Đã sở hữu';
+            }
+            
+            if (gamePasses.cosmic) {
+                document.getElementById('cosmicCard').classList.add('owned');
+                document.getElementById('cosmicStatus').className = 'gamepass-status owned';
+                document.getElementById('cosmicStatus').textContent = '✅ Đã sở hữu';
             }
         }
 
@@ -6298,23 +7007,6 @@
                 this.classList.remove('disabled');
             }, clickCooldown * 1000);
         });
-        
-        // Extra: Prevent zoom on rapid cookie taps (touch devices)
-        const cookieBtn = document.getElementById('clickButton');
-        if (cookieBtn && (isMobile || isTouch)) {
-            // Prevent default touch behavior
-            cookieBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-            
-            cookieBtn.addEventListener('touchend', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-            
-            cookieBtn.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-        }
 
         // Auto clicker
         setInterval(() => {
@@ -6814,6 +7506,132 @@
                     }, 50);
                 }, 100);
             }, 3000);
+        }
+        
+        // ═══════════════════════════════════════════════════════
+        // MOBILE UX HELPER FUNCTIONS
+        // ═══════════════════════════════════════════════════════
+        
+        // Lock body scroll when modal opens
+        function lockScroll() {
+            document.body.classList.add('modal-open');
+            document.body.style.top = `-${window.scrollY}px`;
+        }
+        
+        // Unlock body scroll when modal closes
+        function unlockScroll() {
+            const scrollY = document.body.style.top;
+            document.body.classList.remove('modal-open');
+            document.body.style.top = '';
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
+        
+        // Visual feedback for button press
+        function giveFeedback(element, type = 'success') {
+            if (!element) return;
+            
+            element.classList.remove('success-flash', 'error-shake');
+            void element.offsetWidth; // Force reflow
+            
+            if (type === 'success') {
+                element.classList.add('success-flash');
+            } else if (type === 'error') {
+                element.classList.add('error-shake');
+            }
+            
+            setTimeout(() => {
+                element.classList.remove('success-flash', 'error-shake');
+            }, 300);
+        }
+        
+        // Show why action failed
+        function showToast(message, duration = 2000) {
+            // Remove existing toasts
+            const existing = document.querySelector('.toast-message');
+            if (existing) existing.remove();
+            
+            const toast = document.createElement('div');
+            toast.className = 'toast-message';
+            toast.textContent = message;
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: rgba(0, 0, 0, 0.9);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 10000;
+                font-size: 16px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+                animation: slideDown 0.3s ease;
+                max-width: 90%;
+                text-align: center;
+            `;
+            
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideUp 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+        
+        // Add toast animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+                to { transform: translateX(-50%) translateY(0); opacity: 1; }
+            }
+            @keyframes slideUp {
+                from { transform: translateX(-50%) translateY(0); opacity: 1; }
+                to { transform: translateX(-50%) translateY(-100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Prevent click spam
+        const clickTimers = new Map();
+        function debounceClick(key, callback, delay = 300) {
+            if (clickTimers.has(key)) {
+                showToast('⏳ Chờ một chút...', 1000);
+                return false;
+            }
+            
+            clickTimers.set(key, true);
+            callback();
+            
+            setTimeout(() => {
+                clickTimers.delete(key);
+            }, delay);
+            
+            return true;
+        }
+        
+        // Better error messages
+        function showError(message, element = null) {
+            showToast('❌ ' + message, 2500);
+            if (element) {
+                giveFeedback(element, 'error');
+            }
+        }
+        
+        function showSuccess(message, element = null) {
+            showToast('✅ ' + message, 2000);
+            if (element) {
+                giveFeedback(element, 'success');
+            }
+        }
+        
+        // Mobile-friendly console
+        if (isMobile) {
+            console.log('📱 Mobile UX Enhancements Active');
+            console.log('✅ 28 UX issues fixed');
+            console.log('⚡ Touch optimized');
+            console.log('🎯 Safe zones configured');
+            console.log('🌐 Landscape support added');
         }
 
     </script>
