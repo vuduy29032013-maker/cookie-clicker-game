@@ -19,11 +19,11 @@
         }
 
         html, body {
-            /* MAXIMUM ANTI-ZOOM but ALLOW SCROLL */
-            touch-action: manipulation; /* Allow scroll, block zoom */
+            /* MAXIMUM ANTI-ZOOM but ALLOW SCROLL BOTH DIRECTIONS */
+            touch-action: manipulation; /* Allow scroll X & Y, block zoom */
             -ms-touch-action: manipulation;
-            overflow-x: hidden; /* Prevent horizontal scroll on body */
-            overflow-y: auto; /* Allow vertical scroll */
+            overflow-x: auto; /* Allow horizontal scroll ✅ */
+            overflow-y: auto; /* Allow vertical scroll ✅ */
         }
 
         body {
@@ -47,7 +47,7 @@
             max-width: 1200px;
             margin: 0 auto;
             width: 100%; /* Full width on mobile */
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            overflow-x: auto; /* Allow horizontal scroll ✅ */
             overflow-y: visible; /* Allow content to flow */
         }
 
@@ -1702,7 +1702,7 @@
             body {
                 font-size: 14px;
                 overflow-y: auto !important; /* Force vertical scroll */
-                overflow-x: hidden !important; /* Block horizontal scroll */
+                overflow-x: auto !important; /* Allow horizontal scroll */
                 height: auto;
                 min-height: 100vh;
             }
@@ -1711,6 +1711,7 @@
                 padding: 5px;
                 max-width: 100%;
                 width: 100%;
+                overflow-x: auto !important; /* Allow horizontal scroll */
                 overflow-y: visible !important; /* Allow content flow */
             }
             
@@ -1882,6 +1883,7 @@
             body {
                 font-size: 12px;
                 overflow-y: auto !important; /* Force vertical scroll */
+                overflow-x: auto !important; /* Allow horizontal scroll */
                 height: auto;
             }
             
@@ -2734,53 +2736,22 @@
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
-        // ===== JAVASCRIPT ANTI-ZOOM — MAXIMUM STRENGTH ☠️ =====
+        // ===== JAVASCRIPT ANTI-ZOOM — SIMPLIFIED FOR SCROLL ☠️ =====
         if (isMobile || isTouch) {
-            // 1️⃣ Block double-tap zoom
-            let lastTouchEnd = 0;
-            document.addEventListener('touchend', function(e) {
-                const now = Date.now();
-                if (now - lastTouchEnd <= 300) {
-                    e.preventDefault();
-                }
-                lastTouchEnd = now;
-            }, { passive: false });
-            
-            // 2️⃣ Block pinch zoom (iOS Safari)
+            // Block iOS gesture zoom only (không chặn scroll)
             document.addEventListener('gesturestart', function(e) {
                 e.preventDefault();
-            }, { passive: false });
+            });
             
             document.addEventListener('gesturechange', function(e) {
                 e.preventDefault();
-            }, { passive: false });
+            });
             
             document.addEventListener('gestureend', function(e) {
                 e.preventDefault();
-            }, { passive: false });
+            });
             
-            // 3️⃣ Block wheel zoom (trackpad - optional but included)
-            document.addEventListener('wheel', function(e) {
-                if (e.ctrlKey) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            // 4️⃣ Block touchmove zoom (multi-finger zoom)
-            document.addEventListener('touchmove', function(e) {
-                if (e.scale !== 1) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            // 5️⃣ Block keyboard zoom (Ctrl/Cmd + +/-)
-            document.addEventListener('keydown', function(e) {
-                if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-            
-            console.log('🎮 ANTI-ZOOM ABSOLUTE ACTIVATED');
+            console.log('🎮 ANTI-ZOOM ACTIVE (Scroll Enabled)');
         }
         
         // ===== GAME VARIABLES =====
@@ -6315,23 +6286,6 @@
                 this.classList.remove('disabled');
             }, clickCooldown * 1000);
         });
-        
-        // Extra: Prevent zoom on rapid cookie taps (touch devices)
-        const cookieBtn = document.getElementById('clickButton');
-        if (cookieBtn && (isMobile || isTouch)) {
-            // Prevent default touch behavior
-            cookieBtn.addEventListener('touchstart', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-            
-            cookieBtn.addEventListener('touchend', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-            
-            cookieBtn.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-        }
 
         // Auto clicker
         setInterval(() => {
