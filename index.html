@@ -3,27 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
-    <title>Cookie Clicker Game-By Vuduy 7/7  </title>
+    <title>cookie clicker by vu duy 7/7  </title>
     <style>
-        * {
+       * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* ANTI-ZOOM ABSOLUTE */
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: transparent;
-            user-select: none;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
         }
 
         html, body {
-            /* MAXIMUM ANTI-ZOOM but ALLOW SCROLL BOTH DIRECTIONS */
-            touch-action: manipulation; /* Allow scroll X & Y, block zoom */
-            -ms-touch-action: manipulation;
-            overflow-x: auto; /* Allow horizontal scroll ✅ */
-            overflow-y: auto; /* Allow vertical scroll ✅ */
+            /* ✅ ALLOW SCROLL - ❌ DISABLE ZOOM */
+            touch-action: pan-y;
+            -ms-touch-action: pan-y;
+            overflow-x: auto;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         body {
@@ -32,7 +26,6 @@
             min-height: 100vh;
             color: white;
             padding: 20px;
-            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
         }
 
         /* Exception: Allow text selection in inputs */
@@ -46,9 +39,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            width: 100%; /* Full width on mobile */
-            overflow-x: auto; /* Allow horizontal scroll ✅ */
-            overflow-y: visible; /* Allow content to flow */
+            overflow-x: auto; /* Prevent horizontal scroll */
         }
 
         .header {
@@ -102,7 +93,7 @@
             border-radius: 50%;
             background: linear-gradient(135deg, #ffd700, #ff8c00);
             border: 8px solid #ffed4e;
-            font-size: 6em;
+            font-size: 20em;
             cursor: pointer;
             transition: transform 0.1s;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -151,7 +142,7 @@
         }
 
         .shop-title {
-            font-size: 2em;
+            font-size: 0,7em;
             margin-bottom: 20px;
             text-align: center;
         }
@@ -207,7 +198,7 @@
         .buy-button {
             background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             border: none;
-            padding: 10px 20px;
+            padding: 50px 20px;
             border-radius: 5px;
             color: white;
             font-weight: bold;
@@ -229,7 +220,7 @@
         }
 
         .icon {
-            font-size: 2em;
+            font-size: 1em;
             margin-right: 10px;
         }
 
@@ -252,7 +243,7 @@
             padding: 15px;
             border-radius: 10px;
             border: 2px solid #00ff00;
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: bold;
             color: #00ff00;
         }
@@ -407,7 +398,7 @@
         }
 
         .weather-title {
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: bold;
             margin-bottom: 10px;
             color: #00bfff;
@@ -428,7 +419,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            animation: weatherFadeIn 0.3s ease-in;
+            animation: weatherFadeIn 1s ease-in;
         }
 
         .weather-item.wind {
@@ -1701,18 +1692,11 @@
         @media (max-width: 768px) {
             body {
                 font-size: 14px;
-                overflow-y: auto !important; /* Force vertical scroll */
-                overflow-x: auto !important; /* Allow horizontal scroll */
-                height: auto;
-                min-height: 100vh;
             }
             
             .container {
                 padding: 5px;
                 max-width: 100%;
-                width: 100%;
-                overflow-x: auto !important; /* Allow horizontal scroll */
-                overflow-y: visible !important; /* Allow content flow */
             }
             
             .main-content {
@@ -1722,7 +1706,7 @@
             
             /* Cookie Button - Bigger on mobile */
             #cookie {
-                width: 200px !important;
+                width: 300px !important;
                 height: 200px !important;
                 font-size: 120px !important;
                 margin: 20px auto;
@@ -1882,9 +1866,6 @@
         @media (max-width: 480px) {
             body {
                 font-size: 12px;
-                overflow-y: auto !important; /* Force vertical scroll */
-                overflow-x: auto !important; /* Allow horizontal scroll */
-                height: auto;
             }
             
             /* Cookie - Even bigger on small phones */
@@ -2199,14 +2180,14 @@
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
             <div class="weather-title">🌦️ Thời Tiết Hiện Tại</div>
             <button onclick="toggleWeatherPanel()" id="toggleWeatherBtn" style="
-                padding: 5px 15px;
+                padding: 2px 5px;
                 background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
                 border: 2px solid #ff4444;
                 border-radius: 5px;
                 color: white;
                 font-weight: bold;
                 cursor: pointer;
-                font-size: 0.9em;
+                font-size: 0.7em;
             ">👁️ Ẩn</button>
         </div>
         <div id="weatherCountHidden" style="display: none; color: #00ffff; font-size: 1.1em; margin-bottom: 10px;">
@@ -2272,7 +2253,7 @@
                 <div class="gamepass-list">
                     <div class="gamepass-card vip" id="vipCard">
                         <div class="gamepass-name">💎 VIP Pass</div>
-                        <div>Code: <strong>VIP2025</strong></div>
+                        <div>Code: <strong>none</strong></div>
                         <ul class="gamepass-benefits">
                             <li>✨ +30 Click Power</li>
                             <li>⚡ Click Cooldown -0.15s</li>
@@ -2282,7 +2263,7 @@
                     </div>
                     <div class="gamepass-card premium" id="premiumCard">
                         <div class="gamepass-name">👑 Premium Pass</div>
-                        <div>Code: <strong>PREMIUM999</strong></div>
+                        <div>Code: <strong>none</strong></div>
                         <ul class="gamepass-benefits">
                             <li>🌟 +100 Click Power</li>
                             <li>⏱️ Click Cooldown -0.2s</li>
@@ -2293,7 +2274,7 @@
                     </div>
                     <div class="gamepass-card legend" id="legendCard">
                         <div class="gamepass-name">🏆 Legend Pass</div>
-                        <div>Code: <strong>LEGEND777</strong></div>
+                        <div>Code: <strong>none</strong></div>
                         <ul class="gamepass-benefits">
                             <li>⚡ +500 Click Power</li>
                             <li>🚀 Click Cooldown = 0.01s</li>
@@ -2385,12 +2366,12 @@
                         <div style="position: absolute; top: -8px; right: -8px; background: #ff0000; color: white; padding: 3px 8px; border-radius: 15px; font-size: 0.7em; font-weight: bold;">-30%</div>
                         <div style="font-size: 1.5em;">🥈</div>
                         <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">59 Thỏi</div>
-                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$1.00</div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">1.00$</div>
                     </div>
                     <div style="background: linear-gradient(135deg, #4a3a2a 0%, #2a1a0a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ff8c00; text-align: center; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)';" onmouseout="this.style.transform='scale(1)';" onclick="buyGoldPackage(199, 1.99)">
                         <div style="font-size: 1.5em;">🥇</div>
                         <div style="font-size: 1.1em; font-weight: bold; color: #ffd700;">199 Thỏi</div>
-                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$1.99</div>
+                        <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">1.00$ 2̵.̵0̵0̵$̵ </div>
                     </div>
                     <div style="background: linear-gradient(135deg, #5a4a3a 0%, #3a2a1a 100%); padding: 12px; border-radius: 10px; border: 2px solid #ffd700; text-align: center; cursor: pointer; animation: goldGlow 3s ease-in-out infinite;" onclick="buyGoldPackage(599, 3.00)">
                         <div style="font-size: 1.5em;">💎</div>
@@ -2409,7 +2390,7 @@
                         <div style="font-size: 1.3em; color: #4CAF50; font-weight: bold;">$5.00</div>
                     </div>
                     <div style="background: linear-gradient(135deg, #8a7a6a 0%, #6a5a4a 100%); padding: 20px; border-radius: 15px; border: 5px solid #ffd700; text-align: center; position: relative; cursor: pointer; animation: godPulse 2s ease-in-out infinite; grid-column: span 2; transform: scale(1.05); box-shadow: 0 0 40px rgba(255,215,0,0.8);" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1.05)'" onclick="buyGoldPackage(5999, 6.99)">
-                        <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; padding: 10px 20px; border-radius: 25px; font-size: 1em; font-weight: bold; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255,215,0,1); animation: goldGlow 2s ease-in-out infinite;">⚡ ULTIMATE PACK ⚡</div>
+                        <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); color: #000; padding: 10px 20px; border-radius: 25px; font-size: 1em; font-weight: bold; border: 3px solid #fff; box-shadow: 0 0 30px rgba(255,215,0,1); animation: goldGlow 2s ease-in-out infinite;"> ULTIMATE PACK</div>
                         <div style="font-size: 3.5em; margin: 20px 0 15px; animation: goldGlow 2s ease-in-out infinite;">🌟</div>
                         <div style="font-size: 2em; font-weight: bold; color: #ffd700; text-shadow: 0 0 20px rgba(255,215,0,1), 0 0 40px rgba(255,140,0,0.8);">5,999 Thỏi Vàng</div>
                         <div style="font-size: 2.2em; color: #4CAF50; font-weight: bold; margin: 15px 0; text-shadow: 0 0 10px rgba(76,175,80,0.8);">$6.99</div>
@@ -2418,13 +2399,13 @@
                     </div>
                 </div>
                 <div style="text-align: center; padding: 10px; background: rgba(255,0,0,0.1); border-radius: 8px; border: 2px solid #ff4444;">
-                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ DEMO ONLY - Không thanh toán thật ⚠️</div>
+                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ Contact vuduy29032013@gmail.com to purchase. ⚠️</div>
                 </div>
             </div>
 
             <!-- Inventory -->
             <div class="inventory-panel">
-                <div class="section-title">🎒 Túi Đồ</div>
+                <div class="section-title">🎒 Inventory</div>
                 <div class="inventory-grid">
                     <div class="inventory-item">
                         <div class="potion-icon">🧪</div>
@@ -2736,22 +2717,53 @@
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
         
-        // ===== JAVASCRIPT ANTI-ZOOM — SIMPLIFIED FOR SCROLL ☠️ =====
+        // ===== JAVASCRIPT ANTI-ZOOM — MAXIMUM STRENGTH ☠️ =====
         if (isMobile || isTouch) {
-            // Block iOS gesture zoom only (không chặn scroll)
+            // 1️⃣ Block double-tap zoom
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function(e) {
+                const now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    e.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, { passive: false });
+            
+            // 2️⃣ Block pinch zoom (iOS Safari)
             document.addEventListener('gesturestart', function(e) {
                 e.preventDefault();
-            });
+            }, { passive: false });
             
             document.addEventListener('gesturechange', function(e) {
                 e.preventDefault();
-            });
+            }, { passive: false });
             
             document.addEventListener('gestureend', function(e) {
                 e.preventDefault();
-            });
+            }, { passive: false });
             
-            console.log('🎮 ANTI-ZOOM ACTIVE (Scroll Enabled)');
+            // 3️⃣ Block wheel zoom (trackpad - optional but included)
+            document.addEventListener('wheel', function(e) {
+                if (e.ctrlKey) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // 4️⃣ Block touchmove zoom (multi-finger zoom)
+            document.addEventListener('touchmove', function(e) {
+                if (e.scale !== 1) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            // 5️⃣ Block keyboard zoom (Ctrl/Cmd + +/-)
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && (e.key === '+' || e.key === '-' || e.key === '=')) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+            
+            console.log('🎮 ANTI-ZOOM ABSOLUTE ACTIVATED');
         }
         
         // ===== GAME VARIABLES =====
@@ -6286,6 +6298,23 @@
                 this.classList.remove('disabled');
             }, clickCooldown * 1000);
         });
+        
+        // Extra: Prevent zoom on rapid cookie taps (touch devices)
+        const cookieBtn = document.getElementById('clickButton');
+        if (cookieBtn && (isMobile || isTouch)) {
+            // Prevent default touch behavior
+            cookieBtn.addEventListener('touchstart', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+            
+            cookieBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+            
+            cookieBtn.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+        }
 
         // Auto clicker
         setInterval(() => {
