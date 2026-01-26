@@ -666,6 +666,34 @@
             0% { background-position: -200% center; }
             100% { background-position: 200% center; }
         }
+        
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           PREMIUM PASS VISUAL EFFECTS
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        @keyframes hueRotate {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        @keyframes glitchEffect {
+            0%, 90%, 100% { 
+                filter: none;
+                transform: translateX(0);
+            }
+            92% {
+                filter: brightness(1.5) saturate(2);
+                transform: translateX(2px);
+            }
+            94% {
+                filter: brightness(0.5) saturate(0.5);
+                transform: translateX(-2px);
+            }
+            96% {
+                filter: brightness(1.5) saturate(2);
+                transform: translateX(1px);
+            }
+        }
 
         .weather-item.rainbowrain {
             border-color: #ff69b4;
@@ -1539,6 +1567,219 @@
                 filter: brightness(1.4);
             }
         }
+        
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           PREMIUM GAMEPASS STYLES (GOLD BAR EXCLUSIVE)
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        /* EPIC PASS - Purple/Blue ⚔️ */
+        .gamepass-card.epic {
+            border: 3px solid;
+            border-color: #7c3aed;
+            background: linear-gradient(135deg, rgba(124,58,237,0.3) 0%, rgba(37,99,235,0.2) 100%);
+            box-shadow: 0 0 25px rgba(124,58,237,0.6), 0 0 15px rgba(37,99,235,0.4);
+            animation: epicGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes epicGlow {
+            0%, 100% { 
+                box-shadow: 0 0 25px rgba(124,58,237,0.6), 0 0 15px rgba(37,99,235,0.4);
+            }
+            50% { 
+                box-shadow: 0 0 35px rgba(124,58,237,0.9), 0 0 25px rgba(37,99,235,0.7);
+            }
+        }
+        
+        .pass-label.powerful {
+            background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+            color: white;
+            animation: labelFloat 2s ease-in-out infinite;
+        }
+        
+        /* PRISMATIC PASS - Rainbow 🌈 */
+        .gamepass-card.prismatic {
+            border: 3px solid;
+            border-color: #ff00ff;
+            background: linear-gradient(135deg, 
+                rgba(255,0,0,0.2) 0%, 
+                rgba(255,127,0,0.2) 16.67%, 
+                rgba(255,255,0,0.2) 33.33%, 
+                rgba(0,255,0,0.2) 50%, 
+                rgba(0,0,255,0.2) 66.67%, 
+                rgba(75,0,130,0.2) 83.33%, 
+                rgba(148,0,211,0.2) 100%);
+            box-shadow: 0 0 35px rgba(255,0,255,0.7);
+            animation: prismaticShift 3s linear infinite;
+        }
+        
+        @keyframes prismaticShift {
+            0% { 
+                filter: hue-rotate(0deg) brightness(1.1);
+                box-shadow: 0 0 35px rgba(255,0,255,0.7);
+            }
+            50% {
+                filter: hue-rotate(180deg) brightness(1.3);
+                box-shadow: 0 0 45px rgba(0,255,255,0.9);
+            }
+            100% { 
+                filter: hue-rotate(360deg) brightness(1.1);
+                box-shadow: 0 0 35px rgba(255,0,255,0.7);
+            }
+        }
+        
+        .pass-label.colorful {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 200% 100%;
+            color: white;
+            animation: labelFloat 2s ease-in-out infinite, rainbowSlide 2s linear infinite;
+        }
+        
+        @keyframes rainbowSlide {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+        
+        /* DIVINE PASS - Gold/White ✨ */
+        .gamepass-card.divine {
+            border: 3px solid;
+            border-color: #ffd700;
+            background: linear-gradient(135deg, rgba(255,215,0,0.3) 0%, rgba(255,255,255,0.2) 100%);
+            box-shadow: 0 0 40px rgba(255,215,0,0.8), 0 0 20px rgba(255,255,255,0.6);
+            animation: divineAura 3s ease-in-out infinite;
+        }
+        
+        @keyframes divineAura {
+            0%, 100% { 
+                box-shadow: 0 0 40px rgba(255,215,0,0.8), 0 0 20px rgba(255,255,255,0.6);
+                filter: brightness(1.1);
+            }
+            50% { 
+                box-shadow: 0 0 60px rgba(255,215,0,1), 0 0 40px rgba(255,255,255,0.9), 0 0 80px rgba(255,215,0,0.4);
+                filter: brightness(1.3);
+            }
+        }
+        
+        .pass-label.godlike {
+            background: linear-gradient(135deg, #ffd700 0%, #ffffff 100%);
+            color: #000;
+            font-weight: 900;
+            animation: labelFloat 2s ease-in-out infinite, divineShine 2s ease-in-out infinite;
+            text-shadow: 0 0 5px rgba(255,215,0,0.8);
+        }
+        
+        @keyframes divineShine {
+            0%, 100% { 
+                box-shadow: 0 2px 15px rgba(255,215,0,0.6);
+            }
+            50% { 
+                box-shadow: 0 2px 30px rgba(255,215,0,1), 0 0 40px rgba(255,255,255,0.8);
+            }
+        }
+        
+        /* SECRET PASS - Black/Dark Red 🔒 */
+        .gamepass-card.secret {
+            border: 3px solid;
+            border-color: #8b0000;
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(139,0,0,0.5) 100%);
+            box-shadow: 0 0 30px rgba(139,0,0,0.7);
+            animation: secretGlitch 4s ease-in-out infinite;
+        }
+        
+        @keyframes secretGlitch {
+            0%, 90%, 100% { 
+                box-shadow: 0 0 30px rgba(139,0,0,0.7);
+                filter: brightness(1);
+            }
+            92%, 94%, 96% {
+                box-shadow: 0 0 50px rgba(255,0,0,1);
+                filter: brightness(1.5) saturate(2);
+                transform: translateX(2px);
+            }
+            93%, 95% {
+                transform: translateX(-2px);
+            }
+        }
+        
+        .pass-label.hidden {
+            background: linear-gradient(135deg, #000000 0%, #8b0000 100%);
+            color: #ff0000;
+            font-weight: 900;
+            animation: labelFloat 2s ease-in-out infinite, secretPulse 2s ease-in-out infinite;
+            text-shadow: 0 0 10px rgba(255,0,0,0.8);
+        }
+        
+        @keyframes secretPulse {
+            0%, 100% { 
+                box-shadow: 0 2px 10px rgba(139,0,0,0.5);
+            }
+            50% { 
+                box-shadow: 0 2px 25px rgba(255,0,0,1), 0 0 35px rgba(139,0,0,0.8);
+            }
+        }
+        
+        /* Buy Button Styles */
+        .buy-gamepass-btn {
+            margin-top: 15px;
+            padding: 12px 24px;
+            border: 2px solid #ffd700;
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #000;
+            font-weight: bold;
+            font-size: 1em;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255,215,0,0.4);
+        }
+        
+        .buy-gamepass-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(255,215,0,0.7);
+        }
+        
+        .buy-gamepass-btn:active {
+            transform: scale(0.95);
+        }
+        
+        .buy-gamepass-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .buy-gamepass-btn.prismatic-btn {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 200% 100%;
+            animation: rainbowSlide 2s linear infinite;
+            color: white;
+            border-color: #ff00ff;
+        }
+        
+        .buy-gamepass-btn.divine-btn {
+            background: linear-gradient(135deg, #ffd700 0%, #ffffff 50%, #ffd700 100%);
+            color: #000;
+            border-color: #ffd700;
+            animation: divineButtonShine 2s ease-in-out infinite;
+        }
+        
+        @keyframes divineButtonShine {
+            0%, 100% { box-shadow: 0 4px 15px rgba(255,215,0,0.4); }
+            50% { box-shadow: 0 4px 25px rgba(255,215,0,0.9), 0 0 40px rgba(255,255,255,0.6); }
+        }
+        
+        .buy-gamepass-btn.secret-btn {
+            background: linear-gradient(135deg, #000000 0%, #8b0000 100%);
+            color: #ff0000;
+            border-color: #8b0000;
+        }
+        
+        .pass-price {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #ffd700;
+            margin: 10px 0;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
 
         .gamepass-card.owned {
             background: rgba(0, 255, 0, 0.1);
@@ -1765,6 +2006,294 @@
             font-weight: bold;
             cursor: pointer;
             transition: transform 0.2s;
+        }
+
+        .afk-button:hover {
+            transform: scale(1.05);
+        }
+        
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           🎮 GAME PASS STORE STYLES
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        .game-pass-section {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 30px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .game-pass-title {
+            text-align: center;
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .game-pass-subtitle {
+            text-align: center;
+            font-size: 1.1em;
+            color: #ddd;
+            margin-bottom: 25px;
+        }
+        
+        .game-passes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Base Pass Card */
+        .game-pass-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+        
+        .game-pass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Badge/Label */
+        .pass-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+        }
+        
+        /* SUPER PASS - Rainbow gradient */
+        .game-pass-card.super-pass {
+            background: linear-gradient(135deg, 
+                rgba(138, 43, 226, 0.3) 0%,
+                rgba(255, 215, 0, 0.3) 50%,
+                rgba(255, 0, 0, 0.3) 100%);
+            border-color: #ffd700;
+            animation: superPassGlow 3s ease-in-out infinite;
+        }
+        
+        @keyframes superPassGlow {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.6),
+                           0 0 40px rgba(255, 0, 0, 0.4);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.8),
+                           0 0 60px rgba(255, 0, 0, 0.6);
+            }
+        }
+        
+        .super-pass .pass-badge {
+            background: linear-gradient(135deg, #ff0000 0%, #ffd700 100%);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        /* STARTER PASS - Blue/Green */
+        .game-pass-card.starter-pass {
+            background: linear-gradient(135deg, 
+                rgba(0, 191, 255, 0.2) 0%,
+                rgba(0, 255, 127, 0.2) 100%);
+            border-color: #00bfff;
+        }
+        
+        .starter-pass .pass-badge {
+            background: linear-gradient(135deg, #00bfff 0%, #00ff7f 100%);
+        }
+        
+        /* INSANE PASS - Fire red/orange */
+        .game-pass-card.insane-pass {
+            background: linear-gradient(135deg, 
+                rgba(255, 69, 0, 0.3) 0%,
+                rgba(255, 140, 0, 0.3) 100%);
+            border-color: #ff4500;
+            animation: fireGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes fireGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(255, 69, 0, 0.6); }
+            50% { box-shadow: 0 0 25px rgba(255, 69, 0, 0.9); }
+        }
+        
+        .insane-pass .pass-badge {
+            background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
+            animation: pulse 1s ease-in-out infinite;
+        }
+        
+        /* TRANSCENDENT PASS - White/Rainbow */
+        .game-pass-card.transcendent-pass {
+            background: linear-gradient(135deg, 
+                rgba(255, 255, 255, 0.2) 0%,
+                rgba(138, 43, 226, 0.2) 50%,
+                rgba(255, 215, 0, 0.2) 100%);
+            border-color: #ffffff;
+            animation: transcendentGlow 4s ease-in-out infinite;
+        }
+        
+        @keyframes transcendentGlow {
+            0% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+            33% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.8); }
+            66% { box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); }
+            100% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+        }
+        
+        .transcendent-pass .pass-badge {
+            background: linear-gradient(135deg, 
+                #ffffff 0%, 
+                #8a2be2 50%, 
+                #ffd700 100%);
+            animation: rainbow 3s linear infinite;
+        }
+        
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+        
+        /* Pass Header */
+        .pass-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .pass-icon {
+            font-size: 2.5em;
+        }
+        
+        .pass-name {
+            font-size: 1.4em;
+            font-weight: bold;
+            flex: 1;
+        }
+        
+        .pass-description {
+            color: #ddd;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+        
+        /* Benefits List */
+        .pass-benefits {
+            margin: 15px 0;
+        }
+        
+        .pass-benefit {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pass-benefit:last-child {
+            border-bottom: none;
+        }
+        
+        .benefit-icon {
+            font-size: 1.2em;
+            min-width: 25px;
+        }
+        
+        .benefit-text {
+            flex: 1;
+            font-size: 0.95em;
+        }
+        
+        .benefit-value {
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        /* Pass Price & Button */
+        .pass-footer {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .pass-price {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #ffd700;
+        }
+        
+        .pass-buy-button {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+        }
+        
+        .pass-buy-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .pass-buy-button:active {
+            transform: scale(0.98);
+        }
+        
+        /* Super Pass Button */
+        .super-pass .pass-buy-button {
+            background: linear-gradient(135deg, #8a2be2 0%, #ffd700 50%, #ff0000 100%);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        /* Starter Pass Button */
+        .starter-pass .pass-buy-button {
+            background: linear-gradient(135deg, #00bfff 0%, #00ff7f 100%);
+            color: white;
+        }
+        
+        /* Insane Pass Button */
+        .insane-pass .pass-buy-button {
+            background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);
+            color: white;
+        }
+        
+        /* Transcendent Pass Button */
+        .transcendent-pass .pass-buy-button {
+            background: linear-gradient(135deg, #ffffff 0%, #8a2be2 50%, #ffd700 100%);
+            color: #000;
+            font-weight: bold;
+        }
+        
+        /* Owned Badge */
+        .pass-owned {
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .afk-button:hover {
@@ -2940,6 +3469,87 @@
                         </ul>
                         <div class="gamepass-status not-owned" id="cosmicStatus">❌ Chưa sở hữu</div>
                     </div>
+                    
+                    <!-- ═══════════════════════════════════════════ -->
+                    <!-- PREMIUM TIER PASSES - GOLD BAR EXCLUSIVE -->
+                    <!-- ═══════════════════════════════════════════ -->
+                    
+                    <!-- EPIC PASS - POWERFUL ⚔️ -->
+                    <div class="gamepass-card epic" id="epicCard">
+                        <span class="pass-label powerful">⚔️ POWERFUL</span>
+                        <div class="gamepass-name">⚔️ EPIC PASS</div>
+                        <div class="pass-price">💰 Cost: <strong>50 Gold Bars</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>💰 +100K coins ngay lập tức</li>
+                            <li>🎯 x4 Multiplier (mạnh mẽ)</li>
+                            <li>⚡ +500 Click Power</li>
+                            <li>🤖 +10 Auto Clickers/s</li>
+                            <li>💪 Rất đủ để farm nhanh</li>
+                        </ul>
+                        <button class="buy-gamepass-btn" onclick="buyPremiumPass('epic', 50)">
+                            🏆 Mua với 50 Gold Bars
+                        </button>
+                        <div class="gamepass-status not-owned" id="epicStatus">❌ Chưa sở hữu</div>
+                    </div>
+                    
+                    <!-- PRISMATIC PASS - COLORFUL 🌈 -->
+                    <div class="gamepass-card prismatic" id="prismaticCard">
+                        <span class="pass-label colorful">🌈 COLORFUL</span>
+                        <div class="gamepass-name">🌈 PRISMATIC PASS</div>
+                        <div class="pass-price">💰 Cost: <strong>150 Gold Bars</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>💰 +500K coins ngay lập tức</li>
+                            <li>🌈 x6 Multiplier (ổn định)</li>
+                            <li>⚡ +1000 Click Power</li>
+                            <li>🤖 +20 Auto Clickers/s</li>
+                            <li>✨ Hiệu ứng cầu vồng khi click</li>
+                            <li>🎨 Màu sắc sặc sỡ, đã mắt</li>
+                        </ul>
+                        <button class="buy-gamepass-btn prismatic-btn" onclick="buyPremiumPass('prismatic', 150)">
+                            🌈 Mua với 150 Gold Bars
+                        </button>
+                        <div class="gamepass-status not-owned" id="prismaticStatus">❌ Chưa sở hữu</div>
+                    </div>
+                    
+                    <!-- DIVINE PASS - GODLIKE ✨ -->
+                    <div class="gamepass-card divine" id="divineCard">
+                        <span class="pass-label godlike">✨ GODLIKE</span>
+                        <div class="gamepass-name">✨ DIVINE PASS</div>
+                        <div class="pass-price">💰 Cost: <strong>500 Gold Bars</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>💎 +1M coins ngay lập tức</li>
+                            <li>✨ x12 Multiplier (thần thánh)</li>
+                            <li>⚡ +2000 Click Power</li>
+                            <li>🤖 +50 Auto Clickers/s</li>
+                            <li>🌟 Aura ánh sáng mềm mại</li>
+                            <li>👑 Cảm giác như thần linh</li>
+                            <li>💫 Tiền tăng mượt mà, không cần spam</li>
+                        </ul>
+                        <button class="buy-gamepass-btn divine-btn" onclick="buyPremiumPass('divine', 500)">
+                            ✨ Mua với 500 Gold Bars
+                        </button>
+                        <div class="gamepass-status not-owned" id="divineStatus">❌ Chưa sở hữu</div>
+                    </div>
+                    
+                    <!-- SECRET PASS - HIDDEN 🔒 -->
+                    <div class="gamepass-card secret" id="secretCard" style="display: none;">
+                        <span class="pass-label hidden">🔒 HIDDEN</span>
+                        <div class="gamepass-name">🔒 SECRET PASS</div>
+                        <div class="pass-price">💰 Cost: <strong>??? Gold Bars</strong></div>
+                        <ul class="gamepass-benefits">
+                            <li>💰 +5M coins ngay lập tức</li>
+                            <li>❓ x18 Multiplier (bí ẩn)</li>
+                            <li>⚡ +3000 Click Power (ẩn)</li>
+                            <li>🤖 +100 Auto Clickers/s</li>
+                            <li>🌀 Hiệu ứng glitch đặc biệt</li>
+                            <li>🔮 Quyền năng bí mật chưa công bố</li>
+                            <li>❓ Unlock: Rebirth 10+ hoặc ???</li>
+                        </ul>
+                        <button class="buy-gamepass-btn secret-btn" onclick="buyPremiumPass('secret', 1000)" disabled>
+                            🔒 LOCKED - Điều kiện chưa đạt
+                        </button>
+                        <div class="gamepass-status not-owned" id="secretStatus">🔒 Bị khóa</div>
+                    </div>
                 </div>
             </div>
 
@@ -3055,7 +3665,7 @@
                     </div>
                 </div>
                 <div style="text-align: center; padding: 10px; background: rgba(255,0,0,0.1); border-radius: 8px; border: 2px solid #ff4444;">
-                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ Bạn có thể thanh toán bằng thẻ điện thoại,zing card ⚠️</div>
+                    <div style="font-size: 0.95em; color: #ff6b6b; font-weight: bold;">⚠️ DEMO ONLY - Không thanh toán thật ⚠️</div>
                 </div>
             </div>
 
@@ -3364,6 +3974,186 @@
     <!-- Hatch Animation -->
     <div id="hatchAnimation" style="display: none;"></div>
 
+    <!-- 🎮 GAME PASS STORE -->
+    <div class="game-pass-section">
+        <div class="game-pass-title">🎮 GAME PASS STORE</div>
+        <div class="game-pass-subtitle">💎 Passes độc quyền – Tăng sức mạnh siêu tốc!</div>
+        
+        <div class="game-passes-grid">
+            <!-- SUPER PASS -->
+            <div class="game-pass-card super-pass" onclick="buyGamePass('super')">
+                <div class="pass-badge" style="background: linear-gradient(135deg, #ff0000 0%, #ffd700 100%);">
+                    ⏳ LIMITED
+                </div>
+                
+                <div class="pass-header">
+                    <div class="pass-icon">🌟</div>
+                    <div class="pass-name">SUPER PASS</div>
+                </div>
+                
+                <div class="pass-description">
+                    Pass mạnh nhất – dành cho người muốn khởi đầu bá đạo
+                </div>
+                
+                <div class="pass-benefits">
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">💰</span>
+                        <span class="benefit-text">Tiền khởi đầu: <span class="benefit-value">+1.000.000</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">⚡</span>
+                        <span class="benefit-text">Cooldown: <span class="benefit-value">0s (INSTANT!)</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">🤖</span>
+                        <span class="benefit-text">Auto Clicker: <span class="benefit-value">+2000</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">✖️</span>
+                        <span class="benefit-text">Multiplier: <span class="benefit-value">x7</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">👆</span>
+                        <span class="benefit-text">Click Power: <span class="benefit-value">+1000</span></span>
+                    </div>
+                </div>
+                
+                <div class="pass-footer">
+                    <div class="pass-price">💎 5000 Diamonds</div>
+                    <button class="pass-buy-button" onclick="event.stopPropagation(); buyGamePass('super');">
+                        MUA NGAY
+                    </button>
+                </div>
+            </div>
+            
+            <!-- STARTER BOOST PASS -->
+            <div class="game-pass-card starter-pass" onclick="buyGamePass('starter')">
+                <div class="pass-badge" style="background: linear-gradient(135deg, #00bfff 0%, #00ff7f 100%);">
+                    💡 BEST FOR YOU
+                </div>
+                
+                <div class="pass-header">
+                    <div class="pass-icon">💎</div>
+                    <div class="pass-name">STARTER BOOST</div>
+                </div>
+                
+                <div class="pass-description">
+                    Phù hợp người mới chơi – khởi đầu thuận lợi
+                </div>
+                
+                <div class="pass-benefits">
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">💰</span>
+                        <span class="benefit-text">Tiền khởi đầu: <span class="benefit-value">+100.000</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">👆</span>
+                        <span class="benefit-text">Click Power: <span class="benefit-value">+100</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">✖️</span>
+                        <span class="benefit-text">Multiplier: <span class="benefit-value">x2</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">🤖</span>
+                        <span class="benefit-text">Auto Clicker: <span class="benefit-value">+50</span></span>
+                    </div>
+                </div>
+                
+                <div class="pass-footer">
+                    <div class="pass-price">💎 500 Diamonds</div>
+                    <button class="pass-buy-button" onclick="event.stopPropagation(); buyGamePass('starter');">
+                        MUA NGAY
+                    </button>
+                </div>
+            </div>
+            
+            <!-- INSANE CLICKER PASS -->
+            <div class="game-pass-card insane-pass" onclick="buyGamePass('insane')">
+                <div class="pass-badge" style="background: linear-gradient(135deg, #ff4500 0%, #ff8c00 100%);">
+                    🔥 HOT
+                </div>
+                
+                <div class="pass-header">
+                    <div class="pass-icon">🔥</div>
+                    <div class="pass-name">INSANE CLICKER</div>
+                </div>
+                
+                <div class="pass-description">
+                    Dành cho ai thích click nhanh – farm mạnh
+                </div>
+                
+                <div class="pass-benefits">
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">⚡</span>
+                        <span class="benefit-text">Cooldown giảm: <span class="benefit-value">-70%</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">🤖</span>
+                        <span class="benefit-text">Auto Clicker: <span class="benefit-value">+500</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">👆</span>
+                        <span class="benefit-text">Click Power: <span class="benefit-value">+300</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">✖️</span>
+                        <span class="benefit-text">Multiplier: <span class="benefit-value">x3</span></span>
+                    </div>
+                </div>
+                
+                <div class="pass-footer">
+                    <div class="pass-price">💎 1500 Diamonds</div>
+                    <button class="pass-buy-button" onclick="event.stopPropagation(); buyGamePass('insane');">
+                        MUA NGAY
+                    </button>
+                </div>
+            </div>
+            
+            <!-- TRANSCENDENT PASS -->
+            <div class="game-pass-card transcendent-pass" onclick="buyGamePass('transcendent')">
+                <div class="pass-badge" style="background: linear-gradient(135deg, #ffffff 0%, #8a2be2 50%, #ffd700 100%); color: #000;">
+                    ✨ TRANSCENDENT
+                </div>
+                
+                <div class="pass-header">
+                    <div class="pass-icon">🌈</div>
+                    <div class="pass-name">TRANSCENDENT</div>
+                </div>
+                
+                <div class="pass-description">
+                    Pass cao cấp – cảm giác "vượt cấp độ"
+                </div>
+                
+                <div class="pass-benefits">
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">✖️</span>
+                        <span class="benefit-text">Multiplier: <span class="benefit-value">x5</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">🤖</span>
+                        <span class="benefit-text">Auto Clicker: <span class="benefit-value">+1000</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">👆</span>
+                        <span class="benefit-text">Click Power: <span class="benefit-value">+500</span></span>
+                    </div>
+                    <div class="pass-benefit">
+                        <span class="benefit-icon">✨</span>
+                        <span class="benefit-text">Effect: <span class="benefit-value">Ánh sáng đặc biệt</span></span>
+                    </div>
+                </div>
+                
+                <div class="pass-footer">
+                    <div class="pass-price">💎 3000 Diamonds</div>
+                    <button class="pass-buy-button" onclick="event.stopPropagation(); buyGamePass('transcendent');">
+                        MUA NGAY
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Egg Details Modal -->
     <div id="eggDetailsOverlay" class="egg-details-overlay" style="display: none;" onclick="closeEggDetails()"></div>
     <div id="eggDetailsModal" class="egg-details-modal" style="display: none;"></div>
@@ -3403,10 +4193,18 @@
             vip: false,
             premium: false,
             legend: false,
-            super: false,        // Super Pass - LIMITED
+            super: false,        // Super Pass - LIMITED (code-based)
             infinity: false,     // Infinity Pass - TRANSCENDENT
             quantum: false,      // Quantum Pass - HOT
-            cosmic: false        // Cosmic Pass - BEST FOR YOU
+            cosmic: false,       // Cosmic Pass - BEST FOR YOU
+            epic: false,         // ⚔️ Epic Pass - POWERFUL
+            prismatic: false,    // 🌈 Prismatic Pass - COLORFUL
+            divine: false,       // ✨ Divine Pass - GODLIKE
+            secret: false,       // 🔒 Secret Pass - HIDDEN
+            superDiamond: false, // 🌟 Super Pass - Diamond version
+            starter: false,      // 💎 Starter Boost - Diamond Pass
+            insane: false,       // 🔥 Insane Clicker - Diamond Pass
+            transcendent: false  // 🌈 Transcendent - Diamond Pass
         };
         let inventory = {
             potion_2x: 0,
@@ -5795,7 +6593,7 @@
             clickTimes.push(now);
             
             // Chỉ giữ lại 10 lần click gần nhất
-            if (clickTimes.length > 10) {
+            if (clickTimes.length > 500000000) {
                 clickTimes.shift();
             }
             
@@ -5821,9 +6619,9 @@
                 // 2. Click quá đều (độ lệch chuẩn < 10ms)
                 // 3. Click với pattern giống nhau (variance quá thấp)
                 
-                const tooFast = avgInterval < 50;
-                const tooConsistent = stdDev < 10;
-                const suspiciousPattern = variance < 100 && clickTimes.length >= 8;
+                const tooFast = avgInterval < 10;
+                const tooConsistent = stdDev < 3;
+                const suspiciousPattern = variance < 15 && clickTimes.length >= 12;
                 
                 if ((tooFast && tooConsistent) || suspiciousPattern) {
                     // BAN PLAYER!
@@ -6642,6 +7440,369 @@
                 document.getElementById('cosmicStatus').className = 'gamepass-status owned';
                 document.getElementById('cosmicStatus').textContent = '✅ Đã sở hữu';
             }
+            
+            // Update 4 premium passes
+            if (gamePasses.epic) {
+                document.getElementById('epicCard').classList.add('owned');
+                document.getElementById('epicStatus').className = 'gamepass-status owned';
+                document.getElementById('epicStatus').textContent = '✅ Đã sở hữu';
+            }
+            
+            if (gamePasses.prismatic) {
+                document.getElementById('prismaticCard').classList.add('owned');
+                document.getElementById('prismaticStatus').className = 'gamepass-status owned';
+                document.getElementById('prismaticStatus').textContent = '✅ Đã sở hữu';
+            }
+            
+            if (gamePasses.divine) {
+                document.getElementById('divineCard').classList.add('owned');
+                document.getElementById('divineStatus').className = 'gamepass-status owned';
+                document.getElementById('divineStatus').textContent = '✅ Đã sở hữu';
+            }
+            
+            if (gamePasses.secret) {
+                document.getElementById('secretCard').classList.add('owned');
+                document.getElementById('secretStatus').className = 'gamepass-status owned';
+                document.getElementById('secretStatus').textContent = '✅ Đã sở hữu';
+            }
+            
+            // Check SECRET pass unlock condition
+            checkSecretPassUnlock();
+        }
+        
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // PREMIUM GAMEPASS PURCHASE FUNCTION (GOLD BAR EXCLUSIVE)
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function buyPremiumPass(passType, cost) {
+            console.log(`🎮 buyPremiumPass called: ${passType}, cost: ${cost}`);
+            console.log(`💰 Current Gold Bars: ${goldBars}`);
+            
+            // Validation checks
+            if (!passType || typeof cost !== 'number' || cost <= 0) {
+                alert('❌ Lỗi: Thông tin pass không hợp lệ!');
+                console.error('Invalid pass parameters');
+                return;
+            }
+            
+            // Check if already owned
+            if (gamePasses[passType]) {
+                alert(`❌ Bạn đã sở hữu ${passType.toUpperCase()} Pass rồi!`);
+                console.log(`Already owned: ${passType}`);
+                return;
+            }
+            
+            // Check gold bars balance
+            if (goldBars < cost) {
+                alert(`❌ Không đủ Gold Bars!\n\nCần: ${cost} 🏆\nHiện có: ${goldBars} 🏆\nThiếu: ${cost - goldBars} 🏆`);
+                console.log(`Insufficient gold bars: need ${cost}, have ${goldBars}`);
+                return;
+            }
+            
+            // Confirmation
+            const confirmMsg = currentLanguage === 'en' 
+                ? `🎮 Purchase ${passType.toUpperCase()} Pass?\n\nCost: ${cost} Gold Bars 🏆\nYou have: ${goldBars} Gold Bars\n\nThis pass will replace any active pass.`
+                : `🎮 Mua ${passType.toUpperCase()} Pass?\n\nGiá: ${cost} Gold Bars 🏆\nBạn có: ${goldBars} Gold Bars\n\nPass này sẽ thay thế pass đang hoạt động.`;
+            
+            if (!confirm(confirmMsg)) return;
+            
+            // Deduct gold bars
+            goldBars -= cost;
+            if (goldBars < 0) goldBars = 0; // Safety check
+            
+            // Activate pass
+            gamePasses[passType] = true;
+            
+            // Apply pass bonuses (PARANOID: validate all values)
+            let bonusCoins = 0;
+            let bonusMultiplier = 1;
+            let bonusClickPower = 0;
+            let bonusAutoClickers = 0;
+            let passName = '';
+            
+            switch(passType) {
+                case 'epic':
+                    bonusCoins = 100000;
+                    bonusMultiplier = 4;
+                    bonusClickPower = 500;
+                    bonusAutoClickers = 10;
+                    passName = '⚔️ EPIC PASS';
+                    break;
+                    
+                case 'prismatic':
+                    bonusCoins = 500000;
+                    bonusMultiplier = 6;
+                    bonusClickPower = 1000;
+                    bonusAutoClickers = 20;
+                    passName = '🌈 PRISMATIC PASS';
+                    // Add rainbow click effect
+                    addPrismaticEffect();
+                    break;
+                    
+                case 'divine':
+                    bonusCoins = 1000000;
+                    bonusMultiplier = 12;
+                    bonusClickPower = 2000;
+                    bonusAutoClickers = 50;
+                    passName = '✨ DIVINE PASS';
+                    // Add divine aura effect
+                    addDivineEffect();
+                    break;
+                    
+                case 'secret':
+                    bonusCoins = 5000000;
+                    bonusMultiplier = 18;
+                    bonusClickPower = 3000;
+                    bonusAutoClickers = 100;
+                    passName = '🔒 SECRET PASS';
+                    // Add glitch effect
+                    addSecretEffect();
+                    break;
+                    
+                default:
+                    alert('❌ Lỗi: Pass type không hợp lệ!');
+                    goldBars += cost; // Refund
+                    return;
+            }
+            
+            // Validate bonuses (PARANOID)
+            bonusCoins = Math.max(0, Math.min(bonusCoins, 999999999999));
+            bonusMultiplier = Math.max(1, Math.min(bonusMultiplier, 1000));
+            bonusClickPower = Math.max(0, Math.min(bonusClickPower, 999999));
+            bonusAutoClickers = Math.max(0, Math.min(bonusAutoClickers, 1000));
+            
+            // Apply bonuses
+            coins += bonusCoins;
+            multiplier *= bonusMultiplier;
+            clickPower += bonusClickPower;
+            autoClickers += bonusAutoClickers;
+            
+            // Update UI
+            updateDisplay();
+            updateGamePassUI();
+            
+            // Success message
+            const successMsg = currentLanguage === 'en'
+                ? `✅ ${passName} Activated!\n\n🎁 Instant Bonus: ${formatNumber(bonusCoins)} coins\n🎯 Multiplier: x${bonusMultiplier}\n⚡ Click Power: +${bonusClickPower}\n🤖 Auto Clickers: +${bonusAutoClickers}/s\n\n💰 Gold Bars Remaining: ${goldBars}`
+                : `✅ Đã kích hoạt ${passName}!\n\n🎁 Thưởng ngay: ${formatNumber(bonusCoins)} coins\n🎯 Hệ số nhân: x${bonusMultiplier}\n⚡ Sức mạnh click: +${bonusClickPower}\n🤖 Auto Clickers: +${bonusAutoClickers}/s\n\n💰 Gold Bars còn lại: ${goldBars}`;
+            
+            alert(successMsg);
+            
+            console.log(`✅ Premium Pass Purchased: ${passType}`);
+            console.log(`💰 Cost: ${cost} Gold Bars`);
+            console.log(`🏆 Remaining: ${goldBars} Gold Bars`);
+        }
+        
+        // Check if SECRET pass should be unlocked
+        function checkSecretPassUnlock() {
+            const secretCard = document.getElementById('secretCard');
+            const secretBtn = secretCard?.querySelector('.buy-gamepass-btn');
+            
+            if (!secretCard) return;
+            
+            // Unlock conditions: Rebirth 10+ OR Playtime 10h+
+            const rebirthCondition = rebirthCount >= 10;
+            const timeCondition = playTime >= (10 * 3600); // 10 hours
+            
+            if (rebirthCondition || timeCondition) {
+                secretCard.style.display = 'block';
+                if (secretBtn && !gamePasses.secret) {
+                    secretBtn.disabled = false;
+                    secretBtn.textContent = '🔓 Mua với 1000 Gold Bars';
+                }
+            } else {
+                secretCard.style.display = 'none';
+            }
+        }
+        
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // DIAMOND-BASED GAMEPASS PURCHASE (for modern passes section)
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        function buyGamePass(passType) {
+            console.log(`🎮 buyGamePass called: ${passType}`);
+            console.log(`💎 Current Diamonds: ${diamonds}`);
+            
+            // Validate input
+            if (!passType || typeof passType !== 'string') {
+                alert('❌ Lỗi: Pass type không hợp lệ!');
+                console.error('Invalid passType');
+                return;
+            }
+            
+            // Map passType to correct key (avoid conflicts)
+            const passKeyMap = {
+                'super': 'superDiamond',  // Diamond super pass uses different key
+                'starter': 'starter',
+                'insane': 'insane',
+                'transcendent': 'transcendent'
+            };
+            
+            const passKey = passKeyMap[passType];
+            if (!passKey) {
+                alert(`❌ Pass type "${passType}" không hợp lệ!`);
+                console.error(`Invalid pass type: ${passType}`);
+                return;
+            }
+            
+            console.log(`Mapped to passKey: ${passKey}`);
+            
+            // Define pass configurations
+            const passes = {
+                'super': {
+                    name: '🌟 SUPER PASS',
+                    cost: 5000,
+                    currency: 'diamonds',
+                    bonuses: {
+                        coins: 1000000,
+                        clickPower: 1000,
+                        autoClickers: 2000,
+                        multiplier: 7,
+                        cooldown: 0
+                    }
+                },
+                'starter': {
+                    name: '💎 STARTER BOOST',
+                    cost: 500,
+                    currency: 'diamonds',
+                    bonuses: {
+                        coins: 100000,
+                        clickPower: 100,
+                        autoClickers: 50,
+                        multiplier: 2
+                    }
+                },
+                'insane': {
+                    name: '🔥 INSANE CLICKER',
+                    cost: 1500,
+                    currency: 'diamonds',
+                    bonuses: {
+                        clickPower: 300,
+                        autoClickers: 500,
+                        multiplier: 3,
+                        cooldownReduction: 0.7 // -70%
+                    }
+                },
+                'transcendent': {
+                    name: '🌈 TRANSCENDENT',
+                    cost: 3000,
+                    currency: 'diamonds',
+                    bonuses: {
+                        clickPower: 500,
+                        autoClickers: 1000,
+                        multiplier: 5
+                    }
+                }
+            };
+            
+            // Check if pass exists
+            const pass = passes[passType];
+            if (!pass) {
+                alert(`❌ Pass "${passType}" không tồn tại!`);
+                return;
+            }
+            
+            // Check if already owned (prevent duplicate purchase)
+            if (gamePasses[passKey]) {
+                alert(`❌ Bạn đã sở hữu ${pass.name} rồi!`);
+                return;
+            }
+            
+            // Check currency balance
+            if (pass.currency === 'diamonds') {
+                if (diamonds < pass.cost) {
+                    alert(`❌ Không đủ Diamonds!\n\nCần: ${pass.cost} 💎\nHiện có: ${diamonds} 💎\nThiếu: ${pass.cost - diamonds} 💎`);
+                    return;
+                }
+            }
+            
+            // Confirmation
+            const confirmMsg = `🎮 Mua ${pass.name}?\n\nGiá: ${pass.cost} ${pass.currency === 'diamonds' ? '💎 Diamonds' : '🏆 Gold Bars'}\nBạn có: ${pass.currency === 'diamonds' ? diamonds : goldBars}\n\nXác nhận mua?`;
+            
+            if (!confirm(confirmMsg)) return;
+            
+            // Deduct currency
+            if (pass.currency === 'diamonds') {
+                diamonds -= pass.cost;
+                if (diamonds < 0) diamonds = 0; // Safety
+            }
+            
+            // Mark as owned
+            gamePasses[passKey] = true;
+            
+            // Apply bonuses (PARANOID: validate all)
+            const bonuses = pass.bonuses;
+            
+            if (bonuses.coins) {
+                const safeCoins = Math.max(0, Math.min(bonuses.coins, 999999999999));
+                coins += safeCoins;
+            }
+            
+            if (bonuses.clickPower) {
+                const safePower = Math.max(0, Math.min(bonuses.clickPower, 999999));
+                clickPower += safePower;
+            }
+            
+            if (bonuses.autoClickers) {
+                const safeAuto = Math.max(0, Math.min(bonuses.autoClickers, 10000));
+                autoClickers += safeAuto;
+            }
+            
+            if (bonuses.multiplier) {
+                const safeMult = Math.max(1, Math.min(bonuses.multiplier, 1000));
+                multiplier *= safeMult;
+            }
+            
+            if (bonuses.cooldown !== undefined) {
+                clickCooldown = Math.max(0, bonuses.cooldown);
+            }
+            
+            if (bonuses.cooldownReduction) {
+                const reduction = Math.max(0, Math.min(bonuses.cooldownReduction, 1));
+                clickCooldown = Math.max(0.01, clickCooldown * (1 - reduction));
+            }
+            
+            // Update UI
+            updateDisplay();
+            
+            // Success message
+            let bonusText = '';
+            if (bonuses.coins) bonusText += `\n💰 +${formatNumber(bonuses.coins)} coins`;
+            if (bonuses.clickPower) bonusText += `\n⚡ +${bonuses.clickPower} Click Power`;
+            if (bonuses.autoClickers) bonusText += `\n🤖 +${bonuses.autoClickers} Auto Clickers`;
+            if (bonuses.multiplier) bonusText += `\n✖️ x${bonuses.multiplier} Multiplier`;
+            if (bonuses.cooldown === 0) bonusText += `\n⚡ Click Cooldown = 0s (INSTANT!)`;
+            if (bonuses.cooldownReduction) bonusText += `\n⚡ Cooldown giảm ${(bonuses.cooldownReduction * 100).toFixed(0)}%`;
+            
+            alert(`✅ Đã kích hoạt ${pass.name}!${bonusText}\n\n💎 Diamonds còn lại: ${diamonds}`);
+            
+            console.log(`✅ Game Pass Purchased: ${passType}`);
+            console.log(`💎 Cost: ${pass.cost} ${pass.currency}`);
+            console.log(`💎 Remaining: ${diamonds} diamonds`);
+        }
+        
+        // Visual effects for premium passes
+        function addPrismaticEffect() {
+            // Add rainbow effect to cookie button
+            const cookie = document.getElementById('cookie');
+            if (cookie) {
+                cookie.style.filter = 'hue-rotate(0deg)';
+                cookie.style.animation = 'hueRotate 3s linear infinite';
+            }
+        }
+        
+        function addDivineEffect() {
+            // Add divine glow to cookie
+            const cookie = document.getElementById('cookie');
+            if (cookie) {
+                cookie.style.boxShadow = '0 0 40px rgba(255,215,0,0.8), 0 0 80px rgba(255,255,255,0.6)';
+            }
+        }
+        
+        function addSecretEffect() {
+            // Add glitch effect
+            const cookie = document.getElementById('cookie');
+            if (cookie) {
+                cookie.style.animation = 'glitchEffect 4s ease-in-out infinite';
+            }
         }
 
         // ===== EGG & PETS SYSTEM =====
@@ -7050,7 +8211,7 @@
         document.addEventListener('scroll', resetAFKTimer);
         document.addEventListener('touchstart', resetAFKTimer);
 
-        // Initialize language on page load (wait for DOM)
+        // Initialize language on page load
         window.addEventListener('DOMContentLoaded', function() {
             const savedLang = localStorage.getItem('gameLanguage');
             if (savedLang) {
@@ -7637,4 +8798,3 @@
     </script>
 </body>
 </html>
-
