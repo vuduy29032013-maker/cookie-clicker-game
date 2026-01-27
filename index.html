@@ -220,6 +220,8 @@
         .shop-section {
             flex: 1;
             min-width: 300px;
+            width: 100%;
+            max-width: 100%;
         }
 
         .shop-title {
@@ -232,6 +234,7 @@
             display: flex;
             flex-direction: column;
             gap: 15px;
+            width: 100%;
         }
 
         .shop-item {
@@ -244,6 +247,20 @@
             align-items: center;
             transition: all 0.3s;
             position: relative; /* For rarity badge positioning */
+            gap: 10px;
+            flex-wrap: wrap;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .shop-item .icon {
+            font-size: 3em;
+            flex-shrink: 0;
+        }
+        
+        .shop-item .item-info {
+            flex: 1;
+            min-width: 150px;
         }
 
         .shop-item:hover {
@@ -318,12 +335,14 @@
            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         
         /* All tiers are now static - no animations */
-        .tier-hardcore,
-        .tier-owner,
-        .tier-goat,
-        .tier-strongest,
+        .tier-hacker,
+        .tier-thegod,
+        .tier-rainbow,
         .tier-powerest,
-        .tier-rainbow {
+        .tier-strongest,
+        .tier-goat,
+        .tier-owner,
+        .tier-hardcore {
             /* NO ANIMATIONS */
         }
 
@@ -2884,6 +2903,71 @@
                 gap: 8px;
             }
             
+            /* Shop Items Container */
+            .shop-items {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 10px !important;
+                width: 100% !important;
+            }
+            
+            /* Shop Item Cards */
+            .shop-item {
+                display: flex !important;
+                flex-direction: row !important;
+                flex-wrap: wrap !important;
+                padding: 12px !important;
+                gap: 8px !important;
+                width: 100% !important;
+                min-height: auto !important;
+                align-items: center !important;
+            }
+            
+            .shop-item .icon {
+                font-size: 2em !important;
+                flex-shrink: 0;
+            }
+            
+            .shop-item .item-info {
+                flex: 1 1 auto !important;
+                min-width: 0 !important;
+            }
+            
+            .shop-item .item-name {
+                font-size: 14px !important;
+                font-weight: bold !important;
+            }
+            
+            .shop-item .item-description {
+                font-size: 11px !important;
+                word-wrap: break-word !important;
+            }
+            
+            .shop-item .item-owned {
+                font-size: 11px !important;
+            }
+            
+            .shop-item .buy-button {
+                padding: 10px 15px !important;
+                font-size: 13px !important;
+                min-width: 100px !important;
+                white-space: nowrap !important;
+            }
+            
+            /* Rarity Badge - Smaller on mobile */
+            .rarity-badge {
+                font-size: 0.65em !important;
+                padding: 3px 8px !important;
+                top: -8px !important;
+                left: 5px !important;
+            }
+            
+            .rarity-stars {
+                font-size: 0.7em !important;
+                top: -8px !important;
+                right: 5px !important;
+            }
+            
             .item {
                 padding: 10px;
             }
@@ -3009,6 +3093,39 @@
             /* Shop - Full width items */
             .shop {
                 gap: 6px;
+            }
+            
+            /* Shop Items - Extra compact on tiny screens */
+            .shop-items {
+                gap: 8px !important;
+            }
+            
+            .shop-item {
+                padding: 10px !important;
+                gap: 6px !important;
+            }
+            
+            .shop-item .icon {
+                font-size: 1.8em !important;
+            }
+            
+            .shop-item .item-name {
+                font-size: 13px !important;
+            }
+            
+            .shop-item .item-description {
+                font-size: 10px !important;
+            }
+            
+            .shop-item .buy-button {
+                padding: 8px 12px !important;
+                font-size: 12px !important;
+                min-width: 90px !important;
+            }
+            
+            .rarity-badge {
+                font-size: 0.6em !important;
+                padding: 2px 6px !important;
             }
             
             .item {
@@ -7561,6 +7678,772 @@
                 id: 215, name: 'Beyond Rainbow', description: '+10Oc Multiplier', icon: '🌈',
                 basePrice: 20e48, currentPrice: 20e48, owned: 0,
                 effect: () => multiplier += 10000000000000000000000000000
+            },
+            
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            // TIER: THE GOD (80 items) - Starting at 1e50
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            {
+                id: 216, name: 'Divine Essence', description: '+1Dd Click Power', icon: '⚜️',
+                basePrice: 1e50, currentPrice: 1e50, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 1000000000000000000000000000000000000000
+            },
+            {
+                id: 217, name: 'Godly Aura', description: '+5Dd Auto Clickers', icon: '✨',
+                basePrice: 2e50, currentPrice: 2e50, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000
+            },
+            {
+                id: 218, name: 'Sacred Light', description: '+50Oc Multiplier', icon: '💫',
+                basePrice: 3e50, currentPrice: 3e50, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 50000000000000000000000000000
+            },
+            {
+                id: 219, name: 'Heavenly Power', description: '+10Dd Click Power', icon: '☀️',
+                basePrice: 4e50, currentPrice: 4e50, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 10000000000000000000000000000000000000000
+            },
+            {
+                id: 220, name: 'Celestial Force', description: '+20Dd Auto Clickers', icon: '🌟',
+                basePrice: 5e50, currentPrice: 5e50, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000
+            },
+            {
+                id: 221, name: 'Holy Blessing', description: '+100Oc Multiplier', icon: '🙏',
+                basePrice: 6e50, currentPrice: 6e50, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 100000000000000000000000000000
+            },
+            {
+                id: 222, name: 'Angel Wings', description: '+50Dd Click Power', icon: '👼',
+                basePrice: 7e50, currentPrice: 7e50, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 50000000000000000000000000000000000000000
+            },
+            {
+                id: 223, name: 'Seraphim Halo', description: '+100Dd Auto Clickers', icon: '😇',
+                basePrice: 8e50, currentPrice: 8e50, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000
+            },
+            {
+                id: 224, name: 'Divine Judgment', description: '+500Oc Multiplier', icon: '⚖️',
+                basePrice: 9e50, currentPrice: 9e50, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 500000000000000000000000000000
+            },
+            {
+                id: 225, name: 'Godly Throne', description: '+500Dd Click Power', icon: '👑',
+                basePrice: 10e50, currentPrice: 10e50, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 500000000000000000000000000000000000000000
+            },
+            {
+                id: 226, name: 'Sacred Scepter', description: '+1Td Auto Clickers', icon: '🪄',
+                basePrice: 15e50, currentPrice: 15e50, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000
+            },
+            {
+                id: 227, name: 'Holy Grail', description: '+1No Multiplier', icon: '🏆',
+                basePrice: 20e50, currentPrice: 20e50, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 1000000000000000000000000000000
+            },
+            {
+                id: 228, name: 'Divine Sword', description: '+1Td Click Power', icon: '⚔️',
+                basePrice: 25e50, currentPrice: 25e50, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000
+            },
+            {
+                id: 229, name: 'Godly Shield', description: '+5Td Auto Clickers', icon: '🛡️',
+                basePrice: 30e50, currentPrice: 30e50, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000
+            },
+            {
+                id: 230, name: 'Heavenly Crown', description: '+5No Multiplier', icon: '👑',
+                basePrice: 40e50, currentPrice: 40e50, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 5000000000000000000000000000000
+            },
+            {
+                id: 231, name: 'Sacred Heart', description: '+10Td Click Power', icon: '❤️',
+                basePrice: 50e50, currentPrice: 50e50, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000
+            },
+            {
+                id: 232, name: 'Divine Wisdom', description: '+20Td Auto Clickers', icon: '📖',
+                basePrice: 60e50, currentPrice: 60e50, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000
+            },
+            {
+                id: 233, name: 'Godly Knowledge', description: '+10No Multiplier', icon: '🧠',
+                basePrice: 70e50, currentPrice: 70e50, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 10000000000000000000000000000000
+            },
+            {
+                id: 234, name: 'Holy Spirit', description: '+50Td Click Power', icon: '🕊️',
+                basePrice: 80e50, currentPrice: 80e50, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000
+            },
+            {
+                id: 235, name: 'Celestial Blessing', description: '+100Td Auto Clickers', icon: '🌠',
+                basePrice: 90e50, currentPrice: 90e50, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000
+            },
+            {
+                id: 236, name: 'Divine Glory', description: '+50No Multiplier', icon: '✨',
+                basePrice: 100e50, currentPrice: 100e50, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 50000000000000000000000000000000
+            },
+            {
+                id: 237, name: 'Godly Presence', description: '+500Td Click Power', icon: '👁️',
+                basePrice: 1e53, currentPrice: 1e53, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000
+            },
+            {
+                id: 238, name: 'Sacred Fire', description: '+1Qad Auto Clickers', icon: '🔥',
+                basePrice: 2e53, currentPrice: 2e53, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000
+            },
+            {
+                id: 239, name: 'Heavenly Thunder', description: '+100No Multiplier', icon: '⚡',
+                basePrice: 3e53, currentPrice: 3e53, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 100000000000000000000000000000000
+            },
+            {
+                id: 240, name: 'Divine Lightning', description: '+1Qad Click Power', icon: '🌩️',
+                basePrice: 4e53, currentPrice: 4e53, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000
+            },
+            {
+                id: 241, name: 'Godly Storm', description: '+5Qad Auto Clickers', icon: '🌪️',
+                basePrice: 5e53, currentPrice: 5e53, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000
+            },
+            {
+                id: 242, name: 'Sacred Wind', description: '+500No Multiplier', icon: '💨',
+                basePrice: 6e53, currentPrice: 6e53, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 500000000000000000000000000000000
+            },
+            {
+                id: 243, name: 'Holy Water', description: '+10Qad Click Power', icon: '💧',
+                basePrice: 7e53, currentPrice: 7e53, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000
+            },
+            {
+                id: 244, name: 'Divine Ocean', description: '+20Qad Auto Clickers', icon: '🌊',
+                basePrice: 8e53, currentPrice: 8e53, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000
+            },
+            {
+                id: 245, name: 'Celestial Wave', description: '+1Dc Multiplier', icon: '〰️',
+                basePrice: 9e53, currentPrice: 9e53, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 1000000000000000000000000000000000
+            },
+            {
+                id: 246, name: 'Godly Earth', description: '+50Qad Click Power', icon: '🌍',
+                basePrice: 10e53, currentPrice: 10e53, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000
+            },
+            {
+                id: 247, name: 'Sacred Mountain', description: '+100Qad Auto Clickers', icon: '⛰️',
+                basePrice: 15e53, currentPrice: 15e53, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000000
+            },
+            {
+                id: 248, name: 'Heavenly Peak', description: '+5Dc Multiplier', icon: '🏔️',
+                basePrice: 20e53, currentPrice: 20e53, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 5000000000000000000000000000000000
+            },
+            {
+                id: 249, name: 'Divine Tree', description: '+500Qad Click Power', icon: '🌳',
+                basePrice: 25e53, currentPrice: 25e53, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000
+            },
+            {
+                id: 250, name: 'Godly Forest', description: '+1Qi Auto Clickers', icon: '🌲',
+                basePrice: 30e53, currentPrice: 30e53, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 251, name: 'Sacred Flower', description: '+10Dc Multiplier', icon: '🌸',
+                basePrice: 40e53, currentPrice: 40e53, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 10000000000000000000000000000000000
+            },
+            {
+                id: 252, name: 'Holy Garden', description: '+1Qi Click Power', icon: '🌺',
+                basePrice: 50e53, currentPrice: 50e53, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 253, name: 'Divine Paradise', description: '+5Qi Auto Clickers', icon: '🏝️',
+                basePrice: 60e53, currentPrice: 60e53, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 254, name: 'Celestial Realm', description: '+50Dc Multiplier', icon: '🌌',
+                basePrice: 70e53, currentPrice: 70e53, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 50000000000000000000000000000000000
+            },
+            {
+                id: 255, name: 'Godly Universe', description: '+10Qi Click Power', icon: '🌠',
+                basePrice: 80e53, currentPrice: 80e53, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 256, name: 'Sacred Cosmos', description: '+20Qi Auto Clickers', icon: '✨',
+                basePrice: 90e53, currentPrice: 90e53, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 257, name: 'Heavenly Dimension', description: '+100Dc Multiplier', icon: '🔮',
+                basePrice: 100e53, currentPrice: 100e53, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 100000000000000000000000000000000000
+            },
+            {
+                id: 258, name: 'Divine Infinity', description: '+50Qi Click Power', icon: '♾️',
+                basePrice: 1e56, currentPrice: 1e56, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 259, name: 'Godly Eternity', description: '+100Qi Auto Clickers', icon: '⏳',
+                basePrice: 2e56, currentPrice: 2e56, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 260, name: 'Sacred Timeless', description: '+500Dc Multiplier', icon: '⌛',
+                basePrice: 3e56, currentPrice: 3e56, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 500000000000000000000000000000000000
+            },
+            {
+                id: 261, name: 'Holy Omnipotence', description: '+500Qi Click Power', icon: '💪',
+                basePrice: 4e56, currentPrice: 4e56, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 262, name: 'Divine Omniscience', description: '+1Sx Auto Clickers', icon: '🧿',
+                basePrice: 5e56, currentPrice: 5e56, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 263, name: 'Celestial Omnipresence', description: '+1Ud Multiplier', icon: '👁️',
+                basePrice: 6e56, currentPrice: 6e56, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 1000000000000000000000000000000000000
+            },
+            {
+                id: 264, name: 'Godly Perfection', description: '+1Sx Click Power', icon: '💎',
+                basePrice: 7e56, currentPrice: 7e56, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 265, name: 'Sacred Absolute', description: '+5Sx Auto Clickers', icon: '🔆',
+                basePrice: 8e56, currentPrice: 8e56, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 266, name: 'Heavenly Supreme', description: '+5Ud Multiplier', icon: '🌟',
+                basePrice: 9e56, currentPrice: 9e56, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 5000000000000000000000000000000000000
+            },
+            {
+                id: 267, name: 'Divine Ultimate', description: '+10Sx Click Power', icon: '💫',
+                basePrice: 10e56, currentPrice: 10e56, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 268, name: 'Godly Maximum', description: '+20Sx Auto Clickers', icon: '⚡',
+                basePrice: 15e56, currentPrice: 15e56, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 269, name: 'Sacred Peak', description: '+10Ud Multiplier', icon: '🏔️',
+                basePrice: 20e56, currentPrice: 20e56, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 10000000000000000000000000000000000000
+            },
+            {
+                id: 270, name: 'Holy Zenith', description: '+50Sx Click Power', icon: '⭐',
+                basePrice: 25e56, currentPrice: 25e56, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 271, name: 'Divine Apex', description: '+100Sx Auto Clickers', icon: '🔝',
+                basePrice: 30e56, currentPrice: 30e56, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 272, name: 'Celestial Pinnacle', description: '+50Ud Multiplier', icon: '👑',
+                basePrice: 40e56, currentPrice: 40e56, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 50000000000000000000000000000000000000
+            },
+            {
+                id: 273, name: 'Godly Summit', description: '+500Sx Click Power', icon: '🗻',
+                basePrice: 50e56, currentPrice: 50e56, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 274, name: 'Sacred Crown Jewel', description: '+1Sp Auto Clickers', icon: '💍',
+                basePrice: 60e56, currentPrice: 60e56, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 275, name: 'Heavenly Masterpiece', description: '+100Ud Multiplier', icon: '🎨',
+                basePrice: 70e56, currentPrice: 70e56, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 100000000000000000000000000000000000000
+            },
+            {
+                id: 276, name: 'Divine Magnum Opus', description: '+1Sp Click Power', icon: '🏆',
+                basePrice: 80e56, currentPrice: 80e56, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 277, name: 'Godly Legacy', description: '+5Sp Auto Clickers', icon: '📜',
+                basePrice: 90e56, currentPrice: 90e56, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 278, name: 'Sacred Legend', description: '+500Ud Multiplier', icon: '📖',
+                basePrice: 100e56, currentPrice: 100e56, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 500000000000000000000000000000000000000
+            },
+            {
+                id: 279, name: 'Holy Myth', description: '+10Sp Click Power', icon: '🐉',
+                basePrice: 1e59, currentPrice: 1e59, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 280, name: 'Divine Epic', description: '+20Sp Auto Clickers', icon: '⚔️',
+                basePrice: 2e59, currentPrice: 2e59, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 281, name: 'Celestial Saga', description: '+1Dd Multiplier', icon: '📚',
+                basePrice: 3e59, currentPrice: 3e59, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 1000000000000000000000000000000000000000
+            },
+            {
+                id: 282, name: 'Godly Chronicle', description: '+50Sp Click Power', icon: '📝',
+                basePrice: 4e59, currentPrice: 4e59, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 283, name: 'Sacred Testament', description: '+100Sp Auto Clickers', icon: '✍️',
+                basePrice: 5e59, currentPrice: 5e59, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 284, name: 'Heavenly Scripture', description: '+5Dd Multiplier', icon: '📖',
+                basePrice: 6e59, currentPrice: 6e59, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 5000000000000000000000000000000000000000
+            },
+            {
+                id: 285, name: 'Divine Prophecy', description: '+500Sp Click Power', icon: '🔮',
+                basePrice: 7e59, currentPrice: 7e59, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 286, name: 'Godly Oracle', description: '+1Oc Auto Clickers', icon: '👁️',
+                basePrice: 8e59, currentPrice: 8e59, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 287, name: 'Sacred Vision', description: '+10Dd Multiplier', icon: '🌠',
+                basePrice: 9e59, currentPrice: 9e59, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 10000000000000000000000000000000000000000
+            },
+            {
+                id: 288, name: 'Holy Revelation', description: '+1Oc Click Power', icon: '💫',
+                basePrice: 10e59, currentPrice: 10e59, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 289, name: 'Divine Enlightenment', description: '+5Oc Auto Clickers', icon: '🕯️',
+                basePrice: 15e59, currentPrice: 15e59, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 290, name: 'Celestial Awakening', description: '+50Dd Multiplier', icon: '☀️',
+                basePrice: 20e59, currentPrice: 20e59, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 50000000000000000000000000000000000000000
+            },
+            {
+                id: 291, name: 'Godly Ascension', description: '+10Oc Click Power', icon: '🚀',
+                basePrice: 25e59, currentPrice: 25e59, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 292, name: 'Sacred Transcendence', description: '+20Oc Auto Clickers', icon: '✨',
+                basePrice: 30e59, currentPrice: 30e59, owned: 0, rarity: 'thegod',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 293, name: 'Heavenly Evolution', description: '+100Dd Multiplier', icon: '🧬',
+                basePrice: 40e59, currentPrice: 40e59, owned: 0, rarity: 'thegod',
+                effect: () => multiplier += 100000000000000000000000000000000000000000
+            },
+            {
+                id: 294, name: 'Divine Transformation', description: '+50Oc Click Power', icon: '🦋',
+                basePrice: 50e59, currentPrice: 50e59, owned: 0, rarity: 'thegod',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 295, name: 'The God Almighty', description: 'ALL STATS x1000000000', icon: '🌌',
+                basePrice: 1e63, currentPrice: 1e63, owned: 0, rarity: 'thegod',
+                effect: () => {
+                    clickPower *= 1000000000;
+                    autoClickers *= 1000000000;
+                    multiplier *= 1000000000;
+                }
+            },
+            
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            // TIER: HACKER (70 items) - Starting at 2e63 (2 VG)
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            {
+                id: 296, name: 'Binary Code', description: '+100Oc Click Power', icon: '💻',
+                basePrice: 2e63, currentPrice: 2e63, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 100000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 297, name: 'Firewall Breach', description: '+500Oc Auto Clickers', icon: '🔓',
+                basePrice: 3e63, currentPrice: 3e63, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 500000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 298, name: 'Root Access', description: '+1Dd Multiplier', icon: '🔑',
+                basePrice: 4e63, currentPrice: 4e63, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 1000000000000000000000000000000000000000
+            },
+            {
+                id: 299, name: 'SQL Injection', description: '+500Oc Click Power', icon: '💉',
+                basePrice: 5e63, currentPrice: 5e63, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 300, name: 'DDoS Attack', description: '+1Dd Auto Clickers', icon: '⚡',
+                basePrice: 6e63, currentPrice: 6e63, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 301, name: 'Zero Day Exploit', description: '+5Dd Multiplier', icon: '🎯',
+                basePrice: 7e63, currentPrice: 7e63, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 5000000000000000000000000000000000000000
+            },
+            {
+                id: 302, name: 'Backdoor Access', description: '+1Dd Click Power', icon: '🚪',
+                basePrice: 8e63, currentPrice: 8e63, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 303, name: 'Malware Package', description: '+5Dd Auto Clickers', icon: '🦠',
+                basePrice: 9e63, currentPrice: 9e63, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 304, name: 'Trojan Horse', description: '+10Dd Multiplier', icon: '🐴',
+                basePrice: 10e63, currentPrice: 10e63, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 10000000000000000000000000000000000000000
+            },
+            {
+                id: 305, name: 'Botnet Army', description: '+10Dd Click Power', icon: '🤖',
+                basePrice: 15e63, currentPrice: 15e63, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 306, name: 'Crypto Miner', description: '+20Dd Auto Clickers', icon: '⛏️',
+                basePrice: 20e63, currentPrice: 20e63, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 307, name: 'Ransomware', description: '+50Dd Multiplier', icon: '💰',
+                basePrice: 25e63, currentPrice: 25e63, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 50000000000000000000000000000000000000000
+            },
+            {
+                id: 308, name: 'Keylogger', description: '+50Dd Click Power', icon: '⌨️',
+                basePrice: 30e63, currentPrice: 30e63, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 309, name: 'Phishing Kit', description: '+100Dd Auto Clickers', icon: '🎣',
+                basePrice: 40e63, currentPrice: 40e63, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 310, name: 'Dark Web Access', description: '+100Dd Multiplier', icon: '🕸️',
+                basePrice: 50e63, currentPrice: 50e63, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 100000000000000000000000000000000000000000
+            },
+            {
+                id: 311, name: 'VPN Network', description: '+500Dd Click Power', icon: '🌐',
+                basePrice: 60e63, currentPrice: 60e63, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 312, name: 'Proxy Chain', description: '+1Td Auto Clickers', icon: '🔗',
+                basePrice: 70e63, currentPrice: 70e63, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 313, name: 'Encryption Breaker', description: '+500Dd Multiplier', icon: '🔐',
+                basePrice: 80e63, currentPrice: 80e63, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 500000000000000000000000000000000000000000
+            },
+            {
+                id: 314, name: 'Hash Cracker', description: '+1Td Click Power', icon: '🔨',
+                basePrice: 90e63, currentPrice: 90e63, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 315, name: 'Password Database', description: '+5Td Auto Clickers', icon: '📊',
+                basePrice: 100e63, currentPrice: 100e63, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 316, name: 'Admin Panel', description: '+1Qad Multiplier', icon: '👨‍💻',
+                basePrice: 1e66, currentPrice: 1e66, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 1000000000000000000000000000000000000000000
+            },
+            {
+                id: 317, name: 'Server Farm', description: '+10Td Click Power', icon: '🖥️',
+                basePrice: 2e66, currentPrice: 2e66, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 318, name: 'Supercomputer', description: '+20Td Auto Clickers', icon: '🔬',
+                basePrice: 3e66, currentPrice: 3e66, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 319, name: 'Quantum Processor', description: '+5Qad Multiplier', icon: '⚛️',
+                basePrice: 4e66, currentPrice: 4e66, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 5000000000000000000000000000000000000000000
+            },
+            {
+                id: 320, name: 'AI Algorithm', description: '+50Td Click Power', icon: '🧠',
+                basePrice: 5e66, currentPrice: 5e66, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 321, name: 'Neural Network', description: '+100Td Auto Clickers', icon: '🕸️',
+                basePrice: 6e66, currentPrice: 6e66, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 322, name: 'Deep Learning', description: '+10Qad Multiplier', icon: '📚',
+                basePrice: 7e66, currentPrice: 7e66, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 10000000000000000000000000000000000000000000
+            },
+            {
+                id: 323, name: 'Machine Learning', description: '+500Td Click Power', icon: '🤖',
+                basePrice: 8e66, currentPrice: 8e66, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 324, name: 'Blockchain Tech', description: '+1Qi Auto Clickers', icon: '⛓️',
+                basePrice: 9e66, currentPrice: 9e66, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 325, name: 'Smart Contract', description: '+50Qad Multiplier', icon: '📝',
+                basePrice: 10e66, currentPrice: 10e66, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 50000000000000000000000000000000000000000000
+            },
+            {
+                id: 326, name: 'Data Center', description: '+1Qi Click Power', icon: '🏢',
+                basePrice: 15e66, currentPrice: 15e66, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 327, name: 'Cloud Server', description: '+5Qi Auto Clickers', icon: '☁️',
+                basePrice: 20e66, currentPrice: 20e66, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 328, name: 'Edge Computing', description: '+100Qad Multiplier', icon: '📡',
+                basePrice: 25e66, currentPrice: 25e66, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 100000000000000000000000000000000000000000000
+            },
+            {
+                id: 329, name: 'IoT Network', description: '+10Qi Click Power', icon: '📱',
+                basePrice: 30e66, currentPrice: 30e66, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 330, name: '5G Network', description: '+20Qi Auto Clickers', icon: '📶',
+                basePrice: 40e66, currentPrice: 40e66, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 331, name: 'Satellite Link', description: '+500Qad Multiplier', icon: '🛰️',
+                basePrice: 50e66, currentPrice: 50e66, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 500000000000000000000000000000000000000000000
+            },
+            {
+                id: 332, name: 'Cyber Weapon', description: '+50Qi Click Power', icon: '⚔️',
+                basePrice: 60e66, currentPrice: 60e66, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 333, name: 'Digital Nuke', description: '+100Qi Auto Clickers', icon: '💣',
+                basePrice: 70e66, currentPrice: 70e66, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 334, name: 'EMP Bomb', description: '+1Sx Multiplier', icon: '⚡',
+                basePrice: 80e66, currentPrice: 80e66, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 1000000000000000000000000000000000000000000000
+            },
+            {
+                id: 335, name: 'Logic Bomb', description: '+500Qi Click Power', icon: '💥',
+                basePrice: 90e66, currentPrice: 90e66, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 336, name: 'Code Injection', description: '+1Sx Auto Clickers', icon: '💉',
+                basePrice: 100e66, currentPrice: 100e66, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 337, name: 'System Override', description: '+5Sx Multiplier', icon: '🔄',
+                basePrice: 1e69, currentPrice: 1e69, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 5000000000000000000000000000000000000000000000
+            },
+            {
+                id: 338, name: 'Kernel Exploit', description: '+1Sx Click Power', icon: '🌽',
+                basePrice: 2e69, currentPrice: 2e69, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 339, name: 'Memory Dump', description: '+5Sx Auto Clickers', icon: '🧠',
+                basePrice: 3e69, currentPrice: 3e69, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 340, name: 'Buffer Overflow', description: '+10Sx Multiplier', icon: '💧',
+                basePrice: 4e69, currentPrice: 4e69, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 10000000000000000000000000000000000000000000000
+            },
+            {
+                id: 341, name: 'Stack Smashing', description: '+10Sx Click Power', icon: '📚',
+                basePrice: 5e69, currentPrice: 5e69, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 342, name: 'Heap Spray', description: '+20Sx Auto Clickers', icon: '🎨',
+                basePrice: 6e69, currentPrice: 6e69, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 343, name: 'Race Condition', description: '+50Sx Multiplier', icon: '🏁',
+                basePrice: 7e69, currentPrice: 7e69, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 50000000000000000000000000000000000000000000000
+            },
+            {
+                id: 344, name: 'Time Bomb', description: '+50Sx Click Power', icon: '⏰',
+                basePrice: 8e69, currentPrice: 8e69, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 345, name: 'Worm Virus', description: '+100Sx Auto Clickers', icon: '🐛',
+                basePrice: 9e69, currentPrice: 9e69, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 346, name: 'Rootkit', description: '+100Sx Multiplier', icon: '🌱',
+                basePrice: 10e69, currentPrice: 10e69, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 100000000000000000000000000000000000000000000000
+            },
+            {
+                id: 347, name: 'Spyware', description: '+500Sx Click Power', icon: '🕵️',
+                basePrice: 15e69, currentPrice: 15e69, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 348, name: 'Adware', description: '+1Sp Auto Clickers', icon: '📺',
+                basePrice: 20e69, currentPrice: 20e69, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 349, name: 'Scareware', description: '+500Sx Multiplier', icon: '😱',
+                basePrice: 25e69, currentPrice: 25e69, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 500000000000000000000000000000000000000000000000
+            },
+            {
+                id: 350, name: 'Rogue Software', description: '+1Sp Click Power', icon: '🎭',
+                basePrice: 30e69, currentPrice: 30e69, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 351, name: 'Social Engineering', description: '+5Sp Auto Clickers', icon: '👥',
+                basePrice: 40e69, currentPrice: 40e69, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 352, name: 'Man in the Middle', description: '+1Oc Multiplier', icon: '🧑',
+                basePrice: 50e69, currentPrice: 50e69, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 1000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 353, name: 'Session Hijacking', description: '+10Sp Click Power', icon: '🎯',
+                basePrice: 60e69, currentPrice: 60e69, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 10000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 354, name: 'Cookie Stealing', description: '+20Sp Auto Clickers', icon: '🍪',
+                basePrice: 70e69, currentPrice: 70e69, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 20000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 355, name: 'DNS Spoofing', description: '+5Oc Multiplier', icon: '🌐',
+                basePrice: 80e69, currentPrice: 80e69, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 5000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 356, name: 'IP Spoofing', description: '+50Sp Click Power', icon: '🎭',
+                basePrice: 90e69, currentPrice: 90e69, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 50000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 357, name: 'MAC Spoofing', description: '+100Sp Auto Clickers', icon: '🔀',
+                basePrice: 100e69, currentPrice: 100e69, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 100000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 358, name: 'Port Scanning', description: '+10Oc Multiplier', icon: '🔍',
+                basePrice: 1e72, currentPrice: 1e72, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 10000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 359, name: 'Network Sniffing', description: '+500Sp Click Power', icon: '👃',
+                basePrice: 2e72, currentPrice: 2e72, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 500000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 360, name: 'Packet Injection', description: '+1No Auto Clickers', icon: '📦',
+                basePrice: 3e72, currentPrice: 3e72, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 1000000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 361, name: 'ARP Poisoning', description: '+50Oc Multiplier', icon: '☠️',
+                basePrice: 4e72, currentPrice: 4e72, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 50000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 362, name: 'ICMP Flood', description: '+1No Click Power', icon: '🌊',
+                basePrice: 5e72, currentPrice: 5e72, owned: 0, rarity: 'hacker',
+                effect: () => clickPower += 1000000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 363, name: 'SYN Flood', description: '+5No Auto Clickers', icon: '💧',
+                basePrice: 6e72, currentPrice: 6e72, owned: 0, rarity: 'hacker',
+                effect: () => autoClickers += 5000000000000000000000000000000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 364, name: 'Brute Force Attack', description: '+100Oc Multiplier', icon: '💪',
+                basePrice: 7e72, currentPrice: 7e72, owned: 0, rarity: 'hacker',
+                effect: () => multiplier += 100000000000000000000000000000000000000000000000000
+            },
+            {
+                id: 365, name: 'The Ultimate Hacker', description: 'ALL STATS x10000000000', icon: '👨‍💻',
+                basePrice: 1e75, currentPrice: 1e75, owned: 0, rarity: 'hacker',
+                effect: () => {
+                    clickPower *= 10000000000;
+                    autoClickers *= 10000000000;
+                    multiplier *= 10000000000;
+                }
             }
         ];
 
@@ -7928,9 +8811,30 @@
             const SEPTILLION = 1e24;
             const OCTILLION = 1e27;
             const NONILLION = 1e30;
+            const DECILLION = 1e33;
+            const UNDECILLION = 1e36;
+            const DUODECILLION = 1e39;
+            const TREDECILLION = 1e42;
+            const QUATTUORDECILLION = 1e45;
+            const QUINDECILLION = 1e48;
+            const VIGINTILLION = 1e63;
             
             // NEW ULTIMATE TIERS (Highest to Lowest)
-            if (price >= 10 * NONILLION) {
+            if (price >= 2 * VIGINTILLION) {
+                return {
+                    name: 'HACKER',
+                    color: 'linear-gradient(135deg, #000000 0%, #00ff00 25%, #000000 50%, #00ff00 75%, #000000 100%)',
+                    glow: '0 0 50px rgba(0,255,0,1), 0 0 100px rgba(0,255,0,0.6), 0 0 150px rgba(0,255,0,0.3)',
+                    stars: 15
+                };
+            } else if (price >= 1e50) {
+                return {
+                    name: 'THE GOD',
+                    color: 'linear-gradient(135deg, #ffffff 0%, #ffd700 25%, #ff00ff 50%, #00ffff 75%, #ffffff 100%)',
+                    glow: '0 0 40px rgba(255,255,255,1), 0 0 80px rgba(255,215,0,0.8), 0 0 120px rgba(255,0,255,0.6)',
+                    stars: 10
+                };
+            } else if (price >= 10 * NONILLION) {
                 return {
                     name: 'RAINBOW',
                     color: 'linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff)',
@@ -8133,12 +9037,14 @@
                 
                 // Determine tier class for animations
                 let tierClass = '';
-                if (rarity.name === 'HARDCORE') tierClass = 'tier-hardcore';
-                else if (rarity.name === 'OWNER') tierClass = 'tier-owner';
-                else if (rarity.name === 'GOAT') tierClass = 'tier-goat';
-                else if (rarity.name === 'STRONGEST') tierClass = 'tier-strongest';
-                else if (rarity.name === 'POWEREST') tierClass = 'tier-powerest';
+                if (rarity.name === 'HACKER') tierClass = 'tier-hacker';
+                else if (rarity.name === 'THE GOD') tierClass = 'tier-thegod';
                 else if (rarity.name === 'RAINBOW') tierClass = 'tier-rainbow';
+                else if (rarity.name === 'POWEREST') tierClass = 'tier-powerest';
+                else if (rarity.name === 'STRONGEST') tierClass = 'tier-strongest';
+                else if (rarity.name === 'GOAT') tierClass = 'tier-goat';
+                else if (rarity.name === 'OWNER') tierClass = 'tier-owner';
+                else if (rarity.name === 'HARDCORE') tierClass = 'tier-hardcore';
                 
                 // Build rarity badge
                 const rarityBadge = `
