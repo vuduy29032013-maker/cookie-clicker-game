@@ -257,6 +257,33 @@
         }
         
         /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           TELEPORT SHOP STYLES
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        .teleport-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        .teleport-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.5);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
+        
+        .teleport-btn:active {
+            transform: translateY(-2px) scale(1.02);
+        }
+        
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
            RARITY BADGE STYLES
            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
         
@@ -273,17 +300,8 @@
             color: white;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
             z-index: 10;
-            animation: rarityFloat 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            will-change: transform;
-        }
-        
-        @keyframes rarityFloat {
-            0%, 100% { 
-                transform: translateY(0px);
-            }
-            50% { 
-                transform: translateY(-4px);
-            }
+            
+            /* NO ANIMATIONS - STATIC ONLY */
         }
         
         .rarity-stars {
@@ -292,12 +310,21 @@
             right: 10px;
             font-size: 0.9em;
             text-shadow: 0 2px 4px rgba(255,215,0,0.8);
-            animation: starTwinkle 1.5s ease-in-out infinite;
+            /* NO ANIMATIONS */
         }
         
-        @keyframes starTwinkle {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.7; transform: scale(1.1); }
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           TIER STYLES - NO ANIMATIONS
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        /* All tiers are now static - no animations */
+        .tier-hardcore,
+        .tier-owner,
+        .tier-goat,
+        .tier-strongest,
+        .tier-powerest,
+        .tier-rainbow {
+            /* NO ANIMATIONS */
         }
 
         .item-info {
@@ -3404,6 +3431,45 @@
             </div>
         </div>
         
+        <!-- Background Music System -->
+        <div style="background: rgba(124, 58, 237, 0.1); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+            <div style="color: #c4b5fd; font-weight: bold; margin-bottom: 8px;">🎵 Background Music</div>
+            
+            <!-- Unlock Button -->
+            <button id="unlockMusicBtn" onclick="unlockMusic()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: 2px solid #fbbf24; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; margin-bottom: 10px;">
+                🔓 Unlock Music (50💎)
+            </button>
+            
+            <!-- Music Controls (Hidden until unlocked) -->
+            <div id="musicControls" style="display: none;">
+                <!-- Track Name -->
+                <div style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 6px; margin-bottom: 8px; text-align: center; color: #a78bfa; font-size: 0.9em;">
+                    🎵 <span id="trackName">No track loaded</span>
+                </div>
+                
+                <!-- Import Button -->
+                <button onclick="importMusic()" style="width: 100%; padding: 10px; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); border: 2px solid #a78bfa; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; margin-bottom: 8px;">
+                    📁 Import Music File
+                </button>
+                
+                <!-- Control Buttons -->
+                <div style="display: flex; gap: 8px; margin-bottom: 8px;">
+                    <button id="playPauseBtn" onclick="toggleMusic()" style="flex: 1; padding: 10px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: 2px solid #34d399; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
+                        ▶️ Play
+                    </button>
+                    <button onclick="stopMusic()" style="flex: 1; padding: 10px; background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); border: 2px solid #f87171; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
+                        ⏹️ Stop
+                    </button>
+                </div>
+                
+                <!-- Volume Control -->
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="color: #c4b5fd; font-size: 0.9em;">🔊</span>
+                    <input type="range" min="0" max="100" value="50" onchange="updateVolume(this.value)" style="flex: 1; height: 6px; border-radius: 5px; background: rgba(167,139,250,0.3); outline: none;">
+                </div>
+            </div>
+        </div>
+        
     </div>
 
     <!-- Settings Button (Fixed) -->
@@ -3628,7 +3694,40 @@
         </div>
 
         <div class="main-content">
-            <div class="shop-section" style="width: 100%; max-width: 1200px; margin: 0 auto;">
+            <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+            <!-- TELEPORT SHOP -->
+            <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+            <div class="shop-section" style="width: 100%; max-width: 1200px; margin: 0 auto 30px auto;" id="teleportShop">
+                <h2 class="shop-title">🌀 Teleport Shop - Di Chuyển Nhanh</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; padding: 20px;">
+                    <button class="teleport-btn" onclick="teleportTo('shopItems')">
+                        🛒 Main Shop
+                    </button>
+                    <button class="teleport-btn" onclick="teleportTo('petSystem')">
+                        🐾 Pet System
+                    </button>
+                    <button class="teleport-btn" onclick="teleportTo('eggShop')">
+                        🥚 Egg Shop
+                    </button>
+                    <button class="teleport-btn" onclick="teleportTo('miniGame')">
+                        🎰 Mini Game
+                    </button>
+                    <button class="teleport-btn" onclick="teleportTo('gamepassPanel')">
+                        🎫 Game Pass
+                    </button>
+                    <button class="teleport-btn" onclick="teleportTo('settingsPanel')">
+                        ⚙️ Settings
+                    </button>
+                    <button class="teleport-btn" onclick="teleportTo('tradeUpSection')">
+                        ⬆️ Trade-Up
+                    </button>
+                    <button class="teleport-btn" onclick="teleportTo('rebirthPanel')">
+                        ♻️ Rebirth
+                    </button>
+                </div>
+            </div>
+            
+            <div class="shop-section" style="width: 100%; max-width: 1200px; margin: 0 auto;" id="shopItems-section">
                 <h2 class="shop-title">🛒 Shop</h2>
                 <div class="shop-items" id="shopItems">
                     <!-- Items will be generated here -->
@@ -3637,7 +3736,7 @@
 
 
             <!-- Game Pass Panel -->
-            <div class="gamepass-panel">
+            <div class="gamepass-panel" id="gamepassPanel">
                 <div class="gamepass-title">🎫 Game Pass Store</div>
                 <div class="gamepass-input-section">
                     <input type="text" id="gamepassCode" class="gamepass-input" placeholder="Nhập code Game Pass">
@@ -4030,7 +4129,7 @@
             </div>
 
             <!-- Rebirth Panel -->
-            <div class="rebirth-panel">
+            <div class="rebirth-panel" id="rebirthPanel">
                 <div class="rebirth-title">🔄 Tái Sinh (Rebirth)</div>
                 <div class="rebirth-info">
                     Tái sinh sẽ reset toàn bộ tiến độ nhưng tăng vĩnh viễn thu nhập!<br>
@@ -4061,14 +4160,14 @@
 
             <!-- Egg Shop -->
             <div class="egg-shop">
-                <div class="section-title">🥚 Egg Shop - Mua bằng Kim Cương 💎</div>
+                <div class="section-title" id="eggShop">🥚 Egg Shop - Mua bằng Kim Cương 💎</div>
                 <div class="egg-grid" id="eggGrid">
                     <!-- Eggs will be generated here -->
                 </div>
             </div>
 
             <!-- Pets Collection -->
-            <div class="pets-panel">
+            <div class="pets-panel" id="petSystem">
                 <div class="section-title">🐾 Pet System</div>
                 
                 <!-- Equipped Pets Bar -->
@@ -4120,7 +4219,7 @@
 
             <!-- Trade-Up System -->
             <div class="shop-panel" style="margin-top: 20px;">
-                <div class="section-title">🔄 Pet Trade-Up System</div>
+                <div class="section-title" id="tradeUpSection">🔄 Pet Trade-Up System</div>
                 <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 20px; border-radius: 15px; border: 2px solid #0f3460;">
                     
                     <div style="text-align: center; margin-bottom: 15px;">
@@ -4198,7 +4297,7 @@
 
             <!-- Mini Game - Kéo Búa Bao -->
             <div class="shop-panel" style="margin-top: 20px;">
-                <div class="section-title">🎮 Mini Game - Kéo Búa Bao</div>
+                <div class="section-title" id="miniGame">🎮 Mini Game - Kéo Búa Bao</div>
                 <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 20px; border-radius: 15px; border: 2px solid #0f3460;">
                     <div id="gameStatus" style="text-align: center; margin-bottom: 15px;">
                         <div style="font-size: 1.2em; color: #00d4ff;">🎯 Chọn Mục Tiêu & Đặt Cược</div>
@@ -6752,6 +6851,716 @@
                     autoClickers *= 1000000;
                     multiplier *= 1000000;
                 }
+            },
+            
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            // TIER: HARDCORE (15 items) - 1 Sextillion to 10 Sextillion
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            {
+                id: 82, name: 'Death Scythe', description: '+1B Click Power', icon: '💀',
+                basePrice: 1e21, currentPrice: 1e21, owned: 0,
+                effect: () => clickPower += 1000000000
+            },
+            {
+                id: 83, name: 'Hellfire Sword', description: '+5B Auto Clickers', icon: '🔥',
+                basePrice: 1.5e21, currentPrice: 1.5e21, owned: 0,
+                effect: () => autoClickers += 5000000000
+            },
+            {
+                id: 84, name: 'Demon Wings', description: '+100M Multiplier', icon: '🦇',
+                basePrice: 2e21, currentPrice: 2e21, owned: 0,
+                effect: () => multiplier += 100000000
+            },
+            {
+                id: 85, name: 'Skull Crusher', description: '+10B Click Power', icon: '☠️',
+                basePrice: 2.5e21, currentPrice: 2.5e21, owned: 0,
+                effect: () => clickPower += 10000000000
+            },
+            {
+                id: 86, name: 'Blood Moon Orb', description: '+20B Auto Clickers', icon: '🌑',
+                basePrice: 3e21, currentPrice: 3e21, owned: 0,
+                effect: () => autoClickers += 20000000000
+            },
+            {
+                id: 87, name: 'Reaper Blade', description: '+500M Multiplier', icon: '⚔️',
+                basePrice: 3.5e21, currentPrice: 3.5e21, owned: 0,
+                effect: () => multiplier += 500000000
+            },
+            {
+                id: 88, name: 'Inferno Chain', description: '+50B Click Power', icon: '⛓️',
+                basePrice: 4e21, currentPrice: 4e21, owned: 0,
+                effect: () => clickPower += 50000000000
+            },
+            {
+                id: 89, name: 'Void Essence', description: '+100B Auto Clickers', icon: '🕳️',
+                basePrice: 4.5e21, currentPrice: 4.5e21, owned: 0,
+                effect: () => autoClickers += 100000000000
+            },
+            {
+                id: 90, name: 'Chaos Orb', description: '+1B Multiplier', icon: '💥',
+                basePrice: 5e21, currentPrice: 5e21, owned: 0,
+                effect: () => multiplier += 1000000000
+            },
+            {
+                id: 91, name: 'Dark Matter Core', description: '+200B Click Power', icon: '⚫',
+                basePrice: 6e21, currentPrice: 6e21, owned: 0,
+                effect: () => clickPower += 200000000000
+            },
+            {
+                id: 92, name: 'Nightmare Fuel', description: '+500B Auto Clickers', icon: '👻',
+                basePrice: 7e21, currentPrice: 7e21, owned: 0,
+                effect: () => autoClickers += 500000000000
+            },
+            {
+                id: 93, name: 'Abyssal Shard', description: '+5B Multiplier', icon: '🔮',
+                basePrice: 8e21, currentPrice: 8e21, owned: 0,
+                effect: () => multiplier += 5000000000
+            },
+            {
+                id: 94, name: 'Bone Throne', description: '+1T Click Power', icon: '🦴',
+                basePrice: 9e21, currentPrice: 9e21, owned: 0,
+                effect: () => clickPower += 1000000000000
+            },
+            {
+                id: 95, name: 'Eternal Darkness', description: '+2T Auto Clickers', icon: '🌚',
+                basePrice: 9.5e21, currentPrice: 9.5e21, owned: 0,
+                effect: () => autoClickers += 2000000000000
+            },
+            {
+                id: 96, name: 'Ultimate Destroyer', description: '+10B Multiplier', icon: '💀',
+                basePrice: 10e21, currentPrice: 10e21, owned: 0,
+                effect: () => multiplier += 10000000000
+            },
+            
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            // TIER: OWNER (12 items) - 100 Sextillion to 1 Septillion
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            {
+                id: 97, name: 'Royal Crown', description: '+5T Click Power', icon: '👑',
+                basePrice: 1e23, currentPrice: 1e23, owned: 0,
+                effect: () => clickPower += 5000000000000
+            },
+            {
+                id: 98, name: 'Divine Scepter', description: '+10T Auto Clickers', icon: '🪄',
+                basePrice: 1.5e23, currentPrice: 1.5e23, owned: 0,
+                effect: () => autoClickers += 10000000000000
+            },
+            {
+                id: 99, name: 'Emperor Ring', description: '+50B Multiplier', icon: '💍',
+                basePrice: 2e23, currentPrice: 2e23, owned: 0,
+                effect: () => multiplier += 50000000000
+            },
+            {
+                id: 100, name: 'Throne of Power', description: '+20T Click Power', icon: '🪑',
+                basePrice: 2.5e23, currentPrice: 2.5e23, owned: 0,
+                effect: () => clickPower += 20000000000000
+            },
+            {
+                id: 101, name: 'Celestial Orb', description: '+50T Auto Clickers', icon: '🔆',
+                basePrice: 3e23, currentPrice: 3e23, owned: 0,
+                effect: () => autoClickers += 50000000000000
+            },
+            {
+                id: 102, name: 'Master Key', description: '+100B Multiplier', icon: '🗝️',
+                basePrice: 4e23, currentPrice: 4e23, owned: 0,
+                effect: () => multiplier += 100000000000
+            },
+            {
+                id: 103, name: 'Imperial Armor', description: '+100T Click Power', icon: '🛡️',
+                basePrice: 5e23, currentPrice: 5e23, owned: 0,
+                effect: () => clickPower += 100000000000000
+            },
+            {
+                id: 104, name: 'Sovereign Blade', description: '+200T Auto Clickers', icon: '⚔️',
+                basePrice: 6e23, currentPrice: 6e23, owned: 0,
+                effect: () => autoClickers += 200000000000000
+            },
+            {
+                id: 105, name: 'Regal Diamond', description: '+500B Multiplier', icon: '💎',
+                basePrice: 7e23, currentPrice: 7e23, owned: 0,
+                effect: () => multiplier += 500000000000
+            },
+            {
+                id: 106, name: 'Dynasty Staff', description: '+500T Click Power', icon: '🎋',
+                basePrice: 8e23, currentPrice: 8e23, owned: 0,
+                effect: () => clickPower += 500000000000000
+            },
+            {
+                id: 107, name: 'Lordship Insignia', description: '+1Qa Auto Clickers', icon: '🏅',
+                basePrice: 9e23, currentPrice: 9e23, owned: 0,
+                effect: () => autoClickers += 1000000000000000
+            },
+            {
+                id: 108, name: 'Absolute Authority', description: '+1T Multiplier', icon: '✨',
+                basePrice: 1e24, currentPrice: 1e24, owned: 0,
+                effect: () => multiplier += 1000000000000
+            },
+            
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            // TIER: GOAT (11 items) - 10 Septillion to 100 Septillion
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            {
+                id: 109, name: 'GOAT Trophy', description: '+2Qa Click Power', icon: '🐐',
+                basePrice: 1e25, currentPrice: 1e25, owned: 0,
+                effect: () => clickPower += 2000000000000000
+            },
+            {
+                id: 110, name: 'Legend Medal', description: '+5Qa Auto Clickers', icon: '🏆',
+                basePrice: 1.5e25, currentPrice: 1.5e25, owned: 0,
+                effect: () => autoClickers += 5000000000000000
+            },
+            {
+                id: 111, name: 'Platinum Star', description: '+5T Multiplier', icon: '⭐',
+                basePrice: 2e25, currentPrice: 2e25, owned: 0,
+                effect: () => multiplier += 5000000000000
+            },
+            {
+                id: 112, name: 'Champion Belt', description: '+10Qa Click Power', icon: '🥇',
+                basePrice: 3e25, currentPrice: 3e25, owned: 0,
+                effect: () => clickPower += 10000000000000000
+            },
+            {
+                id: 113, name: 'MVP Crown', description: '+20Qa Auto Clickers', icon: '👑',
+                basePrice: 4e25, currentPrice: 4e25, owned: 0,
+                effect: () => autoClickers += 20000000000000000
+            },
+            {
+                id: 114, name: 'Hall of Fame Ring', description: '+10T Multiplier', icon: '💍',
+                basePrice: 5e25, currentPrice: 5e25, owned: 0,
+                effect: () => multiplier += 10000000000000
+            },
+            {
+                id: 115, name: 'Legendary Sword', description: '+50Qa Click Power', icon: '🗡️',
+                basePrice: 6e25, currentPrice: 6e25, owned: 0,
+                effect: () => clickPower += 50000000000000000
+            },
+            {
+                id: 116, name: 'Platinum Shield', description: '+100Qa Auto Clickers', icon: '🛡️',
+                basePrice: 7e25, currentPrice: 7e25, owned: 0,
+                effect: () => autoClickers += 100000000000000000
+            },
+            {
+                id: 117, name: 'Supreme Badge', description: '+50T Multiplier', icon: '🎖️',
+                basePrice: 8e25, currentPrice: 8e25, owned: 0,
+                effect: () => multiplier += 50000000000000
+            },
+            {
+                id: 118, name: 'Elite Status', description: '+200Qa Click Power', icon: '🌟',
+                basePrice: 9e25, currentPrice: 9e25, owned: 0,
+                effect: () => clickPower += 200000000000000000
+            },
+            {
+                id: 119, name: 'Greatest of All', description: '+100T Multiplier', icon: '🐐',
+                basePrice: 1e26, currentPrice: 1e26, owned: 0,
+                effect: () => multiplier += 100000000000000
+            },
+            
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            // TIER: STRONGEST (10 items) - 1 Octillion to 10 Octillion
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            {
+                id: 120, name: 'Thunder Hammer', description: '+500Qa Click Power', icon: '⚡',
+                basePrice: 1e27, currentPrice: 1e27, owned: 0,
+                effect: () => clickPower += 500000000000000000
+            },
+            {
+                id: 121, name: 'Lightning Gauntlet', description: '+1Qi Auto Clickers', icon: '💪',
+                basePrice: 1.5e27, currentPrice: 1.5e27, owned: 0,
+                effect: () => autoClickers += 1000000000000000000
+            },
+            {
+                id: 122, name: 'Storm Core', description: '+500T Multiplier', icon: '🌩️',
+                basePrice: 2e27, currentPrice: 2e27, owned: 0,
+                effect: () => multiplier += 500000000000000
+            },
+            {
+                id: 123, name: 'Titan Fist', description: '+2Qi Click Power', icon: '✊',
+                basePrice: 3e27, currentPrice: 3e27, owned: 0,
+                effect: () => clickPower += 2000000000000000000
+            },
+            {
+                id: 124, name: 'Hercules Club', description: '+5Qi Auto Clickers', icon: '🏏',
+                basePrice: 4e27, currentPrice: 4e27, owned: 0,
+                effect: () => autoClickers += 5000000000000000000
+            },
+            {
+                id: 125, name: 'Colossus Heart', description: '+1Qa Multiplier', icon: '❤️',
+                basePrice: 5e27, currentPrice: 5e27, owned: 0,
+                effect: () => multiplier += 1000000000000000
+            },
+            {
+                id: 126, name: 'Unstoppable Force', description: '+10Qi Click Power', icon: '💢',
+                basePrice: 6e27, currentPrice: 6e27, owned: 0,
+                effect: () => clickPower += 10000000000000000000
+            },
+            {
+                id: 127, name: 'Invincible Shield', description: '+20Qi Auto Clickers', icon: '🛡️',
+                basePrice: 7e27, currentPrice: 7e27, owned: 0,
+                effect: () => autoClickers += 20000000000000000000
+            },
+            {
+                id: 128, name: 'Ultimate Strength', description: '+5Qa Multiplier', icon: '🌟',
+                basePrice: 9e27, currentPrice: 9e27, owned: 0,
+                effect: () => multiplier += 5000000000000000
+            },
+            {
+                id: 129, name: 'Maximum Power Core', description: '+10Qa Multiplier', icon: '⚡',
+                basePrice: 1e28, currentPrice: 1e28, owned: 0,
+                effect: () => multiplier += 10000000000000000
+            },
+            
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            // TIER: POWEREST (10 items) - 100 Octillion to 1 Nonillion
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            {
+                id: 130, name: 'Volcano Heart', description: '+50Qi Click Power', icon: '🌋',
+                basePrice: 1e29, currentPrice: 1e29, owned: 0,
+                effect: () => clickPower += 50000000000000000000
+            },
+            {
+                id: 131, name: 'Magma Essence', description: '+100Qi Auto Clickers', icon: '🔥',
+                basePrice: 1.5e29, currentPrice: 1.5e29, owned: 0,
+                effect: () => autoClickers += 100000000000000000000
+            },
+            {
+                id: 132, name: 'Inferno Core', description: '+50Qa Multiplier', icon: '💥',
+                basePrice: 2e29, currentPrice: 2e29, owned: 0,
+                effect: () => multiplier += 50000000000000000
+            },
+            {
+                id: 133, name: 'Phoenix Feather', description: '+200Qi Click Power', icon: '🔥',
+                basePrice: 3e29, currentPrice: 3e29, owned: 0,
+                effect: () => clickPower += 200000000000000000000
+            },
+            {
+                id: 134, name: 'Blazing Sword', description: '+500Qi Auto Clickers', icon: '⚔️',
+                basePrice: 4e29, currentPrice: 4e29, owned: 0,
+                effect: () => autoClickers += 500000000000000000000
+            },
+            {
+                id: 135, name: 'Sun Fragment', description: '+100Qa Multiplier', icon: '☀️',
+                basePrice: 5e29, currentPrice: 5e29, owned: 0,
+                effect: () => multiplier += 100000000000000000
+            },
+            {
+                id: 136, name: 'Meteor Strike', description: '+1Sx Click Power', icon: '☄️',
+                basePrice: 6e29, currentPrice: 6e29, owned: 0,
+                effect: () => clickPower += 1000000000000000000000
+            },
+            {
+                id: 137, name: 'Supernova Core', description: '+2Sx Auto Clickers', icon: '💫',
+                basePrice: 7e29, currentPrice: 7e29, owned: 0,
+                effect: () => autoClickers += 2000000000000000000000
+            },
+            {
+                id: 138, name: 'Plasma Orb', description: '+500Qa Multiplier', icon: '⚡',
+                basePrice: 9e29, currentPrice: 9e29, owned: 0,
+                effect: () => multiplier += 500000000000000000
+            },
+            {
+                id: 139, name: 'Absolute Inferno', description: '+1Qi Multiplier', icon: '🔥',
+                basePrice: 1e30, currentPrice: 1e30, owned: 0,
+                effect: () => multiplier += 1000000000000000000
+            },
+            
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            // TIER: RAINBOW (9 items) - 10 Nonillion+
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            {
+                id: 140, name: 'Rainbow Crystal', description: '+5Sx Click Power', icon: '🌈',
+                basePrice: 1e31, currentPrice: 1e31, owned: 0,
+                effect: () => clickPower += 5000000000000000000000
+            },
+            {
+                id: 141, name: 'Prismatic Gem', description: '+10Sx Auto Clickers', icon: '💎',
+                basePrice: 5e31, currentPrice: 5e31, owned: 0,
+                effect: () => autoClickers += 10000000000000000000000
+            },
+            {
+                id: 142, name: 'Aurora Essence', description: '+5Qi Multiplier', icon: '✨',
+                basePrice: 1e32, currentPrice: 1e32, owned: 0,
+                effect: () => multiplier += 5000000000000000000
+            },
+            {
+                id: 143, name: 'Spectrum Orb', description: '+50Sx Click Power', icon: '🔮',
+                basePrice: 5e32, currentPrice: 5e32, owned: 0,
+                effect: () => clickPower += 50000000000000000000000
+            },
+            {
+                id: 144, name: 'Chromatic Shard', description: '+100Sx Auto Clickers', icon: '💫',
+                basePrice: 1e33, currentPrice: 1e33, owned: 0,
+                effect: () => autoClickers += 100000000000000000000000
+            },
+            {
+                id: 145, name: 'Cosmic Prism', description: '+50Qi Multiplier', icon: '🌟',
+                basePrice: 5e33, currentPrice: 5e33, owned: 0,
+                effect: () => multiplier += 50000000000000000000
+            },
+            {
+                id: 146, name: 'Infinite Spectrum', description: '+500Sx Click Power', icon: '🌈',
+                basePrice: 1e34, currentPrice: 1e34, owned: 0,
+                effect: () => clickPower += 500000000000000000000000
+            },
+            {
+                id: 147, name: 'Divine Rainbow', description: '+1Sp Auto Clickers', icon: '✨',
+                basePrice: 5e34, currentPrice: 5e34, owned: 0,
+                effect: () => autoClickers += 1000000000000000000000000
+            },
+            {
+                id: 148, name: 'Ultimate Spectrum', description: '+100Qi Multiplier', icon: '💫',
+                basePrice: 1e35, currentPrice: 1e35, owned: 0,
+                effect: () => multiplier += 100000000000000000000
+            },
+            
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            // ADDITIONAL 67 ITEMS - EVEN MORE POWERFUL!
+            // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            
+            // TIER: HARDCORE+ (10 items) - Starting at 1e36
+            {
+                id: 149, name: 'Void Reaper', description: '+1Sx Click Power', icon: '💀',
+                basePrice: 1e36, currentPrice: 1e36, owned: 0,
+                effect: () => clickPower += 1000000000000000000000
+            },
+            {
+                id: 150, name: 'Soul Extractor', description: '+5Sx Auto Clickers', icon: '👻',
+                basePrice: 2e36, currentPrice: 2e36, owned: 0,
+                effect: () => autoClickers += 5000000000000000000000
+            },
+            {
+                id: 151, name: 'Demon Lord Crown', description: '+1Qi Multiplier', icon: '😈',
+                basePrice: 3e36, currentPrice: 3e36, owned: 0,
+                effect: () => multiplier += 1000000000000000000
+            },
+            {
+                id: 152, name: 'Hellspawn Orb', description: '+10Sx Click Power', icon: '🔥',
+                basePrice: 4e36, currentPrice: 4e36, owned: 0,
+                effect: () => clickPower += 10000000000000000000000
+            },
+            {
+                id: 153, name: 'Abyss Gate', description: '+20Sx Auto Clickers', icon: '🌀',
+                basePrice: 5e36, currentPrice: 5e36, owned: 0,
+                effect: () => autoClickers += 20000000000000000000000
+            },
+            {
+                id: 154, name: 'Necrotic Blade', description: '+5Qi Multiplier', icon: '⚔️',
+                basePrice: 6e36, currentPrice: 6e36, owned: 0,
+                effect: () => multiplier += 5000000000000000000
+            },
+            {
+                id: 155, name: 'Shadow Realm Key', description: '+50Sx Click Power', icon: '🗝️',
+                basePrice: 7e36, currentPrice: 7e36, owned: 0,
+                effect: () => clickPower += 50000000000000000000000
+            },
+            {
+                id: 156, name: 'Death Dimension Core', description: '+100Sx Auto Clickers', icon: '💀',
+                basePrice: 8e36, currentPrice: 8e36, owned: 0,
+                effect: () => autoClickers += 100000000000000000000000
+            },
+            {
+                id: 157, name: 'Infernal Engine', description: '+10Qi Multiplier', icon: '⚙️',
+                basePrice: 9e36, currentPrice: 9e36, owned: 0,
+                effect: () => multiplier += 10000000000000000000
+            },
+            {
+                id: 158, name: 'Apocalypse Catalyst', description: '+500Sx Click Power', icon: '☢️',
+                basePrice: 10e36, currentPrice: 10e36, owned: 0,
+                effect: () => clickPower += 500000000000000000000000
+            },
+            
+            // TIER: OWNER+ (10 items) - Starting at 1e38
+            {
+                id: 159, name: 'God Emperor Throne', description: '+1Sp Click Power', icon: '👑',
+                basePrice: 1e38, currentPrice: 1e38, owned: 0,
+                effect: () => clickPower += 1000000000000000000000000
+            },
+            {
+                id: 160, name: 'Universal Scepter', description: '+5Sp Auto Clickers', icon: '🪄',
+                basePrice: 2e38, currentPrice: 2e38, owned: 0,
+                effect: () => autoClickers += 5000000000000000000000000
+            },
+            {
+                id: 161, name: 'Omnipotent Ring', description: '+50Qi Multiplier', icon: '💍',
+                basePrice: 3e38, currentPrice: 3e38, owned: 0,
+                effect: () => multiplier += 50000000000000000000
+            },
+            {
+                id: 162, name: 'Reality Crown', description: '+10Sp Click Power', icon: '👑',
+                basePrice: 4e38, currentPrice: 4e38, owned: 0,
+                effect: () => clickPower += 10000000000000000000000000
+            },
+            {
+                id: 163, name: 'Cosmic Authority', description: '+20Sp Auto Clickers', icon: '✨',
+                basePrice: 5e38, currentPrice: 5e38, owned: 0,
+                effect: () => autoClickers += 20000000000000000000000000
+            },
+            {
+                id: 164, name: 'Divine Mandate', description: '+100Qi Multiplier', icon: '📜',
+                basePrice: 6e38, currentPrice: 6e38, owned: 0,
+                effect: () => multiplier += 100000000000000000000
+            },
+            {
+                id: 165, name: 'Eternal Dominion', description: '+50Sp Click Power', icon: '🌟',
+                basePrice: 7e38, currentPrice: 7e38, owned: 0,
+                effect: () => clickPower += 50000000000000000000000000
+            },
+            {
+                id: 166, name: 'Absolute Control', description: '+100Sp Auto Clickers', icon: '🎛️',
+                basePrice: 8e38, currentPrice: 8e38, owned: 0,
+                effect: () => autoClickers += 100000000000000000000000000
+            },
+            {
+                id: 167, name: 'Supreme Command', description: '+500Qi Multiplier', icon: '⚡',
+                basePrice: 9e38, currentPrice: 9e38, owned: 0,
+                effect: () => multiplier += 500000000000000000000
+            },
+            {
+                id: 168, name: 'Total Sovereignty', description: '+1Oc Click Power', icon: '👑',
+                basePrice: 10e38, currentPrice: 10e38, owned: 0,
+                effect: () => clickPower += 1000000000000000000000000000
+            },
+            
+            // TIER: GOAT+ (12 items) - Starting at 1e40
+            {
+                id: 169, name: 'Legendary Soul', description: '+5Oc Click Power', icon: '🐐',
+                basePrice: 1e40, currentPrice: 1e40, owned: 0,
+                effect: () => clickPower += 5000000000000000000000000000
+            },
+            {
+                id: 170, name: 'Mythic Champion Belt', description: '+10Oc Auto Clickers', icon: '🥇',
+                basePrice: 1.5e40, currentPrice: 1.5e40, owned: 0,
+                effect: () => autoClickers += 10000000000000000000000000000
+            },
+            {
+                id: 171, name: 'Perfect Form', description: '+1Sx Multiplier', icon: '💫',
+                basePrice: 2e40, currentPrice: 2e40, owned: 0,
+                effect: () => multiplier += 1000000000000000000000
+            },
+            {
+                id: 172, name: 'Undefeated Record', description: '+20Oc Click Power', icon: '🏆',
+                basePrice: 3e40, currentPrice: 3e40, owned: 0,
+                effect: () => clickPower += 20000000000000000000000000000
+            },
+            {
+                id: 173, name: 'Historic Greatness', description: '+50Oc Auto Clickers', icon: '📚',
+                basePrice: 4e40, currentPrice: 4e40, owned: 0,
+                effect: () => autoClickers += 50000000000000000000000000000
+            },
+            {
+                id: 174, name: 'Living Legend', description: '+5Sx Multiplier', icon: '⭐',
+                basePrice: 5e40, currentPrice: 5e40, owned: 0,
+                effect: () => multiplier += 5000000000000000000000
+            },
+            {
+                id: 175, name: 'Icon Status', description: '+100Oc Click Power', icon: '🌟',
+                basePrice: 6e40, currentPrice: 6e40, owned: 0,
+                effect: () => clickPower += 100000000000000000000000000000
+            },
+            {
+                id: 176, name: 'Hall of Immortals', description: '+200Oc Auto Clickers', icon: '🏛️',
+                basePrice: 7e40, currentPrice: 7e40, owned: 0,
+                effect: () => autoClickers += 200000000000000000000000000000
+            },
+            {
+                id: 177, name: 'Eternal Glory', description: '+10Sx Multiplier', icon: '✨',
+                basePrice: 8e40, currentPrice: 8e40, owned: 0,
+                effect: () => multiplier += 10000000000000000000000
+            },
+            {
+                id: 178, name: 'Timeless Achievement', description: '+500Oc Click Power', icon: '⏳',
+                basePrice: 9e40, currentPrice: 9e40, owned: 0,
+                effect: () => clickPower += 500000000000000000000000000000
+            },
+            {
+                id: 179, name: 'Undisputed Title', description: '+1No Auto Clickers', icon: '🥇',
+                basePrice: 10e40, currentPrice: 10e40, owned: 0,
+                effect: () => autoClickers += 1000000000000000000000000000000
+            },
+            {
+                id: 180, name: 'Ultimate GOAT', description: '+50Sx Multiplier', icon: '🐐',
+                basePrice: 15e40, currentPrice: 15e40, owned: 0,
+                effect: () => multiplier += 50000000000000000000000
+            },
+            
+            // TIER: STRONGEST+ (12 items) - Starting at 1e42
+            {
+                id: 181, name: 'Titan Ascendant', description: '+2No Click Power', icon: '⚡',
+                basePrice: 1e42, currentPrice: 1e42, owned: 0,
+                effect: () => clickPower += 2000000000000000000000000000000
+            },
+            {
+                id: 182, name: 'Omega Force', description: '+5No Auto Clickers', icon: '💪',
+                basePrice: 2e42, currentPrice: 2e42, owned: 0,
+                effect: () => autoClickers += 5000000000000000000000000000000
+            },
+            {
+                id: 183, name: 'Maximum Overdrive', description: '+100Sx Multiplier', icon: '⚙️',
+                basePrice: 3e42, currentPrice: 3e42, owned: 0,
+                effect: () => multiplier += 100000000000000000000000
+            },
+            {
+                id: 184, name: 'Godlike Strength', description: '+10No Click Power', icon: '💢',
+                basePrice: 4e42, currentPrice: 4e42, owned: 0,
+                effect: () => clickPower += 10000000000000000000000000000000
+            },
+            {
+                id: 185, name: 'Infinite Power', description: '+20No Auto Clickers', icon: '♾️',
+                basePrice: 5e42, currentPrice: 5e42, owned: 0,
+                effect: () => autoClickers += 20000000000000000000000000000000
+            },
+            {
+                id: 186, name: 'Limitless Potential', description: '+500Sx Multiplier', icon: '🌟',
+                basePrice: 6e42, currentPrice: 6e42, owned: 0,
+                effect: () => multiplier += 500000000000000000000000
+            },
+            {
+                id: 187, name: 'Unbreakable Will', description: '+50No Click Power', icon: '🛡️',
+                basePrice: 7e42, currentPrice: 7e42, owned: 0,
+                effect: () => clickPower += 50000000000000000000000000000000
+            },
+            {
+                id: 188, name: 'Unstoppable Momentum', description: '+100No Auto Clickers', icon: '🌀',
+                basePrice: 8e42, currentPrice: 8e42, owned: 0,
+                effect: () => autoClickers += 100000000000000000000000000000000
+            },
+            {
+                id: 189, name: 'Overwhelming Might', description: '+1Sp Multiplier', icon: '💥',
+                basePrice: 9e42, currentPrice: 9e42, owned: 0,
+                effect: () => multiplier += 1000000000000000000000000
+            },
+            {
+                id: 190, name: 'Absolute Dominance', description: '+200No Click Power', icon: '👊',
+                basePrice: 10e42, currentPrice: 10e42, owned: 0,
+                effect: () => clickPower += 200000000000000000000000000000000
+            },
+            {
+                id: 191, name: 'Supreme Superiority', description: '+500No Auto Clickers', icon: '⚡',
+                basePrice: 15e42, currentPrice: 15e42, owned: 0,
+                effect: () => autoClickers += 500000000000000000000000000000000
+            },
+            {
+                id: 192, name: 'Peak Performance', description: '+5Sp Multiplier', icon: '🏔️',
+                basePrice: 20e42, currentPrice: 20e42, owned: 0,
+                effect: () => multiplier += 5000000000000000000000000
+            },
+            
+            // TIER: POWEREST+ (11 items) - Starting at 1e45
+            {
+                id: 193, name: 'Nuclear Fusion Core', description: '+1Dc Click Power', icon: '⚛️',
+                basePrice: 1e45, currentPrice: 1e45, owned: 0,
+                effect: () => clickPower += 1000000000000000000000000000000000
+            },
+            {
+                id: 194, name: 'Antimatter Reactor', description: '+5Dc Auto Clickers', icon: '☢️',
+                basePrice: 2e45, currentPrice: 2e45, owned: 0,
+                effect: () => autoClickers += 5000000000000000000000000000000000
+            },
+            {
+                id: 195, name: 'Quantum Singularity', description: '+10Sp Multiplier', icon: '⚫',
+                basePrice: 3e45, currentPrice: 3e45, owned: 0,
+                effect: () => multiplier += 10000000000000000000000000
+            },
+            {
+                id: 196, name: 'Dark Energy Generator', description: '+10Dc Click Power', icon: '🌌',
+                basePrice: 4e45, currentPrice: 4e45, owned: 0,
+                effect: () => clickPower += 10000000000000000000000000000000000
+            },
+            {
+                id: 197, name: 'Zero Point Module', description: '+20Dc Auto Clickers', icon: '💫',
+                basePrice: 5e45, currentPrice: 5e45, owned: 0,
+                effect: () => autoClickers += 20000000000000000000000000000000000
+            },
+            {
+                id: 198, name: 'Reality Warper', description: '+50Sp Multiplier', icon: '🌀',
+                basePrice: 6e45, currentPrice: 6e45, owned: 0,
+                effect: () => multiplier += 50000000000000000000000000
+            },
+            {
+                id: 199, name: 'Cosmic Forge', description: '+50Dc Click Power', icon: '🔨',
+                basePrice: 7e45, currentPrice: 7e45, owned: 0,
+                effect: () => clickPower += 50000000000000000000000000000000000
+            },
+            {
+                id: 200, name: 'Stellar Furnace', description: '+100Dc Auto Clickers', icon: '🌟',
+                basePrice: 8e45, currentPrice: 8e45, owned: 0,
+                effect: () => autoClickers += 100000000000000000000000000000000000
+            },
+            {
+                id: 201, name: 'Big Bang Engine', description: '+100Sp Multiplier', icon: '💥',
+                basePrice: 9e45, currentPrice: 9e45, owned: 0,
+                effect: () => multiplier += 100000000000000000000000000
+            },
+            {
+                id: 202, name: 'Universe Creator', description: '+500Dc Click Power', icon: '🌌',
+                basePrice: 10e45, currentPrice: 10e45, owned: 0,
+                effect: () => clickPower += 500000000000000000000000000000000000
+            },
+            {
+                id: 203, name: 'Omniversal Power', description: '+1Oc Multiplier', icon: '♾️',
+                basePrice: 15e45, currentPrice: 15e45, owned: 0,
+                effect: () => multiplier += 1000000000000000000000000000
+            },
+            
+            // TIER: RAINBOW+ (12 items) - Starting at 1e48
+            {
+                id: 204, name: 'Prismatic Infinity', description: '+1Ud Click Power', icon: '🌈',
+                basePrice: 1e48, currentPrice: 1e48, owned: 0,
+                effect: () => clickPower += 1000000000000000000000000000000000000
+            },
+            {
+                id: 205, name: 'Chromatic Eternity', description: '+5Ud Auto Clickers', icon: '✨',
+                basePrice: 2e48, currentPrice: 2e48, owned: 0,
+                effect: () => autoClickers += 5000000000000000000000000000000000000
+            },
+            {
+                id: 206, name: 'Aurora Divinity', description: '+500Sp Multiplier', icon: '🌌',
+                basePrice: 3e48, currentPrice: 3e48, owned: 0,
+                effect: () => multiplier += 500000000000000000000000000
+            },
+            {
+                id: 207, name: 'Spectrum Absolute', description: '+10Ud Click Power', icon: '🔮',
+                basePrice: 4e48, currentPrice: 4e48, owned: 0,
+                effect: () => clickPower += 10000000000000000000000000000000000000
+            },
+            {
+                id: 208, name: 'Light Beyond Light', description: '+20Ud Auto Clickers', icon: '💫',
+                basePrice: 5e48, currentPrice: 5e48, owned: 0,
+                effect: () => autoClickers += 20000000000000000000000000000000000000
+            },
+            {
+                id: 209, name: 'Rainbow Transcendence', description: '+1Oc Multiplier', icon: '🌈',
+                basePrice: 6e48, currentPrice: 6e48, owned: 0,
+                effect: () => multiplier += 1000000000000000000000000000
+            },
+            {
+                id: 210, name: 'Kaleidoscope Reality', description: '+50Ud Click Power', icon: '🎨',
+                basePrice: 7e48, currentPrice: 7e48, owned: 0,
+                effect: () => clickPower += 50000000000000000000000000000000000000
+            },
+            {
+                id: 211, name: 'Hyperspectral Core', description: '+100Ud Auto Clickers', icon: '💎',
+                basePrice: 8e48, currentPrice: 8e48, owned: 0,
+                effect: () => autoClickers += 100000000000000000000000000000000000000
+            },
+            {
+                id: 212, name: 'Omnichromatic Force', description: '+5Oc Multiplier', icon: '🌟',
+                basePrice: 9e48, currentPrice: 9e48, owned: 0,
+                effect: () => multiplier += 5000000000000000000000000000
+            },
+            {
+                id: 213, name: 'Perfect Wavelength', description: '+500Ud Click Power', icon: '〰️',
+                basePrice: 10e48, currentPrice: 10e48, owned: 0,
+                effect: () => clickPower += 500000000000000000000000000000000000000
+            },
+            {
+                id: 214, name: 'Infinite Color', description: '+1Dd Auto Clickers', icon: '🎨',
+                basePrice: 15e48, currentPrice: 15e48, owned: 0,
+                effect: () => autoClickers += 1000000000000000000000000000000000000000
+            },
+            {
+                id: 215, name: 'Beyond Rainbow', description: '+10Oc Multiplier', icon: '🌈',
+                basePrice: 20e48, currentPrice: 20e48, owned: 0,
+                effect: () => multiplier += 10000000000000000000000000000
             }
         ];
 
@@ -7115,6 +7924,55 @@
             const TRILLION = 1e12;
             const QUADRILLION = 1e15;
             const QUINTILLION = 1e18;
+            const SEXTILLION = 1e21;
+            const SEPTILLION = 1e24;
+            const OCTILLION = 1e27;
+            const NONILLION = 1e30;
+            
+            // NEW ULTIMATE TIERS (Highest to Lowest)
+            if (price >= 10 * NONILLION) {
+                return {
+                    name: 'RAINBOW',
+                    color: 'linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #00ffff, #0000ff, #8b00ff)',
+                    glow: '0 0 30px rgba(255,255,255,1)',
+                    stars: 0
+                };
+            } else if (price >= 100 * OCTILLION) {
+                return {
+                    name: 'POWEREST',
+                    color: 'linear-gradient(135deg, #ff4500 0%, #ff8c00 50%, #ff0000 100%)',
+                    glow: '0 0 25px rgba(255,69,0,1)',
+                    stars: 0
+                };
+            } else if (price >= OCTILLION) {
+                return {
+                    name: 'STRONGEST',
+                    color: 'linear-gradient(135deg, #00bfff 0%, #ffffff 50%, #00bfff 100%)',
+                    glow: '0 0 25px rgba(0,191,255,1)',
+                    stars: 0
+                };
+            } else if (price >= 10 * SEPTILLION) {
+                return {
+                    name: 'GOAT',
+                    color: 'linear-gradient(135deg, #c0c0c0 0%, #ffffff 50%, #c0c0c0 100%)',
+                    glow: '0 0 20px rgba(192,192,192,1)',
+                    stars: 0
+                };
+            } else if (price >= 100 * SEXTILLION) {
+                return {
+                    name: 'OWNER',
+                    color: 'linear-gradient(135deg, #9370db 0%, #ffd700 50%, #9370db 100%)',
+                    glow: '0 0 20px rgba(147,112,219,1)',
+                    stars: 0
+                };
+            } else if (price >= SEXTILLION) {
+                return {
+                    name: 'HARDCORE',
+                    color: 'linear-gradient(135deg, #000000 0%, #8b0000 50%, #000000 100%)',
+                    glow: '0 0 20px rgba(139,0,0,1)',
+                    stars: 0
+                };
+            }
             
             // Rarity determination based on price
             if (price >= QUINTILLION) {
@@ -7273,9 +8131,18 @@
                     starDisplay = '<div class="rarity-stars">' + '⭐'.repeat(rarity.stars) + '</div>';
                 }
                 
+                // Determine tier class for animations
+                let tierClass = '';
+                if (rarity.name === 'HARDCORE') tierClass = 'tier-hardcore';
+                else if (rarity.name === 'OWNER') tierClass = 'tier-owner';
+                else if (rarity.name === 'GOAT') tierClass = 'tier-goat';
+                else if (rarity.name === 'STRONGEST') tierClass = 'tier-strongest';
+                else if (rarity.name === 'POWEREST') tierClass = 'tier-powerest';
+                else if (rarity.name === 'RAINBOW') tierClass = 'tier-rainbow';
+                
                 // Build rarity badge
                 const rarityBadge = `
-                    <div class="rarity-badge" style="background: ${rarity.color}; box-shadow: ${rarity.glow};">
+                    <div class="rarity-badge ${tierClass}" style="background: ${rarity.color}; box-shadow: ${rarity.glow};">
                         ${rarity.name}
                     </div>
                     ${starDisplay}
@@ -9369,6 +10236,7 @@
                     isAdmin: isAdmin,
                     weatherNextSpawn: weatherNextSpawn,
                     goldCodes: goldCodes,
+                    musicUnlocked: musicUnlocked,
                     
                     // Shop items (save prices and owned counts)
                     shopItems: shopItems.map(item => ({
@@ -9496,6 +10364,13 @@
                 // Restore misc
                 isAdmin = validData.isAdmin;
                 weatherNextSpawn = validData.weatherNextSpawn;
+                musicUnlocked = validData.musicUnlocked || false;
+                
+                // Update music UI if unlocked
+                if (musicUnlocked) {
+                    document.getElementById('musicControls').style.display = 'block';
+                    document.getElementById('unlockMusicBtn').style.display = 'none';
+                }
                 
                 // Restore gold codes
                 if (validData.goldCodes) {
@@ -10168,6 +11043,144 @@
             console.log('⚡ Touch optimized');
             console.log('🎯 Safe zones configured');
             console.log('🌐 Landscape support added');
+        }
+        
+        // ═══════════════════════════════════════════════════════
+        // TELEPORT SYSTEM
+        // ═══════════════════════════════════════════════════════
+        
+        function teleportTo(sectionId) {
+            let targetElement;
+            
+            // Map section IDs to actual element IDs
+            const sectionMap = {
+                'shopItems': 'shopItems-section',
+                'petSystem': 'petSystem',
+                'eggShop': 'eggShop',
+                'miniGame': 'miniGame',
+                'gamepassPanel': 'gamepassPanel',
+                'settingsPanel': 'settingsPanel',
+                'tradeUpSection': 'tradeUpSection',
+                'rebirthPanel': 'rebirthPanel'
+            };
+            
+            const mappedId = sectionMap[sectionId] || sectionId;
+            targetElement = document.getElementById(mappedId);
+            
+            if (targetElement) {
+                // Smooth scroll to target
+                targetElement.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+                
+                // Visual feedback
+                targetElement.style.transition = 'all 0.3s';
+                targetElement.style.transform = 'scale(1.02)';
+                targetElement.style.boxShadow = '0 0 30px rgba(102,126,234,0.8)';
+                
+                setTimeout(() => {
+                    targetElement.style.transform = 'scale(1)';
+                    targetElement.style.boxShadow = '';
+                }, 600);
+                
+                showToast('✅ Đã dịch chuyển!', 1500);
+            } else {
+                showToast('❌ Không tìm thấy vị trí!', 2000);
+            }
+        }
+        
+        // ═══════════════════════════════════════════════════════
+        // BACKGROUND MUSIC SYSTEM
+        // ═══════════════════════════════════════════════════════
+        
+        let backgroundMusic = null;
+        let musicUnlocked = false;
+        let currentTrackName = '';
+        
+        function unlockMusic() {
+            if (musicUnlocked) {
+                showToast('🎵 Đã mở khóa rồi!', 2000);
+                return;
+            }
+            
+            if (diamonds < 50) {
+                showToast('❌ Cần 50💎 để mở khóa!', 2500);
+                return;
+            }
+            
+            if (confirm('Mở khóa tính năng nhạc nền với 50💎?')) {
+                diamonds -= 50;
+                musicUnlocked = true;
+                updateDisplay();
+                saveToLocalStorage();
+                
+                document.getElementById('musicControls').style.display = 'block';
+                document.getElementById('unlockMusicBtn').style.display = 'none';
+                
+                showToast('✅ Đã mở khóa nhạc nền!', 2000);
+            }
+        }
+        
+        function importMusic() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'audio/mp3,audio/wav,audio/ogg,audio/mpeg';
+            
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const url = URL.createObjectURL(file);
+                    
+                    if (backgroundMusic) {
+                        backgroundMusic.pause();
+                        URL.revokeObjectURL(backgroundMusic.src);
+                    }
+                    
+                    backgroundMusic = new Audio(url);
+                    backgroundMusic.loop = true;
+                    backgroundMusic.volume = 0.5;
+                    
+                    currentTrackName = file.name;
+                    document.getElementById('trackName').textContent = currentTrackName;
+                    
+                    showToast('✅ Đã tải nhạc: ' + file.name, 2500);
+                }
+            };
+            
+            input.click();
+        }
+        
+        function toggleMusic() {
+            if (!backgroundMusic) {
+                showToast('❌ Chưa import nhạc!', 2000);
+                return;
+            }
+            
+            if (backgroundMusic.paused) {
+                backgroundMusic.play();
+                document.getElementById('playPauseBtn').textContent = '⏸️ Pause';
+                showToast('▶️ Đang phát nhạc...', 1500);
+            } else {
+                backgroundMusic.pause();
+                document.getElementById('playPauseBtn').textContent = '▶️ Play';
+                showToast('⏸️ Đã tạm dừng', 1500);
+            }
+        }
+        
+        function stopMusic() {
+            if (backgroundMusic) {
+                backgroundMusic.pause();
+                backgroundMusic.currentTime = 0;
+                document.getElementById('playPauseBtn').textContent = '▶️ Play';
+                showToast('⏹️ Đã dừng nhạc', 1500);
+            }
+        }
+        
+        function updateVolume(value) {
+            if (backgroundMusic) {
+                backgroundMusic.volume = value / 100;
+            }
         }
 
     </script>
