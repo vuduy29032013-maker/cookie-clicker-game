@@ -243,6 +243,7 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.3s;
+            position: relative; /* For rarity badge positioning */
         }
 
         .shop-item:hover {
@@ -253,6 +254,50 @@
         .shop-item.disabled {
             opacity: 0.5;
             cursor: not-allowed;
+        }
+        
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           RARITY BADGE STYLES
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        .rarity-badge {
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            z-index: 10;
+            animation: rarityFloat 3s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            will-change: transform;
+        }
+        
+        @keyframes rarityFloat {
+            0%, 100% { 
+                transform: translateY(0px);
+            }
+            50% { 
+                transform: translateY(-4px);
+            }
+        }
+        
+        .rarity-stars {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            font-size: 0.9em;
+            text-shadow: 0 2px 4px rgba(255,215,0,0.8);
+            animation: starTwinkle 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes starTwinkle {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.1); }
         }
 
         .item-info {
@@ -694,6 +739,21 @@
                 transform: translateX(1px);
             }
         }
+        
+        @keyframes fadeInOut {
+            0% { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            10%, 90% { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% { 
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+        }
 
         .weather-item.rainbowrain {
             border-color: #ff69b4;
@@ -969,6 +1029,72 @@
             padding: 2px 6px;
             border-radius: 10px;
             font-weight: bold;
+        }
+        
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           MUTATION BADGES
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        .mutation-badge {
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            font-size: 0.65em;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 5;
+            animation: mutationFloat 2s ease-in-out infinite;
+        }
+        
+        @keyframes mutationFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-2px); }
+        }
+        
+        .mutation-badge.gold {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #000;
+            box-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        
+        .mutation-badge.diamond {
+            background: linear-gradient(135deg, #00bfff 0%, #1e90ff 100%);
+            color: white;
+            box-shadow: 0 0 10px rgba(0,191,255,0.5);
+        }
+        
+        .mutation-badge.rainbow {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 200% 100%;
+            color: white;
+            box-shadow: 0 0 10px rgba(255,0,255,0.5);
+            animation: mutationFloat 2s ease-in-out infinite, rainbowShift 3s linear infinite;
+        }
+        
+        @keyframes rainbowShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        .mutation-badge.transcendent {
+            background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%);
+            color: white;
+            box-shadow: 0 0 15px rgba(0,255,255,0.7);
+            animation: mutationFloat 2s ease-in-out infinite, transcendentPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes transcendentPulse {
+            0%, 100% { 
+                box-shadow: 0 0 15px rgba(0,255,255,0.7);
+                filter: brightness(1);
+            }
+            50% { 
+                box-shadow: 0 0 25px rgba(0,255,255,1);
+                filter: brightness(1.3);
+            }
         }
 
         .pet-icon {
@@ -1845,6 +1971,8 @@
             border-radius: 10px;
             padding: 15px;
             text-align: center;
+            position: relative;
+            overflow: visible;
         }
 
         .potion-card.x2 {
@@ -1857,6 +1985,150 @@
 
         .potion-card.x4 {
             border-color: #ff6347;
+        }
+        
+        .potion-card.x5 {
+            border-color: #ff00ff;
+            box-shadow: 0 0 15px rgba(255,0,255,0.5);
+        }
+        
+        .potion-card.x6 {
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255,215,0,0.5);
+        }
+        
+        .potion-card.x10 {
+            border-color: #ff4500;
+            box-shadow: 0 0 20px rgba(255,69,0,0.7);
+        }
+        
+        /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+           ANIMATED POTION LABELS
+           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+        
+        .potion-label {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            z-index: 10;
+            white-space: nowrap;
+        }
+        
+        .potion-label.basic {
+            background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+            animation: basicPulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes basicPulse {
+            0%, 100% { 
+                box-shadow: 0 0 10px rgba(0,255,0,0.5);
+            }
+            50% { 
+                box-shadow: 0 0 20px rgba(0,255,0,0.8);
+            }
+        }
+        
+        .potion-label.rare {
+            background: linear-gradient(135deg, #0080ff 0%, #0056b3 100%);
+            animation: rareGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes rareGlow {
+            0%, 100% { 
+                box-shadow: 0 0 10px rgba(0,128,255,0.6);
+            }
+            50% { 
+                box-shadow: 0 0 20px rgba(0,128,255,1);
+            }
+        }
+        
+        .potion-label.epic {
+            background: linear-gradient(135deg, #9370db 0%, #6a4fc1 100%);
+            animation: epicShine 2s ease-in-out infinite;
+        }
+        
+        @keyframes epicShine {
+            0%, 100% { 
+                box-shadow: 0 0 10px rgba(147,112,219,0.7);
+                filter: brightness(1);
+            }
+            50% { 
+                box-shadow: 0 0 25px rgba(147,112,219,1);
+                filter: brightness(1.3);
+            }
+        }
+        
+        .potion-label.rainbow {
+            background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3);
+            background-size: 200% 100%;
+            animation: rainbowFlow 3s linear infinite, rainbowGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes rainbowFlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        @keyframes rainbowGlow {
+            0%, 100% { 
+                box-shadow: 0 0 15px rgba(255,0,255,0.8);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255,255,0,1);
+            }
+        }
+        
+        .potion-label.stellar {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
+            background-size: 200% 100%;
+            animation: stellarSparkle 2s ease-in-out infinite, stellarShift 3s linear infinite;
+        }
+        
+        @keyframes stellarSparkle {
+            0%, 100% { 
+                box-shadow: 0 0 15px rgba(255,215,0,0.8), 0 0 30px rgba(255,255,255,0.5);
+                filter: brightness(1.2);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255,215,0,1), 0 0 50px rgba(255,255,255,0.8);
+                filter: brightness(1.5);
+            }
+        }
+        
+        @keyframes stellarShift {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        
+        .potion-label.legendary {
+            background: linear-gradient(135deg, #ff4500 0%, #ff8c00 50%, #ff0000 100%);
+            background-size: 200% 100%;
+            animation: legendaryFire 2s ease-in-out infinite, legendaryMove 3s linear infinite;
+        }
+        
+        @keyframes legendaryFire {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255,69,0,1), 0 0 40px rgba(255,140,0,0.8);
+                filter: brightness(1.2);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(255,0,0,1), 0 0 60px rgba(255,69,0,1);
+                filter: brightness(1.5);
+            }
+        }
+        
+        @keyframes legendaryMove {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
         }
 
         .potion-icon {
@@ -3557,28 +3829,61 @@
             <div class="potion-shop">
                 <div class="section-title">🧪 Cửa Hàng Thuốc</div>
                 <div class="potion-grid">
+                    <!-- COIN POTIONS -->
                     <div class="potion-card x2">
+                        <div class="potion-label basic">🟢 BASIC</div>
                         <div class="potion-icon">🧪</div>
                         <div class="potion-name">Potion x2</div>
                         <div class="potion-effect">Nhân đôi thu nhập 1 phút</div>
-                        <button class="buy-potion-button" onclick="buyPotion('2x', 100)">
+                        <button class="buy-potion-button" onclick="buyPotion('2x', 100, 'coins')">
                             Mua - 100 💰
                         </button>
                     </div>
                     <div class="potion-card x3">
+                        <div class="potion-label rare">🔵 RARE</div>
                         <div class="potion-icon">🧪</div>
                         <div class="potion-name">Potion x3</div>
                         <div class="potion-effect">Nhân ba thu nhập 1 phút</div>
-                        <button class="buy-potion-button" onclick="buyPotion('3x', 3000)">
+                        <button class="buy-potion-button" onclick="buyPotion('3x', 3000, 'coins')">
                             Mua - 3,000 💰
                         </button>
                     </div>
                     <div class="potion-card x4">
+                        <div class="potion-label epic">🟣 EPIC</div>
                         <div class="potion-icon">🧪</div>
                         <div class="potion-name">Potion x4</div>
                         <div class="potion-effect">Nhân bốn thu nhập 1 phút</div>
-                        <button class="buy-potion-button" onclick="buyPotion('4x', 5000)">
+                        <button class="buy-potion-button" onclick="buyPotion('4x', 5000, 'coins')">
                             Mua - 5,000 💰
+                        </button>
+                    </div>
+                    
+                    <!-- DIAMOND POTIONS -->
+                    <div class="potion-card x5">
+                        <div class="potion-label rainbow">🌈 RAINBOW</div>
+                        <div class="potion-icon">💎</div>
+                        <div class="potion-name">Potion x5</div>
+                        <div class="potion-effect">Nhân 5 thu nhập 1 phút</div>
+                        <button class="buy-potion-button diamond" onclick="buyPotion('5x', 100, 'diamonds')">
+                            Mua - 100 💎
+                        </button>
+                    </div>
+                    <div class="potion-card x6">
+                        <div class="potion-label stellar">⭐ STELLAR</div>
+                        <div class="potion-icon">✨</div>
+                        <div class="potion-name">Potion x6</div>
+                        <div class="potion-effect">Nhân 6 thu nhập 1 phút</div>
+                        <button class="buy-potion-button diamond" onclick="buyPotion('6x', 500, 'diamonds')">
+                            Mua - 500 💎
+                        </button>
+                    </div>
+                    <div class="potion-card x10">
+                        <div class="potion-label legendary">🔥 LEGENDARY</div>
+                        <div class="potion-icon">🔥</div>
+                        <div class="potion-name">Potion x10</div>
+                        <div class="potion-effect">Nhân 10 thu nhập 1 phút</div>
+                        <button class="buy-potion-button diamond" onclick="buyPotion('10x', 1000, 'diamonds')">
+                            Mua - 1,000 💎
                         </button>
                     </div>
                 </div>
@@ -3697,6 +4002,30 @@
                             Sử dụng
                         </button>
                     </div>
+                    <div class="inventory-item diamond">
+                        <div class="potion-icon">💎</div>
+                        <div class="potion-name">Potion x5</div>
+                        <div class="inventory-count" id="inv5x">0</div>
+                        <button class="use-button" onclick="usePotion('5x', 5)">
+                            Sử dụng
+                        </button>
+                    </div>
+                    <div class="inventory-item diamond">
+                        <div class="potion-icon">✨</div>
+                        <div class="potion-name">Potion x6</div>
+                        <div class="inventory-count" id="inv6x">0</div>
+                        <button class="use-button" onclick="usePotion('6x', 6)">
+                            Sử dụng
+                        </button>
+                    </div>
+                    <div class="inventory-item diamond">
+                        <div class="potion-icon">🔥</div>
+                        <div class="potion-name">Potion x10</div>
+                        <div class="inventory-count" id="inv10x">0</div>
+                        <button class="use-button" onclick="usePotion('10x', 10)">
+                            Sử dụng
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -3785,6 +4114,84 @@
                     <div class="section-subtitle">📦 Tất Cả Pets</div>
                     <div class="pets-grid" id="petsGrid">
                         <!-- Pets will be displayed here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trade-Up System -->
+            <div class="shop-panel" style="margin-top: 20px;">
+                <div class="section-title">🔄 Pet Trade-Up System</div>
+                <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 20px; border-radius: 15px; border: 2px solid #0f3460;">
+                    
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <div style="font-size: 1.1em; color: #00d4ff; margin-bottom: 10px;">
+                            ⬆️ Nâng Cấp Pet: 5 Pets Cùng Loại → 1 Pet Cao Cấp Hơn
+                        </div>
+                        <div style="font-size: 0.9em; color: #ff6b6b;">
+                            ⚠️ Tỉ lệ thành công: 25% | Thất bại: 75% (mất tất cả)
+                        </div>
+                    </div>
+
+                    <!-- Mutation Tiers Info -->
+                    <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                        <div style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center;">
+                            📊 Các Cấp Độ Đột Biến:
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px;">
+                            <div style="padding: 8px; background: linear-gradient(135deg, #808080 0%, #a9a9a9 100%); border-radius: 8px; text-align: center;">
+                                <div style="font-weight: bold;">⚪ Normal</div>
+                                <div style="font-size: 0.9em;">x1 (Cơ bản)</div>
+                            </div>
+                            <div style="padding: 8px; background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%); border-radius: 8px; text-align: center; color: #000;">
+                                <div style="font-weight: bold;">🟡 Gold</div>
+                                <div style="font-size: 0.9em;">x2 chỉ số</div>
+                            </div>
+                            <div style="padding: 8px; background: linear-gradient(135deg, #00bfff 0%, #1e90ff 100%); border-radius: 8px; text-align: center;">
+                                <div style="font-weight: bold;">💎 Diamond</div>
+                                <div style="font-size: 0.9em;">x2.5 chỉ số</div>
+                            </div>
+                            <div style="padding: 8px; background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3); border-radius: 8px; text-align: center;">
+                                <div style="font-weight: bold;">🌈 Rainbow</div>
+                                <div style="font-size: 0.9em;">x3 chỉ số</div>
+                            </div>
+                            <div style="padding: 8px; background: linear-gradient(135deg, #00ffff 0%, #00bfff 100%); border-radius: 8px; text-align: center;">
+                                <div style="font-weight: bold;">✨ Transcendent</div>
+                                <div style="font-size: 0.9em;">x5 chỉ số</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trade-Up Interface -->
+                    <div style="background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px;">
+                        <div style="margin-bottom: 15px;">
+                            <label style="color: #ffd700; font-weight: bold; display: block; margin-bottom: 8px;">
+                                🐾 Chọn Loại Pet:
+                            </label>
+                            <select id="tradeUpPetType" onchange="updateTradeUpDisplay()" style="width: 100%; padding: 10px; border-radius: 8px; font-size: 1em; background: #1a1a2e; color: white; border: 2px solid #0f3460;">
+                                <option value="">-- Chọn Pet --</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 15px;">
+                            <label style="color: #ffd700; font-weight: bold; display: block; margin-bottom: 8px;">
+                                ⭐ Cấp Độ Hiện Tại:
+                            </label>
+                            <select id="tradeUpMutation" onchange="updateTradeUpDisplay()" style="width: 100%; padding: 10px; border-radius: 8px; font-size: 1em; background: #1a1a2e; color: white; border: 2px solid #0f3460;">
+                                <option value="">-- Chọn Cấp Độ --</option>
+                                <option value="normal">⚪ Normal (→ Gold)</option>
+                                <option value="gold">🟡 Gold (→ Diamond)</option>
+                                <option value="diamond">💎 Diamond (→ Rainbow)</option>
+                                <option value="rainbow">🌈 Rainbow (→ Transcendent)</option>
+                            </select>
+                        </div>
+
+                        <div id="tradeUpStatus" style="background: rgba(0,0,0,0.5); padding: 15px; border-radius: 8px; margin-bottom: 15px; text-align: center; color: #00d4ff;">
+                            Chọn loại pet và cấp độ để bắt đầu
+                        </div>
+
+                        <button id="tradeUpButton" onclick="attemptTradeUp()" disabled style="width: 100%; padding: 15px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 10px; color: white; font-weight: bold; font-size: 1.1em; cursor: pointer; opacity: 0.5;">
+                            🔄 TRADE-UP (25% Thành Công)
+                        </button>
                     </div>
                 </div>
             </div>
@@ -4209,7 +4616,10 @@
         let inventory = {
             potion_2x: 0,
             potion_3x: 0,
-            potion_4x: 0
+            potion_4x: 0,
+            potion_5x: 0,  // NEW: Diamond potion
+            potion_6x: 0,  // NEW: Diamond potion
+            potion_10x: 0  // NEW: Diamond potion
         };
         let activePotion = null;
         let potionTimer = 0;
@@ -5678,13 +6088,13 @@
             {
                 id: 18,
                 name: 'The Divine',
-                description: '1% giảm giá mọi vật phẩm',
+                description: '5% giảm giá mọi vật phẩm',
                 icon: '✨',
                 basePrice: 50000000,
                 currentPrice: 50000000,
                 owned: 0,
                 effect: () => {
-                    shopDiscount += 1;
+                    shopDiscount += 5;
                 }
             },
             {
@@ -6593,7 +7003,7 @@
             clickTimes.push(now);
             
             // Chỉ giữ lại 10 lần click gần nhất
-            if (clickTimes.length > 500000000) {
+            if (clickTimes.length > 10) {
                 clickTimes.shift();
             }
             
@@ -6619,9 +7029,9 @@
                 // 2. Click quá đều (độ lệch chuẩn < 10ms)
                 // 3. Click với pattern giống nhau (variance quá thấp)
                 
-                const tooFast = avgInterval < 10;
-                const tooConsistent = stdDev < 3;
-                const suspiciousPattern = variance < 15 && clickTimes.length >= 12;
+                const tooFast = avgInterval < 50;
+                const tooConsistent = stdDev < 10;
+                const suspiciousPattern = variance < 100 && clickTimes.length >= 8;
                 
                 if ((tooFast && tooConsistent) || suspiciousPattern) {
                     // BAN PLAYER!
@@ -6680,21 +7090,152 @@
             document.getElementById('inv2x').textContent = inventory.potion_2x;
             document.getElementById('inv3x').textContent = inventory.potion_3x;
             document.getElementById('inv4x').textContent = inventory.potion_4x;
+            document.getElementById('inv5x').textContent = inventory.potion_5x || 0;
+            document.getElementById('inv6x').textContent = inventory.potion_6x || 0;
+            document.getElementById('inv10x').textContent = inventory.potion_10x || 0;
             
             const hours = Math.floor(playTime / 3600);
             const minutes = Math.floor((playTime % 3600) / 60);
             const seconds = playTime % 60;
-            document.getElementById('playTime').textContent = 
+            document.getElementById('playTime').textContent =
                 `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        }
+
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // RARITY SYSTEM FOR SHOP ITEMS
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        
+        function getRarity(price) {
+            // Validate price
+            if (typeof price !== 'number' || price < 0) {
+                return { name: 'Common', color: '#808080', stars: 0 };
+            }
+            
+            // Price thresholds
+            const TRILLION = 1e12;
+            const QUADRILLION = 1e15;
+            const QUINTILLION = 1e18;
+            
+            // Rarity determination based on price
+            if (price >= QUINTILLION) {
+                return { 
+                    name: 'Secret', 
+                    color: 'linear-gradient(135deg, #000000 0%, #8b0000 100%)',
+                    glow: '0 0 20px rgba(255,0,0,0.8)',
+                    stars: 0
+                };
+            } else if (price >= 10 * QUADRILLION) {
+                return { 
+                    name: 'Cosmic', 
+                    color: 'linear-gradient(135deg, #9370db 0%, #ba55d3 100%)',
+                    glow: '0 0 15px rgba(147,112,219,0.8)',
+                    stars: 0
+                };
+            } else if (price >= 10 * QUADRILLION) {
+                // Transcendent 5-Star
+                return { 
+                    name: 'Transcendent', 
+                    color: 'linear-gradient(135deg, #00ffff 0%, #00bfff 100%)',
+                    glow: '0 0 15px rgba(0,255,255,0.8)',
+                    stars: 5
+                };
+            } else if (price >= 5 * QUADRILLION) {
+                // Transcendent 4-Star
+                return { 
+                    name: 'Transcendent', 
+                    color: 'linear-gradient(135deg, #00ffff 0%, #00bfff 100%)',
+                    glow: '0 0 15px rgba(0,255,255,0.8)',
+                    stars: 4
+                };
+            } else if (price >= QUADRILLION) {
+                // Transcendent 3-Star
+                return { 
+                    name: 'Transcendent', 
+                    color: 'linear-gradient(135deg, #00ffff 0%, #00bfff 100%)',
+                    glow: '0 0 15px rgba(0,255,255,0.8)',
+                    stars: 3
+                };
+            } else if (price >= 500 * TRILLION) {
+                // Transcendent 2-Star
+                return { 
+                    name: 'Transcendent', 
+                    color: 'linear-gradient(135deg, #00ffff 0%, #00bfff 100%)',
+                    glow: '0 0 15px rgba(0,255,255,0.8)',
+                    stars: 2
+                };
+            } else if (price >= 100 * TRILLION) {
+                // Transcendent 1-Star
+                return { 
+                    name: 'Transcendent', 
+                    color: 'linear-gradient(135deg, #00ffff 0%, #00bfff 100%)',
+                    glow: '0 0 15px rgba(0,255,255,0.8)',
+                    stars: 1
+                };
+            } else if (price >= TRILLION) {
+                return { 
+                    name: 'Prismatic', 
+                    color: 'linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #9400d3)',
+                    glow: '0 0 15px rgba(255,0,255,0.8)',
+                    stars: 0
+                };
+            } else if (price >= 10e9) {
+                return { 
+                    name: 'Divine', 
+                    color: 'linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)',
+                    glow: '0 0 15px rgba(255,215,0,0.8)',
+                    stars: 0
+                };
+            } else if (price >= 100e6) {
+                return { 
+                    name: 'Mythical', 
+                    color: 'linear-gradient(135deg, #ff0000 0%, #ff69b4 100%)',
+                    glow: '0 0 10px rgba(255,0,0,0.6)',
+                    stars: 0
+                };
+            } else if (price >= 1e6) {
+                return { 
+                    name: 'Legendary', 
+                    color: 'linear-gradient(135deg, #ff00ff 0%, #ff1493 100%)',
+                    glow: '0 0 10px rgba(255,0,255,0.6)',
+                    stars: 0
+                };
+            } else if (price >= 100000) {
+                return { 
+                    name: 'Rare', 
+                    color: 'linear-gradient(135deg, #0080ff 0%, #00bfff 100%)',
+                    glow: '0 0 8px rgba(0,128,255,0.5)',
+                    stars: 0
+                };
+            } else if (price >= 10000) {
+                return { 
+                    name: 'Uncommon', 
+                    color: 'linear-gradient(135deg, #00ff00 0%, #7fff00 100%)',
+                    glow: '0 0 5px rgba(0,255,0,0.4)',
+                    stars: 0
+                };
+            } else {
+                return { 
+                    name: 'Common', 
+                    color: 'linear-gradient(135deg, #808080 0%, #a9a9a9 100%)',
+                    glow: 'none',
+                    stars: 0
+                };
+            }
         }
 
         function renderShop() {
             const shopContainer = document.getElementById('shopItems');
             shopContainer.innerHTML = '';
 
-            shopItems.forEach(item => {
+            // Sort items by current price (low to high)
+            const sortedItems = [...shopItems].sort((a, b) => a.currentPrice - b.currentPrice);
+
+            sortedItems.forEach(item => {
                 const currentPurchases = purchaseCounts[item.id] || 0;
                 const isLimitReached = currentPurchases >= purchaseLimit;
+                
+                // Get rarity based on current price
+                const rarity = getRarity(item.currentPrice);
                 
                 // Tính giảm giá từ shop, ticket VÀ weather
                 let totalDiscount = shopDiscount + discountTicket;
@@ -6726,7 +7267,22 @@
                     limitInfo = `<div style="color: #ffd700; font-size: 0.8em; margin-top: 5px;">${t('remaining')}: ${purchaseLimit - currentPurchases}/${purchaseLimit}</div>`;
                 }
                 
+                // Build star display for Transcendent items
+                let starDisplay = '';
+                if (rarity.stars > 0) {
+                    starDisplay = '<div class="rarity-stars">' + '⭐'.repeat(rarity.stars) + '</div>';
+                }
+                
+                // Build rarity badge
+                const rarityBadge = `
+                    <div class="rarity-badge" style="background: ${rarity.color}; box-shadow: ${rarity.glow};">
+                        ${rarity.name}
+                    </div>
+                    ${starDisplay}
+                `;
+                
                 itemDiv.innerHTML = `
+                    ${rarityBadge}
                     <span class="icon">${item.icon}</span>
                     <div class="item-info">
                         <div class="item-name">${item.name}</div>
@@ -7175,24 +7731,54 @@
             }
         }
 
-        function buyPotion(type, price) {
-            if (coins >= price) {
-                coins -= price;
-                
-                if (type === '2x') {
-                    inventory.potion_2x++;
-                } else if (type === '3x') {
-                    inventory.potion_3x++;
-                } else if (type === '4x') {
-                    inventory.potion_4x++;
+        function buyPotion(type, price, currency = 'coins') {
+            console.log(`🧪 Buying Potion ${type}: ${price} ${currency}`);
+            
+            // Validate currency
+            if (currency === 'coins') {
+                if (coins < price) {
+                    alert('❌ Không đủ coins!');
+                    return;
                 }
-                
-                updateDisplay();
-                renderShop();
-                alert(`✅ Đã mua Potion ${type} thành công!`);
+                coins -= price;
+            } else if (currency === 'diamonds') {
+                if (diamonds < price) {
+                    alert('❌ Không đủ diamonds!');
+                    return;
+                }
+                diamonds -= price;
             } else {
-                alert('❌ Không đủ tiền!');
+                alert('❌ Loại tiền không hợp lệ!');
+                return;
             }
+            
+            // Add potion to inventory
+            if (type === '2x') {
+                inventory.potion_2x++;
+            } else if (type === '3x') {
+                inventory.potion_3x++;
+            } else if (type === '4x') {
+                inventory.potion_4x++;
+            } else if (type === '5x') {
+                inventory.potion_5x++;
+            } else if (type === '6x') {
+                inventory.potion_6x++;
+            } else if (type === '10x') {
+                inventory.potion_10x++;
+            } else {
+                alert('❌ Loại potion không hợp lệ!');
+                return;
+            }
+            
+            updateDisplay();
+            renderShop();
+            saveToLocalStorage(true);
+            
+            const currencyIcon = currency === 'coins' ? '💰' : '💎';
+            alert(`✅ Đã mua Potion ${type} thành công!\n\nCòn lại: ${currency === 'coins' ? formatNumber(coins) : formatNumber(diamonds)} ${currencyIcon}`);
+            
+            console.log(`✅ Potion purchased successfully`);
+            console.log(`📦 Inventory:`, inventory);
         }
 
         function buyDiscountTicket(percent, price) {
@@ -7234,6 +7820,7 @@
         function usePotion(type, multiplierValue) {
             let hasPotion = false;
             
+            // Check if player has the potion
             if (type === '2x' && inventory.potion_2x > 0) {
                 inventory.potion_2x--;
                 hasPotion = true;
@@ -7242,6 +7829,15 @@
                 hasPotion = true;
             } else if (type === '4x' && inventory.potion_4x > 0) {
                 inventory.potion_4x--;
+                hasPotion = true;
+            } else if (type === '5x' && inventory.potion_5x > 0) {
+                inventory.potion_5x--;
+                hasPotion = true;
+            } else if (type === '6x' && inventory.potion_6x > 0) {
+                inventory.potion_6x--;
+                hasPotion = true;
+            } else if (type === '10x' && inventory.potion_10x > 0) {
+                inventory.potion_10x--;
                 hasPotion = true;
             }
             
@@ -7252,9 +7848,13 @@
             
             if (activePotion) {
                 alert('⚠️ Đã có thuốc đang hoạt động! Vui lòng đợi hết hiệu lực.');
+                // Refund the potion
                 if (type === '2x') inventory.potion_2x++;
                 else if (type === '3x') inventory.potion_3x++;
                 else if (type === '4x') inventory.potion_4x++;
+                else if (type === '5x') inventory.potion_5x++;
+                else if (type === '6x') inventory.potion_6x++;
+                else if (type === '10x') inventory.potion_10x++;
                 return;
             }
             
@@ -7280,6 +7880,9 @@
             }, 1000);
             
             updateDisplay();
+            saveToLocalStorage(true);
+            
+            console.log(`✅ Used Potion ${type} (x${multiplierValue})`);
         }
 
         function resetAFKTimer() {
@@ -7580,6 +8183,9 @@
             updateDisplay();
             updateGamePassUI();
             
+            // Save game after purchase
+            saveToLocalStorage(true);
+            
             // Success message
             const successMsg = currentLanguage === 'en'
                 ? `✅ ${passName} Activated!\n\n🎁 Instant Bonus: ${formatNumber(bonusCoins)} coins\n🎯 Multiplier: x${bonusMultiplier}\n⚡ Click Power: +${bonusClickPower}\n🤖 Auto Clickers: +${bonusAutoClickers}/s\n\n💰 Gold Bars Remaining: ${goldBars}`
@@ -7763,6 +8369,9 @@
             // Update UI
             updateDisplay();
             
+            // Save game after purchase
+            saveToLocalStorage(true);
+            
             // Success message
             let bonusText = '';
             if (bonuses.coins) bonusText += `\n💰 +${formatNumber(bonuses.coins)} coins`;
@@ -7904,11 +8513,13 @@
                 hatchedPet = egg.pets[egg.pets.length - 1];
             }
             
-            // Add pet to collection
-            const petKey = hatchedPet.name;
+            // Add pet to collection with mutation support
+            const petKey = hatchedPet.name + '_normal'; // All new pets start as normal
             if (!ownedPets[petKey]) {
                 ownedPets[petKey] = {
                     ...hatchedPet,
+                    baseName: hatchedPet.name,
+                    mutation: 'normal',
                     count: 0
                 };
             }
@@ -7919,6 +8530,7 @@
             
             // Update pets display
             renderPets();
+            updateTradeUpPetList();
         }
 
         function showHatchAnimation(egg, pet) {
@@ -7949,6 +8561,234 @@
         function closeHatchAnimation() {
             document.getElementById('hatchAnimation').style.display = 'none';
         }
+        
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // TRADE-UP SYSTEM
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        
+        const MUTATION_MULTIPLIERS = {
+            'normal': 1,
+            'gold': 2,
+            'diamond': 2.5,
+            'rainbow': 3,
+            'transcendent': 5
+        };
+        
+        const MUTATION_UPGRADES = {
+            'normal': 'gold',
+            'gold': 'diamond',
+            'diamond': 'rainbow',
+            'rainbow': 'transcendent',
+            'transcendent': null // Max tier
+        };
+        
+        const MUTATION_NAMES = {
+            'normal': '⚪ Normal',
+            'gold': '🟡 Gold',
+            'diamond': '💎 Diamond',
+            'rainbow': '🌈 Rainbow',
+            'transcendent': '✨ Transcendent'
+        };
+        
+        function updateTradeUpPetList() {
+            const select = document.getElementById('tradeUpPetType');
+            if (!select) return;
+            
+            select.innerHTML = '<option value="">-- Chọn Pet --</option>';
+            
+            // Get unique base pet names
+            const baseNames = new Set();
+            Object.values(ownedPets).forEach(pet => {
+                if (pet.baseName) baseNames.add(pet.baseName);
+            });
+            
+            baseNames.forEach(name => {
+                select.innerHTML += `<option value="${name}">${name}</option>`;
+            });
+        }
+        
+        function updateTradeUpDisplay() {
+            const petType = document.getElementById('tradeUpPetType')?.value;
+            const mutation = document.getElementById('tradeUpMutation')?.value;
+            const statusDiv = document.getElementById('tradeUpStatus');
+            const button = document.getElementById('tradeUpButton');
+            
+            if (!petType || !mutation) {
+                statusDiv.innerHTML = 'Chọn loại pet và cấp độ để bắt đầu';
+                button.disabled = true;
+                button.style.opacity = '0.5';
+                return;
+            }
+            
+            const petKey = petType + '_' + mutation;
+            const count = ownedPets[petKey]?.count || 0;
+            const nextMutation = MUTATION_UPGRADES[mutation];
+            
+            if (!nextMutation) {
+                statusDiv.innerHTML = `<div style="color: #ffd700;">✨ ${petType} đã ở cấp độ cao nhất!</div>`;
+                button.disabled = true;
+                button.style.opacity = '0.5';
+                return;
+            }
+            
+            if (count < 5) {
+                statusDiv.innerHTML = `
+                    <div style="color: #ff6b6b;">
+                        ❌ Không đủ pets!<br>
+                        Hiện có: ${count}/5 ${MUTATION_NAMES[mutation]} ${petType}
+                    </div>
+                `;
+                button.disabled = true;
+                button.style.opacity = '0.5';
+            } else {
+                statusDiv.innerHTML = `
+                    <div style="color: #00ff00;">
+                        ✅ Đủ điều kiện!<br>
+                        Sẽ dùng: 5x ${MUTATION_NAMES[mutation]} ${petType}<br>
+                        Nâng lên: ${MUTATION_NAMES[nextMutation]} ${petType}<br>
+                        <br>
+                        <div style="color: #ffd700;">Tỉ lệ: 25% Thành công | 75% Thất bại</div>
+                        <div style="color: #ff6b6b; font-size: 0.9em;">Thất bại = Mất tất cả 5 pets!</div>
+                    </div>
+                `;
+                button.disabled = false;
+                button.style.opacity = '1';
+            }
+        }
+        
+        function attemptTradeUp() {
+            const petType = document.getElementById('tradeUpPetType')?.value;
+            const mutation = document.getElementById('tradeUpMutation')?.value;
+            
+            if (!petType || !mutation) {
+                alert('❌ Vui lòng chọn loại pet và cấp độ!');
+                return;
+            }
+            
+            const petKey = petType + '_' + mutation;
+            const count = ownedPets[petKey]?.count || 0;
+            const nextMutation = MUTATION_UPGRADES[mutation];
+            
+            // Validation
+            if (count < 5) {
+                alert(`❌ Không đủ pets! Cần 5 ${MUTATION_NAMES[mutation]} ${petType}, hiện có ${count}.`);
+                return;
+            }
+            
+            if (!nextMutation) {
+                alert('❌ Pet đã ở cấp độ cao nhất!');
+                return;
+            }
+            
+            // Confirmation
+            const confirmMsg = `🔄 XÁC NHẬN TRADE-UP\n\nSẽ dùng: 5x ${MUTATION_NAMES[mutation]} ${petType}\nNâng lên: 1x ${MUTATION_NAMES[nextMutation]} ${petType}\n\n⚠️ TỈ LỆ:\n✅ Thành công: 25%\n❌ Thất bại: 75% (MẤT TẤT CẢ 5 PETS)\n\nBạn có chắc chắn?`;
+            
+            if (!confirm(confirmMsg)) {
+                return;
+            }
+            
+            // Deduct pets
+            ownedPets[petKey].count -= 5;
+            if (ownedPets[petKey].count <= 0) {
+                delete ownedPets[petKey];
+            }
+            
+            // Roll for success (25% chance)
+            const success = Math.random() < 0.25;
+            
+            if (success) {
+                // Success! Add upgraded pet
+                const newPetKey = petType + '_' + nextMutation;
+                if (!ownedPets[newPetKey]) {
+                    // Create new entry based on original pet
+                    const basePet = Object.values(ownedPets).find(p => p.baseName === petType) || 
+                                   Object.values(ownedPets).find(p => p.name && p.name.includes(petType));
+                    
+                    if (basePet) {
+                        ownedPets[newPetKey] = {
+                            ...basePet,
+                            baseName: petType,
+                            mutation: nextMutation,
+                            count: 0
+                        };
+                    } else {
+                        alert('❌ Lỗi: Không tìm thấy thông tin pet gốc!');
+                        return;
+                    }
+                }
+                ownedPets[newPetKey].count++;
+                
+                // Success animation
+                showTradeUpResult(true, petType, mutation, nextMutation);
+                
+                alert(`✅ THÀNH CÔNG!\n\n🎉 Bạn đã nhận được:\n${MUTATION_NAMES[nextMutation]} ${petType}\n\nHệ số nhân: x${MUTATION_MULTIPLIERS[nextMutation]}`);
+            } else {
+                // Failure - pets already removed
+                showTradeUpResult(false, petType, mutation, nextMutation);
+                
+                alert(`❌ THẤT BẠI!\n\nBạn đã mất 5x ${MUTATION_NAMES[mutation]} ${petType}\n\nHãy thử lại lần sau!`);
+            }
+            
+            // Update displays
+            renderPets();
+            updateTradeUpPetList();
+            updateTradeUpDisplay();
+            updateDisplay();
+            saveToLocalStorage(true);
+            
+            console.log(`🔄 Trade-Up ${success ? 'SUCCESS' : 'FAILED'}: ${petType} ${mutation} → ${nextMutation}`);
+        }
+        
+        function showTradeUpResult(success, petType, fromMutation, toMutation) {
+            const animDiv = document.getElementById('hatchAnimation');
+            if (!animDiv) return;
+            
+            animDiv.style.display = 'block';
+            
+            if (success) {
+                animDiv.innerHTML = `
+                    <div class="hatch-animation">
+                        <div class="hatch-result" style="font-size: 5em; animation: successPulse 1s ease-in-out infinite;">
+                            ✨
+                        </div>
+                        <div class="hatch-text" style="color: #00ff00; font-size: 1.5em; font-weight: bold;">
+                            🎉 THÀNH CÔNG! 🎉
+                        </div>
+                        <div style="margin-top: 15px; font-size: 1.2em;">
+                            ${MUTATION_NAMES[toMutation]} ${petType}
+                        </div>
+                        <div class="hatch-multiplier" style="color: #ffd700;">
+                            Hệ số: x${MUTATION_MULTIPLIERS[toMutation]}
+                        </div>
+                        <button class="admin-button" onclick="closeHatchAnimation()" style="margin-top: 20px;">OK</button>
+                    </div>
+                `;
+            } else {
+                animDiv.innerHTML = `
+                    <div class="hatch-animation">
+                        <div class="hatch-result" style="font-size: 5em; animation: failShake 0.5s ease-in-out infinite;">
+                            💔
+                        </div>
+                        <div class="hatch-text" style="color: #ff6b6b; font-size: 1.5em; font-weight: bold;">
+                            ❌ THẤT BẠI ❌
+                        </div>
+                        <div style="margin-top: 15px; color: #ff6b6b;">
+                            Đã mất 5x ${MUTATION_NAMES[fromMutation]} ${petType}
+                        </div>
+                        <div style="color: #888; margin-top: 10px;">
+                            Thử lại lần sau!
+                        </div>
+                        <button class="admin-button" onclick="closeHatchAnimation()" style="margin-top: 20px;">OK</button>
+                    </div>
+                `;
+            }
+            
+            setTimeout(() => {
+                if (animDiv.style.display === 'block') {
+                    closeHatchAnimation();
+                }
+            }, 5000);
+        }
 
         function renderPets() {
             const petsGrid = document.getElementById('petsGrid');
@@ -7974,11 +8814,18 @@
                 // Check if can equip more
                 const canEquipMore = equippedCount < pet.count && equippedPets.length < MAX_EQUIPPED_PETS;
                 
+                // Get mutation badge
+                const mutation = pet.mutation || 'normal';
+                const mutationBadge = getMutationBadge(mutation);
+                const mutationMult = MUTATION_MULTIPLIERS[mutation] || 1;
+                const totalMult = pet.multiplier * mutationMult;
+                
                 petCard.innerHTML = `
                     ${isEquipped ? `<div class="pet-equipped-badge">✓ ${equippedCount}/${pet.count}</div>` : ''}
+                    ${mutationBadge}
                     <div class="pet-icon">${pet.icon}</div>
-                    <div class="pet-name">${pet.name}</div>
-                    <div class="pet-multiplier">x${pet.multiplier.toLocaleString()}</div>
+                    <div class="pet-name">${pet.baseName || pet.name}</div>
+                    <div class="pet-multiplier">x${totalMult.toLocaleString()} ${mutation !== 'normal' ? `(Base: x${pet.multiplier})` : ''}</div>
                     <div class="pet-count">Owned: ${pet.count}</div>
                     <div class="pet-actions">
                         ${isEquipped 
@@ -7987,7 +8834,16 @@
                         <button class="equip-btn" onclick="equipPet('${escapedKey}')" ${!canEquipMore ? 'disabled' : ''}>
                             ${equippedCount >= pet.count ? 'Hết' : 'Trang Bị'}
                         </button>
-                        }
+                    </div>
+                    <div class="pet-sell-actions" style="margin-top: 8px; display: flex; gap: 5px;">
+                        <button class="sell-btn" onclick="sellPet('${escapedKey}')" style="flex: 1; padding: 6px; background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%); border: none; border-radius: 5px; color: #000; font-weight: bold; cursor: pointer; font-size: 0.85em;">
+                            💰 Bán 1 (1💎)
+                        </button>
+                        ${pet.count > 1 ? `
+                        <button class="sell-btn" onclick="sellAllPets('${escapedKey}')" style="flex: 1; padding: 6px; background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%); border: none; border-radius: 5px; color: white; font-weight: bold; cursor: pointer; font-size: 0.85em;">
+                            🔥 Bán Hết (${pet.count}💎)
+                        </button>
+                        ` : ''}
                     </div>
                 `;
                 
@@ -7995,6 +8851,17 @@
             });
             
             renderEquippedPets();
+        }
+        
+        function getMutationBadge(mutation) {
+            const badges = {
+                'normal': '',
+                'gold': '<div class="mutation-badge gold">🟡 GOLD</div>',
+                'diamond': '<div class="mutation-badge diamond">💎 DIAMOND</div>',
+                'rainbow': '<div class="mutation-badge rainbow">🌈 RAINBOW</div>',
+                'transcendent': '<div class="mutation-badge transcendent">✨ TRANSCENDENT</div>'
+            };
+            return badges[mutation] || '';
         }
 
         function renderEquippedPets() {
@@ -8123,6 +8990,123 @@
             
             alert(`✅ Đã gỡ ${count} pets!`);
         }
+        
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // SELL PET SYSTEM
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        
+        function sellPet(petKey) {
+            console.log(`💰 Attempting to sell pet: ${petKey}`);
+            
+            // Validate pet exists
+            const pet = ownedPets[petKey];
+            if (!pet) {
+                alert('❌ Pet không tồn tại!');
+                return;
+            }
+            
+            // Validate count
+            if (pet.count <= 0) {
+                alert('❌ Không còn pet này để bán!');
+                return;
+            }
+            
+            // Get pet info
+            const petName = pet.baseName || pet.name;
+            const mutation = pet.mutation || 'normal';
+            const mutationName = MUTATION_NAMES[mutation] || mutation;
+            
+            // Confirmation
+            const confirmMsg = `💰 BÁN PET\n\nPet: ${mutationName} ${petName}\nGiá: 1 💎 Diamond\n\nBạn có chắc chắn?`;
+            
+            if (!confirm(confirmMsg)) {
+                return;
+            }
+            
+            // Check if pet is equipped - auto unequip first
+            const equippedIndex = equippedPets.findIndex(p => p.key === petKey);
+            if (equippedIndex !== -1) {
+                // Remove from equipped
+                equippedPets.splice(equippedIndex, 1);
+                console.log(`🔧 Auto-unequipped pet before selling`);
+            }
+            
+            // Sell pet
+            pet.count--;
+            diamonds += 1;
+            
+            // Remove from ownedPets if count reaches 0
+            if (pet.count <= 0) {
+                delete ownedPets[petKey];
+                console.log(`🗑️ Removed pet from inventory (count = 0)`);
+            }
+            
+            // Update displays
+            renderPets();
+            updateDisplay();
+            updateTradeUpPetList();
+            saveToLocalStorage(true);
+            
+            // Success message
+            alert(`✅ Đã bán!\n\n${mutationName} ${petName}\n+1 💎 Diamond\n\nTổng Diamonds: ${formatNumber(diamonds)}`);
+            
+            console.log(`✅ Pet sold successfully`);
+            console.log(`💎 Diamonds: ${diamonds}`);
+        }
+        
+        function sellAllPets(petKey) {
+            console.log(`💰 Attempting to sell ALL pets: ${petKey}`);
+            
+            // Validate pet exists
+            const pet = ownedPets[petKey];
+            if (!pet) {
+                alert('❌ Pet không tồn tại!');
+                return;
+            }
+            
+            // Validate count
+            if (pet.count <= 0) {
+                alert('❌ Không còn pet này để bán!');
+                return;
+            }
+            
+            // Get pet info
+            const petName = pet.baseName || pet.name;
+            const mutation = pet.mutation || 'normal';
+            const mutationName = MUTATION_NAMES[mutation] || mutation;
+            const totalValue = pet.count;
+            
+            // Confirmation
+            const confirmMsg = `💰 BÁN TẤT CẢ\n\nPet: ${mutationName} ${petName}\nSố lượng: ${pet.count}\nTổng giá: ${totalValue} 💎 Diamonds\n\n⚠️ Sẽ bán TẤT CẢ ${pet.count} pets!\n\nBạn có chắc chắn?`;
+            
+            if (!confirm(confirmMsg)) {
+                return;
+            }
+            
+            // Unequip all instances of this pet
+            equippedPets = equippedPets.filter(p => p.key !== petKey);
+            console.log(`🔧 Auto-unequipped all instances before selling`);
+            
+            // Sell all pets
+            const soldCount = pet.count;
+            diamonds += soldCount;
+            
+            // Remove from ownedPets
+            delete ownedPets[petKey];
+            console.log(`🗑️ Removed all pets from inventory`);
+            
+            // Update displays
+            renderPets();
+            updateDisplay();
+            updateTradeUpPetList();
+            saveToLocalStorage(true);
+            
+            // Success message
+            alert(`✅ Đã bán tất cả!\n\n${soldCount}x ${mutationName} ${petName}\n+${soldCount} 💎 Diamonds\n\nTổng Diamonds: ${formatNumber(diamonds)}`);
+            
+            console.log(`✅ Sold ${soldCount} pets`);
+            console.log(`💎 Diamonds: ${diamonds}`);
+        }
 
         function getPetMultiplier() {
             let totalMult = 1;
@@ -8130,7 +9114,9 @@
                 // Each equipped pet applies its multiplier based on owned count
                 const ownedPet = ownedPets[pet.key];
                 if (ownedPet) {
-                    totalMult *= Math.pow(pet.multiplier, ownedPet.count);
+                    const mutationMult = MUTATION_MULTIPLIERS[ownedPet.mutation] || 1;
+                    const effectiveMult = pet.multiplier * mutationMult;
+                    totalMult *= Math.pow(effectiveMult, ownedPet.count);
                 }
             });
             return totalMult;
@@ -8141,12 +9127,14 @@
             e.preventDefault();
             e.stopPropagation(); // Stop event bubbling
             
-            if (!canClick || isAfk || isBanned) return;
+            // Anti-cheat DISABLED - allow all clicks
+            // if (!canClick || isAfk || isBanned) return;
+            if (!canClick) return;
             
-            // Kiểm tra auto clicker TRƯỚC khi xử lý click
-            if (checkAutoClicker()) {
-                return; // Dừng ngay nếu phát hiện auto clicker
-            }
+            // Auto-clicker detection DISABLED
+            // if (checkAutoClicker()) {
+            //     return;
+            // }
             
             resetAFKTimer();
             
@@ -8171,7 +9159,9 @@
 
         // Auto clicker
         setInterval(() => {
-            if (autoClickers > 0 && !isAfk && !isBanned) {
+            // Anti-AFK check DISABLED
+            // if (autoClickers > 0 && !isAfk && !isBanned) {
+            if (autoClickers > 0) {
                 const weatherMult = getWeatherMultiplier();
                 const petMult = getPetMultiplier();
                 const totalMultiplier = multiplier * rebirthMultiplier * weatherMult * petMult;
@@ -8196,13 +9186,15 @@
         updateWeatherDisplay();
         renderEggShop();
         renderPets();
+        updateTradeUpPetList(); // Initialize Trade-Up dropdown
 
         // Playtime counter
         playTimeInterval = setInterval(() => {
-            if (!isAfk && !isBanned) {
+            // AFK check DISABLED - always count time
+            // if (!isAfk && !isBanned) {
                 playTime++;
                 updateDisplay();
-            }
+            // }
         }, 1000);
 
         // Event listeners để reset AFK timer
@@ -8211,8 +9203,382 @@
         document.addEventListener('scroll', resetAFKTimer);
         document.addEventListener('touchstart', resetAFKTimer);
 
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        // LOCALSTORAGE AUTO-SAVE SYSTEM
+        // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+        
+        const SAVE_VERSION = '1.0.0';
+        const SAVE_KEY = 'cookieClickerSave';
+        const BACKUP_KEY = 'cookieClickerSaveBackup';
+        let autoSaveInterval = null;
+        let lastSaveTime = 0;
+        
+        // Check if localStorage is available
+        function isLocalStorageAvailable() {
+            try {
+                const test = '__localStorage_test__';
+                localStorage.setItem(test, test);
+                localStorage.removeItem(test);
+                return true;
+            } catch (e) {
+                console.error('localStorage not available:', e);
+                return false;
+            }
+        }
+        
+        // Show save indicator (visual feedback)
+        function showSaveIndicator(success = true) {
+            const indicator = document.createElement('div');
+            indicator.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                padding: 10px 20px;
+                background: ${success ? 'rgba(0, 255, 0, 0.9)' : 'rgba(255, 0, 0, 0.9)'};
+                color: white;
+                border-radius: 8px;
+                font-weight: bold;
+                z-index: 10000;
+                animation: fadeInOut 2s ease-in-out;
+            `;
+            indicator.textContent = success ? '💾 Đã lưu!' : '❌ Lưu thất bại!';
+            document.body.appendChild(indicator);
+            
+            setTimeout(() => {
+                if (indicator.parentNode) {
+                    indicator.parentNode.removeChild(indicator);
+                }
+            }, 2000);
+        }
+        
+        // Validate data before saving (prevent corruption)
+        function validateSaveData(data) {
+            if (!data || typeof data !== 'object') return false;
+            
+            // Check required fields exist
+            const requiredFields = ['coins', 'diamonds', 'clickPower', 'gamePasses'];
+            for (const field of requiredFields) {
+                if (!(field in data)) {
+                    console.error(`Missing required field: ${field}`);
+                    return false;
+                }
+            }
+            
+            // Validate data types
+            if (typeof data.coins !== 'number') return false;
+            if (typeof data.diamonds !== 'number') return false;
+            if (typeof data.gamePasses !== 'object') return false;
+            
+            return true;
+        }
+        
+        // Validate loaded data (prevent crashes)
+        function validateLoadData(data) {
+            if (!data || typeof data !== 'object') return null;
+            
+            // Set safe defaults for missing/invalid values
+            const safeData = {
+                // Core stats
+                coins: typeof data.coins === 'number' ? Math.max(0, data.coins) : 0,
+                diamonds: typeof data.diamonds === 'number' ? Math.max(0, data.diamonds) : 0,
+                tickets: typeof data.tickets === 'number' ? Math.max(0, data.tickets) : 0,
+                goldBars: typeof data.goldBars === 'number' ? Math.max(0, data.goldBars) : 0,
+                
+                // Stats
+                clickPower: typeof data.clickPower === 'number' ? Math.max(1, data.clickPower) : 1,
+                autoClickers: typeof data.autoClickers === 'number' ? Math.max(0, data.autoClickers) : 0,
+                multiplier: typeof data.multiplier === 'number' ? Math.max(1, data.multiplier) : 1,
+                clickCooldown: typeof data.clickCooldown === 'number' ? Math.max(0, data.clickCooldown) : 0.5,
+                
+                // Game state
+                gamePasses: typeof data.gamePasses === 'object' ? data.gamePasses : {},
+                inventory: typeof data.inventory === 'object' ? data.inventory : {
+                    potion_2x: 0,
+                    potion_3x: 0,
+                    potion_4x: 0
+                },
+                ownedPets: Array.isArray(data.ownedPets) ? data.ownedPets : [],
+                equippedPets: Array.isArray(data.equippedPets) ? data.equippedPets : [],
+                
+                // Progress
+                playTime: typeof data.playTime === 'number' ? Math.max(0, data.playTime) : 0,
+                shopDiscount: typeof data.shopDiscount === 'number' ? Math.max(0, data.shopDiscount) : 0,
+                rebirthCount: typeof data.rebirthCount === 'number' ? Math.max(0, data.rebirthCount) : 0,
+                rebirthMultiplier: typeof data.rebirthMultiplier === 'number' ? Math.max(1, data.rebirthMultiplier) : 1,
+                purchaseLimit: typeof data.purchaseLimit === 'number' ? Math.max(1, data.purchaseLimit) : 5,
+                purchaseCounts: typeof data.purchaseCounts === 'object' ? data.purchaseCounts : {},
+                
+                // Misc
+                isAdmin: data.isAdmin === true,
+                weatherNextSpawn: typeof data.weatherNextSpawn === 'number' ? data.weatherNextSpawn : 0,
+                goldCodes: typeof data.goldCodes === 'object' ? data.goldCodes : {},
+                
+                // Shop items
+                shopItems: Array.isArray(data.shopItems) ? data.shopItems : null
+            };
+            
+            return safeData;
+        }
+        
+        // Save game to localStorage
+        function saveToLocalStorage(silent = false) {
+            if (!isLocalStorageAvailable()) {
+                if (!silent) console.error('localStorage not available');
+                return false;
+            }
+            
+            try {
+                // Create backup of current save
+                const currentSave = localStorage.getItem(SAVE_KEY);
+                if (currentSave) {
+                    localStorage.setItem(BACKUP_KEY, currentSave);
+                }
+                
+                // Prepare save data
+                const saveData = {
+                    version: SAVE_VERSION,
+                    saveDate: new Date().toISOString(),
+                    
+                    // Core stats
+                    coins: coins,
+                    diamonds: diamonds,
+                    tickets: tickets,
+                    goldBars: goldBars,
+                    
+                    // Stats
+                    clickPower: clickPower,
+                    autoClickers: autoClickers,
+                    multiplier: multiplier,
+                    clickCooldown: clickCooldown,
+                    
+                    // Game state
+                    gamePasses: gamePasses,
+                    inventory: inventory,
+                    ownedPets: ownedPets,
+                    equippedPets: equippedPets,
+                    
+                    // Progress
+                    playTime: playTime,
+                    shopDiscount: shopDiscount,
+                    rebirthCount: rebirthCount,
+                    rebirthMultiplier: rebirthMultiplier,
+                    purchaseLimit: purchaseLimit,
+                    purchaseCounts: purchaseCounts,
+                    
+                    // Misc
+                    isAdmin: isAdmin,
+                    weatherNextSpawn: weatherNextSpawn,
+                    goldCodes: goldCodes,
+                    
+                    // Shop items (save prices and owned counts)
+                    shopItems: shopItems.map(item => ({
+                        id: item.id,
+                        currentPrice: item.currentPrice,
+                        owned: item.owned
+                    }))
+                };
+                
+                // Validate before saving
+                if (!validateSaveData(saveData)) {
+                    console.error('Save data validation failed');
+                    if (!silent) showSaveIndicator(false);
+                    return false;
+                }
+                
+                // Save to localStorage
+                const saveString = JSON.stringify(saveData);
+                localStorage.setItem(SAVE_KEY, saveString);
+                
+                lastSaveTime = Date.now();
+                
+                if (!silent) {
+                    console.log('✅ Game saved to localStorage');
+                    console.log(`📊 Save size: ${(saveString.length / 1024).toFixed(2)} KB`);
+                    showSaveIndicator(true);
+                }
+                
+                return true;
+                
+            } catch (e) {
+                console.error('❌ Failed to save game:', e);
+                
+                // Handle quota exceeded error
+                if (e.name === 'QuotaExceededError') {
+                    console.error('localStorage quota exceeded!');
+                    // Try to clear backup and save again
+                    try {
+                        localStorage.removeItem(BACKUP_KEY);
+                        const saveString = JSON.stringify({
+                            version: SAVE_VERSION,
+                            saveDate: new Date().toISOString(),
+                            coins, diamonds, tickets, goldBars,
+                            clickPower, autoClickers, multiplier, clickCooldown,
+                            gamePasses, playTime, rebirthCount, rebirthMultiplier
+                        });
+                        localStorage.setItem(SAVE_KEY, saveString);
+                        if (!silent) showSaveIndicator(true);
+                        return true;
+                    } catch (e2) {
+                        console.error('Failed even after clearing backup:', e2);
+                    }
+                }
+                
+                if (!silent) showSaveIndicator(false);
+                return false;
+            }
+        }
+        
+        // Load game from localStorage
+        function loadFromLocalStorage() {
+            if (!isLocalStorageAvailable()) {
+                console.log('localStorage not available, starting fresh');
+                return false;
+            }
+            
+            try {
+                const saveString = localStorage.getItem(SAVE_KEY);
+                
+                if (!saveString) {
+                    console.log('No save found, starting fresh');
+                    return false;
+                }
+                
+                // Parse save data
+                let saveData;
+                try {
+                    saveData = JSON.parse(saveString);
+                } catch (e) {
+                    console.error('Failed to parse save data, trying backup...', e);
+                    
+                    // Try backup
+                    const backupString = localStorage.getItem(BACKUP_KEY);
+                    if (backupString) {
+                        saveData = JSON.parse(backupString);
+                        console.log('✅ Loaded from backup');
+                    } else {
+                        throw new Error('No valid backup found');
+                    }
+                }
+                
+                // Validate loaded data
+                const validData = validateLoadData(saveData);
+                if (!validData) {
+                    console.error('Save data validation failed');
+                    return false;
+                }
+                
+                // Restore core stats
+                coins = validData.coins;
+                diamonds = validData.diamonds;
+                tickets = validData.tickets;
+                goldBars = validData.goldBars;
+                
+                // Restore stats
+                clickPower = validData.clickPower;
+                autoClickers = validData.autoClickers;
+                multiplier = validData.multiplier;
+                clickCooldown = validData.clickCooldown;
+                
+                // Restore game state
+                gamePasses = validData.gamePasses;
+                inventory = validData.inventory;
+                ownedPets = validData.ownedPets;
+                equippedPets = validData.equippedPets;
+                
+                // Restore progress
+                playTime = validData.playTime;
+                shopDiscount = validData.shopDiscount;
+                rebirthCount = validData.rebirthCount;
+                rebirthMultiplier = validData.rebirthMultiplier;
+                purchaseLimit = validData.purchaseLimit;
+                purchaseCounts = validData.purchaseCounts;
+                
+                // Restore misc
+                isAdmin = validData.isAdmin;
+                weatherNextSpawn = validData.weatherNextSpawn;
+                
+                // Restore gold codes
+                if (validData.goldCodes) {
+                    Object.keys(validData.goldCodes).forEach(code => {
+                        if (goldCodes[code]) {
+                            goldCodes[code].used = validData.goldCodes[code].used;
+                        }
+                    });
+                }
+                
+                // Restore shop items
+                if (validData.shopItems) {
+                    validData.shopItems.forEach(savedItem => {
+                        const item = shopItems.find(i => i.id === savedItem.id);
+                        if (item) {
+                            item.currentPrice = savedItem.currentPrice;
+                            item.owned = savedItem.owned;
+                        }
+                    });
+                }
+                
+                // Update all displays
+                updateDisplay();
+                updateWeatherDisplay();
+                updateGamePassUI();
+                renderShop();
+                renderPets();
+                
+                console.log('✅ Game loaded from localStorage');
+                console.log('📅 Save date:', saveData.saveDate);
+                
+                showToast('✅ Đã tải game tự động!', 2000);
+                
+                return true;
+                
+            } catch (e) {
+                console.error('❌ Failed to load game:', e);
+                console.log('Starting fresh game');
+                return false;
+            }
+        }
+        
+        // Clear save data (for testing/reset)
+        function clearLocalStorageSave() {
+            if (!isLocalStorageAvailable()) return;
+            
+            try {
+                localStorage.removeItem(SAVE_KEY);
+                localStorage.removeItem(BACKUP_KEY);
+                console.log('✅ Save data cleared');
+                return true;
+            } catch (e) {
+                console.error('Failed to clear save:', e);
+                return false;
+            }
+        }
+        
+        // Start auto-save system
+        function startAutoSave() {
+            // Auto-save every 10 seconds
+            if (autoSaveInterval) {
+                clearInterval(autoSaveInterval);
+            }
+            
+            autoSaveInterval = setInterval(() => {
+                saveToLocalStorage(true); // Silent save
+            }, 10000);
+            
+            console.log('🔄 Auto-save enabled (every 10 seconds)');
+        }
+        
+        // Stop auto-save
+        function stopAutoSave() {
+            if (autoSaveInterval) {
+                clearInterval(autoSaveInterval);
+                autoSaveInterval = null;
+                console.log('⏸️ Auto-save disabled');
+            }
+        }
+
         // Initialize language on page load
         window.addEventListener('DOMContentLoaded', function() {
+            // Load language preference
             const savedLang = localStorage.getItem('gameLanguage');
             if (savedLang) {
                 setLanguage(savedLang);
@@ -8220,6 +9586,15 @@
                 // Default to English
                 setLanguage('en');
             }
+            
+            // Auto-load save from localStorage
+            loadFromLocalStorage();
+            
+            // Start auto-save system
+            startAutoSave();
+            
+            console.log('🎮 Game initialized');
+            console.log('💾 Auto-save: Enabled');
         });
 
         // ===== MINI GAME - KÉO BÚA BAO =====
