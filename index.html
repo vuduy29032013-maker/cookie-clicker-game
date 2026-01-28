@@ -409,6 +409,61 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.5);
         }
 
+        .status-panel {
+            position: fixed;
+            top: 20px;
+            left: 320px;  /* Right of admin panel */
+            background: linear-gradient(135deg, rgba(0, 20, 40, 0.95) 0%, rgba(0, 40, 80, 0.95) 100%);
+            padding: 15px;
+            border-radius: 12px;
+            border: 2px solid #00d4ff;
+            z-index: 100;
+            max-width: 350px;
+            min-width: 320px;
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .status-category {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #00d4ff;
+        }
+
+        .status-category-title {
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 0.95em;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85em;
+        }
+
+        .status-item:last-child {
+            border-bottom: none;
+        }
+
+        .status-label {
+            color: #a0d4ff;
+        }
+
+        .status-value {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
         .playtime-panel {
             position: fixed;
             top: 20px;
@@ -1140,6 +1195,24 @@
             50% { 
                 box-shadow: 0 0 25px rgba(0,255,255,1);
                 filter: brightness(1.3);
+            }
+        }
+        
+        .mutation-badge.cosmic {
+            background: linear-gradient(135deg, #1a0033 0%, #4b0082 50%, #8a2be2 100%);
+            color: white;
+            box-shadow: 0 0 20px rgba(138,43,226,0.9);
+            animation: mutationFloat 2s ease-in-out infinite, cosmicPulse 3s ease-in-out infinite;
+        }
+        
+        @keyframes cosmicPulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(138,43,226,0.9), 0 0 40px rgba(75,0,130,0.5);
+                filter: brightness(1);
+            }
+            50% { 
+                box-shadow: 0 0 35px rgba(138,43,226,1), 0 0 60px rgba(75,0,130,0.8);
+                filter: brightness(1.4);
             }
         }
 
@@ -3594,6 +3667,11 @@
         ⚙️ <span id="settingsButtonText">Settings</span>
     </button>
 
+    <!-- Status Button (Fixed) -->
+    <button onclick="toggleStatusPanel()" id="statusButton" style="position: fixed; top: 210px; left: 20px; padding: 12px 20px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 12px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em; z-index: 99; box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4); transition: all 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+        📊 <span id="statusButtonText">Status</span>
+    </button>
+
     <!-- AFK Warning -->
     <div class="afk-warning" id="afkWarning">
         ⚠️ AFK Warning: <span id="afkCountdown">60</span>s
@@ -3776,6 +3854,169 @@
         </div>
     </div>
 
+    <!-- Status Panel -->
+    <div class="status-panel" id="statusPanel" style="display: none;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="font-size: 1.2em; font-weight: bold; color: #00d4ff;">📊 Player Status</div>
+            <button onclick="toggleStatusPanel()" style="
+                padding: 5px 15px;
+                background: linear-gradient(135deg, #ff6b6b 0%, #ff4444 100%);
+                border: 2px solid #ff4444;
+                border-radius: 5px;
+                color: white;
+                font-weight: bold;
+                cursor: pointer;
+                font-size: 0.85em;
+            ">❌ Đóng</button>
+        </div>
+
+        <div id="statusContent">
+            <!-- Game Progress -->
+            <div class="status-category">
+                <div class="status-category-title">🎮 Tiến Trình Game</div>
+                <div class="status-item">
+                    <span class="status-label">Total Clicks:</span>
+                    <span class="status-value" id="statusTotalClicks">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Playtime:</span>
+                    <span class="status-value" id="statusPlaytime">0:00:00</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Rebirth Count:</span>
+                    <span class="status-value" id="statusRebirths">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Total Coins Earned:</span>
+                    <span class="status-value" id="statusTotalCoins">0</span>
+                </div>
+            </div>
+
+            <!-- Current Stats -->
+            <div class="status-category">
+                <div class="status-category-title">⚡ Chỉ Số Hiện Tại</div>
+                <div class="status-item">
+                    <span class="status-label">Click Power:</span>
+                    <span class="status-value" id="statusClickPower">1</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Auto Clickers:</span>
+                    <span class="status-value" id="statusAutoClickers">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Multiplier:</span>
+                    <span class="status-value" id="statusMultiplier">1x</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Cooldown:</span>
+                    <span class="status-value" id="statusCooldown">2s</span>
+                </div>
+            </div>
+
+            <!-- Pets -->
+            <div class="status-category">
+                <div class="status-category-title">🐾 Pet System</div>
+                <div class="status-item">
+                    <span class="status-label">Total Pets Owned:</span>
+                    <span class="status-value" id="statusTotalPets">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Pets Equipped:</span>
+                    <span class="status-value" id="statusEquippedPets">0/5</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Total Pet Power:</span>
+                    <span class="status-value" id="statusPetPower">0x</span>
+                </div>
+            </div>
+
+            <!-- Resources -->
+            <div class="status-category">
+                <div class="status-category-title">💎 Tài Nguyên</div>
+                <div class="status-item">
+                    <span class="status-label">Diamonds:</span>
+                    <span class="status-value" id="statusDiamonds">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Tickets:</span>
+                    <span class="status-value" id="statusTickets">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Gold Bars:</span>
+                    <span class="status-value" id="statusGoldBars">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Event 2026 Coins:</span>
+                    <span class="status-value" id="statusEvent2026">0</span>
+                </div>
+            </div>
+
+            <!-- Shop & Upgrades -->
+            <div class="status-category">
+                <div class="status-category-title">🛍️ Shop & Upgrades</div>
+                <div class="status-item">
+                    <span class="status-label">Items Purchased:</span>
+                    <span class="status-value" id="statusItemsPurchased">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Upgrades Owned:</span>
+                    <span class="status-value" id="statusUpgrades">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Game Passes:</span>
+                    <span class="status-value" id="statusGamePasses">0</span>
+                </div>
+            </div>
+
+            <!-- Mini Games -->
+            <div class="status-category">
+                <div class="status-category-title">🎲 Mini Games</div>
+                <div class="status-item">
+                    <span class="status-label">RPS Games Played:</span>
+                    <span class="status-value" id="statusRPSPlayed">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">RPS Wins:</span>
+                    <span class="status-value" id="statusRPSWins">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Spins Used:</span>
+                    <span class="status-value" id="statusSpins">0</span>
+                </div>
+            </div>
+
+            <!-- Weather -->
+            <div class="status-category">
+                <div class="status-category-title">🌦️ Weather System</div>
+                <div class="status-item">
+                    <span class="status-label">Active Weathers:</span>
+                    <span class="status-value" id="statusActiveWeather">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Total Summoned:</span>
+                    <span class="status-value" id="statusTotalWeather">0</span>
+                </div>
+            </div>
+
+            <!-- Event 2026 -->
+            <div class="status-category">
+                <div class="status-category-title">🎊 Event 2026</div>
+                <div class="status-item">
+                    <span class="status-label">Daily Tasks Done:</span>
+                    <span class="status-value" id="statusDailyTasks">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Weekly Tasks Done:</span>
+                    <span class="status-value" id="statusWeeklyTasks">0</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">Special Tasks Done:</span>
+                    <span class="status-value" id="statusSpecialTasks">0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="container">
         <div class="header">
             <h1>🍪 Cookie Clicker</h1>
@@ -3841,6 +4082,179 @@
                     <button class="teleport-btn" onclick="teleportTo('rebirthPanel')">
                         ♻️ Rebirth
                     </button>
+                </div>
+            </div>
+            
+            <!-- EVENT 2026 PANEL -->
+            <div class="shop-section" style="width: 100%; max-width: 1200px; margin: 30px auto; background: linear-gradient(135deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3); border: 3px solid #ffd700; box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);" id="event2026Panel">
+                <h2 class="shop-title" style="font-size: 2.5em; text-shadow: 0 0 10px #ffd700;">🎉 EVENT 2026 - ĂN TẾT VUI VẺ 🎉</h2>
+                
+                <!-- Event Currency Display -->
+                <div style="text-align: center; margin: 20px 0; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 15px;">
+                    <div style="font-size: 2em; font-weight: bold; color: #ffd700;">
+                        🪙 <span id="event2026CoinsDisplay">0</span> Xu 2026
+                    </div>
+                    <div style="margin-top: 15px; font-size: 1.2em; color: #fff;">
+                        ⏰ Task reset sau: <span id="taskResetTimer" style="color: #ffd700; font-weight: bold;">--:--:--</span>
+                    </div>
+                </div>
+                
+                <!-- Tasks Section -->
+                <div style="margin: 20px 0;">
+                    <h3 style="text-align: center; font-size: 1.8em; margin-bottom: 15px;">📋 Nhiệm Vụ</h3>
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <button onclick="skipAllTasks()" class="buy-button" style="background: linear-gradient(135deg, #ffd700, #ff8c00); font-size: 1.1em; padding: 12px 30px;">
+                            ⚡ HOÀN THÀNH TẤT CẢ - 599🏆 Gold Bar
+                        </button>
+                    </div>
+                    
+                    <!-- Daily Tasks -->
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="color: #4ecdc4; font-size: 1.3em; margin-bottom: 10px;">⏰ Nhiệm vụ hàng ngày</h4>
+                        <div id="dailyTasks" style="display: grid; gap: 10px;"></div>
+                    </div>
+                    
+                    <!-- Weekly Tasks -->
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="color: #ff6b6b; font-size: 1.3em; margin-bottom: 10px;">📅 Nhiệm vụ hàng tuần</h4>
+                        <div id="weeklyTasks" style="display: grid; gap: 10px;"></div>
+                    </div>
+                    
+                    <!-- Special Tasks -->
+                    <div style="margin-bottom: 20px;">
+                        <h4 style="color: #ffd700; font-size: 1.3em; margin-bottom: 10px;">⭐ Nhiệm vụ đặc biệt</h4>
+                        <div id="specialTasks" style="display: grid; gap: 10px;"></div>
+                    </div>
+                </div>
+                
+                <!-- Event Shop -->
+                <div style="margin: 30px 0;">
+                    <h3 style="text-align: center; font-size: 1.8em; margin-bottom: 15px;">🛍️ Cửa Hàng Event - Vật Phẩm Độc Quyền</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                        
+                        <!-- 1. Pass 2026 -->
+                        <div style="background: rgba(255,215,0,0.2); border: 2px solid #ffd700; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">🎫</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Pass 2026</div>
+                            <div style="color: #aaa; font-size: 0.9em;">x3 Click Power + x2 Auto</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 500 Xu</div>
+                            <button onclick="buyEventItem('pass2026', 500)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 2. Lucky Clover -->
+                        <div style="background: rgba(0,255,0,0.2); border: 2px solid #00ff00; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">🍀</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Lucky Clover</div>
+                            <div style="color: #aaa; font-size: 0.9em;">x2 Luck - Tăng drop rate</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 150 Xu</div>
+                            <button onclick="buyEventItem('luckyClover', 150)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 3. Golden Ticket -->
+                        <div style="background: rgba(255,215,0,0.3); border: 2px solid #ffd700; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">🎟️</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Golden Ticket</div>
+                            <div style="color: #aaa; font-size: 0.9em;">+100 Vé quay miễn phí</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 75 Xu</div>
+                            <button onclick="buyEventItem('goldenTicket', 75)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 4. Mega Coin Bomb -->
+                        <div style="background: rgba(255,165,0,0.2); border: 2px solid #ffa500; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">💣</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Mega Coin Bomb</div>
+                            <div style="color: #aaa; font-size: 0.9em;">+500,000 Coins</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 125 Xu</div>
+                            <button onclick="buyEventItem('megaCoinBomb', 125)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 5. Diamond Rain -->
+                        <div style="background: rgba(0,191,255,0.2); border: 2px solid #00bfff; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">💎</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Diamond Rain</div>
+                            <div style="color: #aaa; font-size: 0.9em;">+200 Diamonds</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 200 Xu</div>
+                            <button onclick="buyEventItem('diamondRain', 200)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 6. Auto Clicker Boost -->
+                        <div style="background: rgba(138,43,226,0.2); border: 2px solid #8a2be2; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">⚡</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Auto Boost x100</div>
+                            <div style="color: #aaa; font-size: 0.9em;">+100 Auto Clickers</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 175 Xu</div>
+                            <button onclick="buyEventItem('autoBoost', 175)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 7. Click Power Potion -->
+                        <div style="background: rgba(255,0,255,0.2); border: 2px solid #ff00ff; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">🧪</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Power Potion</div>
+                            <div style="color: #aaa; font-size: 0.9em;">+200 Click Power</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 150 Xu</div>
+                            <button onclick="buyEventItem('powerPotion', 150)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 8. Speed Master -->
+                        <div style="background: rgba(255,69,0,0.2); border: 2px solid #ff4500; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">🚀</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Speed Master</div>
+                            <div style="color: #aaa; font-size: 0.9em;">Cooldown -0.3s (Min: 0.01s)</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 250 Xu</div>
+                            <button onclick="buyEventItem('speedMaster', 250)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 9. Multiplier Orb -->
+                        <div style="background: rgba(255,215,0,0.3); border: 2px solid #ffd700; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">🔮</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Multiplier Orb</div>
+                            <div style="color: #aaa; font-size: 0.9em;">+10x Multiplier</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 300 Xu</div>
+                            <button onclick="buyEventItem('multiplierOrb', 300)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 10. Pet Slot Expander -->
+                        <div style="background: rgba(50,205,50,0.2); border: 2px solid #32cd32; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">🐾</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Pet Slot +1</div>
+                            <div style="color: #aaa; font-size: 0.9em;">Thêm 1 slot equipped pet</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 400 Xu</div>
+                            <button onclick="buyEventItem('petSlot', 400)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 11. Rebirth Booster -->
+                        <div style="background: rgba(255,20,147,0.2); border: 2px solid #ff1493; border-radius: 10px; padding: 15px; text-align: center;">
+                            <div style="font-size: 2em;">♻️</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Rebirth Booster</div>
+                            <div style="color: #aaa; font-size: 0.9em;">+2x Rebirth Multiplier</div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0;">🪙 450 Xu</div>
+                            <button onclick="buyEventItem('rebirthBooster', 450)" class="buy-button">Mua</button>
+                        </div>
+                        
+                        <!-- 12. Gold Bar Pack -->
+                        <div style="background: linear-gradient(135deg, #ffd700, #ff8c00); border: 3px solid #ff4500; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 0 20px rgba(255,69,0,0.6);">
+                            <div style="font-size: 2em;">🏆</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0; color: #fff;">Gold Bar x50</div>
+                            <div style="color: #fff; font-size: 0.9em;">50 Thỏi Vàng - Siêu hiếm!</div>
+                            <div style="color: #fff; font-weight: bold; margin: 10px 0; font-size: 1.2em;">🪙 750 Xu</div>
+                            <button onclick="buyEventItem('goldBarPack', 750)" class="buy-button" style="background: linear-gradient(135deg, #ff4500, #ff1493);">Mua</button>
+                        </div>
+                        
+                        <!-- Event Egg 2026 -->
+                        <div style="background: linear-gradient(135deg, #ff6b6b, #feca57); border: 3px solid #ffd700; border-radius: 10px; padding: 15px; text-align: center; box-shadow: 0 0 20px rgba(255,215,0,0.6);">
+                            <div style="font-size: 2em;">🥚✨</div>
+                            <div style="font-weight: bold; font-size: 1.2em; margin: 10px 0;">Trứng 2026</div>
+                            <div style="color: #fff; font-size: 0.85em; line-height: 1.4;">
+                                🐱 Cat: 50% (x2)<br>
+                                🐺 Wolf: 25% (x5)<br>
+                                🦅 Bird: 24% (x5.5)<br>
+                                🐲 Dragon: 1% (x10 + 1💎/phút)
+                            </div>
+                            <div style="color: #ffd700; font-weight: bold; margin: 10px 0; font-size: 1.1em;">🪙 100 Xu</div>
+                            <button onclick="buyEventEgg()" class="buy-button" style="background: linear-gradient(135deg, #ff6b6b, #feca57); font-weight: bold;">Mở Trứng!</button>
+                        </div>
+                        
+                    </div>
                 </div>
             </div>
             
@@ -4374,6 +4788,10 @@
                                 <div style="font-weight: bold;">✨ Transcendent</div>
                                 <div style="font-size: 0.9em;">x5 chỉ số</div>
                             </div>
+                            <div style="padding: 8px; background: linear-gradient(135deg, #1a0033 0%, #4b0082 50%, #8a2be2 100%); border-radius: 8px; text-align: center;">
+                                <div style="font-weight: bold;">🌌 Cosmic</div>
+                                <div style="font-size: 0.9em;">x10 chỉ số</div>
+                            </div>
                         </div>
                     </div>
 
@@ -4394,10 +4812,11 @@
                             </label>
                             <select id="tradeUpMutation" onchange="updateTradeUpDisplay()" style="width: 100%; padding: 10px; border-radius: 8px; font-size: 1em; background: #1a1a2e; color: white; border: 2px solid #0f3460;">
                                 <option value="">-- Chọn Cấp Độ --</option>
-                                <option value="normal">⚪ Normal (→ Gold)</option>
-                                <option value="gold">🟡 Gold (→ Diamond)</option>
-                                <option value="diamond">💎 Diamond (→ Rainbow)</option>
-                                <option value="rainbow">🌈 Rainbow (→ Transcendent)</option>
+                                <option value="normal">⚪ Normal (→ Gold) - 90%</option>
+                                <option value="gold">🟡 Gold (→ Diamond) - 75%</option>
+                                <option value="diamond">💎 Diamond (→ Rainbow) - 50%</option>
+                                <option value="rainbow">🌈 Rainbow (→ Transcendent) - 35%</option>
+                                <option value="transcendent">✨ Transcendent (→ Cosmic) - 25%</option>
                             </select>
                         </div>
 
@@ -4406,7 +4825,7 @@
                         </div>
 
                         <button id="tradeUpButton" onclick="attemptTradeUp()" disabled style="width: 100%; padding: 15px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 10px; color: white; font-weight: bold; font-size: 1.1em; cursor: pointer; opacity: 0.5;">
-                            🔄 TRADE-UP (25% Thành Công)
+                            🔄 TRADE-UP
                         </button>
                     </div>
                 </div>
@@ -4827,7 +5246,8 @@
             superDiamond: false, // 🌟 Super Pass - Diamond version
             starter: false,      // 💎 Starter Boost - Diamond Pass
             insane: false,       // 🔥 Insane Clicker - Diamond Pass
-            transcendent: false  // 🌈 Transcendent - Diamond Pass
+            transcendent: false, // 🌈 Transcendent - Diamond Pass
+            event2026: false     // 🎉 Event 2026 Pass - x3 Click + x2 Auto
         };
         let inventory = {
             potion_2x: 0,
@@ -4860,6 +5280,76 @@
         let diamonds = 0;
         let tickets = 0; // Vé quay
         let goldBars = 0; // Thỏi vàng - Premium currency
+        
+        // ===== TELEPORT SYSTEM =====
+        let teleportPrice = 1; // Giá ban đầu để teleport
+        
+        // ===== EVENT 2026 SYSTEM =====
+        let event2026Coins = 0; // Xu event 2026
+        let lastTaskReset = Date.now(); // Thời gian reset task lần cuối
+        let nextTaskReset = Date.now() + (24 * 60 * 60 * 1000); // Reset sau 24h
+
+        // ===== TRACKING STATS =====
+        let totalClicks = 0;
+        let totalCoinsEarned = 0;
+        let totalSpins = 0;
+        let totalWeatherSummoned = 0;
+        let rpsStats = {
+            gamesPlayed: 0,
+            wins: 0,
+            losses: 0,
+            draws: 0
+        };
+        
+        let event2026Tasks = {
+            // Daily Tasks - increased rewards
+            click100: { name: 'Click 100 lần', target: 100, progress: 0, reward: 20, completed: false, type: 'daily' },
+            earn1000: { name: 'Kiếm 1,000 coins', target: 1000, progress: 0, reward: 30, completed: false, type: 'daily' },
+            buyShop5: { name: 'Mua 5 items từ shop', target: 5, progress: 0, reward: 40, completed: false, type: 'daily' },
+            
+            // Weekly Tasks - increased rewards
+            click10000: { name: 'Click 10,000 lần', target: 10000, progress: 0, reward: 200, completed: false, type: 'weekly' },
+            earn100k: { name: 'Kiếm 100,000 coins', target: 100000, progress: 0, reward: 300, completed: false, type: 'weekly' },
+            openEgg10: { name: 'Mở 10 trứng', target: 10, progress: 0, reward: 400, completed: false, type: 'weekly' },
+            
+            // Special Tasks - increased rewards
+            rebirth1: { name: 'Rebirth 1 lần', target: 1, progress: 0, reward: 1000, completed: false, type: 'special' },
+            getPet: { name: 'Có 10 pets', target: 10, progress: 0, reward: 600, completed: false, type: 'special' },
+            playTime60: { name: 'Chơi 60 phút', target: 3600, progress: 0, reward: 500, completed: false, type: 'special' }
+        };
+        
+        // Event 2026 Egg Pets
+        const EVENT_2026_PETS = [
+            { 
+                name: 'New Year Cat', 
+                icon: '🐱', 
+                multiplier: 2, 
+                chance: 50,
+                description: 'x2 Click Power'
+            },
+            { 
+                name: 'Star Wolf', 
+                icon: '🐺', 
+                multiplier: 5, 
+                chance: 25,
+                description: 'x5 Click Power'
+            },
+            { 
+                name: 'Bird New Year', 
+                icon: '🦅', 
+                multiplier: 5.5, 
+                chance: 24,
+                description: 'x5.5 Click Power'
+            },
+            { 
+                name: 'Dragon New Year', 
+                icon: '🐲', 
+                multiplier: 10, 
+                chance: 1,
+                description: 'x10 Click Power + 1💎/phút',
+                special: 'diamond_generator'
+            }
+        ];
         
         // Language System
         let currentLanguage = 'en'; // Default: English
@@ -8454,6 +8944,7 @@
             if (activeWeathers.includes(type)) return; // Already active
             
             activeWeathers.push(type);
+            totalWeatherSummoned++; // Track weather summons
             const config = weatherConfig[type];
             weatherTimers[type] = config.duration;
             
@@ -9127,6 +9618,9 @@
                 
                 purchaseCounts[item.id] = currentPurchases + 1;
                 
+                // Update event task
+                updateEventTask('buyShop5', 1);
+                
                 updateDisplay();
                 renderShop();
             }
@@ -9180,6 +9674,75 @@
             }
         }
 
+        function toggleStatusPanel() {
+            const panel = document.getElementById('statusPanel');
+            if (panel.style.display === 'none' || !panel.style.display) {
+                panel.style.display = 'block';
+                updateStatusPanel();
+            } else {
+                panel.style.display = 'none';
+            }
+        }
+
+        function updateStatusPanel() {
+            // Game Progress
+            document.getElementById('statusTotalClicks').textContent = formatNumber(totalClicks || 0);
+            document.getElementById('statusPlaytime').textContent = formatPlaytime(totalPlaytime);
+            document.getElementById('statusRebirths').textContent = formatNumber(rebirthCount);
+            document.getElementById('statusTotalCoins').textContent = formatNumber(totalCoinsEarned || 0);
+
+            // Current Stats
+            document.getElementById('statusClickPower').textContent = formatNumber(clickPower);
+            document.getElementById('statusAutoClickers').textContent = formatNumber(autoClickers);
+            document.getElementById('statusMultiplier').textContent = multiplier + 'x';
+            document.getElementById('statusCooldown').textContent = clickCooldown.toFixed(2) + 's';
+
+            // Pets
+            const totalPets = Object.values(ownedPets).reduce((sum, pet) => sum + (pet.count || 0), 0);
+            const totalPetPower = equippedPets.reduce((sum, pet) => sum + (pet.multiplier || 0), 0);
+            document.getElementById('statusTotalPets').textContent = formatNumber(totalPets);
+            document.getElementById('statusEquippedPets').textContent = equippedPets.length + '/' + MAX_EQUIPPED_PETS;
+            document.getElementById('statusPetPower').textContent = totalPetPower.toFixed(1) + 'x';
+
+            // Resources
+            document.getElementById('statusDiamonds').textContent = formatNumber(diamonds);
+            document.getElementById('statusTickets').textContent = formatNumber(tickets);
+            document.getElementById('statusGoldBars').textContent = formatNumber(goldBars);
+            document.getElementById('statusEvent2026').textContent = formatNumber(event2026Coins);
+
+            // Shop & Upgrades
+            const itemsPurchased = Object.values(shopItems).filter(item => item.owned > 0).length;
+            const upgradesOwned = Object.values(upgrades).filter(upgrade => upgrade.owned).length;
+            const gamePassesOwned = Object.values(gamePasses).filter(pass => pass === true).length;
+            document.getElementById('statusItemsPurchased').textContent = itemsPurchased;
+            document.getElementById('statusUpgrades').textContent = upgradesOwned;
+            document.getElementById('statusGamePasses').textContent = gamePassesOwned;
+
+            // Mini Games
+            document.getElementById('statusRPSPlayed').textContent = formatNumber(rpsStats.gamesPlayed || 0);
+            document.getElementById('statusRPSWins').textContent = formatNumber(rpsStats.wins || 0);
+            document.getElementById('statusSpins').textContent = formatNumber(totalSpins || 0);
+
+            // Weather
+            document.getElementById('statusActiveWeather').textContent = activeWeathers.length;
+            document.getElementById('statusTotalWeather').textContent = formatNumber(totalWeatherSummoned || 0);
+
+            // Event 2026
+            const dailyDone = Object.values(event2026Tasks).filter(t => t.type === 'daily' && t.completed).length;
+            const weeklyDone = Object.values(event2026Tasks).filter(t => t.type === 'weekly' && t.completed).length;
+            const specialDone = Object.values(event2026Tasks).filter(t => t.type === 'special' && t.completed).length;
+            document.getElementById('statusDailyTasks').textContent = dailyDone;
+            document.getElementById('statusWeeklyTasks').textContent = weeklyDone;
+            document.getElementById('statusSpecialTasks').textContent = specialDone;
+        }
+
+        function formatPlaytime(seconds) {
+            const hours = Math.floor(seconds / 3600);
+            const mins = Math.floor((seconds % 3600) / 60);
+            const secs = seconds % 60;
+            return `${hours}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
         // Security: Anti-debugging
         (function(){
             const _0xd=()=>{const d=new Date();d.setTime(d.getTime()+100);return d;};
@@ -9226,14 +9789,17 @@
         function summonPet(petName, petIcon, petMultiplier) {
             if (!isAdmin) return;
             
-            const petKey = petName;
+            // Use same format as hatchEgg for trade-up compatibility
+            const petKey = petName + '_normal';
             
-            // Add pet to ownedPets
+            // Add pet to ownedPets with baseName and mutation
             if (!ownedPets[petKey]) {
                 ownedPets[petKey] = {
                     name: petName,
+                    baseName: petName,
                     icon: petIcon,
                     multiplier: petMultiplier,
+                    mutation: 'normal',
                     count: 0
                 };
             }
@@ -9242,6 +9808,7 @@
             
             renderPets();
             updateDisplay();
+            updateTradeUpPetList(); // Update trade-up dropdown
             
             alert(`✅ Đã triệu hồi ${petIcon} ${petName} (x${petMultiplier})!`);
         }
@@ -9766,6 +10333,9 @@
             rebirthMultiplier += 0.75;
             purchaseLimit += 5;
             diamonds += 500; // Thêm 500 kim cương
+            
+            // Update event task
+            updateEventTask('rebirth1', 1);
             
             updateDisplay();
             renderShop();
@@ -10344,7 +10914,8 @@
             'gold': 2,
             'diamond': 2.5,
             'rainbow': 3,
-            'transcendent': 5
+            'transcendent': 5,
+            'cosmic': 10
         };
         
         const MUTATION_UPGRADES = {
@@ -10352,7 +10923,17 @@
             'gold': 'diamond',
             'diamond': 'rainbow',
             'rainbow': 'transcendent',
-            'transcendent': null // Max tier
+            'transcendent': 'cosmic',
+            'cosmic': null // Max tier
+        };
+        
+        // Trade-up success rates for each tier
+        const TRADE_UP_SUCCESS_RATES = {
+            'normal': 0.90,      // 90% normal -> gold
+            'gold': 0.75,        // 75% gold -> diamond
+            'diamond': 0.50,     // 50% diamond -> rainbow
+            'rainbow': 0.35,     // 35% rainbow -> transcendent
+            'transcendent': 0.25 // 25% transcendent -> cosmic
         };
         
         const MUTATION_NAMES = {
@@ -10360,7 +10941,8 @@
             'gold': '🟡 Gold',
             'diamond': '💎 Diamond',
             'rainbow': '🌈 Rainbow',
-            'transcendent': '✨ Transcendent'
+            'transcendent': '✨ Transcendent',
+            'cosmic': '🌌 Cosmic'
         };
         
         function updateTradeUpPetList() {
@@ -10372,12 +10954,19 @@
             // Get unique base pet names
             const baseNames = new Set();
             Object.values(ownedPets).forEach(pet => {
-                if (pet.baseName) baseNames.add(pet.baseName);
+                // Use baseName if available, otherwise use name
+                const displayName = pet.baseName || pet.name;
+                if (displayName && pet.count > 0) {
+                    baseNames.add(displayName);
+                }
             });
             
-            baseNames.forEach(name => {
+            // Sort and add to dropdown
+            Array.from(baseNames).sort().forEach(name => {
                 select.innerHTML += `<option value="${name}">${name}</option>`;
             });
+            
+            console.log('Trade-Up Pet List Updated:', Array.from(baseNames));
         }
         
         function updateTradeUpDisplay() {
@@ -10414,13 +11003,17 @@
                 button.disabled = true;
                 button.style.opacity = '0.5';
             } else {
+                const successRate = TRADE_UP_SUCCESS_RATES[mutation] || 0.25;
+                const successPercent = Math.round(successRate * 100);
+                const failPercent = 100 - successPercent;
+                
                 statusDiv.innerHTML = `
                     <div style="color: #00ff00;">
                         ✅ Đủ điều kiện!<br>
                         Sẽ dùng: 5x ${MUTATION_NAMES[mutation]} ${petType}<br>
                         Nâng lên: ${MUTATION_NAMES[nextMutation]} ${petType}<br>
                         <br>
-                        <div style="color: #ffd700;">Tỉ lệ: 25% Thành công | 75% Thất bại</div>
+                        <div style="color: #ffd700;">Tỉ lệ: ${successPercent}% Thành công | ${failPercent}% Thất bại</div>
                         <div style="color: #ff6b6b; font-size: 0.9em;">Thất bại = Mất tất cả 5 pets!</div>
                     </div>
                 `;
@@ -10453,8 +11046,13 @@
                 return;
             }
             
+            // Get success rate for this tier
+            const successRate = TRADE_UP_SUCCESS_RATES[mutation] || 0.25;
+            const successPercent = Math.round(successRate * 100);
+            const failPercent = 100 - successPercent;
+            
             // Confirmation
-            const confirmMsg = `🔄 XÁC NHẬN TRADE-UP\n\nSẽ dùng: 5x ${MUTATION_NAMES[mutation]} ${petType}\nNâng lên: 1x ${MUTATION_NAMES[nextMutation]} ${petType}\n\n⚠️ TỈ LỆ:\n✅ Thành công: 25%\n❌ Thất bại: 75% (MẤT TẤT CẢ 5 PETS)\n\nBạn có chắc chắn?`;
+            const confirmMsg = `🔄 XÁC NHẬN TRADE-UP\n\nSẽ dùng: 5x ${MUTATION_NAMES[mutation]} ${petType}\nNâng lên: 1x ${MUTATION_NAMES[nextMutation]} ${petType}\n\n⚠️ TỈ LỆ:\n✅ Thành công: ${successPercent}%\n❌ Thất bại: ${failPercent}% (MẤT TẤT CẢ 5 PETS)\n\nBạn có chắc chắn?`;
             
             if (!confirm(confirmMsg)) {
                 return;
@@ -10466,26 +11064,51 @@
                 delete ownedPets[petKey];
             }
             
-            // Roll for success (25% chance)
-            const success = Math.random() < 0.25;
+            // Roll for success with dynamic rate
+            const success = Math.random() < successRate;
             
             if (success) {
                 // Success! Add upgraded pet
                 const newPetKey = petType + '_' + nextMutation;
                 if (!ownedPets[newPetKey]) {
-                    // Create new entry based on original pet
-                    const basePet = Object.values(ownedPets).find(p => p.baseName === petType) || 
-                                   Object.values(ownedPets).find(p => p.name && p.name.includes(petType));
+                    // Find base pet info - look for any pet with matching baseName or name
+                    let basePet = null;
+                    
+                    // Method 1: Find by baseName
+                    basePet = Object.values(ownedPets).find(p => (p.baseName || p.name) === petType);
+                    
+                    // Method 2: Find from current mutation if still exists
+                    if (!basePet && ownedPets[petKey]) {
+                        basePet = ownedPets[petKey];
+                    }
+                    
+                    // Method 3: Search through all pets for matching name
+                    if (!basePet) {
+                        for (const pet of Object.values(ownedPets)) {
+                            if ((pet.baseName === petType) || (pet.name === petType)) {
+                                basePet = pet;
+                                break;
+                            }
+                        }
+                    }
                     
                     if (basePet) {
                         ownedPets[newPetKey] = {
-                            ...basePet,
+                            key: newPetKey,
+                            name: basePet.name,
                             baseName: petType,
+                            icon: basePet.icon,
+                            multiplier: basePet.multiplier,
                             mutation: nextMutation,
-                            count: 0
+                            count: 0,
+                            special: basePet.special || null,
+                            event: basePet.event || null
                         };
+                        console.log('✅ Created new pet entry:', newPetKey, ownedPets[newPetKey]);
                     } else {
                         alert('❌ Lỗi: Không tìm thấy thông tin pet gốc!');
+                        console.error('Failed to find base pet for:', petType);
+                        console.log('Available pets:', Object.keys(ownedPets));
                         return;
                     }
                 }
@@ -10632,7 +11255,8 @@
                 'gold': '<div class="mutation-badge gold">🟡 GOLD</div>',
                 'diamond': '<div class="mutation-badge diamond">💎 DIAMOND</div>',
                 'rainbow': '<div class="mutation-badge rainbow">🌈 RAINBOW</div>',
-                'transcendent': '<div class="mutation-badge transcendent">✨ TRANSCENDENT</div>'
+                'transcendent': '<div class="mutation-badge transcendent">✨ TRANSCENDENT</div>',
+                'cosmic': '<div class="mutation-badge cosmic">🌌 COSMIC</div>'
             };
             return badges[mutation] || '';
         }
@@ -10914,8 +11538,25 @@
             // Áp dụng multiplier từ weather và pets
             const weatherMult = getWeatherMultiplier();
             const petMult = getPetMultiplier();
-            const totalMultiplier = multiplier * rebirthMultiplier * weatherMult * petMult;
-            coins += clickPower * totalMultiplier;
+            
+            // Event 2026 Pass bonus
+            let event2026Mult = 1;
+            if (gamePasses.event2026) event2026Mult = 3;
+            
+            const totalMultiplier = multiplier * rebirthMultiplier * weatherMult * petMult * event2026Mult;
+            const earned = clickPower * totalMultiplier;
+            coins += earned;
+            
+            // Track stats
+            totalClicks++;
+            totalCoinsEarned += earned;
+            
+            // Update event tasks
+            updateEventTask('click100', 1);
+            updateEventTask('click10000', 1);
+            updateEventTask('earn1000', earned);
+            updateEventTask('earn100k', earned);
+            
             updateDisplay();
             renderShop();
             updateRebirthUI();
@@ -10937,8 +11578,22 @@
             if (autoClickers > 0) {
                 const weatherMult = getWeatherMultiplier();
                 const petMult = getPetMultiplier();
+                
+                // Event 2026 Pass bonus for auto
+                let event2026AutoMult = 1;
+                if (gamePasses.event2026) event2026AutoMult = 2;
+                
                 const totalMultiplier = multiplier * rebirthMultiplier * weatherMult * petMult;
-                coins += autoClickers * totalMultiplier;
+                const earned = autoClickers * totalMultiplier * event2026AutoMult;
+                coins += earned;
+                
+                // Track stats
+                totalCoinsEarned += earned;
+                
+                // Update event tasks
+                updateEventTask('earn1000', earned);
+                updateEventTask('earn100k', earned);
+                
                 updateDisplay();
                 renderShop();
                 updateRebirthUI();
@@ -10960,12 +11615,30 @@
         renderEggShop();
         renderPets();
         updateTradeUpPetList(); // Initialize Trade-Up dropdown
+        updateTeleportPrices(); // Initialize teleport prices display
+        updateEventDisplay(); // Initialize event 2026 display
+        renderEventTasks(); // Render event tasks
+        initDragonGenerators(); // Start dragon generators
 
         // Playtime counter
         playTimeInterval = setInterval(() => {
             // AFK check DISABLED - always count time
             // if (!isAfk && !isBanned) {
                 playTime++;
+                
+                // Update event tasks
+                updateEventTask('playTime60', 1);
+                
+                // Update pet count task
+                const totalPets = Object.values(ownedPets).reduce((sum, pet) => sum + pet.count, 0);
+                if (event2026Tasks.getPet && !event2026Tasks.getPet.completed) {
+                    event2026Tasks.getPet.progress = totalPets;
+                    renderEventTasks();
+                }
+                
+                // Update task reset timer
+                updateTaskResetTimer();
+                
                 updateDisplay();
             // }
         }, 1000);
@@ -11056,6 +11729,13 @@
                 diamonds: typeof data.diamonds === 'number' ? Math.max(0, data.diamonds) : 0,
                 tickets: typeof data.tickets === 'number' ? Math.max(0, data.tickets) : 0,
                 goldBars: typeof data.goldBars === 'number' ? Math.max(0, data.goldBars) : 0,
+                teleportPrice: typeof data.teleportPrice === 'number' ? Math.max(1, data.teleportPrice) : 1,
+                
+                // Event 2026
+                event2026Coins: typeof data.event2026Coins === 'number' ? Math.max(0, data.event2026Coins) : 0,
+                event2026Tasks: typeof data.event2026Tasks === 'object' ? data.event2026Tasks : null,
+                lastTaskReset: typeof data.lastTaskReset === 'number' ? data.lastTaskReset : Date.now(),
+                nextTaskReset: typeof data.nextTaskReset === 'number' ? data.nextTaskReset : Date.now() + (24 * 60 * 60 * 1000),
                 
                 // Stats
                 clickPower: typeof data.clickPower === 'number' ? Math.max(1, data.clickPower) : 1,
@@ -11070,7 +11750,7 @@
                     potion_3x: 0,
                     potion_4x: 0
                 },
-                ownedPets: Array.isArray(data.ownedPets) ? data.ownedPets : [],
+                ownedPets: typeof data.ownedPets === 'object' && data.ownedPets !== null && !Array.isArray(data.ownedPets) ? data.ownedPets : {},
                 equippedPets: Array.isArray(data.equippedPets) ? data.equippedPets : [],
                 
                 // Progress
@@ -11117,6 +11797,13 @@
                     diamonds: diamonds,
                     tickets: tickets,
                     goldBars: goldBars,
+                    teleportPrice: teleportPrice,
+                    
+                    // Event 2026
+                    event2026Coins: event2026Coins,
+                    event2026Tasks: event2026Tasks,
+                    lastTaskReset: lastTaskReset,
+                    nextTaskReset: nextTaskReset,
                     
                     // Stats
                     clickPower: clickPower,
@@ -11143,6 +11830,13 @@
                     weatherNextSpawn: weatherNextSpawn,
                     goldCodes: goldCodes,
                     musicUnlocked: musicUnlocked,
+                    
+                    // Tracking Stats
+                    totalClicks: totalClicks,
+                    totalCoinsEarned: totalCoinsEarned,
+                    totalSpins: totalSpins,
+                    totalWeatherSummoned: totalWeatherSummoned,
+                    rpsStats: rpsStats,
                     
                     // Shop items (save prices and owned counts)
                     shopItems: shopItems.map(item => ({
@@ -11246,6 +11940,24 @@
                 diamonds = validData.diamonds;
                 tickets = validData.tickets;
                 goldBars = validData.goldBars;
+                teleportPrice = validData.teleportPrice;
+                
+                // Restore event 2026
+                event2026Coins = validData.event2026Coins;
+                lastTaskReset = validData.lastTaskReset;
+                nextTaskReset = validData.nextTaskReset;
+                
+                if (validData.event2026Tasks) {
+                    // Merge saved tasks with default tasks (preserve structure)
+                    for (const [key, task] of Object.entries(validData.event2026Tasks)) {
+                        if (event2026Tasks[key]) {
+                            event2026Tasks[key] = { ...event2026Tasks[key], ...task };
+                        }
+                    }
+                }
+                
+                // Check if tasks need reset after loading
+                checkTaskReset();
                 
                 // Restore stats
                 clickPower = validData.clickPower;
@@ -11258,6 +11970,38 @@
                 inventory = validData.inventory;
                 ownedPets = validData.ownedPets;
                 equippedPets = validData.equippedPets;
+                
+                // MIGRATION: Convert old pets to new format with baseName and mutation
+                const migratedPets = {};
+                for (const [key, pet] of Object.entries(ownedPets)) {
+                    if (!pet.baseName) {
+                        // Old pet format detected - migrate to new format
+                        const newKey = key.includes('_') ? key : `${key}_normal`;
+                        const baseName = key.replace(/_.*$/, ''); // Remove mutation suffix if exists
+                        
+                        migratedPets[newKey] = {
+                            ...pet,
+                            baseName: baseName,
+                            mutation: newKey.includes('_') ? newKey.split('_')[1] : 'normal'
+                        };
+                        
+                        console.log(`✅ Migrated pet: ${key} -> ${newKey}`, migratedPets[newKey]);
+                    } else {
+                        // Already new format
+                        migratedPets[key] = pet;
+                    }
+                }
+                ownedPets = migratedPets;
+                
+                // Migrate equipped pets keys
+                equippedPets = equippedPets.map(petKey => {
+                    if (petKey && !petKey.includes('_normal')) {
+                        return `${petKey}_normal`;
+                    }
+                    return petKey;
+                }).filter(Boolean);
+                
+                console.log('✅ Pet migration completed. Total pets:', Object.keys(ownedPets).length);
                 
                 // Restore progress
                 playTime = validData.playTime;
@@ -11272,10 +12016,26 @@
                 weatherNextSpawn = validData.weatherNextSpawn;
                 musicUnlocked = validData.musicUnlocked || false;
                 
+                // Restore tracking stats
+                totalClicks = validData.totalClicks || 0;
+                totalCoinsEarned = validData.totalCoinsEarned || 0;
+                totalSpins = validData.totalSpins || 0;
+                totalWeatherSummoned = validData.totalWeatherSummoned || 0;
+                rpsStats = validData.rpsStats || { gamesPlayed: 0, wins: 0, losses: 0, draws: 0 };
+                
                 // Update music UI if unlocked
                 if (musicUnlocked) {
                     document.getElementById('musicControls').style.display = 'block';
                     document.getElementById('unlockMusicBtn').style.display = 'none';
+                }
+                
+                // Restore music volume
+                const savedVolume = localStorage.getItem('musicVolume');
+                if (savedVolume) {
+                    const volumeSlider = document.querySelector('input[type="range"]');
+                    if (volumeSlider) {
+                        volumeSlider.value = savedVolume;
+                    }
                 }
                 
                 // Restore gold codes
@@ -11304,6 +12064,11 @@
                 updateGamePassUI();
                 renderShop();
                 renderPets();
+                updateTradeUpPetList(); // Update trade-up dropdown after loading pets
+                updateTeleportPrices(); // Update teleport prices after loading
+                updateEventDisplay(); // Update event 2026 display
+                renderEventTasks(); // Render event tasks
+                initDragonGenerators(); // Start dragon diamond generators
                 
                 console.log('✅ Game loaded from localStorage');
                 console.log('📅 Save date:', saveData.saveDate);
@@ -11464,8 +12229,13 @@
             const botChoiceName = choiceNames[botChoice];
             const playerChoiceName = choiceNames[choice];
             let result = '';
+            
+            // Track game played
+            rpsStats.gamesPlayed++;
+            
             if (choice === botChoice) {
                 result = 'Hòa';
+                rpsStats.draws++;
             } else if (
                 (choice === 'rock' && botChoice === 'scissors') ||
                 (choice === 'paper' && botChoice === 'rock') ||
@@ -11473,8 +12243,10 @@
             ) {
                 result = 'Thắng';
                 currentWins++;
+                rpsStats.wins++;
             } else {
                 result = 'Thua';
+                rpsStats.losses++;
             }
             document.getElementById('gameButtons').style.display = 'none';
             document.getElementById('gameResult').style.display = 'block';
@@ -11778,6 +12550,7 @@
                 return;
             }
             tickets -= times;
+            totalSpins += times; // Track spins
             isSpinning = true;
             document.getElementById('spin1Btn').disabled = true;
             document.getElementById('spin10Btn').disabled = true;
@@ -11956,6 +12729,12 @@
         // ═══════════════════════════════════════════════════════
         
         function teleportTo(sectionId) {
+            // Kiểm tra đủ tiền
+            if (coins < teleportPrice) {
+                showToast(`❌ Không đủ tiền! Cần ${formatNumber(teleportPrice)} coins`, 2500);
+                return;
+            }
+            
             let targetElement;
             
             // Map section IDs to actual element IDs
@@ -11974,6 +12753,18 @@
             targetElement = document.getElementById(mappedId);
             
             if (targetElement) {
+                // Trừ tiền
+                coins -= teleportPrice;
+                
+                // Tăng giá x2
+                const oldPrice = teleportPrice;
+                teleportPrice *= 2;
+                
+                // Cập nhật hiển thị
+                updateDisplay();
+                updateTeleportPrices();
+                saveToLocalStorage(true);
+                
                 // Smooth scroll to target
                 targetElement.scrollIntoView({ 
                     behavior: 'smooth', 
@@ -11990,10 +12781,24 @@
                     targetElement.style.boxShadow = '';
                 }, 600);
                 
-                showToast('✅ Đã dịch chuyển!', 1500);
+                showToast(`✅ Đã dịch chuyển! -${formatNumber(oldPrice)} coins\n💰 Giá mới: ${formatNumber(teleportPrice)} coins`, 2500);
             } else {
                 showToast('❌ Không tìm thấy vị trí!', 2000);
             }
+        }
+        
+        // Cập nhật giá hiển thị trên các nút teleport
+        function updateTeleportPrices() {
+            const teleportButtons = document.querySelectorAll('.teleport-btn');
+            teleportButtons.forEach(btn => {
+                const originalText = btn.getAttribute('data-original-text');
+                if (!originalText) {
+                    // Lưu text gốc lần đầu
+                    btn.setAttribute('data-original-text', btn.textContent.trim());
+                }
+                const baseText = btn.getAttribute('data-original-text');
+                btn.innerHTML = `${baseText}<br><span style="font-size: 0.85em; color: #ffd700;">💰 ${formatNumber(teleportPrice)} coins</span>`;
+            });
         }
         
         // ═══════════════════════════════════════════════════════
@@ -12066,10 +12871,12 @@
             if (backgroundMusic.paused) {
                 backgroundMusic.play();
                 document.getElementById('playPauseBtn').textContent = '⏸️ Pause';
+                localStorage.setItem('musicPlaying', 'true');
                 showToast('▶️ Đang phát nhạc...', 1500);
             } else {
                 backgroundMusic.pause();
                 document.getElementById('playPauseBtn').textContent = '▶️ Play';
+                localStorage.setItem('musicPlaying', 'false');
                 showToast('⏸️ Đã tạm dừng', 1500);
             }
         }
@@ -12079,6 +12886,7 @@
                 backgroundMusic.pause();
                 backgroundMusic.currentTime = 0;
                 document.getElementById('playPauseBtn').textContent = '▶️ Play';
+                localStorage.setItem('musicPlaying', 'false');
                 showToast('⏹️ Đã dừng nhạc', 1500);
             }
         }
@@ -12086,6 +12894,422 @@
         function updateVolume(value) {
             if (backgroundMusic) {
                 backgroundMusic.volume = value / 100;
+                localStorage.setItem('musicVolume', value);
+            }
+        }
+        
+        // ═══════════════════════════════════════════════════════
+        // EVENT 2026 SYSTEM
+        // ═══════════════════════════════════════════════════════
+        
+        // Render event tasks
+        function renderEventTasks() {
+            const dailyContainer = document.getElementById('dailyTasks');
+            const weeklyContainer = document.getElementById('weeklyTasks');
+            const specialContainer = document.getElementById('specialTasks');
+            
+            if (!dailyContainer || !weeklyContainer || !specialContainer) return;
+            
+            dailyContainer.innerHTML = '';
+            weeklyContainer.innerHTML = '';
+            specialContainer.innerHTML = '';
+            
+            for (const [key, task] of Object.entries(event2026Tasks)) {
+                const taskEl = document.createElement('div');
+                taskEl.style.cssText = `
+                    background: ${task.completed ? 'rgba(0,255,0,0.2)' : 'rgba(255,255,255,0.1)'};
+                    border: 2px solid ${task.completed ? '#00ff00' : 'rgba(255,255,255,0.3)'};
+                    border-radius: 10px;
+                    padding: 15px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                `;
+                
+                const progress = Math.min(100, (task.progress / task.target) * 100);
+                
+                taskEl.innerHTML = `
+                    <div style="flex: 1; min-width: 200px;">
+                        <div style="font-weight: bold; font-size: 1.1em;">${task.completed ? '✅' : '⏳'} ${task.name}</div>
+                        <div style="color: #aaa; font-size: 0.9em; margin-top: 5px;">
+                            Tiến độ: ${formatNumber(task.progress)} / ${formatNumber(task.target)}
+                        </div>
+                        <div style="background: rgba(0,0,0,0.3); height: 8px; border-radius: 4px; margin-top: 8px; overflow: hidden;">
+                            <div style="background: linear-gradient(90deg, #4ecdc4, #44a2ff); height: 100%; width: ${progress}%; transition: width 0.3s;"></div>
+                        </div>
+                    </div>
+                    <div style="text-align: center; display: flex; flex-direction: column; gap: 5px;">
+                        <div style="color: #ffd700; font-weight: bold; font-size: 1.1em;">🪙 ${task.reward}</div>
+                        ${!task.completed && task.progress >= task.target ? 
+                            `<button onclick="claimEventTask('${key}')" class="buy-button" style="padding: 8px 15px;">Nhận thưởng</button>` : 
+                            task.completed ? '<div style="color: #00ff00; font-size: 0.9em;">Đã hoàn thành</div>' : 
+                            `<button onclick="skipTask('${key}')" class="buy-button" style="padding: 6px 12px; background: linear-gradient(135deg, #ffd700, #ff8c00); font-size: 0.9em;">⚡ Skip (599🏆)</button>`}
+                    </div>
+                `;
+                
+                if (task.type === 'daily') dailyContainer.appendChild(taskEl);
+                else if (task.type === 'weekly') weeklyContainer.appendChild(taskEl);
+                else if (task.type === 'special') specialContainer.appendChild(taskEl);
+            }
+        }
+        
+        // Update task progress
+        function updateEventTask(taskKey, increment = 1) {
+            if (event2026Tasks[taskKey] && !event2026Tasks[taskKey].completed) {
+                event2026Tasks[taskKey].progress += increment;
+                renderEventTasks();
+                saveToLocalStorage(true);
+            }
+        }
+        
+        // Claim task reward
+        function claimEventTask(taskKey) {
+            const task = event2026Tasks[taskKey];
+            if (!task || task.completed) return;
+            
+            if (task.progress >= task.target) {
+                task.completed = true;
+                event2026Coins += task.reward;
+                updateEventDisplay();
+                renderEventTasks();
+                saveToLocalStorage(true);
+                showToast(`✅ Hoàn thành nhiệm vụ! +${task.reward} 🪙 Xu 2026`, 2500);
+            }
+        }
+        
+        // Skip single task with gold bars
+        function skipTask(taskKey) {
+            const task = event2026Tasks[taskKey];
+            if (!task || task.completed) return;
+            
+            if (goldBars < 599) {
+                showToast('❌ Không đủ Gold Bar! Cần 599 🏆', 2500);
+                return;
+            }
+            
+            if (!confirm(`⚡ SKIP NHIỆM VỤ\n\n${task.name}\nPhần thưởng: ${task.reward} 🪙 Xu 2026\n\nGiá: 599 🏆 Gold Bar\n\nXác nhận skip?`)) {
+                return;
+            }
+            
+            goldBars -= 599;
+            task.completed = true;
+            event2026Coins += task.reward;
+            
+            updateEventDisplay();
+            updateDisplay();
+            renderEventTasks();
+            saveToLocalStorage(true);
+            
+            showToast(`✅ Đã skip nhiệm vụ! +${task.reward} 🪙`, 2000);
+        }
+        
+        // Skip all tasks
+        function skipAllTasks() {
+            // Count incomplete tasks
+            const incompleteTasks = Object.values(event2026Tasks).filter(t => !t.completed);
+            
+            if (incompleteTasks.length === 0) {
+                showToast('✅ Tất cả nhiệm vụ đã hoàn thành!', 2000);
+                return;
+            }
+            
+            const totalCost = 599 * incompleteTasks.length;
+            const totalReward = incompleteTasks.reduce((sum, t) => sum + t.reward, 0);
+            
+            if (goldBars < totalCost) {
+                showToast(`❌ Không đủ Gold Bar! Cần ${totalCost} 🏆\nCó: ${goldBars} 🏆`, 3000);
+                return;
+            }
+            
+            if (!confirm(
+                `⚡ HOÀN THÀNH TẤT CẢ NHIỆM VỤ\n\n` +
+                `Số nhiệm vụ chưa hoàn thành: ${incompleteTasks.length}\n` +
+                `Tổng phần thưởng: ${totalReward} 🪙 Xu 2026\n\n` +
+                `Tổng giá: ${totalCost} 🏆 Gold Bar\n` +
+                `Còn lại: ${goldBars - totalCost} 🏆\n\n` +
+                `Xác nhận?`
+            )) {
+                return;
+            }
+            
+            goldBars -= totalCost;
+            
+            // Complete all tasks
+            incompleteTasks.forEach(task => {
+                task.completed = true;
+                event2026Coins += task.reward;
+            });
+            
+            updateEventDisplay();
+            updateDisplay();
+            renderEventTasks();
+            saveToLocalStorage(true);
+            
+            showToast(`✅ Đã hoàn thành ${incompleteTasks.length} nhiệm vụ! +${totalReward} 🪙`, 3000);
+        }
+        
+        // Reset daily/weekly tasks
+        function resetEventTasks() {
+            console.log('🔄 Resetting event tasks...');
+            
+            for (const [key, task] of Object.entries(event2026Tasks)) {
+                if (task.type === 'daily' || task.type === 'weekly') {
+                    task.progress = 0;
+                    task.completed = false;
+                }
+                // Special tasks are one-time only, don't reset
+            }
+            
+            // Set next reset time (24 hours from now)
+            nextTaskReset = Date.now() + (24 * 60 * 60 * 1000);
+            lastTaskReset = Date.now();
+            
+            renderEventTasks();
+            saveToLocalStorage(true);
+            
+            showToast('🔄 Nhiệm vụ đã được làm mới!', 2500);
+        }
+        
+        // Check if tasks need reset
+        function checkTaskReset() {
+            if (Date.now() >= nextTaskReset) {
+                resetEventTasks();
+            }
+        }
+        
+        // Update reset timer display
+        function updateTaskResetTimer() {
+            const timerEl = document.getElementById('taskResetTimer');
+            if (!timerEl) return;
+            
+            const timeLeft = Math.max(0, nextTaskReset - Date.now());
+            const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            timerEl.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Check if reset needed
+            if (timeLeft === 0) {
+                checkTaskReset();
+            }
+        }
+        
+        // Update event display
+        function updateEventDisplay() {
+            const display = document.getElementById('event2026CoinsDisplay');
+            if (display) {
+                display.textContent = formatNumber(event2026Coins);
+            }
+        }
+        
+        // Buy event item
+        function buyEventItem(itemType, cost) {
+            if (event2026Coins < cost) {
+                showToast(`❌ Không đủ Xu 2026! Cần ${cost} 🪙`, 2500);
+                return;
+            }
+            
+            let itemName = '';
+            let effect = '';
+            let canBuy = true;
+            
+            if (itemType === 'pass2026') {
+                if (gamePasses.event2026) {
+                    showToast('❌ Bạn đã có Pass 2026 rồi!', 2000);
+                    return;
+                }
+                itemName = 'Pass 2026';
+                effect = 'x3 Click Power + x2 Auto Clicker';
+            } else if (itemType === 'luckyClover') {
+                itemName = 'Lucky Clover 🍀';
+                effect = 'x2 Luck - Tăng drop rate';
+            } else if (itemType === 'goldenTicket') {
+                itemName = 'Golden Ticket 🎟️';
+                effect = '+100 Vé quay';
+            } else if (itemType === 'megaCoinBomb') {
+                itemName = 'Mega Coin Bomb 💣';
+                effect = '+500,000 Coins';
+            } else if (itemType === 'diamondRain') {
+                itemName = 'Diamond Rain 💎';
+                effect = '+200 Diamonds';
+            } else if (itemType === 'autoBoost') {
+                itemName = 'Auto Clicker Boost ⚡';
+                effect = '+100 Auto Clickers';
+            } else if (itemType === 'powerPotion') {
+                itemName = 'Click Power Potion 🧪';
+                effect = '+200 Click Power';
+            } else if (itemType === 'speedMaster') {
+                itemName = 'Speed Master 🚀';
+                effect = 'Cooldown -0.3s';
+            } else if (itemType === 'multiplierOrb') {
+                itemName = 'Multiplier Orb 🔮';
+                effect = '+10x Multiplier';
+            } else if (itemType === 'petSlot') {
+                itemName = 'Pet Slot Expander 🐾';
+                effect = '+1 Pet Slot';
+            } else if (itemType === 'rebirthBooster') {
+                itemName = 'Rebirth Booster ♻️';
+                effect = '+2x Rebirth Multiplier';
+            } else if (itemType === 'goldBarPack') {
+                itemName = 'Gold Bar Pack 🏆';
+                effect = '+50 Gold Bars';
+            }
+            
+            if (!confirm(`🛍️ MUA VẬT PHẨM EVENT\n\n${itemName}\nGiá: ${cost} 🪙 Xu 2026\n\nHiệu ứng: ${effect}\n\nXác nhận mua?`)) {
+                return;
+            }
+            
+            event2026Coins -= cost;
+            
+            // Apply effects
+            if (itemType === 'pass2026') {
+                gamePasses.event2026 = true;
+                updateGamePassUI();
+            } else if (itemType === 'luckyClover') {
+                // Lucky effect - could increase mutation chances
+                showToast('✨ Luck đã tăng! Drop rate tốt hơn!', 2000);
+            } else if (itemType === 'goldenTicket') {
+                tickets += 100;
+            } else if (itemType === 'megaCoinBomb') {
+                coins += 500000;
+            } else if (itemType === 'diamondRain') {
+                diamonds += 200;
+            } else if (itemType === 'autoBoost') {
+                autoClickers += 100;
+            } else if (itemType === 'powerPotion') {
+                clickPower += 200;
+            } else if (itemType === 'speedMaster') {
+                clickCooldown = Math.max(0.01, clickCooldown - 0.3);
+            } else if (itemType === 'multiplierOrb') {
+                multiplier += 10;
+            } else if (itemType === 'petSlot') {
+                MAX_EQUIPPED_PETS += 1;
+                showToast(`✅ Pet slot tăng lên ${MAX_EQUIPPED_PETS}!`, 2000);
+            } else if (itemType === 'rebirthBooster') {
+                rebirthMultiplier += 2;
+            } else if (itemType === 'goldBarPack') {
+                goldBars += 50;
+            }
+            
+            updateEventDisplay();
+            updateDisplay();
+            saveToLocalStorage(true);
+            
+            showToast(`✅ Đã mua ${itemName}!`, 2500);
+        }
+        
+        // Buy and open event egg
+        function buyEventEgg() {
+            if (event2026Coins < 100) {
+                showToast('❌ Không đủ Xu 2026! Cần 100 🪙', 2500);
+                return;
+            }
+            
+            if (!confirm('🥚 MỞ TRỨNG 2026\n\nGiá: 100 🪙 Xu 2026\n\nBạn có thể nhận được:\n🐱 Cat (50%) - x2\n🐺 Wolf (25%) - x5\n🦅 Bird (24%) - x5.5\n🐲 Dragon (1%) - x10 + 1💎/phút\n\nXác nhận mở?')) {
+                return;
+            }
+            
+            event2026Coins -= 100;
+            
+            // Random pet based on chances
+            const rand = Math.random() * 100;
+            let cumulative = 0;
+            let selectedPet = null;
+            
+            for (const pet of EVENT_2026_PETS) {
+                cumulative += pet.chance;
+                if (rand <= cumulative) {
+                    selectedPet = pet;
+                    break;
+                }
+            }
+            
+            if (!selectedPet) selectedPet = EVENT_2026_PETS[0]; // Fallback
+            
+            // Random mutation - Use same system as trade-up
+            const mutations = ['normal', 'gold', 'diamond', 'rainbow', 'transcendent'];
+            const mutationChances = [70, 15, 10, 4, 1];
+            const mutRand = Math.random() * 100;
+            let mutCumulative = 0;
+            let mutation = 'normal';
+            
+            for (let i = 0; i < mutations.length; i++) {
+                mutCumulative += mutationChances[i];
+                if (mutRand <= mutCumulative) {
+                    mutation = mutations[i];
+                    break;
+                }
+            }
+            
+            // Add pet to inventory - Use same format as normal pets for trade-up compatibility
+            const baseName = selectedPet.name;
+            const petKey = `${baseName}_${mutation}`;
+            const mutationMult = MUTATION_MULTIPLIERS[mutation] || 1;
+            
+            // Check if pet already exists
+            if (!ownedPets[petKey]) {
+                ownedPets[petKey] = {
+                    key: petKey,
+                    name: selectedPet.name,
+                    baseName: baseName,
+                    icon: selectedPet.icon,
+                    multiplier: selectedPet.multiplier,
+                    mutation: mutation,
+                    count: 0,
+                    special: selectedPet.special || null,
+                    event: '2026'
+                };
+            }
+            
+            // Increase count
+            ownedPets[petKey].count++;
+            
+            renderPets();
+            updateEventDisplay();
+            updateDisplay();
+            updateEventTask('openEgg10', 1);
+            updateTradeUpPetList(); // Update trade-up list
+            saveToLocalStorage(true);
+            
+            const mutationName = MUTATION_NAMES[mutation] || mutation;
+            const totalMult = selectedPet.multiplier * mutationMult;
+            
+            let message = `🎉 CHÚC MỪNG!\n\n${selectedPet.icon} ${mutationName} ${selectedPet.name}\nSức mạnh: x${totalMult.toFixed(1)} Click Power`;
+            
+            if (selectedPet.special === 'diamond_generator') {
+                message += '\n✨ Đặc biệt: +1💎 mỗi phút!';
+                
+                // Start diamond generation
+                setInterval(() => {
+                    // Check if pet is equipped
+                    const equipped = equippedPets.find(p => p.key === petKey);
+                    if (equipped && ownedPets[petKey]) {
+                        diamonds += 1;
+                        updateDisplay();
+                        saveToLocalStorage(true);
+                    }
+                }, 60000); // Every 60 seconds
+            }
+            
+            alert(message);
+        }
+        
+        // Dragon diamond generator (for loaded pets)
+        function initDragonGenerators() {
+            for (const [key, pet] of Object.entries(ownedPets)) {
+                if (pet.special === 'diamond_generator' && pet.event === '2026') {
+                    setInterval(() => {
+                        const equipped = equippedPets.find(p => p.key === key);
+                        if (equipped && ownedPets[key]) {
+                            diamonds += 1;
+                            updateDisplay();
+                            saveToLocalStorage(true);
+                        }
+                    }, 60000);
+                }
             }
         }
 
