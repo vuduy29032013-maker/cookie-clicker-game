@@ -3823,6 +3823,22 @@
                     <button class="weather-summon-btn" onclick="summonPet(`Admin's Cat`, '😺', 25)" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);">😺 Admin's Cat</button>
                     <button class="weather-summon-btn" onclick="summonPet('Bird Admin', '🦅', 35)" style="background: linear-gradient(135deg, #ff6b6b 0%, #ffd700 100%);">🦅 Bird Admin</button>
                     <button class="weather-summon-btn" onclick="summonPet(`God's Pet`, '🌟', 30)" style="background: linear-gradient(135deg, #ffd700 0%, #ffffff 50%, #ffd700 100%); font-weight: bold; box-shadow: 0 0 30px rgba(255, 215, 0, 0.8); animation: godPulse 2s infinite;">🌟 GOD'S PET</button>
+                    
+                    <!-- SECRET EGG PETS -->
+                    <button class="weather-summon-btn" onclick="summonPet('Shadow Wolf', '🐺', 50)" style="background: linear-gradient(135deg, #4b0082 0%, #000000 100%);">🐺 Shadow Wolf</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Phoenix', '🔥', 60)" style="background: linear-gradient(135deg, #ff4500 0%, #ffa500 100%);">🔥 Phoenix</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Ice Dragon', '🐉', 70)" style="background: linear-gradient(135deg, #00ffff 0%, #0080ff 100%);">🐉 Ice Dragon</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Thunder Tiger', '⚡', 80)" style="background: linear-gradient(135deg, #ffff00 0%, #ff8c00 100%);">⚡ Thunder Tiger</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Mystic Unicorn', '🦄', 100)" style="background: linear-gradient(135deg, #ff69b4 0%, #ffb6c1 100%);">🦄 Mystic Unicorn</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Void Reaper', '💀', 150)" style="background: linear-gradient(135deg, #000000 0%, #8b00ff 100%); font-weight: bold;">💀 Void Reaper</button>
+                    
+                    <!-- COSMIC EGG PETS -->
+                    <button class="weather-summon-btn" onclick="summonPetSpecial('Cosmic Dog', '🐕', 5, 'click_power_5x')" style="background: linear-gradient(135deg, #1a0033 0%, #4b0082 50%, #8a2be2 100%); font-weight: bold;">🐕 COSMIC DOG (x5 Power)</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Star Cat', '🐱', 100)" style="background: linear-gradient(135deg, #1a0033 0%, #8a2be2 100%);">🐱 Star Cat</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Galaxy Wolf', '🌠', 120)" style="background: linear-gradient(135deg, #1a0033 0%, #4b0082 100%);">🌠 Galaxy Wolf</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Nebula Fox', '🦊', 150)" style="background: linear-gradient(135deg, #4b0082 0%, #8a2be2 100%);">🦊 Nebula Fox</button>
+                    <button class="weather-summon-btn" onclick="summonPetSpecial('Cosmic Dragon', '🐲', 200, 'diamond_generator')" style="background: linear-gradient(135deg, #1a0033 0%, #4b0082 50%, #8a2be2 100%); font-weight: bold; box-shadow: 0 0 20px rgba(138, 43, 226, 0.8);">🐲 COSMIC DRAGON (+1💎/s)</button>
+                    <button class="weather-summon-btn" onclick="summonPet('Universe Phoenix', '🔆', 250)" style="background: linear-gradient(135deg, #ffd700 0%, #8a2be2 100%); font-weight: bold;">🔆 Universe Phoenix</button>
                 </div>
             </div>
         </div>
@@ -4276,7 +4292,7 @@
                 <div class="gamepass-list">
                     <div class="gamepass-card vip" id="vipCard">
                         <div class="gamepass-name">💎 VIP Pass</div>
-                        <div>Code: <strong>VIP2025</strong></div>
+                        <div style="color: #888; font-style: italic;">🔒 Secret Code Required</div>
                         <ul class="gamepass-benefits">
                             <li>✨ +30 Click Power</li>
                             <li>⚡ Click Cooldown -0.15s</li>
@@ -4286,7 +4302,7 @@
                     </div>
                     <div class="gamepass-card premium" id="premiumCard">
                         <div class="gamepass-name">👑 Premium Pass</div>
-                        <div>Code: <strong>PREMIUM999</strong></div>
+                        <div style="color: #888; font-style: italic;">🔒 Secret Code Required</div>
                         <ul class="gamepass-benefits">
                             <li>🌟 +100 Click Power</li>
                             <li>⏱️ Click Cooldown -0.2s</li>
@@ -4297,13 +4313,13 @@
                     </div>
                     <div class="gamepass-card legend" id="legendCard">
                         <div class="gamepass-name">🏆 Legend Pass</div>
-                        <div>Code: <strong>LEGEND777</strong></div>
+                        <div style="color: #888; font-style: italic;">🔒 Secret Code Required</div>
                         <ul class="gamepass-benefits">
                             <li>⚡ +500 Click Power</li>
                             <li>🚀 Click Cooldown = 0.01s</li>
                             <li>💫 +1000 Auto Clickers/s</li>
                             <li>👑 x5 Multiplier</li>
-                            <li>💰 +500K coins khởi đầu</li>
+                            <li>💰 +50K coins khởi đầu</li>
                         </ul>
                         <div class="gamepass-status not-owned" id="legendStatus">❌ Chưa sở hữu</div>
                     </div>
@@ -4312,7 +4328,7 @@
                     <div class="gamepass-card super" id="superCard">
                         <span class="pass-label limited">⚡ LIMITED</span>
                         <div class="gamepass-name">💎 SUPER PASS</div>
-                        <div>Code: <strong>SUPER2025</strong></div>
+                        <div style="color: #888; font-style: italic;">🔒 Secret Code Required</div>
                         <ul class="gamepass-benefits">
                             <li>💰 +1M coins khởi đầu</li>
                             <li>⚡ Click Cooldown = 0s (INSTANT)</li>
@@ -4327,7 +4343,7 @@
                     <div class="gamepass-card infinity" id="infinityCard">
                         <span class="pass-label transcendent">🌌 TRANSCENDENT</span>
                         <div class="gamepass-name">♾️ INFINITY PASS</div>
-                        <div>Code: <strong>INFINITY∞</strong></div>
+                        <div style="color: #888; font-style: italic;">🔒 Secret Code Required</div>
                         <ul class="gamepass-benefits">
                             <li>💸 +5M coins khởi đầu</li>
                             <li>⏱️ Click Cooldown = 0s</li>
@@ -4343,7 +4359,7 @@
                     <div class="gamepass-card quantum" id="quantumCard">
                         <span class="pass-label hot">🔥 HOT</span>
                         <div class="gamepass-name">⚛️ QUANTUM PASS</div>
-                        <div>Code: <strong>QUANTUM888</strong></div>
+                        <div style="color: #888; font-style: italic;">🔒 Secret Code Required</div>
                         <ul class="gamepass-benefits">
                             <li>💰 +2M coins khởi đầu</li>
                             <li>⚡ Click Cooldown = 0s</li>
@@ -4359,7 +4375,7 @@
                     <div class="gamepass-card cosmic" id="cosmicCard">
                         <span class="pass-label best">⭐ BEST FOR YOU</span>
                         <div class="gamepass-name">🌠 COSMIC PASS</div>
-                        <div>Code: <strong>COSMIC999</strong></div>
+                        <div style="color: #888; font-style: italic;">🔒 Secret Code Required</div>
                         <ul class="gamepass-benefits">
                             <li>💎 +10M coins khởi đầu</li>
                             <li>⚡ Click Cooldown = 0s</li>
@@ -5225,7 +5241,7 @@
         
         // ===== GAME VARIABLES =====
         let coins = 0;
-        let clickPower = 1;
+        let clickPower = 0.1; // Reduced from 1 to 0.1 for deflation
         let autoClickers = 0;
         let multiplier = 1;
         let isAdmin = false;
@@ -5957,13 +5973,13 @@
         // Wheel Game
         let isSpinning = false;
         const wheelPrizes = [
-            { name: '100 Coins', value: 100, type: 'coins', chance: 30, icon: '💰' },
-            { name: '500 Coins', value: 500, type: 'coins', chance: 25, icon: '💰' },
-            { name: '1K Coins', value: 1000, type: 'coins', chance: 20, icon: '💰' },
-            { name: '5K Coins', value: 5000, type: 'coins', chance: 10, icon: '💰' },
-            { name: '10 Diamonds', value: 10, type: 'diamonds', chance: 8, icon: '💎' },
-            { name: '25 Diamonds', value: 25, type: 'diamonds', chance: 5, icon: '💎' },
-            { name: '50 Diamonds', value: 50, type: 'diamonds', chance: 1, icon: '💎' },
+            { name: '10 Coins', value: 10, type: 'coins', chance: 30, icon: '💰' }, // Reduced from 100 (90% down)
+            { name: '50 Coins', value: 50, type: 'coins', chance: 25, icon: '💰' }, // Reduced from 500
+            { name: '100 Coins', value: 100, type: 'coins', chance: 20, icon: '💰' }, // Reduced from 1000
+            { name: '500 Coins', value: 500, type: 'coins', chance: 10, icon: '💰' }, // Reduced from 5000
+            { name: '1 Diamond', value: 1, type: 'diamonds', chance: 8, icon: '💎' }, // Reduced from 10
+            { name: '2 Diamonds', value: 2, type: 'diamonds', chance: 5, icon: '💎' }, // Reduced from 25
+            { name: '5 Diamonds', value: 5, type: 'diamonds', chance: 1, icon: '💎' }, // Reduced from 50
             { name: '1 Pet Random', value: 1, type: 'pet', chance: 1, icon: '🐾' }
         ];
 
@@ -5973,7 +5989,7 @@
                 id: 1,
                 name: 'Common Egg',
                 icon: '🥚',
-                price: 10,
+                price: 100, // Increased from 10 (10x)
                 pets: [
                     { name: 'Bunny', icon: '🐰', chance: 33.33, multiplier: 1.5 },
                     { name: 'Dog', icon: '🐕', chance: 33.33, multiplier: 1.5 },
@@ -5984,7 +6000,7 @@
                 id: 2,
                 name: 'Uncommon Egg',
                 icon: '🥚',
-                price: 50,
+                price: 500, // Increased from 50 (10x)
                 pets: [
                     { name: 'Black Bunny', icon: '🐇', chance: 25, multiplier: 2 },
                     { name: 'Cat', icon: '🐈', chance: 25, multiplier: 2 },
@@ -5996,7 +6012,7 @@
                 id: 3,
                 name: 'Rare Egg',
                 icon: '🥚',
-                price: 150,
+                price: 1500, // Increased from 150 (10x)
                 pets: [
                     { name: 'Orange Tabby', icon: '🐈‍⬛', chance: 33.33, multiplier: 3 },
                     { name: 'Spotted Deer', icon: '🦌', chance: 25, multiplier: 3 },
@@ -6009,7 +6025,7 @@
                 id: 4,
                 name: 'Legendary Egg',
                 icon: '🥚',
-                price: 500,
+                price: 5000, // Increased from 500 (10x)
                 pets: [
                     { name: 'Cow', icon: '🐄', chance: 42.55, multiplier: 6 },
                     { name: 'Silver Monkey', icon: '🐵', chance: 42.55, multiplier: 6 },
@@ -6022,7 +6038,7 @@
                 id: 5,
                 name: 'Mythical Egg',
                 icon: '🥚',
-                price: 1000,
+                price: 10000, // Increased from 1000 (10x)
                 pets: [
                     { name: 'Grey Mouse', icon: '🐭', chance: 35.7, multiplier: 8 },
                     { name: 'Brown Mouse', icon: '🐭', chance: 26.8, multiplier: 9 },
@@ -6035,7 +6051,7 @@
                 id: 6,
                 name: 'Bug Egg',
                 icon: '🥚',
-                price: 2000,
+                price: 20000, // Increased from 2000 (10x)
                 pets: [
                     { name: 'Snail', icon: '🐌', chance: 40, multiplier: 10 },
                     { name: 'Giant Ant', icon: '🐜', chance: 30, multiplier: 12 },
@@ -6048,7 +6064,7 @@
                 id: 7,
                 name: 'Night Egg',
                 icon: '🌙',
-                price: 5000,
+                price: 50000, // Increased from 5000 (10x)
                 pets: [
                     { name: 'Hedgehog', icon: '🦔', chance: 47, multiplier: 12 },
                     { name: 'Mole', icon: '🦡', chance: 23.5, multiplier: 14 },
@@ -6062,7 +6078,7 @@
                 id: 8,
                 name: 'Bee Egg',
                 icon: '🐝',
-                price: 10000,
+                price: 100000, // Increased from 10000 (10x)
                 pets: [
                     { name: 'Bee', icon: '🐝', chance: 65, multiplier: 12 },
                     { name: 'Honey Bee', icon: '🐝', chance: 25, multiplier: 15 },
@@ -6075,7 +6091,7 @@
                 id: 9,
                 name: 'Anti Bee Egg',
                 icon: '🦟',
-                price: 25000,
+                price: 250000, // Increased from 25000 (10x)
                 pets: [
                     { name: 'Wasp', icon: '🦟', chance: 55, multiplier: 18 },
                     { name: 'Tarantula Hawk', icon: '🕷️', chance: 30, multiplier: 22 },
@@ -6088,7 +6104,7 @@
                 id: 10,
                 name: 'Admin Egg',
                 icon: '👑',
-                price: 500000,
+                price: 5000000, // Increased from 500000 (10x)
                 pets: [
                     { name: "Admin's Dog", icon: '🐕‍🦺', chance: 50, multiplier: 20 },
                     { name: "Admin's Cat", icon: '😺', chance: 30, multiplier: 25 },
@@ -6099,7 +6115,7 @@
                 id: 11,
                 name: 'Hacker Egg',
                 icon: '💻',
-                price: 200000,
+                price: 2000000, // Increased from 200000 (10x)
                 pets: [
                     { name: 'Hacker Dog', icon: '🐕‍🦺', chance: 60, multiplier: 40 },
                     { name: 'Hacker Bunny', icon: '🐰', chance: 40, multiplier: 50 }
@@ -6109,9 +6125,37 @@
                 id: 12,
                 name: 'God Egg',
                 icon: '⚜️',
-                price: 10000000,
+                price: 100000000, // Increased from 10000000 (10x)
                 pets: [
                     { name: "God's Pet", icon: '🌟', chance: 100, multiplier: 30 }
+                ]
+            },
+            {
+                id: 13,
+                name: 'Secret Egg',
+                icon: '🔮',
+                price: 1000000, // 1M diamonds
+                pets: [
+                    { name: 'Shadow Wolf', icon: '🐺', chance: 30, multiplier: 50 },
+                    { name: 'Phoenix', icon: '🔥', chance: 25, multiplier: 60 },
+                    { name: 'Ice Dragon', icon: '🐉', chance: 20, multiplier: 70 },
+                    { name: 'Thunder Tiger', icon: '⚡', chance: 15, multiplier: 80 },
+                    { name: 'Mystic Unicorn', icon: '🦄', chance: 9, multiplier: 100 },
+                    { name: 'Void Reaper', icon: '💀', chance: 1, multiplier: 150 }
+                ]
+            },
+            {
+                id: 14,
+                name: 'Cosmic Egg',
+                icon: '🌌',
+                price: 2000000, // 2M diamonds
+                pets: [
+                    { name: 'Cosmic Dog', icon: '🐕', chance: 40, multiplier: 5, special: 'click_power_5x' },
+                    { name: 'Star Cat', icon: '🐱', chance: 30, multiplier: 100 },
+                    { name: 'Galaxy Wolf', icon: '🌠', chance: 20, multiplier: 120 },
+                    { name: 'Nebula Fox', icon: '🦊', chance: 8, multiplier: 150 },
+                    { name: 'Cosmic Dragon', icon: '🐲', chance: 1, multiplier: 200, special: 'diamond_generator' },
+                    { name: 'Universe Phoenix', icon: '🔆', chance: 1, multiplier: 250 }
                 ]
             }
         ];
@@ -6622,8 +6666,8 @@
                 name: '+1 Click Power',
                 description: 'Tăng 1 coin mỗi click',
                 icon: '⚡',
-                basePrice: 10,
-                currentPrice: 10,
+                basePrice: 500, // Increased from 10 (50x)
+                currentPrice: 500,
                 owned: 0,
                 effect: () => clickPower++
             },
@@ -6632,8 +6676,8 @@
                 name: 'Auto Clicker',
                 description: '+1 coin mỗi giây',
                 icon: '🤖',
-                basePrice: 100,
-                currentPrice: 100,
+                basePrice: 5000, // Increased from 100 (50x)
+                currentPrice: 5000,
                 owned: 0,
                 effect: () => autoClickers++
             },
@@ -6642,8 +6686,8 @@
                 name: 'Faster Click',
                 description: 'Giảm 0.05s thời gian chờ click',
                 icon: '⚡',
-                basePrice: 500,
-                currentPrice: 500,
+                basePrice: 25000, // Increased from 500 (50x)
+                currentPrice: 25000,
                 owned: 0,
                 effect: () => {
                     clickCooldown = Math.max(0.05, clickCooldown - 0.05);
@@ -6654,8 +6698,8 @@
                 name: 'Super Click',
                 description: '+5 click power',
                 icon: '⭐',
-                basePrice: 1000,
-                currentPrice: 1000,
+                basePrice: 50000, // Increased from 1000 (50x)
+                currentPrice: 50000,
                 owned: 0,
                 effect: () => clickPower += 5
             },
@@ -6664,8 +6708,8 @@
                 name: 'Mega Clicker',
                 description: '+10 coins mỗi giây',
                 icon: '✨',
-                basePrice: 3000,
-                currentPrice: 3000,
+                basePrice: 150000, // Increased from 3000 (50x)
+                currentPrice: 150000,
                 owned: 0,
                 effect: () => autoClickers += 10
             },
@@ -6674,8 +6718,8 @@
                 name: '2x Multiplier',
                 description: 'Nhân đôi tất cả thu nhập',
                 icon: '👑',
-                basePrice: 15000,
-                currentPrice: 15000,
+                basePrice: 750000, // Increased from 15000 (50x)
+                currentPrice: 750000,
                 owned: 0,
                 effect: () => multiplier *= 2
             },
@@ -6684,8 +6728,8 @@
                 name: 'Ultra Click',
                 description: '+20 click power',
                 icon: '💎',
-                basePrice: 10000,
-                currentPrice: 10000,
+                basePrice: 500000, // Increased from 10000 (50x)
+                currentPrice: 500000,
                 owned: 0,
                 effect: () => clickPower += 20
             },
@@ -6694,8 +6738,8 @@
                 name: 'Factory',
                 description: '+50 coins mỗi giây',
                 icon: '🏭',
-                basePrice: 30000,
-                currentPrice: 30000,
+                basePrice: 1500000, // Increased from 30000 (50x)
+                currentPrice: 1500000,
                 owned: 0,
                 effect: () => autoClickers += 50
             },
@@ -6704,8 +6748,8 @@
                 name: 'Golden Touch',
                 description: '+100 click power',
                 icon: '🌟',
-                basePrice: 75000,
-                currentPrice: 75000,
+                basePrice: 3750000, // Increased from 75000 (50x)
+                currentPrice: 3750000,
                 owned: 0,
                 effect: () => clickPower += 100
             },
@@ -6714,8 +6758,8 @@
                 name: 'Time Warp',
                 description: 'Giảm 0.03s cooldown',
                 icon: '⏰',
-                basePrice: 120000,
-                currentPrice: 120000,
+                basePrice: 6000000, // Increased from 120000 (50x)
+                currentPrice: 6000000,
                 owned: 0,
                 effect: () => {
                     clickCooldown = Math.max(0.01, clickCooldown - 0.03);
@@ -6726,8 +6770,8 @@
                 name: 'Robot Army',
                 description: '+100 coins mỗi giây',
                 icon: '🤖',
-                basePrice: 200000,
-                currentPrice: 200000,
+                basePrice: 10000000, // Increased from 200000 (50x)
+                currentPrice: 10000000,
                 owned: 0,
                 effect: () => autoClickers += 100
             },
@@ -6736,8 +6780,8 @@
                 name: 'Diamond Finger',
                 description: '+250 click power',
                 icon: '💍',
-                basePrice: 350000,
-                currentPrice: 350000,
+                basePrice: 17500000, // Increased from 350000 (50x)
+                currentPrice: 17500000,
                 owned: 0,
                 effect: () => clickPower += 250
             },
@@ -6746,8 +6790,8 @@
                 name: 'Money Printer',
                 description: '+200 coins mỗi giây',
                 icon: '🖨️',
-                basePrice: 600000,
-                currentPrice: 600000,
+                basePrice: 30000000, // Increased from 600000 (50x)
+                currentPrice: 30000000,
                 owned: 0,
                 effect: () => autoClickers += 200
             },
@@ -6756,8 +6800,8 @@
                 name: 'Cosmic Power',
                 description: '+400 click power',
                 icon: '🌌',
-                basePrice: 1200000,
-                currentPrice: 1200000,
+                basePrice: 60000000, // Increased from 1200000 (50x)
+                currentPrice: 60000000,
                 owned: 0,
                 effect: () => clickPower += 400
             },
@@ -6766,8 +6810,8 @@
                 name: 'Quantum Clicker',
                 description: '+500 coins mỗi giây',
                 icon: '⚛️',
-                basePrice: 2500000,
-                currentPrice: 2500000,
+                basePrice: 125000000, // Increased from 2500000 (50x)
+                currentPrice: 125000000,
                 owned: 0,
                 effect: () => autoClickers += 500
             },
@@ -6776,8 +6820,8 @@
                 name: 'Infinity Stone',
                 description: '+1000 click power',
                 icon: '💠',
-                basePrice: 6000000,
-                currentPrice: 6000000,
+                basePrice: 300000000, // Increased from 6000000 (50x)
+                currentPrice: 300000000,
                 owned: 0,
                 effect: () => clickPower += 1000
             },
@@ -6786,8 +6830,8 @@
                 name: 'Universe Generator',
                 description: '+1500 coins mỗi giây',
                 icon: '🌠',
-                basePrice: 25000000,
-                currentPrice: 25000000,
+                basePrice: 1250000000, // Increased from 25000000 (50x)
+                currentPrice: 1250000000,
                 owned: 0,
                 effect: () => autoClickers += 1500
             },
@@ -6796,8 +6840,8 @@
                 name: 'The Divine',
                 description: '5% giảm giá mọi vật phẩm',
                 icon: '✨',
-                basePrice: 50000000,
-                currentPrice: 50000000,
+                basePrice: 2500000000, // Increased from 50000000 (50x)
+                currentPrice: 2500000000,
                 owned: 0,
                 effect: () => {
                     shopDiscount += 5;
@@ -9806,11 +9850,89 @@
             
             ownedPets[petKey].count++;
             
+            // Auto-save immediately
+            console.log('💾 Auto-saving after admin summon:', petKey);
+            saveToLocalStorage(true);
+            
             renderPets();
             updateDisplay();
             updateTradeUpPetList(); // Update trade-up dropdown
             
             alert(`✅ Đã triệu hồi ${petIcon} ${petName} (x${petMultiplier})!`);
+        }
+
+        // Summon pet with special abilities (Cosmic Dog, Cosmic Dragon)
+        function summonPetSpecial(petName, petIcon, petMultiplier, special) {
+            if (!isAdmin) return;
+            
+            const petKey = petName + '_normal';
+            
+            if (!ownedPets[petKey]) {
+                ownedPets[petKey] = {
+                    name: petName,
+                    baseName: petName,
+                    icon: petIcon,
+                    multiplier: petMultiplier,
+                    mutation: 'normal',
+                    count: 0,
+                    special: special // Add special ability
+                };
+            }
+            
+            ownedPets[petKey].count++;
+            
+            // Start diamond generator if it's Cosmic Dragon
+            if (special === 'diamond_generator') {
+                setInterval(() => {
+                    const equipped = equippedPets.find(p => p.key === petKey);
+                    if (equipped && ownedPets[petKey]) {
+                        // Calculate mutation bonus
+                        let mutationMultiplier = 1;
+                        const pet = ownedPets[petKey];
+                        
+                        if (pet && pet.mutation) {
+                            switch(pet.mutation) {
+                                case 'gold':
+                                    mutationMultiplier = 2; // Gold: 2x
+                                    break;
+                                case 'diamond':
+                                    mutationMultiplier = 3; // Diamond: 3x
+                                    break;
+                                case 'rainbow':
+                                    mutationMultiplier = 4; // Rainbow: 4x
+                                    break;
+                                case 'transcendent':
+                                    mutationMultiplier = 5; // Transcendent: 5x
+                                    break;
+                                case 'prismatic':
+                                    mutationMultiplier = 10; // Prismatic: 10x
+                                    break;
+                            }
+                        }
+                        
+                        // Generate diamonds based on mutation
+                        const diamondsToAdd = 1 * mutationMultiplier;
+                        diamonds += diamondsToAdd;
+                        
+                        updateDisplay();
+                        saveToLocalStorage(true);
+                    }
+                }, 1000); // Every 1 second
+            }
+            
+            // Auto-save immediately
+            console.log('💾 Auto-saving after special summon:', petKey);
+            saveToLocalStorage(true);
+            
+            renderPets();
+            updateDisplay();
+            updateTradeUpPetList();
+            
+            let specialText = '';
+            if (special === 'click_power_5x') specialText = ' - x5 Click Power!';
+            if (special === 'diamond_generator') specialText = ' - +1💎/s!';
+            
+            alert(`✅ Đã triệu hồi ${petIcon} ${petName} (x${petMultiplier})${specialText}`);
         }
 
         function loadGameFromButton() {
@@ -9988,7 +10110,7 @@
                 clickCooldown = 0.01;
                 autoClickers += 1000;
                 multiplier *= 5;
-                coins += 500000;
+                coins += 50000; // Reduced from 500000 (10%)
                 diamonds += 2000;
                 passName = 'Legend Pass';
                 success = true;
@@ -9998,7 +10120,7 @@
                 clickCooldown = 0; // INSTANT!
                 autoClickers += 2000;
                 multiplier *= 7;
-                coins += 1000000; // 1M coins
+                coins += 100000; // Reduced from 1000000 (10%)
                 diamonds += 5000;
                 passName = '💎 SUPER PASS';
                 success = true;
@@ -10008,7 +10130,7 @@
                 clickCooldown = 0;
                 autoClickers += 5000;
                 multiplier *= 10;
-                coins += 5000000; // 5M coins
+                coins += 500000; // Reduced from 5000000 (10%)
                 diamonds += 10000;
                 shopDiscount = 50; // Permanent 50% discount
                 passName = '♾️ INFINITY PASS';
@@ -10019,7 +10141,7 @@
                 clickCooldown = 0;
                 autoClickers += 3000;
                 multiplier *= 8;
-                coins += 2000000; // 2M coins
+                coins += 200000; // Reduced from 2000000 (10%)
                 diamonds += 7000;
                 passName = '⚛️ QUANTUM PASS';
                 success = true;
@@ -10029,7 +10151,7 @@
                 clickCooldown = 0;
                 autoClickers += 10000;
                 multiplier *= 15;
-                coins += 10000000; // 10M coins
+                coins += 1000000; // Reduced from 10000000 (10%)
                 diamonds += 20000;
                 goldBars += 1000;
                 // Unlock all pets
@@ -10284,8 +10406,8 @@
         }
 
         function performRebirth() {
-            // Công thức: 100K lần đầu, sau đó x5 mỗi lần
-            const nextReq = 100000 * Math.pow(5, rebirthCount);
+            // Formula: 1M first time, then x5 each rebirth (increased from 100K for deflation)
+            const nextReq = 1000000 * Math.pow(5, rebirthCount);
             
             if (coins < nextReq) {
                 alert('❌ Không đủ coins để tái sinh!');
@@ -10316,7 +10438,7 @@
             if (!confirm) return;
             
             coins = 0;
-            clickPower = 1;
+            clickPower = 0.1; // Reset to 0.1 for deflation (was 1)
             autoClickers = 0;
             multiplier = 1;
             clickCooldown = 0.5;
@@ -10868,6 +10990,51 @@
             }
             ownedPets[petKey].count++;
             
+            // ═══════════════════════════════════════════════════════
+            // AUTO-SAVE IMMEDIATELY AFTER ADDING PET
+            // ═══════════════════════════════════════════════════════
+            console.log('💾 Auto-saving after hatching pet:', petKey);
+            saveToLocalStorage(true);
+            
+            // Start diamond generator for Cosmic Dragon
+            if (hatchedPet.special === 'diamond_generator') {
+                setInterval(() => {
+                    const equipped = equippedPets.find(p => p.key === petKey);
+                    if (equipped && ownedPets[petKey]) {
+                        // Calculate mutation bonus
+                        let mutationMultiplier = 1;
+                        const pet = ownedPets[petKey];
+                        
+                        if (pet && pet.mutation) {
+                            switch(pet.mutation) {
+                                case 'gold':
+                                    mutationMultiplier = 2; // Gold: 2x
+                                    break;
+                                case 'diamond':
+                                    mutationMultiplier = 3; // Diamond: 3x
+                                    break;
+                                case 'rainbow':
+                                    mutationMultiplier = 4; // Rainbow: 4x
+                                    break;
+                                case 'transcendent':
+                                    mutationMultiplier = 5; // Transcendent: 5x
+                                    break;
+                                case 'prismatic':
+                                    mutationMultiplier = 10; // Prismatic: 10x
+                                    break;
+                            }
+                        }
+                        
+                        // Generate diamonds based on mutation
+                        const diamondsToAdd = 1 * mutationMultiplier;
+                        diamonds += diamondsToAdd;
+                        
+                        updateDisplay();
+                        saveToLocalStorage(true);
+                    }
+                }, 1000); // Every 1 second for Cosmic Dragon
+            }
+            
             // Show hatch animation
             showHatchAnimation(egg, hatchedPet);
             
@@ -10890,11 +11057,19 @@
             
             // Phase 2: Show result after 2 seconds
             setTimeout(() => {
+                let specialText = '';
+                if (pet.special === 'diamond_generator') {
+                    specialText = '<div style="color: #00ffff; font-size: 0.9em; margin-top: 10px;">✨ Đặc biệt: +1💎/giây!</div>';
+                } else if (pet.special === 'click_power_5x') {
+                    specialText = '<div style="color: #ffd700; font-size: 0.9em; margin-top: 10px;">⚡ Đặc biệt: x5 Click Power!</div>';
+                }
+                
                 animDiv.innerHTML = `
                     <div class="hatch-animation">
                         <div class="hatch-result">${pet.icon}</div>
                         <div class="hatch-text">🎉 ${pet.name}!</div>
                         <div class="hatch-multiplier">x${pet.multiplier} Thu nhập</div>
+                        ${specialText}
                         <button class="admin-button" onclick="closeHatchAnimation()" style="margin-top: 20px;">OK</button>
                     </div>
                 `;
@@ -11071,46 +11246,65 @@
                 // Success! Add upgraded pet
                 const newPetKey = petType + '_' + nextMutation;
                 if (!ownedPets[newPetKey]) {
-                    // Find base pet info - look for any pet with matching baseName or name
+                    // Find base pet info - IMPROVED LOGIC
                     let basePet = null;
                     
-                    // Method 1: Find by baseName
-                    basePet = Object.values(ownedPets).find(p => (p.baseName || p.name) === petType);
-                    
-                    // Method 2: Find from current mutation if still exists
-                    if (!basePet && ownedPets[petKey]) {
+                    // Method 1: Check if the pet we just consumed still exists (has more than 0)
+                    if (ownedPets[petKey] && ownedPets[petKey].count > 0) {
                         basePet = ownedPets[petKey];
+                        console.log('✅ Found basePet from consumed pet (still exists):', petKey);
                     }
                     
-                    // Method 3: Search through all pets for matching name
+                    // Method 2: Find ANY pet with matching baseName or name
                     if (!basePet) {
-                        for (const pet of Object.values(ownedPets)) {
-                            if ((pet.baseName === petType) || (pet.name === petType)) {
+                        for (const [key, pet] of Object.entries(ownedPets)) {
+                            if (pet.baseName === petType || pet.name === petType) {
                                 basePet = pet;
+                                console.log('✅ Found basePet by name match:', key, pet.name);
                                 break;
                             }
                         }
                     }
                     
-                    if (basePet) {
-                        ownedPets[newPetKey] = {
-                            key: newPetKey,
-                            name: basePet.name,
-                            baseName: petType,
-                            icon: basePet.icon,
-                            multiplier: basePet.multiplier,
-                            mutation: nextMutation,
-                            count: 0,
-                            special: basePet.special || null,
-                            event: basePet.event || null
-                        };
-                        console.log('✅ Created new pet entry:', newPetKey, ownedPets[newPetKey]);
-                    } else {
-                        alert('❌ Lỗi: Không tìm thấy thông tin pet gốc!');
-                        console.error('Failed to find base pet for:', petType);
-                        console.log('Available pets:', Object.keys(ownedPets));
-                        return;
+                    // Method 3: Search through ALL mutation levels of this pet type
+                    if (!basePet) {
+                        const allMutations = ['normal', 'gold', 'diamond', 'rainbow', 'transcendent', 'prismatic'];
+                        for (const mut of allMutations) {
+                            const searchKey = petType + '_' + mut;
+                            if (ownedPets[searchKey]) {
+                                basePet = ownedPets[searchKey];
+                                console.log('✅ Found basePet by mutation search:', searchKey);
+                                break;
+                            }
+                        }
                     }
+                    
+                    // Method 4: FALLBACK - Create basic pet structure
+                    if (!basePet) {
+                        console.warn('⚠️ Could not find basePet, creating basic structure for:', petType);
+                        basePet = {
+                            name: petType,
+                            baseName: petType,
+                            icon: '❓', // Default icon
+                            multiplier: 1, // Default multiplier
+                            special: null,
+                            event: null
+                        };
+                    }
+                    
+                    // Create the upgraded pet
+                    ownedPets[newPetKey] = {
+                        key: newPetKey,
+                        name: basePet.name,
+                        baseName: petType,
+                        icon: basePet.icon,
+                        multiplier: basePet.multiplier,
+                        mutation: nextMutation,
+                        count: 0,
+                        special: basePet.special || null,
+                        event: basePet.event || null
+                    };
+                    console.log('✅ Created new pet entry:', newPetKey, ownedPets[newPetKey]);
                 }
                 ownedPets[newPetKey].count++;
                 
@@ -11216,12 +11410,21 @@
                 const mutationMult = MUTATION_MULTIPLIERS[mutation] || 1;
                 const totalMult = pet.multiplier * mutationMult;
                 
+                // Special ability display
+                let specialText = '';
+                if (pet.special === 'diamond_generator') {
+                    specialText = '<div style="color: #00ffff; font-size: 0.75em; margin-top: 4px;">✨ +1💎/s</div>';
+                } else if (pet.special === 'click_power_5x') {
+                    specialText = '<div style="color: #ffd700; font-size: 0.75em; margin-top: 4px;">⚡ x5 Click Power</div>';
+                }
+                
                 petCard.innerHTML = `
                     ${isEquipped ? `<div class="pet-equipped-badge">✓ ${equippedCount}/${pet.count}</div>` : ''}
                     ${mutationBadge}
                     <div class="pet-icon">${pet.icon}</div>
                     <div class="pet-name">${pet.baseName || pet.name}</div>
                     <div class="pet-multiplier">x${totalMult.toLocaleString()} ${mutation !== 'normal' ? `(Base: x${pet.multiplier})` : ''}</div>
+                    ${specialText}
                     <div class="pet-count">Owned: ${pet.count}</div>
                     <div class="pet-actions">
                         ${isEquipped 
@@ -11519,6 +11722,18 @@
             return totalMult;
         }
 
+        // Get click power bonus from special pets (like Cosmic Dog)
+        function getClickPowerBonus() {
+            let bonus = 1;
+            equippedPets.forEach(pet => {
+                const ownedPet = ownedPets[pet.key];
+                if (ownedPet && ownedPet.special === 'click_power_5x') {
+                    bonus *= 5; // Cosmic Dog gives x5 click power
+                }
+            });
+            return bonus;
+        }
+
         // ===== CLICK BUTTON EVENT =====
         document.getElementById('clickButton').addEventListener('click', function(e) {
             e.preventDefault();
@@ -11538,13 +11753,14 @@
             // Áp dụng multiplier từ weather và pets
             const weatherMult = getWeatherMultiplier();
             const petMult = getPetMultiplier();
+            const clickPowerBonus = getClickPowerBonus(); // Cosmic Dog bonus
             
             // Event 2026 Pass bonus
             let event2026Mult = 1;
             if (gamePasses.event2026) event2026Mult = 3;
             
             const totalMultiplier = multiplier * rebirthMultiplier * weatherMult * petMult * event2026Mult;
-            const earned = clickPower * totalMultiplier;
+            const earned = clickPower * clickPowerBonus * totalMultiplier; // Apply click power bonus
             coins += earned;
             
             // Track stats
@@ -11859,6 +12075,26 @@
                 
                 lastSaveTime = Date.now();
                 
+                // ═══════════════════════════════════════════════════════
+                // DEBUG: LOG SAVED PET DATA
+                // ═══════════════════════════════════════════════════════
+                if (!silent) {
+                    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                    console.log('💾 PET SAVE DEBUG');
+                    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                    console.log('ownedPets in memory:', ownedPets);
+                    console.log('  Type:', typeof ownedPets);
+                    console.log('  Keys:', Object.keys(ownedPets));
+                    console.log('  Count:', Object.keys(ownedPets).length);
+                    console.log('equippedPets:', equippedPets);
+                    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                    console.log('saveData.ownedPets:', saveData.ownedPets);
+                    console.log('  Type:', typeof saveData.ownedPets);
+                    console.log('  Keys:', Object.keys(saveData.ownedPets || {}));
+                    console.log('  Count:', Object.keys(saveData.ownedPets || {}).length);
+                    console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                }
+                
                 if (!silent) {
                     console.log('✅ Game saved to localStorage');
                     console.log(`📊 Save size: ${(saveString.length / 1024).toFixed(2)} KB`);
@@ -11971,6 +12207,20 @@
                 ownedPets = validData.ownedPets;
                 equippedPets = validData.equippedPets;
                 
+                // ═══════════════════════════════════════════════════════
+                // DEBUG: LOG LOADED PET DATA
+                // ═══════════════════════════════════════════════════════
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log('🔍 PET LOAD DEBUG');
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log('1️⃣ Raw loaded ownedPets:', ownedPets);
+                console.log('   Type:', typeof ownedPets);
+                console.log('   Is Array?', Array.isArray(ownedPets));
+                console.log('   Is null?', ownedPets === null);
+                console.log('   Keys count:', Object.keys(ownedPets || {}).length);
+                console.log('   Keys:', Object.keys(ownedPets || {}));
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                
                 // MIGRATION: Convert old pets to new format with baseName and mutation
                 const migratedPets = {};
                 for (const [key, pet] of Object.entries(ownedPets)) {
@@ -11989,19 +12239,36 @@
                     } else {
                         // Already new format
                         migratedPets[key] = pet;
+                        console.log(`✓ Pet already migrated: ${key}`, pet);
                     }
                 }
                 ownedPets = migratedPets;
                 
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log('2️⃣ After migration ownedPets:', ownedPets);
+                console.log('   Keys count:', Object.keys(ownedPets).length);
+                console.log('   Keys:', Object.keys(ownedPets));
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                
                 // Migrate equipped pets keys
+                const oldEquippedPets = [...equippedPets];
                 equippedPets = equippedPets.map(petKey => {
                     if (petKey && !petKey.includes('_normal')) {
-                        return `${petKey}_normal`;
+                        const newKey = `${petKey}_normal`;
+                        console.log(`✅ Migrated equipped pet: ${petKey} -> ${newKey}`);
+                        return newKey;
                     }
                     return petKey;
                 }).filter(Boolean);
                 
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log('3️⃣ Equipped pets migration:');
+                console.log('   Before:', oldEquippedPets);
+                console.log('   After:', equippedPets);
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                
                 console.log('✅ Pet migration completed. Total pets:', Object.keys(ownedPets).length);
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
                 
                 // Restore progress
                 playTime = validData.playTime;
@@ -12063,6 +12330,33 @@
                 updateWeatherDisplay();
                 updateGamePassUI();
                 renderShop();
+                
+                // ═══════════════════════════════════════════════════════
+                // EMERGENCY SAFEGUARD: ENSURE ownedPets IS ALWAYS OBJECT
+                // ═══════════════════════════════════════════════════════
+                if (!ownedPets || typeof ownedPets !== 'object' || Array.isArray(ownedPets)) {
+                    console.error('❌ CRITICAL: ownedPets is not an object after load!');
+                    console.error('   Type:', typeof ownedPets);
+                    console.error('   Value:', ownedPets);
+                    console.error('   Resetting to empty object...');
+                    ownedPets = {};
+                }
+                
+                if (!equippedPets || !Array.isArray(equippedPets)) {
+                    console.error('❌ CRITICAL: equippedPets is not an array after load!');
+                    console.error('   Type:', typeof equippedPets);
+                    console.error('   Value:', equippedPets);
+                    console.error('   Resetting to empty array...');
+                    equippedPets = [];
+                }
+                
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log('✅ FINAL PET STATE AFTER LOAD:');
+                console.log('   ownedPets keys:', Object.keys(ownedPets));
+                console.log('   ownedPets count:', Object.keys(ownedPets).length);
+                console.log('   equippedPets:', equippedPets);
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                
                 renderPets();
                 updateTradeUpPetList(); // Update trade-up dropdown after loading pets
                 updateTeleportPrices(); // Update teleport prices after loading
@@ -12475,15 +12769,21 @@
                     { name: 'Unicorn', icon: '🦄', multiplier: 120 }
                 ];
                 const pet = legendaryPets[Math.floor(Math.random() * legendaryPets.length)];
-                const petKey = `${pet.name}_${Date.now()}`;
-                ownedPets[petKey] = {
-                    key: petKey,
-                    name: pet.name,
-                    icon: pet.icon,
-                    multiplier: pet.multiplier,
-                    count: 1
-                };
+                const petKey = `${pet.name}_normal`;
+                if (!ownedPets[petKey]) {
+                    ownedPets[petKey] = {
+                        key: petKey,
+                        name: pet.name,
+                        baseName: pet.name,
+                        icon: pet.icon,
+                        multiplier: pet.multiplier,
+                        mutation: 'normal',
+                        count: 0
+                    };
+                }
+                ownedPets[petKey].count++;
                 renderPets();
+                updateTradeUpPetList();
                 alert(`🎉 Nhận được pet Legendary: ${pet.icon} ${pet.name} (x${pet.multiplier})!`);
             } else if (itemName === '🌟 Rebirth Multiplier +2x') {
                 rebirthMultiplier += 2;
@@ -12525,19 +12825,21 @@
             } else if (prize.type === 'pet') {
                 const commonPets = eggShop[0].pets;
                 const randomPet = commonPets[Math.floor(Math.random() * commonPets.length)];
-                const petKey = `${randomPet.name}_${Date.now()}`;
+                const petKey = `${randomPet.name}_normal`;
                 if (!ownedPets[petKey]) {
                     ownedPets[petKey] = {
                         key: petKey,
                         name: randomPet.name,
+                        baseName: randomPet.name,
                         icon: randomPet.icon,
                         multiplier: randomPet.multiplier,
-                        count: 1
+                        mutation: 'normal',
+                        count: 0
                     };
-                } else {
-                    ownedPets[petKey].count++;
                 }
+                ownedPets[petKey].count++;
                 renderPets();
+                updateTradeUpPetList();
                 return { ...prize, name: randomPet.name, icon: randomPet.icon };
             }
             return prize;
@@ -13300,15 +13602,46 @@
         // Dragon diamond generator (for loaded pets)
         function initDragonGenerators() {
             for (const [key, pet] of Object.entries(ownedPets)) {
-                if (pet.special === 'diamond_generator' && pet.event === '2026') {
+                // Support both Event 2026 Dragon and Cosmic Dragon
+                if (pet.special === 'diamond_generator') {
+                    // Determine interval: 1 second for Cosmic Dragon, 60 seconds for Event 2026 Dragon
+                    const interval = pet.event === '2026' ? 60000 : 1000;
+                    
                     setInterval(() => {
                         const equipped = equippedPets.find(p => p.key === key);
                         if (equipped && ownedPets[key]) {
-                            diamonds += 1;
+                            // Calculate mutation bonus
+                            let mutationMultiplier = 1;
+                            const currentPet = ownedPets[key];
+                            
+                            if (currentPet && currentPet.mutation) {
+                                switch(currentPet.mutation) {
+                                    case 'gold':
+                                        mutationMultiplier = 2; // Gold: 2x
+                                        break;
+                                    case 'diamond':
+                                        mutationMultiplier = 3; // Diamond: 3x
+                                        break;
+                                    case 'rainbow':
+                                        mutationMultiplier = 4; // Rainbow: 4x
+                                        break;
+                                    case 'transcendent':
+                                        mutationMultiplier = 5; // Transcendent: 5x
+                                        break;
+                                    case 'prismatic':
+                                        mutationMultiplier = 10; // Prismatic: 10x
+                                        break;
+                                }
+                            }
+                            
+                            // Generate diamonds based on mutation
+                            const diamondsToAdd = 1 * mutationMultiplier;
+                            diamonds += diamondsToAdd;
+                            
                             updateDisplay();
                             saveToLocalStorage(true);
                         }
-                    }, 60000);
+                    }, interval);
                 }
             }
         }
