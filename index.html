@@ -3571,6 +3571,15 @@
                 min-width: 48px !important;
             }
         }
+        
+        /* Custom background class */
+        body.custom-bg {
+            background: none !important;
+            background-size: cover !important;
+            background-position: center !important;
+            background-repeat: no-repeat !important;
+            background-attachment: fixed !important;
+        }
     </style>
 </head>
 <body>
@@ -3665,7 +3674,7 @@
             <div style="color: #c4b5fd; font-weight: bold; margin-bottom: 8px;">🖼️ Background</div>
             
             <!-- Current Background Preview -->
-            <div id="bgPreview" style="width: 100%; height: 80px; background: linear-gradient(135deg, #0f0f23 0%, #1a0f2e 100%); border-radius: 8px; margin-bottom: 10px; border: 2px solid #7c3aed; background-size: cover; background-position: center;"></div>
+            <div id="bgPreview" style="width: 100%; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; margin-bottom: 10px; border: 2px solid #7c3aed; background-size: cover; background-position: center;"></div>
             
             <!-- Upload Button -->
             <input type="file" id="bgFileInput" accept="image/*" style="display: none;">
@@ -4137,12 +4146,9 @@
                 <!-- Tasks Section -->
                 <div style="margin: 20px 0;">
                     <h3 style="text-align: center; font-size: 1.8em; margin-bottom: 15px;">📋 Nhiệm Vụ</h3>
-                    <div style="text-align: center; margin-bottom: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <div style="text-align: center; margin-bottom: 15px;">
                         <button onclick="skipAllTasks()" class="buy-button" style="background: linear-gradient(135deg, #ffd700, #ff8c00); font-size: 1.1em; padding: 12px 30px;">
                             ⚡ HOÀN THÀNH TẤT CẢ - 599🏆 Gold Bar
-                        </button>
-                        <button onclick="resetAllTasks()" class="buy-button" style="background: linear-gradient(135deg, #ff1493, #ff4500); font-size: 1.1em; padding: 12px 30px; box-shadow: 0 0 20px rgba(255,20,147,0.5);">
-                            🔄 RESET TẤT CẢ TASK - 1999🏆 Gold Bar
                         </button>
                     </div>
                     
@@ -4958,46 +4964,46 @@
                     </div>
 
                     <!-- Betting Interface -->
-                    <div id="coinFlipStep1" style="margin-bottom: 20px;">
+                    <div style="margin-bottom: 20px;">
                         <div style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center;">
                             BƯỚC 1: 💰 Chọn Loại Tiền & Số Tiền Cược
                         </div>
-                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
+                        <div style="display: flex; gap: 10px; align-items: center;">
                             <select id="coinFlipBetType" style="padding: 10px; border-radius: 8px; flex: 1; font-size: 1em; background: #1a1a2e; color: white; border: 2px solid #0f3460;">
                                 <option value="coins">💰 Coins</option>
                                 <option value="diamonds">💎 Diamonds</option>
                             </select>
                             <input type="number" id="coinFlipBetAmount" placeholder="Nhập số tiền" style="padding: 10px; border-radius: 8px; flex: 2; font-size: 1em; background: #1a1a2e; color: white; border: 2px solid #0f3460;" value="100" min="1">
                         </div>
-                        <div style="text-align: center;">
-                            <button id="confirmBetBtn" onclick="confirmBetAmount(); return false;" style="padding: 12px 40px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.2em; transition: all 0.3s;">
-                                ✅ OK - Tiếp tục
-                            </button>
-                        </div>
                     </div>
 
                     <!-- Coin Choice Selection -->
-                    <div id="coinFlipStep2" style="margin-bottom: 20px; display: none;">
+                    <div style="margin-bottom: 20px;">
                         <div style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center;">
                             BƯỚC 2: 🪙 Chọn Mặt Đồng Xu
                         </div>
-                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px;">
-                            <button id="headsBtn" onclick="selectCoinSide('heads'); return false;" style="padding: 20px; background: rgba(255,215,0,0.2); border: 3px solid rgba(255,215,0,0.5); border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.2em; transition: all 0.3s;">
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px;">
+                            <button id="headsBtn" onclick="selectCoinSide('heads')" style="padding: 20px; background: rgba(255,215,0,0.2); border: 3px solid rgba(255,215,0,0.5); border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.2em; transition: all 0.3s;">
                                 <div style="font-size: 2em;">👑</div>
                                 <div>Ngửa (Heads)</div>
                             </button>
-                            <button id="tailsBtn" onclick="selectCoinSide('tails'); return false;" style="padding: 20px; background: rgba(0,212,255,0.2); border: 3px solid rgba(0,212,255,0.5); border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.2em; transition: all 0.3s;">
+                            <button id="tailsBtn" onclick="selectCoinSide('tails')" style="padding: 20px; background: rgba(0,212,255,0.2); border: 3px solid rgba(0,212,255,0.5); border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.2em; transition: all 0.3s;">
                                 <div style="font-size: 2em;">🪙</div>
                                 <div>Sấp (Tails)</div>
                             </button>
                         </div>
-                        <div style="text-align: center;">
-                            <button id="coinFlipPlayBtn" onclick="playCoinFlip(); return false;" disabled style="padding: 15px 50px; background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: not-allowed; font-size: 1.3em; transition: all 0.3s; opacity: 0.5;">
-                                ✅ OK - BẮT ĐẦU!
-                            </button>
-                            <div id="coinFlipSelectedChoice" style="margin-top: 10px; color: #aaa; font-size: 0.9em;">
-                                ⬆️ Chọn mặt đồng xu để tiếp tục
-                            </div>
+                    </div>
+
+                    <!-- Play Button -->
+                    <div style="margin-bottom: 20px; text-align: center;">
+                        <div style="color: #ffd700; font-weight: bold; margin-bottom: 10px;">
+                            BƯỚC 3: ✅ Xác Nhận & Bắt Đầu
+                        </div>
+                        <button id="coinFlipPlayBtn" onclick="playCoinFlip()" disabled style="padding: 15px 50px; background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: not-allowed; font-size: 1.3em; transition: all 0.3s; opacity: 0.5;">
+                            ✅ XÁC NHẬN
+                        </button>
+                        <div id="coinFlipSelectedChoice" style="margin-top: 10px; color: #aaa; font-size: 0.9em;">
+                            ⬆️ Chọn loại tiền, nhập số tiền, rồi chọn mặt đồng xu
                         </div>
                     </div>
 
@@ -5006,7 +5012,7 @@
                         <div id="coinFlipAnimation" style="font-size: 4em; margin-bottom: 15px;">🪙</div>
                         <div id="coinFlipResultText" style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;"></div>
                         <div id="coinFlipResultDetail" style="font-size: 1em; margin-bottom: 15px;"></div>
-                        <button id="closeCoinFlipResultBtn" onclick="closeCoinFlipResult(); return false;" style="padding: 12px 30px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em;">OK</button>
+                        <button onclick="closeCoinFlipResult()" style="padding: 12px 30px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em;">OK</button>
                     </div>
 
                     <!-- Rank Info -->
@@ -5430,14 +5436,6 @@
         let coinFlipLosses = 0;
         let coinFlipConsecutiveLosses = 0;
         let coinFlipHistory = [];
-        
-        // Coin flip game state (MUST BE HERE FOR onclick TO WORK)
-        let selectedCoinSide = null;
-        let confirmedBetAmount = 0;
-        let confirmedBetType = '';
-        
-        // Custom background
-        let customBackground = null; // Stores base64 image data
         
         // ===== TELEPORT SYSTEM =====
         let teleportPrice = 1; // Giá ban đầu để teleport
@@ -12116,6 +12114,8 @@
                     weatherNextSpawn: weatherNextSpawn,
                     goldCodes: goldCodes,
                     musicUnlocked: musicUnlocked,
+                    currentTrackName: currentTrackName,
+                    customBackground: customBackground,
                     customBackground: customBackground,
                     
                     // Coin Flip Game
@@ -12360,13 +12360,26 @@
                 isAdmin = validData.isAdmin;
                 weatherNextSpawn = validData.weatherNextSpawn;
                 musicUnlocked = validData.musicUnlocked || false;
-                customBackground = validData.customBackground || null;
+                currentTrackName = validData.currentTrackName || '';
                 
-                // Apply custom background if exists
+                // Update music UI if unlocked
+                if (musicUnlocked) {
+                    document.getElementById('musicControls').style.display = 'block';
+                    document.getElementById('unlockMusicBtn').style.display = 'none';
+                    if (currentTrackName) {
+                        document.getElementById('trackName').textContent = currentTrackName;
+                    }
+                }
+                
+                // Restore custom background
+                customBackground = validData.customBackground || null;
                 if (customBackground) {
-                    applyCustomBackground();
-                    updateBackgroundPreview();
-                    console.log('✅ Custom background loaded from save');
+                    // Apply background immediately after load
+                    setTimeout(function() {
+                        applyCustomBackground();
+                        updateBackgroundPreview();
+                        console.log('✅ Custom background loaded and applied from save');
+                    }, 100);
                 }
                 
                 // Restore Coin Flip Game data
@@ -12387,12 +12400,6 @@
                 totalSpins = validData.totalSpins || 0;
                 totalWeatherSummoned = validData.totalWeatherSummoned || 0;
                 rpsStats = validData.rpsStats || { gamesPlayed: 0, wins: 0, losses: 0, draws: 0 };
-                
-                // Update music UI if unlocked
-                if (musicUnlocked) {
-                    document.getElementById('musicControls').style.display = 'block';
-                    document.getElementById('unlockMusicBtn').style.display = 'none';
-                }
                 
                 // Restore music volume
                 const savedVolume = localStorage.getItem('musicVolume');
@@ -12535,6 +12542,97 @@
             
             // Start auto-save system
             startAutoSave();
+            
+            // Setup background file input listener
+            const bgFileInput = document.getElementById('bgFileInput');
+            if (bgFileInput) {
+                bgFileInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    
+                    // Validate image
+                    if (!file.type.startsWith('image/')) {
+                        alert('❌ Vui lòng chọn file hình ảnh!');
+                        bgFileInput.value = '';
+                        return;
+                    }
+                    
+                    // Check size (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        alert('❌ File quá lớn! Vui lòng chọn hình dưới 5MB.');
+                        bgFileInput.value = '';
+                        return;
+                    }
+                    
+                    // Check diamonds
+                    if (diamonds < 100) {
+                        alert(`❌ Bạn không đủ Kim Cương!\n\nCần: 100 💎\nHiện có: ${diamonds} 💎\nThiếu: ${100 - diamonds} 💎`);
+                        bgFileInput.value = '';
+                        return;
+                    }
+                    
+                    // Confirm purchase
+                    const confirmPurchase = confirm(
+                        '🖼️ ĐỔI BACKGROUND\n\n' +
+                        'File: ' + file.name + '\n' +
+                        'Giá: 100 💎\n' +
+                        'Có: ' + diamonds + ' 💎\n' +
+                        'Còn lại: ' + (diamonds - 100) + ' 💎\n\n' +
+                        'Xác nhận đổi background?'
+                    );
+                    
+                    if (!confirmPurchase) {
+                        bgFileInput.value = '';
+                        return;
+                    }
+                    
+                    // Deduct diamonds immediately
+                    diamonds -= 100;
+                    updateDisplay();
+                    saveToLocalStorage(true);
+                    
+                    // Read file as base64
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const base64Image = event.target.result;
+                        
+                        customBackground = base64Image;
+                        localStorage.setItem('customBackground', base64Image);
+                        
+                        applyCustomBackground();
+                        updateBackgroundPreview();
+                        
+                        // Force repaint
+                        setTimeout(function() {
+                            document.body.style.display = 'none';
+                            document.body.offsetHeight;
+                            document.body.style.display = '';
+                            
+                            if (customBackground) {
+                                document.body.classList.add('custom-bg');
+                                document.body.setAttribute('style', `background-image: url('${customBackground}') !important;`);
+                            }
+                        }, 100);
+                        
+                        showToast('✅ Đã đổi background thành công!', 3000);
+                        saveToLocalStorage(true);
+                        
+                        console.log('✅ Background changed successfully');
+                    };
+                    
+                    reader.onerror = function() {
+                        alert('❌ Lỗi khi đọc file!');
+                        diamonds += 100;
+                        updateDisplay();
+                        saveToLocalStorage(true);
+                        bgFileInput.value = '';
+                    };
+                    
+                    reader.readAsDataURL(file);
+                    bgFileInput.value = '';
+                });
+                console.log('✅ Background file input listener attached');
+            }
             
             // Update background preview
             updateBackgroundPreview();
@@ -12816,8 +12914,6 @@
 
         // Allow Enter key to redeem
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('🎮 DOMContentLoaded fired!');
-            
             const codeInput = document.getElementById('codeInput');
             if (codeInput) {
                 codeInput.addEventListener('keypress', function(e) {
@@ -12826,194 +12922,6 @@
                     }
                 });
             }
-            
-            // Wait a bit for DOM to be fully ready
-            setTimeout(function() {
-                console.log('🔍 Searching for coin flip buttons...');
-                
-                // Add event listeners for coin flip buttons
-                const headsBtn = document.getElementById('headsBtn');
-                const tailsBtn = document.getElementById('tailsBtn');
-                const coinFlipPlayBtn = document.getElementById('coinFlipPlayBtn');
-                const confirmBetBtn = document.getElementById('confirmBetBtn');
-                const closeCoinFlipResultBtn = document.getElementById('closeCoinFlipResultBtn');
-                
-                console.log('confirmBetBtn found:', !!confirmBetBtn);
-                console.log('headsBtn found:', !!headsBtn);
-                console.log('tailsBtn found:', !!tailsBtn);
-                console.log('coinFlipPlayBtn found:', !!coinFlipPlayBtn);
-                console.log('closeCoinFlipResultBtn found:', !!closeCoinFlipResultBtn);
-                
-                if (confirmBetBtn) {
-                    confirmBetBtn.addEventListener('click', function(e) {
-                        console.log('🎯 Confirm button clicked!');
-                        e.preventDefault();
-                        confirmBetAmount();
-                    });
-                    // Also add as backup
-                    confirmBetBtn.onclick = function(e) {
-                        console.log('🎯 Confirm button onclick!');
-                        e.preventDefault();
-                        confirmBetAmount();
-                    };
-                    console.log('✅ Confirm bet button listener attached');
-                } else {
-                    console.error('❌ confirmBetBtn NOT FOUND!');
-                }
-                
-                if (headsBtn) {
-                    headsBtn.addEventListener('click', function(e) {
-                        console.log('👑 Heads button clicked!');
-                        e.preventDefault();
-                        selectCoinSide('heads');
-                    });
-                    console.log('✅ Heads button listener attached');
-                } else {
-                    console.error('❌ headsBtn NOT FOUND!');
-                }
-                
-                if (tailsBtn) {
-                    tailsBtn.addEventListener('click', function(e) {
-                        console.log('🪙 Tails button clicked!');
-                        e.preventDefault();
-                        selectCoinSide('tails');
-                    });
-                    console.log('✅ Tails button listener attached');
-                } else {
-                    console.error('❌ tailsBtn NOT FOUND!');
-                }
-                
-                if (coinFlipPlayBtn) {
-                    coinFlipPlayBtn.addEventListener('click', function(e) {
-                        console.log('🎮 Play button clicked!');
-                        e.preventDefault();
-                        playCoinFlip();
-                    });
-                    console.log('✅ Play button listener attached');
-                } else {
-                    console.error('❌ coinFlipPlayBtn NOT FOUND!');
-                }
-                
-                if (closeCoinFlipResultBtn) {
-                    closeCoinFlipResultBtn.addEventListener('click', function(e) {
-                        console.log('❌ Close button clicked!');
-                        e.preventDefault();
-                        closeCoinFlipResult();
-                    });
-                    console.log('✅ Close result button listener attached');
-                } else {
-                    console.error('❌ closeCoinFlipResultBtn NOT FOUND!');
-                }
-                
-                // Add background file input listener
-                const bgFileInput = document.getElementById('bgFileInput');
-                console.log('bgFileInput found:', !!bgFileInput);
-                
-                if (bgFileInput) {
-                    bgFileInput.addEventListener('change', function(e) {
-                        const file = e.target.files[0];
-                        if (!file) {
-                            console.log('❌ No file selected');
-                            return;
-                        }
-                        
-                        console.log('📁 File selected:', file.name, 'Type:', file.type, 'Size:', file.size);
-                        
-                        // Check if file is image
-                        if (!file.type.startsWith('image/')) {
-                            alert('❌ Vui lòng chọn file hình ảnh!');
-                            bgFileInput.value = '';
-                            return;
-                        }
-                        
-                        // Check file size (max 5MB)
-                        if (file.size > 5 * 1024 * 1024) {
-                            alert('❌ File quá lớn! Vui lòng chọn hình dưới 5MB.');
-                            bgFileInput.value = '';
-                            return;
-                        }
-                        
-                        // CRITICAL CHECK - Must have 100 diamonds
-                        console.log('💎 Current diamonds:', diamonds);
-                        if (diamonds < 100) {
-                            alert(`❌ Bạn không đủ Kim Cương!\n\nCần: 100 💎\nHiện có: ${diamonds} 💎\nThiếu: ${100 - diamonds} 💎`);
-                            bgFileInput.value = '';
-                            return;
-                        }
-                        
-                        // Show current diamond count in confirm
-                        const confirmPurchase = confirm(
-                            '🖼️ ĐỔI BACKGROUND\n\n' +
-                            'File: ' + file.name + '\n' +
-                            'Giá: 100 💎\n' +
-                            'Có: ' + diamonds + ' 💎\n' +
-                            'Còn lại: ' + (diamonds - 100) + ' 💎\n\n' +
-                            'Xác nhận đổi background?'
-                        );
-                        
-                        if (!confirmPurchase) {
-                            console.log('❌ User cancelled');
-                            bgFileInput.value = '';
-                            return;
-                        }
-                        
-                        // DEDUCT DIAMONDS IMMEDIATELY
-                        console.log('💰 Deducting 100 diamonds...');
-                        diamonds -= 100;
-                        updateDisplay();
-                        saveToLocalStorage(true);
-                        console.log('💎 Diamonds after deduction:', diamonds);
-                        
-                        // Read file as base64
-                        const reader = new FileReader();
-                        reader.onload = function(event) {
-                            const base64Image = event.target.result;
-                            
-                            console.log('📸 Image loaded, base64 length:', base64Image.length);
-                            
-                            customBackground = base64Image;
-                            localStorage.setItem('customBackground', base64Image);
-                            console.log('💾 Saved to localStorage');
-                            
-                            applyCustomBackground();
-                            console.log('🖼️ Background applied to body');
-                            
-                            updateBackgroundPreview();
-                            console.log('👁️ Preview updated');
-                            
-                            // Force repaint
-                            document.body.style.display = 'none';
-                            document.body.offsetHeight;
-                            document.body.style.display = '';
-                            
-                            showToast('✅ Đã đổi background thành công!', 3000);
-                            saveToLocalStorage(true);
-                            
-                            console.log('✅ Background changed successfully');
-                            console.log('Current body background:', document.body.style.background);
-                            console.log('Current body backgroundImage:', document.body.style.backgroundImage);
-                        };
-                        
-                        reader.onerror = function(error) {
-                            console.error('❌ FileReader error:', error);
-                            alert('❌ Lỗi khi đọc file!');
-                            diamonds += 100;
-                            updateDisplay();
-                            saveToLocalStorage(true);
-                            bgFileInput.value = '';
-                            console.log('💎 Diamonds refunded:', diamonds);
-                        };
-                        
-                        reader.readAsDataURL(file);
-                        bgFileInput.value = '';
-                    });
-                    console.log('✅ Background file input listener attached');
-                } else {
-                    console.error('❌ bgFileInput NOT FOUND!');
-                }
-                
-                console.log('✅ Coin flip event listeners setup complete!');
-            }, 500); // Wait 500ms for DOM to be fully ready
         });
 
         function buyGoldItem(itemName, cost, effect) {
@@ -13380,6 +13288,9 @@
                 }, 600);
                 
                 showToast(`✅ Đã dịch chuyển! -${formatNumber(oldPrice)} coins\n💰 Giá mới: ${formatNumber(teleportPrice)} coins`, 2500);
+                
+                // Start 15-second timer
+                showTeleportTimer();
             } else {
                 showToast('❌ Không tìm thấy vị trí!', 2000);
             }
@@ -13406,6 +13317,9 @@
         let backgroundMusic = null;
         let musicUnlocked = false;
         let currentTrackName = '';
+        
+        // Custom background
+        let customBackground = null; // Stores base64 image data
         
         function unlockMusic() {
             if (musicUnlocked) {
@@ -13501,7 +13415,7 @@
         // ═══════════════════════════════════════════════════════
         
         window.selectBackgroundFile = function() {
-            // CHECK DIAMONDS FIRST - BEFORE opening file picker
+            // Check diamonds BEFORE opening file picker
             if (diamonds < 100) {
                 alert(`❌ Bạn không đủ Kim Cương!\n\nCần: 100 💎\nHiện có: ${diamonds} 💎\nThiếu: ${100 - diamonds} 💎`);
                 return;
@@ -13509,36 +13423,6 @@
             
             const fileInput = document.getElementById('bgFileInput');
             fileInput.click();
-        }
-        
-        function applyCustomBackground() {
-            if (customBackground) {
-                // Remove old background first
-                document.body.style.background = 'none';
-                // Apply new background image with full styles
-                document.body.style.backgroundImage = `url('${customBackground}')`;
-                document.body.style.backgroundSize = 'cover';
-                document.body.style.backgroundPosition = 'center';
-                document.body.style.backgroundRepeat = 'no-repeat';
-                document.body.style.backgroundAttachment = 'fixed';
-                console.log('✅ Custom background applied');
-            } else {
-                // Restore default gradient
-                document.body.style.backgroundImage = 'none';
-                document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-                console.log('✅ Default background restored');
-            }
-        }
-        
-        function updateBackgroundPreview() {
-            const preview = document.getElementById('bgPreview');
-            if (preview) {
-                if (customBackground) {
-                    preview.style.backgroundImage = `url('${customBackground}')`;
-                } else {
-                    preview.style.backgroundImage = 'linear-gradient(135deg, #0f0f23 0%, #1a0f2e 100%)';
-                }
-            }
         }
         
         window.resetBackground = function() {
@@ -13555,20 +13439,39 @@
             
             if (!confirmReset) return;
             
-            // Reset background
             customBackground = null;
             localStorage.removeItem('customBackground');
             
-            // Apply default background using the function
             applyCustomBackground();
-            
-            // Update preview
             updateBackgroundPreview();
             
             showToast('✅ Đã reset background!', 2000);
             saveToLocalStorage(true);
+        }
+        
+        function applyCustomBackground() {
+            console.log('🎨 applyCustomBackground called');
             
-            console.log('✅ Background reset to default');
+            if (customBackground) {
+                document.body.classList.add('custom-bg');
+                document.body.setAttribute('style', `background-image: url('${customBackground}') !important;`);
+                console.log('✅ Custom background applied');
+            } else {
+                document.body.classList.remove('custom-bg');
+                document.body.setAttribute('style', '');
+                console.log('✅ Default background restored');
+            }
+        }
+        
+        function updateBackgroundPreview() {
+            const preview = document.getElementById('bgPreview');
+            if (preview) {
+                if (customBackground) {
+                    preview.style.backgroundImage = `url('${customBackground}')`;
+                } else {
+                    preview.style.backgroundImage = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                }
+            }
         }
         
         // ═══════════════════════════════════════════════════════
@@ -13721,53 +13624,6 @@
             saveToLocalStorage(true);
             
             showToast(`✅ Đã hoàn thành ${incompleteTasks.length} nhiệm vụ! +${totalReward} 🪙`, 3000);
-        }
-        
-        // Reset ALL tasks - Cost 1999 Gold Bar
-        function resetAllTasks() {
-            const RESET_COST = 1999;
-            
-            if (goldBars < RESET_COST) {
-                showToast(`❌ Không đủ Gold Bar! Cần ${RESET_COST} 🏆\nCó: ${goldBars} 🏆`, 3000);
-                return;
-            }
-            
-            // Count all tasks
-            const allTasks = Object.values(event2026Tasks);
-            const completedTasks = allTasks.filter(t => t.completed);
-            
-            if (completedTasks.length === 0) {
-                showToast('⚠️ Không có nhiệm vụ nào đã hoàn thành để reset!', 2500);
-                return;
-            }
-            
-            if (!confirm(
-                `🔄 RESET TẤT CẢ NHIỆM VỤ\n\n` +
-                `Giá: ${RESET_COST} 🏆 Gold Bar\n` +
-                `Còn lại sau khi reset: ${goldBars - RESET_COST} 🏆\n\n` +
-                `⚠️ CHÚ Ý:\n` +
-                `• Tất cả ${allTasks.length} nhiệm vụ sẽ được reset về trạng thái chưa hoàn thành\n` +
-                `• Progress hiện tại của các task sẽ được GIỮ NGUYÊN\n` +
-                `• Bạn có thể làm lại để nhận thưởng\n\n` +
-                `Xác nhận reset?`
-            )) {
-                return;
-            }
-            
-            goldBars -= RESET_COST;
-            
-            // Reset all tasks to incomplete (keep progress)
-            allTasks.forEach(task => {
-                task.completed = false;
-                // Keep progress as is - don't reset to 0
-            });
-            
-            updateEventDisplay();
-            updateDisplay();
-            renderEventTasks();
-            saveToLocalStorage(true);
-            
-            showToast(`🔄 Đã reset ${allTasks.length} nhiệm vụ! Làm lại để nhận thưởng! 💎`, 3500);
         }
         
         // Reset daily/weekly tasks
@@ -14083,6 +13939,8 @@
             }, 1000); // Check every 1 second
             
             console.log('🐲 Dragon generators initialized (single global interval)');
+        }
+        
         // ═══════════════════════════════════════════════════════
         // COIN FLIP GAME SYSTEM
         // ═══════════════════════════════════════════════════════
@@ -14137,55 +13995,9 @@
             document.getElementById('coinFlipWinRateDisplay').textContent = winRate + '%';
         }
         
-        window.confirmBetAmount = function() {
-            console.log('🎯 confirmBetAmount() called');
-            
-            const betType = document.getElementById('coinFlipBetType').value;
-            const betAmount = parseInt(document.getElementById('coinFlipBetAmount').value);
-            
-            console.log('Bet type:', betType);
-            console.log('Bet amount:', betAmount);
-            console.log('Current coins:', coins);
-            console.log('Current diamonds:', diamonds);
-            
-            // Validation
-            if (!betAmount || betAmount <= 0) {
-                alert('❌ Vui lòng nhập số tiền cược hợp lệ!');
-                return;
-            }
-            
-            if (betType === 'coins' && coins < betAmount) {
-                alert(`❌ Không đủ Coins!\n\nCần: ${betAmount.toLocaleString()} 💰\nCó: ${coins.toLocaleString()} 💰`);
-                return;
-            }
-            
-            if (betType === 'diamonds' && diamonds < betAmount) {
-                alert(`❌ Không đủ Diamonds!\n\nCần: ${betAmount.toLocaleString()} 💎\nCó: ${diamonds.toLocaleString()} 💎`);
-                return;
-            }
-            
-            // Save bet info
-            confirmedBetAmount = betAmount;
-            confirmedBetType = betType;
-            
-            console.log('✅ Bet confirmed:', confirmedBetAmount, confirmedBetType);
-            
-            // Hide step 1, show step 2
-            const step1 = document.getElementById('coinFlipStep1');
-            const step2 = document.getElementById('coinFlipStep2');
-            
-            if (step1) {
-                step1.style.display = 'none';
-                console.log('✅ Step 1 hidden');
-            }
-            
-            if (step2) {
-                step2.style.display = 'block';
-                console.log('✅ Step 2 shown');
-            }
-        }
+        let selectedCoinSide = null;
         
-        window.selectCoinSide = function(side) {
+        function selectCoinSide(side) {
             selectedCoinSide = side;
             console.log('🪙 Coin side selected:', side);
             
@@ -14228,17 +14040,21 @@
             console.log('✅ Play button enabled!');
         }
         
-        window.playCoinFlip = function() {
+        function playCoinFlip() {
             if (!selectedCoinSide) {
                 alert('❌ Vui lòng chọn mặt trước!');
                 return;
             }
             
-            // Use confirmed bet values
-            const betType = confirmedBetType;
-            const betAmount = confirmedBetAmount;
+            const betType = document.getElementById('coinFlipBetType').value;
+            const betAmount = parseInt(document.getElementById('coinFlipBetAmount').value);
             
-            // Double check funds (in case they changed)
+            // Validation
+            if (!betAmount || betAmount <= 0) {
+                alert('❌ Vui lòng nhập số tiền cược hợp lệ!');
+                return;
+            }
+            
             if (betType === 'coins' && coins < betAmount) {
                 alert('❌ Không đủ Coins!');
                 return;
@@ -14258,40 +14074,9 @@
             
             updateDisplay();
             
-            // FAIR 50/50 with PITY SYSTEM
-            // After consecutive losses, increase win chance slightly
-            let winChance = 0.5; // Base 50%
-            
-            if (coinFlipConsecutiveLosses >= 5) {
-                winChance = 0.75; // 75% after 5 losses
-                console.log('🎁 PITY ACTIVE: 75% win chance after 5 losses!');
-            } else if (coinFlipConsecutiveLosses >= 3) {
-                winChance = 0.65; // 65% after 3 losses
-                console.log('🎁 PITY ACTIVE: 65% win chance after 3 losses!');
-            }
-            
-            const randomValue = Math.random();
-            
-            // Generate bot choice based on pity system
-            let botChoice;
-            if (randomValue < winChance) {
-                // Player should win - bot picks same as player
-                botChoice = selectedCoinSide;
-                console.log('🎯 Pity system: Bot will match player');
-            } else {
-                // Player should lose - bot picks opposite
-                botChoice = selectedCoinSide === 'heads' ? 'tails' : 'heads';
-                console.log('💔 Normal: Bot will pick opposite');
-            }
-            
+            // 50/50 chance
+            const botChoice = Math.random() < 0.5 ? 'heads' : 'tails';
             const playerWin = selectedCoinSide === botChoice;
-            
-            console.log('🎲 Random value:', randomValue.toFixed(3));
-            console.log('🎯 Win chance:', (winChance * 100).toFixed(0) + '%');
-            console.log('📊 Consecutive losses:', coinFlipConsecutiveLosses);
-            console.log('👤 Player chose:', selectedCoinSide);
-            console.log('🤖 Bot chose:', botChoice);
-            console.log('🏆 Player win?', playerWin);
             
             // Show animation
             showCoinFlipAnimation(selectedCoinSide, botChoice, playerWin, betAmount, betType);
@@ -14302,42 +14087,27 @@
         
         function resetCoinSelection() {
             selectedCoinSide = null;
-            confirmedBetAmount = 0;
-            confirmedBetType = '';
             
-            // Show step 1, hide step 2
-            document.getElementById('coinFlipStep1').style.display = 'block';
-            document.getElementById('coinFlipStep2').style.display = 'none';
-            
-            // Reset step 2 buttons
             const headsBtn = document.getElementById('headsBtn');
             const tailsBtn = document.getElementById('tailsBtn');
             const playBtn = document.getElementById('coinFlipPlayBtn');
             const choiceText = document.getElementById('coinFlipSelectedChoice');
             
-            if (headsBtn) {
-                headsBtn.style.background = 'rgba(255,215,0,0.2)';
-                headsBtn.style.border = '3px solid rgba(255,215,0,0.5)';
-                headsBtn.style.transform = 'scale(1)';
-            }
+            headsBtn.style.background = 'rgba(255,215,0,0.2)';
+            headsBtn.style.border = '3px solid rgba(255,215,0,0.5)';
+            headsBtn.style.transform = 'scale(1)';
             
-            if (tailsBtn) {
-                tailsBtn.style.background = 'rgba(0,212,255,0.2)';
-                tailsBtn.style.border = '3px solid rgba(0,212,255,0.5)';
-                tailsBtn.style.transform = 'scale(1)';
-            }
+            tailsBtn.style.background = 'rgba(0,212,255,0.2)';
+            tailsBtn.style.border = '3px solid rgba(0,212,255,0.5)';
+            tailsBtn.style.transform = 'scale(1)';
             
-            if (playBtn) {
-                playBtn.disabled = true;
-                playBtn.style.opacity = '0.5';
-                playBtn.style.cursor = 'not-allowed';
-                playBtn.style.animation = 'none';
-            }
+            playBtn.disabled = true;
+            playBtn.style.opacity = '0.5';
+            playBtn.style.cursor = 'not-allowed';
+            playBtn.style.animation = 'none';
             
-            if (choiceText) {
-                choiceText.innerHTML = '⬆️ Chọn mặt đồng xu để tiếp tục';
-                choiceText.style.color = '#aaa';
-            }
+            choiceText.innerHTML = '⬆️ Chọn loại tiền, nhập số tiền, rồi chọn mặt đồng xu';
+            choiceText.style.color = '#aaa';
         }
         
         function showCoinFlipAnimation(playerChoice, botChoice, playerWin, betAmount, betType) {
@@ -14470,11 +14240,227 @@
             }
         }
         
-        window.closeCoinFlipResult = function() {
+        function closeCoinFlipResult() {
             document.getElementById('coinFlipResult').style.display = 'none';
         }
+        
+        // ═══════════════════════════════════════════════════════
+        // TELEPORT TIMER SYSTEM
+        // ═══════════════════════════════════════════════════════
+        
+        let teleportTimer = null;
+        let teleportTimeLeft = 0;
+        let teleportReturnPosition = 0;
+        
+        window.showTeleportTimer = function() {
+            console.log('🚀 showTeleportTimer called');
+            teleportTimeLeft = 8;
+            teleportReturnPosition = window.pageYOffset || document.documentElement.scrollTop;
+            
+            const overlay = document.getElementById('teleportTimerOverlay');
+            if (!overlay) {
+                console.error('❌ teleportTimerOverlay not found!');
+                return;
+            }
+            overlay.style.display = 'flex';
+            
+            updateTeleportTimerDisplay();
+            
+            // Start countdown
+            teleportTimer = setInterval(function() {
+                teleportTimeLeft--;
+                updateTeleportTimerDisplay();
+                
+                if (teleportTimeLeft <= 0) {
+                    clearInterval(teleportTimer);
+                    showReturnDialog();
+                }
+            }, 1000);
+        }
+        
+        window.updateTeleportTimerDisplay = function() {
+            const elem = document.getElementById('teleportTimeLeft');
+            if (elem) {
+                elem.textContent = teleportTimeLeft;
+            }
+        }
+        
+        window.stopTeleportTimer = function() {
+            console.log('⏸️ stopTeleportTimer called');
+            if (teleportTimer) {
+                clearInterval(teleportTimer);
+                teleportTimer = null;
+            }
+            const overlay = document.getElementById('teleportTimerOverlay');
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+        }
+        
+        window.showReturnDialog = function() {
+            console.log('💬 showReturnDialog called');
+            const overlay = document.getElementById('teleportTimerOverlay');
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+            
+            const dialog = document.getElementById('returnDialog');
+            if (!dialog) {
+                console.error('❌ returnDialog not found!');
+                return;
+            }
+            dialog.style.display = 'flex';
+            
+            // Auto hide after 5 seconds
+            setTimeout(function() {
+                if (dialog.style.display === 'flex') {
+                    dialog.style.display = 'none';
+                }
+            }, 5000);
+        }
+        
+        window.returnToTop = function() {
+            console.log('↩️ returnToTop called');
+            const dialog = document.getElementById('returnDialog');
+            if (dialog) {
+                dialog.style.display = 'none';
+            }
+            window.scrollTo({
+                top: teleportReturnPosition,
+                behavior: 'smooth'
+            });
+        }
+        
+        window.stayHere = function() {
+            console.log('🛑 stayHere called');
+            const dialog = document.getElementById('returnDialog');
+            if (dialog) {
+                dialog.style.display = 'none';
+            }
+        }
+        
+        window.returnEarlyWithCost = function() {
+            try {
+                console.log('💰 returnEarlyWithCost called');
+                console.log('Current coins:', coins);
+                console.log('teleportReturnPosition:', teleportReturnPosition);
+                
+                const RETURN_COST = 5;
+                
+                // Check if player has enough coins
+                if (typeof coins === 'undefined') {
+                    alert('❌ Lỗi: Biến coins chưa được khởi tạo!');
+                    return;
+                }
+                
+                if (coins < RETURN_COST) {
+                    alert(`❌ Không đủ Coins! Cần ${RETURN_COST}💰\nBạn có: ${coins}💰`);
+                    return;
+                }
+                
+                // Confirm action
+                const confirmMsg = `↩️ QUAY LẠI NGAY\n\nTrừ ${RETURN_COST}💰 Coins để quay về vị trí ban đầu?\n\nCòn lại: ${(coins - RETURN_COST).toLocaleString()}💰`;
+                console.log('Showing confirm:', confirmMsg);
+                
+                if (!confirm(confirmMsg)) {
+                    console.log('User cancelled');
+                    return;
+                }
+                
+                console.log('User confirmed, deducting coins...');
+                
+                // Deduct coins
+                coins -= RETURN_COST;
+                console.log('New coins amount:', coins);
+                
+                // Stop timer
+                if (teleportTimer) {
+                    clearInterval(teleportTimer);
+                    teleportTimer = null;
+                    console.log('Timer stopped');
+                }
+                
+                // Hide overlay
+                const overlay = document.getElementById('teleportTimerOverlay');
+                if (overlay) {
+                    overlay.style.display = 'none';
+                    console.log('Overlay hidden');
+                } else {
+                    console.log('⚠️ Overlay not found');
+                }
+                
+                // Scroll back to original position
+                console.log('Scrolling to:', teleportReturnPosition);
+                window.scrollTo({
+                    top: teleportReturnPosition || 0,
+                    behavior: 'smooth'
+                });
+                
+                // Update display and save
+                if (typeof updateDisplay === 'function') {
+                    updateDisplay();
+                    console.log('Display updated');
+                } else {
+                    console.log('⚠️ updateDisplay not found');
+                }
+                
+                if (typeof saveToLocalStorage === 'function') {
+                    saveToLocalStorage(true);
+                    console.log('Game saved');
+                } else {
+                    console.log('⚠️ saveToLocalStorage not found');
+                }
+                
+                if (typeof showToast === 'function') {
+                    showToast('↩️ Đã quay về! -5💰', 2000);
+                } else {
+                    alert('↩️ Đã quay về! -5💰');
+                }
+                
+                console.log('✅ returnEarlyWithCost completed successfully');
+                
+            } catch (error) {
+                console.error('❌ Error in returnEarlyWithCost:', error);
+                alert('❌ Có lỗi xảy ra: ' + error.message);
+            }
         }
 
     </script>
+    
+    <!-- Teleport Timer Overlay -->
+    <div id="teleportTimerOverlay" style="display: none; position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 20px; border-radius: 15px; border: 3px solid #ffd700; z-index: 9999; box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
+        <div style="text-align: center; color: white;">
+            <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px;">⏱️ Thời gian mua sắm</div>
+            <div style="font-size: 3em; font-weight: bold; color: #ffd700; margin-bottom: 15px;">
+                <span id="teleportTimeLeft">8</span>s
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <button onclick="stopTeleportTimer()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #10b981 0%, #059669 100%); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em;">
+                    ✅ Dừng lại - Ở đây
+                </button>
+                <button onclick="returnEarlyWithCost()" style="width: 100%; padding: 12px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em; border: 2px solid #fbbf24;">
+                    ↩️ Quay lại ngay -5💰
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Return Dialog -->
+    <div id="returnDialog" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 30px; border-radius: 20px; border: 3px solid #ffd700; z-index: 10000; box-shadow: 0 8px 32px rgba(0,0,0,0.8); min-width: 350px;">
+        <div style="text-align: center; color: white;">
+            <div style="font-size: 2em; margin-bottom: 15px;">⏰</div>
+            <div style="font-size: 1.3em; font-weight: bold; margin-bottom: 10px; color: #ffd700;">Thời gian quay trở lại đã hết!</div>
+            <div style="margin-bottom: 20px; color: #aaa;">Bạn có muốn quay về vị trí ban đầu?</div>
+            <div style="display: flex; gap: 10px;">
+                <button onclick="returnToTop()" style="flex: 1; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em;">
+                    ↩️ Quay về
+                </button>
+                <button onclick="stayHere()" style="flex: 1; padding: 15px; background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em;">
+                    🛑 Ở lại
+                </button>
+            </div>
+            <div style="margin-top: 10px; font-size: 0.85em; color: #666;">Tự động đóng sau 5 giây</div>
+        </div>
+    </div>
 </body>
 </html>
