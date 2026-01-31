@@ -4137,9 +4137,12 @@
                 <!-- Tasks Section -->
                 <div style="margin: 20px 0;">
                     <h3 style="text-align: center; font-size: 1.8em; margin-bottom: 15px;">📋 Nhiệm Vụ</h3>
-                    <div style="text-align: center; margin-bottom: 15px;">
+                    <div style="text-align: center; margin-bottom: 15px; display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
                         <button onclick="skipAllTasks()" class="buy-button" style="background: linear-gradient(135deg, #ffd700, #ff8c00); font-size: 1.1em; padding: 12px 30px;">
                             ⚡ HOÀN THÀNH TẤT CẢ - 599🏆 Gold Bar
+                        </button>
+                        <button onclick="resetAllTasks()" class="buy-button" style="background: linear-gradient(135deg, #ff1493, #ff4500); font-size: 1.1em; padding: 12px 30px; box-shadow: 0 0 20px rgba(255,20,147,0.5);">
+                            🔄 RESET TẤT CẢ TASK - 1999🏆 Gold Bar
                         </button>
                     </div>
                     
@@ -13718,6 +13721,53 @@
             saveToLocalStorage(true);
             
             showToast(`✅ Đã hoàn thành ${incompleteTasks.length} nhiệm vụ! +${totalReward} 🪙`, 3000);
+        }
+        
+        // Reset ALL tasks - Cost 1999 Gold Bar
+        function resetAllTasks() {
+            const RESET_COST = 1999;
+            
+            if (goldBars < RESET_COST) {
+                showToast(`❌ Không đủ Gold Bar! Cần ${RESET_COST} 🏆\nCó: ${goldBars} 🏆`, 3000);
+                return;
+            }
+            
+            // Count all tasks
+            const allTasks = Object.values(event2026Tasks);
+            const completedTasks = allTasks.filter(t => t.completed);
+            
+            if (completedTasks.length === 0) {
+                showToast('⚠️ Không có nhiệm vụ nào đã hoàn thành để reset!', 2500);
+                return;
+            }
+            
+            if (!confirm(
+                `🔄 RESET TẤT CẢ NHIỆM VỤ\n\n` +
+                `Giá: ${RESET_COST} 🏆 Gold Bar\n` +
+                `Còn lại sau khi reset: ${goldBars - RESET_COST} 🏆\n\n` +
+                `⚠️ CHÚ Ý:\n` +
+                `• Tất cả ${allTasks.length} nhiệm vụ sẽ được reset về trạng thái chưa hoàn thành\n` +
+                `• Progress hiện tại của các task sẽ được GIỮ NGUYÊN\n` +
+                `• Bạn có thể làm lại để nhận thưởng\n\n` +
+                `Xác nhận reset?`
+            )) {
+                return;
+            }
+            
+            goldBars -= RESET_COST;
+            
+            // Reset all tasks to incomplete (keep progress)
+            allTasks.forEach(task => {
+                task.completed = false;
+                // Keep progress as is - don't reset to 0
+            });
+            
+            updateEventDisplay();
+            updateDisplay();
+            renderEventTasks();
+            saveToLocalStorage(true);
+            
+            showToast(`🔄 Đã reset ${allTasks.length} nhiệm vụ! Làm lại để nhận thưởng! 💎`, 3500);
         }
         
         // Reset daily/weekly tasks
