@@ -3660,6 +3660,25 @@
             </div>
         </div>
         
+        <!-- Background Customization -->
+        <div style="background: rgba(124, 58, 237, 0.1); padding: 12px; border-radius: 10px; margin-bottom: 12px;">
+            <div style="color: #c4b5fd; font-weight: bold; margin-bottom: 8px;">🖼️ Background</div>
+            
+            <!-- Current Background Preview -->
+            <div id="bgPreview" style="width: 100%; height: 80px; background: linear-gradient(135deg, #0f0f23 0%, #1a0f2e 100%); border-radius: 8px; margin-bottom: 10px; border: 2px solid #7c3aed; background-size: cover; background-position: center;"></div>
+            
+            <!-- Upload Button -->
+            <input type="file" id="bgFileInput" accept="image/*" style="display: none;">
+            <button onclick="selectBackgroundFile()" style="width: 100%; padding: 10px; background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); border: 2px solid #a78bfa; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; margin-bottom: 8px;">
+                📁 Upload Background (100💎)
+            </button>
+            
+            <!-- Reset Button -->
+            <button onclick="resetBackground()" style="width: 100%; padding: 10px; background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%); border: 2px solid #9ca3af; border-radius: 8px; color: white; font-weight: bold; cursor: pointer;">
+                🔄 Reset to Default
+            </button>
+        </div>
+        
     </div>
 
     <!-- Settings Button (Fixed) -->
@@ -4899,6 +4918,109 @@
                 </div>
             </div>
 
+            <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+            <!-- COIN FLIP MINI GAME -->
+            <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+            <div class="shop-panel" style="margin-top: 20px;">
+                <div class="section-title">🪙 Lật Đồng Xu - PvP Bot</div>
+                <div style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 20px; border-radius: 15px; border: 2px solid #ffd700;">
+                    
+                    <!-- Rank Display -->
+                    <div style="background: rgba(255,215,0,0.1); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #ffd700;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.5em; color: #ffd700; font-weight: bold; margin-bottom: 10px;" id="coinFlipRankDisplay">
+                                🥉 Đồng I
+                            </div>
+                            <div style="display: flex; justify-content: center; align-items: center; gap: 5px; margin-bottom: 10px;" id="coinFlipStarsDisplay">
+                                ⭐
+                            </div>
+                            <div style="font-size: 0.9em; color: #aaa;">
+                                <span id="coinFlipProgressText">1/10 sao để lên rank Bạc</span>
+                            </div>
+                        </div>
+                        <div style="display: flex; justify-content: space-around; margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,215,0,0.3);">
+                            <div style="text-align: center;">
+                                <div style="color: #00ff00; font-weight: bold; font-size: 1.2em;" id="coinFlipWinsDisplay">0</div>
+                                <div style="color: #aaa; font-size: 0.85em;">Thắng</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="color: #ff6b6b; font-weight: bold; font-size: 1.2em;" id="coinFlipLossesDisplay">0</div>
+                                <div style="color: #aaa; font-size: 0.85em;">Thua</div>
+                            </div>
+                            <div style="text-align: center;">
+                                <div style="color: #ffd700; font-weight: bold; font-size: 1.2em;" id="coinFlipWinRateDisplay">0%</div>
+                                <div style="color: #aaa; font-size: 0.85em;">Tỉ lệ thắng</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Betting Interface -->
+                    <div id="coinFlipStep1" style="margin-bottom: 20px;">
+                        <div style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center;">
+                            BƯỚC 1: 💰 Chọn Loại Tiền & Số Tiền Cược
+                        </div>
+                        <div style="display: flex; gap: 10px; align-items: center; margin-bottom: 15px;">
+                            <select id="coinFlipBetType" style="padding: 10px; border-radius: 8px; flex: 1; font-size: 1em; background: #1a1a2e; color: white; border: 2px solid #0f3460;">
+                                <option value="coins">💰 Coins</option>
+                                <option value="diamonds">💎 Diamonds</option>
+                            </select>
+                            <input type="number" id="coinFlipBetAmount" placeholder="Nhập số tiền" style="padding: 10px; border-radius: 8px; flex: 2; font-size: 1em; background: #1a1a2e; color: white; border: 2px solid #0f3460;" value="100" min="1">
+                        </div>
+                        <div style="text-align: center;">
+                            <button id="confirmBetBtn" onclick="confirmBetAmount(); return false;" style="padding: 12px 40px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.2em; transition: all 0.3s;">
+                                ✅ OK - Tiếp tục
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Coin Choice Selection -->
+                    <div id="coinFlipStep2" style="margin-bottom: 20px; display: none;">
+                        <div style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center;">
+                            BƯỚC 2: 🪙 Chọn Mặt Đồng Xu
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 15px;">
+                            <button id="headsBtn" onclick="selectCoinSide('heads'); return false;" style="padding: 20px; background: rgba(255,215,0,0.2); border: 3px solid rgba(255,215,0,0.5); border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.2em; transition: all 0.3s;">
+                                <div style="font-size: 2em;">👑</div>
+                                <div>Ngửa (Heads)</div>
+                            </button>
+                            <button id="tailsBtn" onclick="selectCoinSide('tails'); return false;" style="padding: 20px; background: rgba(0,212,255,0.2); border: 3px solid rgba(0,212,255,0.5); border-radius: 10px; color: white; font-weight: bold; cursor: pointer; font-size: 1.2em; transition: all 0.3s;">
+                                <div style="font-size: 2em;">🪙</div>
+                                <div>Sấp (Tails)</div>
+                            </button>
+                        </div>
+                        <div style="text-align: center;">
+                            <button id="coinFlipPlayBtn" onclick="playCoinFlip(); return false;" disabled style="padding: 15px 50px; background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%); border: none; border-radius: 10px; color: white; font-weight: bold; cursor: not-allowed; font-size: 1.3em; transition: all 0.3s; opacity: 0.5;">
+                                ✅ OK - BẮT ĐẦU!
+                            </button>
+                            <div id="coinFlipSelectedChoice" style="margin-top: 10px; color: #aaa; font-size: 0.9em;">
+                                ⬆️ Chọn mặt đồng xu để tiếp tục
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game Result -->
+                    <div id="coinFlipResult" style="display: none; background: rgba(0,0,0,0.5); padding: 20px; border-radius: 10px; text-align: center;">
+                        <div id="coinFlipAnimation" style="font-size: 4em; margin-bottom: 15px;">🪙</div>
+                        <div id="coinFlipResultText" style="font-size: 1.5em; font-weight: bold; margin-bottom: 10px;"></div>
+                        <div id="coinFlipResultDetail" style="font-size: 1em; margin-bottom: 15px;"></div>
+                        <button id="closeCoinFlipResultBtn" onclick="closeCoinFlipResult(); return false;" style="padding: 12px 30px; background: linear-gradient(135deg, #00d4ff 0%, #0080ff 100%); border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; font-size: 1.1em;">OK</button>
+                    </div>
+
+                    <!-- Rank Info -->
+                    <div style="margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 10px; border: 1px solid rgba(255,215,0,0.3);">
+                        <div style="color: #ffd700; font-weight: bold; margin-bottom: 10px; text-align: center;">📊 Thông Tin Rank</div>
+                        <div style="font-size: 0.85em; color: #aaa; line-height: 1.6;">
+                            • Thắng: +1 ⭐<br>
+                            • Thua: -1 ⭐<br>
+                            • Thua 2 trận liên tiếp: -3 ⭐ tổng<br>
+                            • 10 ⭐ = Lên rank mới<br>
+                            • Mỗi lần lên rank nhận 💎 Diamonds<br>
+                            • Tỉ lệ thắng: 50% - 50%
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Gold Shop - Premium Items -->
             <div class="shop-panel" style="margin-top: 20px; background: linear-gradient(135deg, #2a1a0a 0%, #1a0a0a 100%); border: 3px solid #ffd700;">
                 <div class="section-title" style="color: #ffd700;">🏆 GOLD SHOP - VẬT PHẨM ĐỘC QUYỀN 🏆</div>
@@ -5278,6 +5400,7 @@
         let potionInterval = null;
         let afkTimer = null;
         let afkTimeLeft = 1800;
+        let dragonGeneratorInterval = null; // GLOBAL interval for all diamond generators
         let isAfk = false;
         let playTime = 0;
         let playTimeInterval = null;
@@ -5296,6 +5419,22 @@
         let diamonds = 0;
         let tickets = 0; // Vé quay
         let goldBars = 0; // Thỏi vàng - Premium currency
+        
+        // ===== COIN FLIP GAME =====
+        let coinFlipRank = 0; // 0=Đồng, 1=Bạc, 2=Vàng, 3=Bạch Kim, 4=Kim Cương, 5=Huyền Thoại, 6=Master, 7=Super, 8=Hardcore
+        let coinFlipStars = 1; // Start at 1 star (Đồng 1 sao)
+        let coinFlipWins = 0;
+        let coinFlipLosses = 0;
+        let coinFlipConsecutiveLosses = 0;
+        let coinFlipHistory = [];
+        
+        // Coin flip game state (MUST BE HERE FOR onclick TO WORK)
+        let selectedCoinSide = null;
+        let confirmedBetAmount = 0;
+        let confirmedBetType = '';
+        
+        // Custom background
+        let customBackground = null; // Stores base64 image data
         
         // ===== TELEPORT SYSTEM =====
         let teleportPrice = 1; // Giá ban đầu để teleport
@@ -9881,44 +10020,8 @@
             
             ownedPets[petKey].count++;
             
-            // Start diamond generator if it's Cosmic Dragon
-            if (special === 'diamond_generator') {
-                setInterval(() => {
-                    const equipped = equippedPets.find(p => p.key === petKey);
-                    if (equipped && ownedPets[petKey]) {
-                        // Calculate mutation bonus
-                        let mutationMultiplier = 1;
-                        const pet = ownedPets[petKey];
-                        
-                        if (pet && pet.mutation) {
-                            switch(pet.mutation) {
-                                case 'gold':
-                                    mutationMultiplier = 2; // Gold: 2x
-                                    break;
-                                case 'diamond':
-                                    mutationMultiplier = 3; // Diamond: 3x
-                                    break;
-                                case 'rainbow':
-                                    mutationMultiplier = 4; // Rainbow: 4x
-                                    break;
-                                case 'transcendent':
-                                    mutationMultiplier = 5; // Transcendent: 5x
-                                    break;
-                                case 'prismatic':
-                                    mutationMultiplier = 10; // Prismatic: 10x
-                                    break;
-                            }
-                        }
-                        
-                        // Generate diamonds based on mutation
-                        const diamondsToAdd = 1 * mutationMultiplier;
-                        diamonds += diamondsToAdd;
-                        
-                        updateDisplay();
-                        saveToLocalStorage(true);
-                    }
-                }, 1000); // Every 1 second
-            }
+            // NOTE: Diamond generation handled by global dragonGeneratorInterval
+            // No need to create individual intervals here
             
             // Auto-save immediately
             console.log('💾 Auto-saving after special summon:', petKey);
@@ -10996,44 +11099,8 @@
             console.log('💾 Auto-saving after hatching pet:', petKey);
             saveToLocalStorage(true);
             
-            // Start diamond generator for Cosmic Dragon
-            if (hatchedPet.special === 'diamond_generator') {
-                setInterval(() => {
-                    const equipped = equippedPets.find(p => p.key === petKey);
-                    if (equipped && ownedPets[petKey]) {
-                        // Calculate mutation bonus
-                        let mutationMultiplier = 1;
-                        const pet = ownedPets[petKey];
-                        
-                        if (pet && pet.mutation) {
-                            switch(pet.mutation) {
-                                case 'gold':
-                                    mutationMultiplier = 2; // Gold: 2x
-                                    break;
-                                case 'diamond':
-                                    mutationMultiplier = 3; // Diamond: 3x
-                                    break;
-                                case 'rainbow':
-                                    mutationMultiplier = 4; // Rainbow: 4x
-                                    break;
-                                case 'transcendent':
-                                    mutationMultiplier = 5; // Transcendent: 5x
-                                    break;
-                                case 'prismatic':
-                                    mutationMultiplier = 10; // Prismatic: 10x
-                                    break;
-                            }
-                        }
-                        
-                        // Generate diamonds based on mutation
-                        const diamondsToAdd = 1 * mutationMultiplier;
-                        diamonds += diamondsToAdd;
-                        
-                        updateDisplay();
-                        saveToLocalStorage(true);
-                    }
-                }, 1000); // Every 1 second for Cosmic Dragon
-            }
+            // NOTE: Diamond generation handled by global dragonGeneratorInterval
+            // No need to create individual intervals here
             
             // Show hatch animation
             showHatchAnimation(egg, hatchedPet);
@@ -12046,6 +12113,14 @@
                     weatherNextSpawn: weatherNextSpawn,
                     goldCodes: goldCodes,
                     musicUnlocked: musicUnlocked,
+                    customBackground: customBackground,
+                    
+                    // Coin Flip Game
+                    coinFlipRank: coinFlipRank,
+                    coinFlipStars: coinFlipStars,
+                    coinFlipWins: coinFlipWins,
+                    coinFlipLosses: coinFlipLosses,
+                    coinFlipConsecutiveLosses: coinFlipConsecutiveLosses,
                     
                     // Tracking Stats
                     totalClicks: totalClicks,
@@ -12282,6 +12357,26 @@
                 isAdmin = validData.isAdmin;
                 weatherNextSpawn = validData.weatherNextSpawn;
                 musicUnlocked = validData.musicUnlocked || false;
+                customBackground = validData.customBackground || null;
+                
+                // Apply custom background if exists
+                if (customBackground) {
+                    applyCustomBackground();
+                    updateBackgroundPreview();
+                    console.log('✅ Custom background loaded from save');
+                }
+                
+                // Restore Coin Flip Game data
+                coinFlipRank = validData.coinFlipRank || 0;
+                coinFlipStars = validData.coinFlipStars || 1;
+                coinFlipWins = validData.coinFlipWins || 0;
+                coinFlipLosses = validData.coinFlipLosses || 0;
+                coinFlipConsecutiveLosses = validData.coinFlipConsecutiveLosses || 0;
+                
+                // Update coin flip display
+                if (typeof updateCoinFlipDisplay === 'function') {
+                    updateCoinFlipDisplay();
+                }
                 
                 // Restore tracking stats
                 totalClicks = validData.totalClicks || 0;
@@ -12430,8 +12525,16 @@
             // Auto-load save from localStorage
             loadFromLocalStorage();
             
+            // Update coin flip display
+            if (typeof updateCoinFlipDisplay === 'function') {
+                updateCoinFlipDisplay();
+            }
+            
             // Start auto-save system
             startAutoSave();
+            
+            // Update background preview
+            updateBackgroundPreview();
             
             console.log('🎮 Game initialized');
             console.log('💾 Auto-save: Enabled');
@@ -12710,6 +12813,8 @@
 
         // Allow Enter key to redeem
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('🎮 DOMContentLoaded fired!');
+            
             const codeInput = document.getElementById('codeInput');
             if (codeInput) {
                 codeInput.addEventListener('keypress', function(e) {
@@ -12718,6 +12823,194 @@
                     }
                 });
             }
+            
+            // Wait a bit for DOM to be fully ready
+            setTimeout(function() {
+                console.log('🔍 Searching for coin flip buttons...');
+                
+                // Add event listeners for coin flip buttons
+                const headsBtn = document.getElementById('headsBtn');
+                const tailsBtn = document.getElementById('tailsBtn');
+                const coinFlipPlayBtn = document.getElementById('coinFlipPlayBtn');
+                const confirmBetBtn = document.getElementById('confirmBetBtn');
+                const closeCoinFlipResultBtn = document.getElementById('closeCoinFlipResultBtn');
+                
+                console.log('confirmBetBtn found:', !!confirmBetBtn);
+                console.log('headsBtn found:', !!headsBtn);
+                console.log('tailsBtn found:', !!tailsBtn);
+                console.log('coinFlipPlayBtn found:', !!coinFlipPlayBtn);
+                console.log('closeCoinFlipResultBtn found:', !!closeCoinFlipResultBtn);
+                
+                if (confirmBetBtn) {
+                    confirmBetBtn.addEventListener('click', function(e) {
+                        console.log('🎯 Confirm button clicked!');
+                        e.preventDefault();
+                        confirmBetAmount();
+                    });
+                    // Also add as backup
+                    confirmBetBtn.onclick = function(e) {
+                        console.log('🎯 Confirm button onclick!');
+                        e.preventDefault();
+                        confirmBetAmount();
+                    };
+                    console.log('✅ Confirm bet button listener attached');
+                } else {
+                    console.error('❌ confirmBetBtn NOT FOUND!');
+                }
+                
+                if (headsBtn) {
+                    headsBtn.addEventListener('click', function(e) {
+                        console.log('👑 Heads button clicked!');
+                        e.preventDefault();
+                        selectCoinSide('heads');
+                    });
+                    console.log('✅ Heads button listener attached');
+                } else {
+                    console.error('❌ headsBtn NOT FOUND!');
+                }
+                
+                if (tailsBtn) {
+                    tailsBtn.addEventListener('click', function(e) {
+                        console.log('🪙 Tails button clicked!');
+                        e.preventDefault();
+                        selectCoinSide('tails');
+                    });
+                    console.log('✅ Tails button listener attached');
+                } else {
+                    console.error('❌ tailsBtn NOT FOUND!');
+                }
+                
+                if (coinFlipPlayBtn) {
+                    coinFlipPlayBtn.addEventListener('click', function(e) {
+                        console.log('🎮 Play button clicked!');
+                        e.preventDefault();
+                        playCoinFlip();
+                    });
+                    console.log('✅ Play button listener attached');
+                } else {
+                    console.error('❌ coinFlipPlayBtn NOT FOUND!');
+                }
+                
+                if (closeCoinFlipResultBtn) {
+                    closeCoinFlipResultBtn.addEventListener('click', function(e) {
+                        console.log('❌ Close button clicked!');
+                        e.preventDefault();
+                        closeCoinFlipResult();
+                    });
+                    console.log('✅ Close result button listener attached');
+                } else {
+                    console.error('❌ closeCoinFlipResultBtn NOT FOUND!');
+                }
+                
+                // Add background file input listener
+                const bgFileInput = document.getElementById('bgFileInput');
+                console.log('bgFileInput found:', !!bgFileInput);
+                
+                if (bgFileInput) {
+                    bgFileInput.addEventListener('change', function(e) {
+                        const file = e.target.files[0];
+                        if (!file) {
+                            console.log('❌ No file selected');
+                            return;
+                        }
+                        
+                        console.log('📁 File selected:', file.name, 'Type:', file.type, 'Size:', file.size);
+                        
+                        // Check if file is image
+                        if (!file.type.startsWith('image/')) {
+                            alert('❌ Vui lòng chọn file hình ảnh!');
+                            bgFileInput.value = '';
+                            return;
+                        }
+                        
+                        // Check file size (max 5MB)
+                        if (file.size > 5 * 1024 * 1024) {
+                            alert('❌ File quá lớn! Vui lòng chọn hình dưới 5MB.');
+                            bgFileInput.value = '';
+                            return;
+                        }
+                        
+                        // CRITICAL CHECK - Must have 100 diamonds
+                        console.log('💎 Current diamonds:', diamonds);
+                        if (diamonds < 100) {
+                            alert(`❌ Bạn không đủ Kim Cương!\n\nCần: 100 💎\nHiện có: ${diamonds} 💎\nThiếu: ${100 - diamonds} 💎`);
+                            bgFileInput.value = '';
+                            return;
+                        }
+                        
+                        // Show current diamond count in confirm
+                        const confirmPurchase = confirm(
+                            '🖼️ ĐỔI BACKGROUND\n\n' +
+                            'File: ' + file.name + '\n' +
+                            'Giá: 100 💎\n' +
+                            'Có: ' + diamonds + ' 💎\n' +
+                            'Còn lại: ' + (diamonds - 100) + ' 💎\n\n' +
+                            'Xác nhận đổi background?'
+                        );
+                        
+                        if (!confirmPurchase) {
+                            console.log('❌ User cancelled');
+                            bgFileInput.value = '';
+                            return;
+                        }
+                        
+                        // DEDUCT DIAMONDS IMMEDIATELY
+                        console.log('💰 Deducting 100 diamonds...');
+                        diamonds -= 100;
+                        updateDisplay();
+                        saveToLocalStorage(true);
+                        console.log('💎 Diamonds after deduction:', diamonds);
+                        
+                        // Read file as base64
+                        const reader = new FileReader();
+                        reader.onload = function(event) {
+                            const base64Image = event.target.result;
+                            
+                            console.log('📸 Image loaded, base64 length:', base64Image.length);
+                            
+                            customBackground = base64Image;
+                            localStorage.setItem('customBackground', base64Image);
+                            console.log('💾 Saved to localStorage');
+                            
+                            applyCustomBackground();
+                            console.log('🖼️ Background applied to body');
+                            
+                            updateBackgroundPreview();
+                            console.log('👁️ Preview updated');
+                            
+                            // Force repaint
+                            document.body.style.display = 'none';
+                            document.body.offsetHeight;
+                            document.body.style.display = '';
+                            
+                            showToast('✅ Đã đổi background thành công!', 3000);
+                            saveToLocalStorage(true);
+                            
+                            console.log('✅ Background changed successfully');
+                            console.log('Current body background:', document.body.style.background);
+                            console.log('Current body backgroundImage:', document.body.style.backgroundImage);
+                        };
+                        
+                        reader.onerror = function(error) {
+                            console.error('❌ FileReader error:', error);
+                            alert('❌ Lỗi khi đọc file!');
+                            diamonds += 100;
+                            updateDisplay();
+                            saveToLocalStorage(true);
+                            bgFileInput.value = '';
+                            console.log('💎 Diamonds refunded:', diamonds);
+                        };
+                        
+                        reader.readAsDataURL(file);
+                        bgFileInput.value = '';
+                    });
+                    console.log('✅ Background file input listener attached');
+                } else {
+                    console.error('❌ bgFileInput NOT FOUND!');
+                }
+                
+                console.log('✅ Coin flip event listeners setup complete!');
+            }, 500); // Wait 500ms for DOM to be fully ready
         });
 
         function buyGoldItem(itemName, cost, effect) {
@@ -13201,6 +13494,81 @@
         }
         
         // ═══════════════════════════════════════════════════════
+        // BACKGROUND CUSTOMIZATION SYSTEM
+        // ═══════════════════════════════════════════════════════
+        
+        window.selectBackgroundFile = function() {
+            // CHECK DIAMONDS FIRST - BEFORE opening file picker
+            if (diamonds < 100) {
+                alert(`❌ Bạn không đủ Kim Cương!\n\nCần: 100 💎\nHiện có: ${diamonds} 💎\nThiếu: ${100 - diamonds} 💎`);
+                return;
+            }
+            
+            const fileInput = document.getElementById('bgFileInput');
+            fileInput.click();
+        }
+        
+        function applyCustomBackground() {
+            if (customBackground) {
+                // Remove old background first
+                document.body.style.background = 'none';
+                // Apply new background image with full styles
+                document.body.style.backgroundImage = `url('${customBackground}')`;
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+                document.body.style.backgroundRepeat = 'no-repeat';
+                document.body.style.backgroundAttachment = 'fixed';
+                console.log('✅ Custom background applied');
+            } else {
+                // Restore default gradient
+                document.body.style.backgroundImage = 'none';
+                document.body.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                console.log('✅ Default background restored');
+            }
+        }
+        
+        function updateBackgroundPreview() {
+            const preview = document.getElementById('bgPreview');
+            if (preview) {
+                if (customBackground) {
+                    preview.style.backgroundImage = `url('${customBackground}')`;
+                } else {
+                    preview.style.backgroundImage = 'linear-gradient(135deg, #0f0f23 0%, #1a0f2e 100%)';
+                }
+            }
+        }
+        
+        window.resetBackground = function() {
+            if (!customBackground) {
+                showToast('ℹ️ Đang dùng background mặc định', 2000);
+                return;
+            }
+            
+            const confirmReset = confirm(
+                '🔄 RESET BACKGROUND\n\n' +
+                'Bạn có chắc muốn đặt lại background mặc định?\n\n' +
+                '(Không hoàn lại 100💎)'
+            );
+            
+            if (!confirmReset) return;
+            
+            // Reset background
+            customBackground = null;
+            localStorage.removeItem('customBackground');
+            
+            // Apply default background using the function
+            applyCustomBackground();
+            
+            // Update preview
+            updateBackgroundPreview();
+            
+            showToast('✅ Đã reset background!', 2000);
+            saveToLocalStorage(true);
+            
+            console.log('✅ Background reset to default');
+        }
+        
+        // ═══════════════════════════════════════════════════════
         // EVENT 2026 SYSTEM
         // ═══════════════════════════════════════════════════════
         
@@ -13599,51 +13967,462 @@
             alert(message);
         }
         
-        // Dragon diamond generator (for loaded pets)
+        // ═══════════════════════════════════════════════════════
+        // DRAGON DIAMOND GENERATOR - SINGLE GLOBAL INTERVAL
+        // ═══════════════════════════════════════════════════════
+        
         function initDragonGenerators() {
-            for (const [key, pet] of Object.entries(ownedPets)) {
-                // Support both Event 2026 Dragon and Cosmic Dragon
-                if (pet.special === 'diamond_generator') {
-                    // Determine interval: 1 second for Cosmic Dragon, 60 seconds for Event 2026 Dragon
-                    const interval = pet.event === '2026' ? 60000 : 1000;
+            // Clear any existing interval to prevent duplicates
+            if (dragonGeneratorInterval) {
+                clearInterval(dragonGeneratorInterval);
+                dragonGeneratorInterval = null;
+            }
+            
+            // Single global interval that checks ALL equipped dragons
+            dragonGeneratorInterval = setInterval(() => {
+                // Check each equipped pet
+                for (const equippedPet of equippedPets) {
+                    const pet = ownedPets[equippedPet.key];
                     
-                    setInterval(() => {
-                        const equipped = equippedPets.find(p => p.key === key);
-                        if (equipped && ownedPets[key]) {
-                            // Calculate mutation bonus
-                            let mutationMultiplier = 1;
-                            const currentPet = ownedPets[key];
-                            
-                            if (currentPet && currentPet.mutation) {
-                                switch(currentPet.mutation) {
-                                    case 'gold':
-                                        mutationMultiplier = 2; // Gold: 2x
-                                        break;
-                                    case 'diamond':
-                                        mutationMultiplier = 3; // Diamond: 3x
-                                        break;
-                                    case 'rainbow':
-                                        mutationMultiplier = 4; // Rainbow: 4x
-                                        break;
-                                    case 'transcendent':
-                                        mutationMultiplier = 5; // Transcendent: 5x
-                                        break;
-                                    case 'prismatic':
-                                        mutationMultiplier = 10; // Prismatic: 10x
-                                        break;
-                                }
+                    // Only process diamond generators
+                    if (pet && pet.special === 'diamond_generator') {
+                        // Calculate mutation bonus
+                        let mutationMultiplier = 1;
+                        
+                        if (pet.mutation) {
+                            switch(pet.mutation) {
+                                case 'normal':
+                                    mutationMultiplier = 1; // Normal: 1x (explicit)
+                                    break;
+                                case 'gold':
+                                    mutationMultiplier = 2; // Gold: 2x
+                                    break;
+                                case 'diamond':
+                                    mutationMultiplier = 3; // Diamond: 3x
+                                    break;
+                                case 'rainbow':
+                                    mutationMultiplier = 4; // Rainbow: 4x
+                                    break;
+                                case 'transcendent':
+                                    mutationMultiplier = 5; // Transcendent: 5x
+                                    break;
+                                case 'prismatic':
+                                    mutationMultiplier = 10; // Prismatic: 10x
+                                    break;
                             }
-                            
-                            // Generate diamonds based on mutation
-                            const diamondsToAdd = 1 * mutationMultiplier;
-                            diamonds += diamondsToAdd;
-                            
-                            updateDisplay();
-                            saveToLocalStorage(true);
                         }
-                    }, interval);
+                        
+                        // Base rate depends on event type
+                        const baseRate = pet.event === '2026' ? (1/60) : 1; // Event 2026: 1💎/60s, Others: 1💎/s
+                        
+                        // Generate diamonds based on mutation
+                        const diamondsToAdd = baseRate * mutationMultiplier;
+                        diamonds += diamondsToAdd;
+                        
+                        // Update display (throttled to avoid spam)
+                        if (Math.random() < 0.1) { // Only update 10% of the time
+                            updateDisplay();
+                        }
+                    }
+                }
+                
+                // Save periodically (every 10 seconds)
+                if (Date.now() % 10000 < 1000) {
+                    saveToLocalStorage(true);
+                }
+            }, 1000); // Check every 1 second
+            
+            console.log('🐲 Dragon generators initialized (single global interval)');
+        // ═══════════════════════════════════════════════════════
+        // COIN FLIP GAME SYSTEM
+        // ═══════════════════════════════════════════════════════
+        
+        const COIN_FLIP_RANKS = [
+            { name: 'Đồng', icon: '🥉', reward: 1, color: '#cd7f32' },
+            { name: 'Bạc', icon: '🥈', reward: 2, color: '#c0c0c0' },
+            { name: 'Vàng', icon: '🥇', reward: 5, color: '#ffd700' },
+            { name: 'Bạch Kim', icon: '💎', reward: 10, color: '#e5e4e2' },
+            { name: 'Kim Cương', icon: '💠', reward: 20, color: '#00d4ff' },
+            { name: 'Huyền Thoại', icon: '🌟', reward: 50, color: '#ff00ff' },
+            { name: 'Master', icon: '👑', reward: 100, color: '#ff4500' },
+            { name: 'Super', icon: '⚡', reward: 200, color: '#ffff00' },
+            { name: 'Hardcore', icon: '🔥', reward: 500, color: '#ff0000' }
+        ];
+        
+        function updateCoinFlipDisplay() {
+            const rank = COIN_FLIP_RANKS[coinFlipRank];
+            const nextRank = COIN_FLIP_RANKS[coinFlipRank + 1];
+            
+            // Update rank display
+            const rankDisplay = document.getElementById('coinFlipRankDisplay');
+            if (rankDisplay) {
+                const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+                const starLevel = Math.min(coinFlipStars, 10);
+                rankDisplay.innerHTML = `${rank.icon} ${rank.name} ${romanNumerals[starLevel - 1] || 'X'}`;
+                rankDisplay.style.color = rank.color;
+            }
+            
+            // Update stars display
+            const starsDisplay = document.getElementById('coinFlipStarsDisplay');
+            if (starsDisplay) {
+                starsDisplay.innerHTML = '⭐'.repeat(Math.min(coinFlipStars, 10));
+            }
+            
+            // Update progress text
+            const progressText = document.getElementById('coinFlipProgressText');
+            if (progressText) {
+                if (coinFlipRank >= COIN_FLIP_RANKS.length - 1 && coinFlipStars >= 10) {
+                    progressText.textContent = 'Rank tối đa! 🎉';
+                } else if (nextRank) {
+                    progressText.textContent = `${coinFlipStars}/10 sao để lên rank ${nextRank.name}`;
                 }
             }
+            
+            // Update stats
+            document.getElementById('coinFlipWinsDisplay').textContent = coinFlipWins;
+            document.getElementById('coinFlipLossesDisplay').textContent = coinFlipLosses;
+            
+            const totalGames = coinFlipWins + coinFlipLosses;
+            const winRate = totalGames > 0 ? Math.round((coinFlipWins / totalGames) * 100) : 0;
+            document.getElementById('coinFlipWinRateDisplay').textContent = winRate + '%';
+        }
+        
+        window.confirmBetAmount = function() {
+            console.log('🎯 confirmBetAmount() called');
+            
+            const betType = document.getElementById('coinFlipBetType').value;
+            const betAmount = parseInt(document.getElementById('coinFlipBetAmount').value);
+            
+            console.log('Bet type:', betType);
+            console.log('Bet amount:', betAmount);
+            console.log('Current coins:', coins);
+            console.log('Current diamonds:', diamonds);
+            
+            // Validation
+            if (!betAmount || betAmount <= 0) {
+                alert('❌ Vui lòng nhập số tiền cược hợp lệ!');
+                return;
+            }
+            
+            if (betType === 'coins' && coins < betAmount) {
+                alert(`❌ Không đủ Coins!\n\nCần: ${betAmount.toLocaleString()} 💰\nCó: ${coins.toLocaleString()} 💰`);
+                return;
+            }
+            
+            if (betType === 'diamonds' && diamonds < betAmount) {
+                alert(`❌ Không đủ Diamonds!\n\nCần: ${betAmount.toLocaleString()} 💎\nCó: ${diamonds.toLocaleString()} 💎`);
+                return;
+            }
+            
+            // Save bet info
+            confirmedBetAmount = betAmount;
+            confirmedBetType = betType;
+            
+            console.log('✅ Bet confirmed:', confirmedBetAmount, confirmedBetType);
+            
+            // Hide step 1, show step 2
+            const step1 = document.getElementById('coinFlipStep1');
+            const step2 = document.getElementById('coinFlipStep2');
+            
+            if (step1) {
+                step1.style.display = 'none';
+                console.log('✅ Step 1 hidden');
+            }
+            
+            if (step2) {
+                step2.style.display = 'block';
+                console.log('✅ Step 2 shown');
+            }
+        }
+        
+        window.selectCoinSide = function(side) {
+            selectedCoinSide = side;
+            console.log('🪙 Coin side selected:', side);
+            
+            // Update button styles
+            const headsBtn = document.getElementById('headsBtn');
+            const tailsBtn = document.getElementById('tailsBtn');
+            const playBtn = document.getElementById('coinFlipPlayBtn');
+            const choiceText = document.getElementById('coinFlipSelectedChoice');
+            
+            if (side === 'heads') {
+                headsBtn.style.background = 'linear-gradient(135deg, #ffd700 0%, #ff8c00 100%)';
+                headsBtn.style.border = '3px solid #ffd700';
+                headsBtn.style.transform = 'scale(1.05)';
+                
+                tailsBtn.style.background = 'rgba(0,212,255,0.2)';
+                tailsBtn.style.border = '3px solid rgba(0,212,255,0.5)';
+                tailsBtn.style.transform = 'scale(1)';
+                
+                choiceText.innerHTML = '✅ Đã chọn: <span style="color: #ffd700; font-weight: bold;">👑 Ngửa (Heads)</span><br>Nhấn nút XÁC NHẬN để bắt đầu!';
+                choiceText.style.color = '#00ff00';
+            } else {
+                tailsBtn.style.background = 'linear-gradient(135deg, #00d4ff 0%, #0080ff 100%)';
+                tailsBtn.style.border = '3px solid #00d4ff';
+                tailsBtn.style.transform = 'scale(1.05)';
+                
+                headsBtn.style.background = 'rgba(255,215,0,0.2)';
+                headsBtn.style.border = '3px solid rgba(255,215,0,0.5)';
+                headsBtn.style.transform = 'scale(1)';
+                
+                choiceText.innerHTML = '✅ Đã chọn: <span style="color: #00d4ff; font-weight: bold;">🪙 Sấp (Tails)</span><br>Nhấn nút XÁC NHẬN để bắt đầu!';
+                choiceText.style.color = '#00ff00';
+            }
+            
+            // Enable play button with animation
+            playBtn.disabled = false;
+            playBtn.style.opacity = '1';
+            playBtn.style.cursor = 'pointer';
+            playBtn.style.animation = 'pulse 1s infinite';
+            
+            console.log('✅ Play button enabled!');
+        }
+        
+        window.playCoinFlip = function() {
+            if (!selectedCoinSide) {
+                alert('❌ Vui lòng chọn mặt trước!');
+                return;
+            }
+            
+            // Use confirmed bet values
+            const betType = confirmedBetType;
+            const betAmount = confirmedBetAmount;
+            
+            // Double check funds (in case they changed)
+            if (betType === 'coins' && coins < betAmount) {
+                alert('❌ Không đủ Coins!');
+                return;
+            }
+            
+            if (betType === 'diamonds' && diamonds < betAmount) {
+                alert('❌ Không đủ Diamonds!');
+                return;
+            }
+            
+            // Deduct bet
+            if (betType === 'coins') {
+                coins -= betAmount;
+            } else {
+                diamonds -= betAmount;
+            }
+            
+            updateDisplay();
+            
+            // FAIR 50/50 with PITY SYSTEM
+            // After consecutive losses, increase win chance slightly
+            let winChance = 0.5; // Base 50%
+            
+            if (coinFlipConsecutiveLosses >= 5) {
+                winChance = 0.75; // 75% after 5 losses
+                console.log('🎁 PITY ACTIVE: 75% win chance after 5 losses!');
+            } else if (coinFlipConsecutiveLosses >= 3) {
+                winChance = 0.65; // 65% after 3 losses
+                console.log('🎁 PITY ACTIVE: 65% win chance after 3 losses!');
+            }
+            
+            const randomValue = Math.random();
+            
+            // Generate bot choice based on pity system
+            let botChoice;
+            if (randomValue < winChance) {
+                // Player should win - bot picks same as player
+                botChoice = selectedCoinSide;
+                console.log('🎯 Pity system: Bot will match player');
+            } else {
+                // Player should lose - bot picks opposite
+                botChoice = selectedCoinSide === 'heads' ? 'tails' : 'heads';
+                console.log('💔 Normal: Bot will pick opposite');
+            }
+            
+            const playerWin = selectedCoinSide === botChoice;
+            
+            console.log('🎲 Random value:', randomValue.toFixed(3));
+            console.log('🎯 Win chance:', (winChance * 100).toFixed(0) + '%');
+            console.log('📊 Consecutive losses:', coinFlipConsecutiveLosses);
+            console.log('👤 Player chose:', selectedCoinSide);
+            console.log('🤖 Bot chose:', botChoice);
+            console.log('🏆 Player win?', playerWin);
+            
+            // Show animation
+            showCoinFlipAnimation(selectedCoinSide, botChoice, playerWin, betAmount, betType);
+            
+            // Reset selection after playing
+            resetCoinSelection();
+        }
+        
+        function resetCoinSelection() {
+            selectedCoinSide = null;
+            confirmedBetAmount = 0;
+            confirmedBetType = '';
+            
+            // Show step 1, hide step 2
+            document.getElementById('coinFlipStep1').style.display = 'block';
+            document.getElementById('coinFlipStep2').style.display = 'none';
+            
+            // Reset step 2 buttons
+            const headsBtn = document.getElementById('headsBtn');
+            const tailsBtn = document.getElementById('tailsBtn');
+            const playBtn = document.getElementById('coinFlipPlayBtn');
+            const choiceText = document.getElementById('coinFlipSelectedChoice');
+            
+            if (headsBtn) {
+                headsBtn.style.background = 'rgba(255,215,0,0.2)';
+                headsBtn.style.border = '3px solid rgba(255,215,0,0.5)';
+                headsBtn.style.transform = 'scale(1)';
+            }
+            
+            if (tailsBtn) {
+                tailsBtn.style.background = 'rgba(0,212,255,0.2)';
+                tailsBtn.style.border = '3px solid rgba(0,212,255,0.5)';
+                tailsBtn.style.transform = 'scale(1)';
+            }
+            
+            if (playBtn) {
+                playBtn.disabled = true;
+                playBtn.style.opacity = '0.5';
+                playBtn.style.cursor = 'not-allowed';
+                playBtn.style.animation = 'none';
+            }
+            
+            if (choiceText) {
+                choiceText.innerHTML = '⬆️ Chọn mặt đồng xu để tiếp tục';
+                choiceText.style.color = '#aaa';
+            }
+        }
+        
+        function showCoinFlipAnimation(playerChoice, botChoice, playerWin, betAmount, betType) {
+            const resultDiv = document.getElementById('coinFlipResult');
+            const animDiv = document.getElementById('coinFlipAnimation');
+            const resultText = document.getElementById('coinFlipResultText');
+            const resultDetail = document.getElementById('coinFlipResultDetail');
+            
+            resultDiv.style.display = 'block';
+            
+            // Spinning animation
+            let spins = 0;
+            const maxSpins = 10;
+            const spinInterval = setInterval(() => {
+                animDiv.textContent = spins % 2 === 0 ? '👑' : '🪙';
+                spins++;
+                
+                if (spins >= maxSpins) {
+                    clearInterval(spinInterval);
+                    
+                    // Show final result
+                    animDiv.textContent = botChoice === 'heads' ? '👑' : '🪙';
+                    
+                    if (playerWin) {
+                        // WIN
+                        resultText.innerHTML = '<span style="color: #00ff00;">🎉 THẮNG! 🎉</span>';
+                        
+                        const winAmount = betAmount * 2;
+                        if (betType === 'coins') {
+                            coins += winAmount;
+                            resultDetail.innerHTML = `
+                                Bạn chọn: ${playerChoice === 'heads' ? '👑 Ngửa' : '🪙 Sấp'}<br>
+                                Bot chọn: ${botChoice === 'heads' ? '👑 Ngửa' : '🪙 Sấp'}<br>
+                                <span style="color: #00ff00;">+${winAmount.toLocaleString()} 💰 Coins</span>
+                            `;
+                        } else {
+                            diamonds += winAmount;
+                            resultDetail.innerHTML = `
+                                Bạn chọn: ${playerChoice === 'heads' ? '👑 Ngửa' : '🪙 Sấp'}<br>
+                                Bot chọn: ${botChoice === 'heads' ? '👑 Ngửa' : '🪙 Sấp'}<br>
+                                <span style="color: #00ff00;">+${winAmount.toLocaleString()} 💎 Diamonds</span>
+                            `;
+                        }
+                        
+                        // Update stats
+                        coinFlipWins++;
+                        coinFlipConsecutiveLosses = 0;
+                        
+                        // Add star
+                        addCoinFlipStar();
+                        
+                    } else {
+                        // LOSE
+                        resultText.innerHTML = '<span style="color: #ff6b6b;">💔 THUA! 💔</span>';
+                        resultDetail.innerHTML = `
+                            Bạn chọn: ${playerChoice === 'heads' ? '👑 Ngửa' : '🪙 Sấp'}<br>
+                            Bot chọn: ${botChoice === 'heads' ? '👑 Ngửa' : '🪙 Sấp'}<br>
+                            <span style="color: #ff6b6b;">Mất ${betAmount.toLocaleString()} ${betType === 'coins' ? '💰' : '💎'}</span>
+                        `;
+                        
+                        // Update stats
+                        coinFlipLosses++;
+                        coinFlipConsecutiveLosses++;
+                        
+                        // Lose stars
+                        if (coinFlipConsecutiveLosses >= 2) {
+                            removeCoinFlipStars(3); // Lose 3 stars total for 2 consecutive losses
+                            resultDetail.innerHTML += '<br><span style="color: #ff0000;">⚠️ 2 thua liên tiếp: -3 ⭐ tổng!</span>';
+                        } else {
+                            removeCoinFlipStars(1);
+                        }
+                    }
+                    
+                    updateDisplay();
+                    updateCoinFlipDisplay();
+                    saveToLocalStorage(true);
+                }
+            }, 150);
+        }
+        
+        function addCoinFlipStar() {
+            coinFlipStars++;
+            
+            // Check rank up (need 10 stars)
+            if (coinFlipStars > 10 && coinFlipRank < COIN_FLIP_RANKS.length - 1) {
+                coinFlipStars = 1; // Reset to 1 star in new rank
+                coinFlipRank++;
+                
+                const newRank = COIN_FLIP_RANKS[coinFlipRank];
+                const reward = newRank.reward;
+                
+                diamonds += reward;
+                
+                setTimeout(() => {
+                    alert(`🎉 RANK UP! 🎉\n\nLên rank ${newRank.icon} ${newRank.name}!\n\n🎁 Phần thưởng: +${reward} 💎 Diamonds!`);
+                }, 500);
+            }
+            
+            // Max at 10 stars for max rank
+            if (coinFlipRank >= COIN_FLIP_RANKS.length - 1 && coinFlipStars > 10) {
+                coinFlipStars = 10;
+                
+                // Bonus for max rank stars
+                diamonds += 500;
+                
+                setTimeout(() => {
+                    alert(`⭐ HARDCORE STAR! ⭐\n\n+500 💎 Diamonds bonus!`);
+                }, 500);
+            }
+        }
+        
+        function removeCoinFlipStars(amount) {
+            coinFlipStars -= amount;
+            
+            // Check rank down
+            if (coinFlipStars < 1 && coinFlipRank > 0) {
+                coinFlipRank--;
+                coinFlipStars = 10; // Start at 10 stars in lower rank
+                
+                const newRank = COIN_FLIP_RANKS[coinFlipRank];
+                
+                setTimeout(() => {
+                    alert(`😢 RANK DOWN!\n\nXuống rank ${newRank.icon} ${newRank.name}`);
+                }, 500);
+            }
+            
+            // Min at 1 star for lowest rank
+            if (coinFlipRank === 0 && coinFlipStars < 1) {
+                coinFlipStars = 1;
+            }
+        }
+        
+        window.closeCoinFlipResult = function() {
+            document.getElementById('coinFlipResult').style.display = 'none';
+        }
         }
 
     </script>
