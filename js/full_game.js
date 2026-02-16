@@ -1456,8 +1456,8 @@
                 name: '+1 Click Power',
                 description: 'Tăng 1 coin mỗi click',
                 icon: '⚡',
-                basePrice: 500, // Increased from 10 (50x)
-                currentPrice: 500,
+                basePrice: 10, // Increased from 10 (50x)
+                currentPrice: 10,
                 owned: 0,
                 effect: () => clickPower++
             },
@@ -1466,8 +1466,8 @@
                 name: 'Auto Clicker',
                 description: '+1 coin mỗi giây',
                 icon: '🤖',
-                basePrice: 5000, // Increased from 100 (50x)
-                currentPrice: 5000,
+                basePrice: 500, // Increased from 100 (50x)
+                currentPrice: 500,
                 owned: 0,
                 effect: () => autoClickers++
             },
